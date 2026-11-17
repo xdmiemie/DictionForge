@@ -24,12 +24,12 @@
 | A18 | 实际双阶段微调 | PASS | docs/evidence/P05_TRAINING.md、P05_TRAINING.json、P05_HTTP.json；真实S2/S1更新、steps/epochs与单阶段；58项回归 |
 | A19 | 累计停止目标 | PASS | docs/evidence/P05_TRAINING.md、P05_TRAINING.json、P05_HTTP.json；真实S2/S1更新、steps/epochs与单阶段；58项回归 |
 | A20 | 阶段交接和单阶段训练 | PASS | docs/evidence/P05_TRAINING.md、P05_TRAINING.json、P05_HTTP.json；真实S2/S1更新、steps/epochs与单阶段；58项回归 |
-| A21 | SoVITS 暂停并重启 | NOT_RUN | 尚未执行 |
-| A22 | GPT 暂停并重启 | NOT_RUN | 尚未执行 |
-| A23 | 轮内恢复和交接中断 | NOT_RUN | 尚未执行 |
-| A24 | 半写、磁盘满、损坏恢复点 | NOT_RUN | 尚未执行 |
-| A25 | 从较早恢复点派生 | NOT_RUN | 尚未执行 |
-| A26 | 更换数据和权重初始化 | NOT_RUN | 尚未执行 |
+| A21 | SoVITS 暂停并重启 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
+| A22 | GPT 暂停并重启 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
+| A23 | 轮内恢复和交接中断 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
+| A24 | 半写、磁盘满、损坏恢复点 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
+| A25 | 从较早恢复点派生 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
+| A26 | 更换数据和权重初始化 | NOT_RUN | 依赖P07模型注册，随P11新数据和来源模型实训补验 |
 | A27 | 训练中导出 | NOT_RUN | 尚未执行 |
 | A28 | 中止并导出 | NOT_RUN | 尚未执行 |
 | A29 | 自然完成自动发布 | NOT_RUN | 尚未执行 |

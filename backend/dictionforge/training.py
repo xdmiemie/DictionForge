@@ -1,5 +1,6 @@
 """Freeze verified training inputs; launching never silently changes parameters."""
 import json
+import copy
 from pathlib import Path
 import time
 from .audio import atomic_json, digest
@@ -7,7 +8,7 @@ from .engine import invoke
 from .jobs import Conflict
 from .records import get, put
 from .settings import ROOT, Settings
-from .training_config import config_fingerprint
+from .training_config import config_fingerprint, feature_fingerprint
 from .source_lock import verify_source
 
 def validate_preflight(jobs, preflight, *, upstream=None):
@@ -21,8 +22,9 @@ def validate_preflight(jobs, preflight, *, upstream=None):
         raise Conflict("PREFLIGHT_STALE：数据版本变化")
     area = jobs.root / "features" / version["id"]
     checks = {ROOT / "configs/upstream.lock.json": preflight.get("upstream_lock"),
-              ROOT / "configs/assets.lock.json": preflight.get("asset_lock"),
-              area / "manifest.json": preflight.get("features_manifest_sha256")}
+              ROOT / "configs/assets.lock.json": preflight.get("asset_lock")}
+    if not preflight.get("features_content_sha256"):
+        checks[area / "manifest.json"] = preflight.get("features_manifest_sha256")
     for path, expected in checks.items():
         if not expected or not path.is_file() or digest(path) != expected:
             raise Conflict(f"PREFLIGHT_STALE：{path.name} 已变化，请重新预检")
@@ -31,6 +33,8 @@ def validate_preflight(jobs, preflight, *, upstream=None):
     except Exception as exc:
         raise Conflict(f"PREFLIGHT_STALE：实际上游源码校验失败：{exc}") from exc
     manifest = json.loads((area / "manifest.json").read_text(encoding="utf-8"))
+    if preflight.get("features_content_sha256") and feature_fingerprint(manifest) != preflight["features_content_sha256"]:
+        raise Conflict("PREFLIGHT_STALE：特征内容指纹变化")
     expected_files = dict(manifest["indexes"])
     for entry in manifest["entries"].values():
         expected_files.update(entry["files"])
@@ -100,4 +104,113 @@ def snapshot(jobs, run_id):
     job = jobs.get(run_id)
     run = get(jobs, "run", run_id)
     path = Path(run["run_dir"]) / "stage_state.json"
-    return {**job, "run": run, "stage_state": json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None}
+    with jobs.connect() as db:
+        pending = [dict(row) for row in db.execute("""SELECT c.* FROM controls c
+            LEFT JOIN control_receipts r ON c.request=r.request
+            WHERE c.job_id=? AND r.request IS NULL ORDER BY c.created""", (run_id,))]
+    return {**job, "run": run, "pending_controls": pending,
+            "stage_state": json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None}
+
+
+def checkpoints(jobs, run_id):
+    from .checkpoints import list_checkpoints
+    entries = list_checkpoints(jobs, run_id)
+    inherited = None
+    if not entries and get(jobs, "run", run_id).get("parent_run"):
+        try:
+            source, inherited = _resume_point(jobs, get(jobs, "run", run_id))
+        except ValueError as exc:
+            inherited = {"valid": False, "reason": str(exc)}
+    last = next((e for e in reversed(entries) if e["valid"]), None)
+    return {"checkpoints": entries, "last_valid": last or (inherited if inherited and inherited.get("valid") else None),
+            "inherited_start_point": inherited, "invalid": [e for e in entries if not e["valid"]]}
+
+
+def _resume_point(jobs, run):
+    from .checkpoints import list_checkpoints, select_checkpoint
+    if list_checkpoints(jobs, run["id"]):
+        return run["id"], select_checkpoint(jobs, run["id"])
+    parent = run.get("parent_run")
+    frozen = run.get("resume_checkpoint") or {}
+    if not parent or run.get("resume_source_run") != parent or frozen.get("id") != run.get("parent_checkpoint"):
+        return run["id"], select_checkpoint(jobs, run["id"])
+    point = select_checkpoint(jobs, parent, run["parent_checkpoint"])
+    if any(point.get(key) != frozen.get(key) for key in ("sha256", "bytes")):
+        raise Conflict("派生起点与冻结恢复点不一致")
+    point["selection"].update(source_run=parent, parent_seed_reason="child_has_no_own_checkpoint")
+    return parent, point
+
+
+def _validate_run(jobs, run):
+    validate_preflight(jobs, run["preflight"], upstream=Path(run["upstream"]))
+    for name, path in run["initial_weights"].items():
+        if not Path(path).is_file() or digest(Path(path)) != run["initial_hashes"][name]:
+            raise Conflict("MODEL_DEPENDENCY_INVALID：冻结的初始化权重已变化")
+
+
+def control(jobs, run_id, action, request_id):
+    if action == "pause":
+        return jobs.control(run_id, action, request_id)
+    if action != "resume":
+        raise ValueError("未支持的训练控制")
+    with jobs.connect() as db:
+        previous = db.execute("SELECT * FROM controls WHERE request=?", (request_id,)).fetchone()
+        if previous:
+            if previous["job_id"] != run_id or previous["action"] != action:
+                raise Conflict("该控制请求 ID 已使用")
+            return jobs.get(run_id)
+    run = get(jobs, "run", run_id)
+    _validate_run(jobs, run)
+    source, point = _resume_point(jobs, run)
+    with jobs.connect(write=True) as db:
+        previous = db.execute("SELECT * FROM controls WHERE request=?", (request_id,)).fetchone()
+        if previous:
+            if previous["job_id"] != run_id or previous["action"] != action:
+                raise Conflict("该控制请求 ID 已使用")
+            return jobs.decode(db.execute("SELECT * FROM jobs WHERE id=?", (run_id,)).fetchone())
+        current = jobs.decode(db.execute("SELECT * FROM jobs WHERE id=?", (run_id,)).fetchone())
+        if current["kind"] != "train" or current["state"] not in {"PAUSED", "INTERRUPTED", "FAILED", "EARLY_COMPLETED"}:
+            raise Conflict("仅暂停、中断、失败或提前结束的训练可续训")
+        if db.execute("SELECT 1 FROM records WHERE kind='service' AND id='draining'").fetchone():
+            raise Conflict("服务正在安全停止")
+        # Retention also holds this write lock; revalidate before binding the point.
+        source, point = _resume_point(jobs, run)
+        now = time.time()
+        # A stale pause from an interrupted process must not immediately pause a resumed run.
+        db.execute("INSERT OR IGNORE INTO control_receipts SELECT request FROM controls WHERE job_id=?", (run_id,))
+        db.execute("INSERT INTO controls VALUES(?,?,?,?)", (request_id, run_id, action, now))
+        db.execute("INSERT INTO control_receipts VALUES(?)", (request_id,))
+        run["resume_checkpoint"] = point
+        run["resume_source_run"] = source
+        run["resumed_at"] = now
+        put(jobs, "run", run_id, run, db)
+        db.execute("UPDATE jobs SET state='QUEUED',result=NULL,error=NULL,pid=NULL,process_start=NULL,instance=NULL,updated=? WHERE id=?", (now, run_id))
+        jobs.emit(db, run_id, "state", {"state": "QUEUED", "action": "resume", "checkpoint_id": point["id"], "selection": point["selection"]})
+        result = jobs.decode(db.execute("SELECT * FROM jobs WHERE id=?", (run_id,)).fetchone())
+    atomic_json(Path(run["run_dir"]) / "run_meta.json", run)
+    return result
+
+
+def derive(jobs, run_id, checkpoint_id, request_id):
+    payload = {"parent_run": run_id, "parent_checkpoint": checkpoint_id}
+    with jobs.connect() as db:
+        previous = db.execute("SELECT * FROM jobs WHERE request=?", (request_id,)).fetchone()
+        if previous:
+            previous = jobs.decode(previous)
+            if previous["kind"] != "train" or previous["payload"] != payload:
+                raise Conflict("该请求已绑定其他训练")
+            return previous
+    parent = get(jobs, "run", run_id)
+    _validate_run(jobs, parent)
+    from .checkpoints import select_checkpoint
+    point = select_checkpoint(jobs, run_id, checkpoint_id)
+    def accepted(db, job_id):
+        point = select_checkpoint(jobs, run_id, checkpoint_id)
+        child = copy.deepcopy(parent)
+        child.update(id=job_id, run_id=job_id, created=time.time(), run_dir=str(jobs.root / "runs" / job_id),
+                     parent_run=run_id, parent_checkpoint=checkpoint_id, resume_checkpoint=point, resume_source_run=run_id)
+        child.pop("resumed_at", None)
+        Path(child["run_dir"]).mkdir(parents=True, exist_ok=True)
+        atomic_json(Path(child["run_dir"]) / "run_meta.json", child)
+        put(jobs, "run", job_id, child, db)
+    return jobs.submit("train", payload, request_id, on_accept=accepted)

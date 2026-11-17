@@ -14,7 +14,7 @@ import uuid
 
 from .audio import atomic_json, digest
 from .settings import ROOT
-from .training_config import config_fingerprint
+from .training_config import config_fingerprint, feature_fingerprint
 from .source_lock import verify_source
 
 
@@ -296,7 +296,7 @@ def preflight(request):
             raise ValueError("特征未就绪或数据指纹变化")
         if manifest["upstream_lock"] != digest(ROOT/"configs/upstream.lock.json") or manifest["asset_lock"] != digest(ROOT/"configs/assets.lock.json"):
             raise ValueError("源码或资产锁已变化，请重新准备特征")
-        result.update(features_manifest_sha256=digest(area/"manifest.json"),
+        result.update(features_manifest_sha256=digest(area/"manifest.json"), features_content_sha256=feature_fingerprint(manifest),
                       upstream_lock=manifest["upstream_lock"], asset_lock=manifest["asset_lock"])
         training_clips = [c for c in version["clips"] if c["split"] == "train"]
         if set(manifest["entries"]) != {Path(c["path"]).name for c in training_clips}:

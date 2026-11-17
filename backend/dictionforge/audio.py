@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import uuid
+import time
 
 
 RATE = 48000
@@ -58,7 +59,16 @@ def atomic_json(path, value):
             json.dump(value, output, indent=2, ensure_ascii=False, allow_nan=False)
             output.flush()
             os.fsync(output.fileno())
-        temporary.replace(path)
+        # Short-lived readers on Windows may omit FILE_SHARE_DELETE. Keep the
+        # same fully fsynced temporary file and preserve the previous generation.
+        for attempt in range(8):
+            try:
+                temporary.replace(path)
+                break
+            except PermissionError as exc:
+                if os.name != "nt" or getattr(exc, "winerror", None) not in (5, 32, 33) or attempt == 7:
+                    raise
+                time.sleep(min(.01 * 2**attempt, .25))
     finally:
         temporary.unlink(missing_ok=True)
 

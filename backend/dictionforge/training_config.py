@@ -8,6 +8,12 @@ def config_fingerprint(config):
     return hashlib.sha256(json.dumps(config, sort_keys=True, allow_nan=False).encode()).hexdigest()
 
 
+def feature_fingerprint(manifest):
+    """Hash reusable feature content, excluding rebuild timing/cache statistics."""
+    return config_fingerprint({key: manifest[key] for key in
+        ("entries", "indexes", "version_fingerprint", "upstream_lock", "asset_lock", "ready")})
+
+
 def normalize_config(payload):
     allowed = {"version_id", "initial_model", "stages", "seed", "s1", "s2"}
     if set(payload) - allowed:

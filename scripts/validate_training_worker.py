@@ -22,13 +22,18 @@ def inspect_run(area):
     from dictionforge.feature_worker import init_runtime
     init_runtime(ROOT/'vendor/gpt-sovits')
     from process_ckpt import load_sovits_new
-    request = json.loads((area/'request.json').read_text(encoding='utf-8'))
-    result = json.loads((area/'result.json').read_text(encoding='utf-8'))
-    report = {'run_id': request['run_id'], 'outcome': result['outcome'], 'stages': {}}
+    request_path = area/'request.json' if (area/'request.json').is_file() else area/'training-request.json'
+    result_path = area/'result.json' if (area/'result.json').is_file() else area/'training-result.json'
+    request = json.loads(request_path.read_text(encoding='utf-8'))
+    result = json.loads(result_path.read_text(encoding='utf-8'))
+    index_path = area/'checkpoints/index.json'
+    entries = json.loads(index_path.read_text(encoding='utf-8'))['checkpoints'] if index_path.is_file() else result['checkpoints']
+    report = {'run_id': request['run_id'], 'outcome': result['outcome'], 'stages': {},
+              'checkpoint_states': {}, 'checked_checkpoint_ids': []}
     required = {'schema_version','run_id','stage','config','config_fingerprint','version_fingerprint',
         'features_manifest_sha256','upstream_lock','asset_lock','initial_weights','model','optimizer',
         'scheduler','scaler','rng','effective','metrics','batch_order','dataset_names','trainable_keys','dataloader'}
-    for entry in result['checkpoints']:
+    for entry in entries:
         assert digest(Path(entry['path'])) == entry['sha256']
         checkpoint = torch.load(entry['path'], map_location='cpu', weights_only=False)
         assert required <= set(checkpoint)
@@ -42,20 +47,30 @@ def inspect_run(area):
             parameter_sha.update(value.float().contiguous().numpy().tobytes())
         assert parameter_sha.hexdigest() == checkpoint['metrics']['final_parameters_sha256']
         stage = entry['stage']
-        snapshot_path = Path(result['snapshots']['gpt' if stage == 's1' else 'sovits'])
+        snapshot_path = Path(entry['snapshot']['path'] if entry.get('snapshot') else
+                             result['snapshots']['gpt' if stage == 's1' else 'sovits'])
         package = torch.load(snapshot_path, map_location='cpu', weights_only=False) if stage == 's1' else load_sovits_new(str(snapshot_path))
         assert set(checkpoint['trainable_keys']) <= set(package['weight'])
         for name, value in package['weight'].items():
             assert torch.equal(value, checkpoint['model'][name].half())
         if stage == 's2':
-            assert snapshot_path.read_bytes()[:2] == b'04'
+            with snapshot_path.open('rb') as stream:
+                assert stream.read(2) == b'04'
             assert package['lora_rank'] == request['config']['s2']['rank']
         optimizer_steps = sorted({int(value['step']) for value in checkpoint['optimizer']['state'].values() if 'step' in value})
-        report['stages'][stage] = {'checkpoint': entry, 'snapshot_sha256': digest(snapshot_path),
+        rng = checkpoint['rng']
+        rng_hashes = {'python': hashlib.sha256(repr(rng['python']).encode()).hexdigest(),
+                     'numpy': hashlib.sha256(rng['numpy'][1].tobytes() + repr((rng['numpy'][0], *rng['numpy'][2:])).encode()).hexdigest(),
+                     'torch_cpu': hashlib.sha256(rng['torch_cpu'].numpy().tobytes()).hexdigest(),
+                     'torch_cuda': [hashlib.sha256(value.numpy().tobytes()).hexdigest() for value in rng['torch_cuda']]}
+        inspected = {'checkpoint': entry, 'snapshot_sha256': digest(snapshot_path),
             'optimizer_state_entries': len(checkpoint['optimizer']['state']), 'optimizer_steps': optimizer_steps,
             'scheduler': checkpoint['scheduler'], 'scaler': checkpoint['scaler'],
             'verified_trainable_sha256': parameter_sha.hexdigest(), 'snapshot_matches_checkpoint_fp16': True,
-            'rng_fields': sorted(checkpoint['rng']), 'batch_order': checkpoint['batch_order']}
+            'rng_fields': sorted(checkpoint['rng']), 'rng_hashes': rng_hashes, 'batch_order': checkpoint['batch_order']}
+        report['stages'][stage] = inspected
+        report['checkpoint_states'][entry['id']] = inspected
+        report['checked_checkpoint_ids'].append(entry['id'])
         del checkpoint, package
     atomic_json(area/'checkpoint-inspection.json', report)
     print(json.dumps({'run_id': report['run_id'], 'inspection': 'PASSED'}, ensure_ascii=False))

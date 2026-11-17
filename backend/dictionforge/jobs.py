@@ -134,6 +134,14 @@ class Jobs:
             )
             if changed.rowcount:
                 self.emit(db, job_id, "state", {"state": state, "error": error})
+                if state in TERMINAL:
+                    pending = db.execute("""SELECT c.* FROM controls c LEFT JOIN control_receipts r ON c.request=r.request
+                        WHERE c.job_id=? AND r.request IS NULL""", (job_id,)).fetchall()
+                    for command in pending:
+                        db.execute("INSERT INTO control_receipts VALUES(?)", (command["request"],))
+                        self.emit(db, job_id, "control_finished", {"request": command["request"],
+                            "action": command["action"], "terminal_state": state,
+                            "reason": "任务已结束；检查任务状态与最后有效恢复点", "error": error})
 
     def progress(self, job_id, payload):
         with self.connect(write=True) as db:

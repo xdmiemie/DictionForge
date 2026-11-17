@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-17",
+  "command": ".\\.venv-api\\Scripts\\python.exe -m pytest tests/test_checkpoints.py tests/test_checkpoint_torch_io.py -q --basetemp E:\\DictionForge\\data\\pytest-checkpoints-verified",
+  "result": "20 passed in 8.73s",
+  "scope": "CPU checkpoint integrity, retention, real Torch serialization and injected I/O failures; not GPU resume acceptance",
+  "junction": {"platform": "Windows", "real_junction_created": true, "outside_target_preserved": true, "sandbox_elevation_used": true},
+  "torch_io": {
+    "device": "cpu",
+    "torch": "2.9.0+cu128",
+    "space_guard": true,
+    "partial_write": true,
+    "immutable": true,
+    "index_atomicity": true,
+    "indexed_checkpoints": 1,
+    "orphan_checkpoints": 1
+  },
+  "fixture_root": "data/pytest-checkpoints-verified",
+  "retention": {
+    "periodic_keep": 3,
+    "protect": ["last", "latest_valid", "pause", "stage_final", "unknown_kind", "invalid_diagnostic", "derived_parent_reference", "same_run_resume_reference"],
+    "index_before_unlink": true,
+    "database_write_lock_verified": true,
+    "index_failure_preserves_all_files": true,
+    "unlink_failure_leaves_unindexed_orphan": true
+  }
+}

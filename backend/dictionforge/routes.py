@@ -77,6 +77,12 @@ class TrainingConfiguration(Identified):
 class TrainingStart(Identified):
     preflight_id: str
 
+class TrainingControl(Identified):
+    action: Literal["pause", "resume"]
+
+class Derive(Identified):
+    checkpoint_id: str
+
 def register(app):
     @app.post("/api/folders/pick")
     def folder(body: Folder):
@@ -126,6 +132,21 @@ def register(app):
     def training_snapshot(key: str, request: Request):
         from .training import snapshot
         return snapshot(request.app.state.jobs, key)
+
+    @app.get("/api/training/{key}/checkpoints")
+    def training_checkpoints(key: str, request: Request):
+        from .training import checkpoints
+        return checkpoints(request.app.state.jobs, key)
+
+    @app.post("/api/training/{key}/controls", status_code=202)
+    def training_control(key: str, body: TrainingControl, request: Request):
+        from .training import control
+        return control(request.app.state.jobs, key, body.action, str(body.request_id))
+
+    @app.post("/api/training/{key}/derive", status_code=202)
+    def training_derive(key: str, body: Derive, request: Request):
+        from .training import derive
+        return derive(request.app.state.jobs, key, body.checkpoint_id, str(body.request_id))
 
     @app.get("/api/dataset-drafts")
     def drafts(request: Request):

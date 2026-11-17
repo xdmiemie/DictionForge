@@ -1,0 +1,1310 @@
+{
+  "inspection_device": "CPU; no CUDA model allocation",
+  "parent": {
+    "run_id": "be4045700e60491b95efb7101aaf411a",
+    "outcome": "COMPLETED",
+    "stages": {
+      "s2": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\checkpoints\\s2-u20-8ab0e08344a8.pt",
+          "sha256": "6c1f13da3d80b6ade72a3059df406b3ebc64b6dcebd45b95a4117b8438036ab3",
+          "bytes": 1845472125,
+          "stage": "s2",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 3,
+            "completed_epochs": 4,
+            "batch_cursor": 5,
+            "processed_batches": 20,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "2043c0cd0b1a21038439b2cde67dbff3aa06bd13b8afe1f43024f152d2618af8",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": true,
+            "loss": 0.24201951920986176,
+            "learning_rate": 9.996250468730469e-05,
+            "next_learning_rate": 9.995000937421877e-05,
+            "seconds": 14.421999999998661,
+            "updates_per_second": 1.3867702121759713,
+            "peak_allocated_bytes": 4089878016,
+            "peak_reserved_bytes": 4831838208,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 4089878016,
+            "final_parameters_sha256": "e70cbdbb65f9e5d707a9144699d9657bf06d75d9aed353c599deafe4f99d6736",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s2-u3-423a198ece27",
+            "restored_optimizer_updates": 3,
+            "restored_parameters_sha256": "a824912232d9cc2ec15dd1ca5a71803b31ff8fd8c4b2d2e6636611c798a67584"
+          },
+          "kind": "stage_final",
+          "id": "s2-u20-8ab0e08344a8",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\snapshots\\s2-u20-8ab0e08344a8\\sovits.pth",
+            "sha256": "640548bb0d96082d250c16e81ac5f8e446425cf38f5db5de84383efbfa28bc0d",
+            "bytes": 75550971
+          }
+        },
+        "snapshot_sha256": "640548bb0d96082d250c16e81ac5f8e446425cf38f5db5de84383efbfa28bc0d",
+        "optimizer_state_entries": 233,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "gamma": 0.999875,
+          "base_lrs": [
+            0.0001
+          ],
+          "last_epoch": 4,
+          "_step_count": 5,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            9.995000937421877e-05
+          ]
+        },
+        "scaler": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "e70cbdbb65f9e5d707a9144699d9657bf06d75d9aed353c599deafe4f99d6736",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "11a225b737428bbd2b3cd7393ffa4226ba66838dcb814c4d19fb5dfff9df350b",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "848c7bd5162876a56f0fb36c79ed6b51d8d1838786a30c734e0f1768d8ae36b8",
+          "torch_cuda": [
+            "2edeff83245d86495c669243f8f290cd569766866f9692c917883b707501b662"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "s1": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\checkpoints\\s1-u20-41838fab351b.pt",
+          "sha256": "ebfceac6684051e2d7b3ca1c08ea913f912f5c7d103d78d52563cecdb06ad898",
+          "bytes": 931432445,
+          "stage": "s1",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 9,
+            "completed_epochs": 10,
+            "batch_cursor": 5,
+            "processed_batches": 50,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "53f769ec47c0ee8b6a10fb2a98cf2da391e218c00afefde9e4975cf9a0885447",
+            "trainable_parameters": 77606402,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 4,
+            "stage": "s1",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 341.494384765625,
+            "learning_rate": 0.002,
+            "next_learning_rate": 0.002,
+            "seconds": 8.06300000000192,
+            "updates_per_second": 2.480466327669011,
+            "peak_allocated_bytes": 2325302784,
+            "peak_reserved_bytes": 3068133376,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 128.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 2325302784,
+            "accuracy": 0.8595041036605835,
+            "final_parameters_sha256": "513c13b4e8ed632427f335a8c1abe98f6aada22ceddb72046fd0dd0ef2c4cce6",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s1-u3-5d9400dab283",
+            "restored_optimizer_updates": 3,
+            "restored_parameters_sha256": "0828f624758a51cdbfd089201ddc915bca2e96c7cd101b607431f60735c1f5e0"
+          },
+          "kind": "stage_final",
+          "id": "s1-u20-41838fab351b",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\snapshots\\s1-u20-41838fab351b\\gpt.ckpt",
+            "sha256": "46880aec74c32df8901b9c9c5c01753d9490834d9e3f3cfc74a51778bef7964b",
+            "bytes": 155306225
+          }
+        },
+        "snapshot_sha256": "46880aec74c32df8901b9c9c5c01753d9490834d9e3f3cfc74a51778bef7964b",
+        "optimizer_state_entries": 11,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "base_lrs": [
+            0.002
+          ],
+          "last_epoch": 20,
+          "_step_count": 21,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            0.002
+          ],
+          "lr_lambdas": [
+            null
+          ]
+        },
+        "scaler": {
+          "scale": 128.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "513c13b4e8ed632427f335a8c1abe98f6aada22ceddb72046fd0dd0ef2c4cce6",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "6c14fcdeec496819659efeaac03470b4b0bdb65315f2d78d12632f26fcb7a9d5",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "c3ea8f33717d03bd181f03553ed0c309cb1e2b03ace5f327ccf3a18dc09f2426",
+          "torch_cuda": [
+            "e80285234d026bf9b4c5540d85041878ea283801e66a146d222824b342a43454"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    },
+    "checkpoint_states": {
+      "s2-u3-423a198ece27": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\checkpoints\\s2-u3-423a198ece27.pt",
+          "sha256": "f24308a8de6173b97f23245fb1c859df0178e35996db55139e2666833bd14ab4",
+          "bytes": 1845471805,
+          "stage": "s2",
+          "metrics": {
+            "state": "PAUSED",
+            "epoch": 0,
+            "completed_epochs": 0,
+            "batch_cursor": 3,
+            "processed_batches": 3,
+            "optimizer_updates": 3,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "2043c0cd0b1a21038439b2cde67dbff3aa06bd13b8afe1f43024f152d2618af8",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "6890f31114aba6aa2f449389681e2c855762a812da22adbc4b7e0213e6be7c86",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 0.005395205691456795,
+            "learning_rate": 0.0001,
+            "next_learning_rate": 0.0001,
+            "seconds": 4.311999999998079,
+            "updates_per_second": 0.6957328385902913,
+            "peak_allocated_bytes": 4064164864,
+            "peak_reserved_bytes": 4831838208,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536.0,
+            "update_applied": true,
+            "step": 3,
+            "peak_cuda_bytes": 4064164864,
+            "final_parameters_sha256": "a824912232d9cc2ec15dd1ca5a71803b31ff8fd8c4b2d2e6636611c798a67584",
+            "grads_clear": true,
+            "accumulation_pending": 0
+          },
+          "kind": "pause",
+          "id": "s2-u3-423a198ece27",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\snapshots\\s2-u3-423a198ece27\\sovits.pth",
+            "sha256": "954aa554af4e80daecae9018f21a69c397774de84f8a72e04371213a78ba7e4a",
+            "bytes": 75550971
+          }
+        },
+        "snapshot_sha256": "954aa554af4e80daecae9018f21a69c397774de84f8a72e04371213a78ba7e4a",
+        "optimizer_state_entries": 233,
+        "optimizer_steps": [
+          3
+        ],
+        "scheduler": {
+          "gamma": 0.999875,
+          "base_lrs": [
+            0.0001
+          ],
+          "last_epoch": 0,
+          "_step_count": 1,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            0.0001
+          ]
+        },
+        "scaler": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 3
+        },
+        "verified_trainable_sha256": "a824912232d9cc2ec15dd1ca5a71803b31ff8fd8c4b2d2e6636611c798a67584",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "aa02cb3b4b72f624f79e1591bd17619dda9d804723b97b925c4b8f4ff4b4e711",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "848c7bd5162876a56f0fb36c79ed6b51d8d1838786a30c734e0f1768d8ae36b8",
+          "torch_cuda": [
+            "6728da6064b8cfd3137cbd8a7c5c24124354ca42ebceb3d8115b353ddc517076"
+          ]
+        },
+        "batch_order": [
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "s2-u20-8ab0e08344a8": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\checkpoints\\s2-u20-8ab0e08344a8.pt",
+          "sha256": "6c1f13da3d80b6ade72a3059df406b3ebc64b6dcebd45b95a4117b8438036ab3",
+          "bytes": 1845472125,
+          "stage": "s2",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 3,
+            "completed_epochs": 4,
+            "batch_cursor": 5,
+            "processed_batches": 20,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "2043c0cd0b1a21038439b2cde67dbff3aa06bd13b8afe1f43024f152d2618af8",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": true,
+            "loss": 0.24201951920986176,
+            "learning_rate": 9.996250468730469e-05,
+            "next_learning_rate": 9.995000937421877e-05,
+            "seconds": 14.421999999998661,
+            "updates_per_second": 1.3867702121759713,
+            "peak_allocated_bytes": 4089878016,
+            "peak_reserved_bytes": 4831838208,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 4089878016,
+            "final_parameters_sha256": "e70cbdbb65f9e5d707a9144699d9657bf06d75d9aed353c599deafe4f99d6736",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s2-u3-423a198ece27",
+            "restored_optimizer_updates": 3,
+            "restored_parameters_sha256": "a824912232d9cc2ec15dd1ca5a71803b31ff8fd8c4b2d2e6636611c798a67584"
+          },
+          "kind": "stage_final",
+          "id": "s2-u20-8ab0e08344a8",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\snapshots\\s2-u20-8ab0e08344a8\\sovits.pth",
+            "sha256": "640548bb0d96082d250c16e81ac5f8e446425cf38f5db5de84383efbfa28bc0d",
+            "bytes": 75550971
+          }
+        },
+        "snapshot_sha256": "640548bb0d96082d250c16e81ac5f8e446425cf38f5db5de84383efbfa28bc0d",
+        "optimizer_state_entries": 233,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "gamma": 0.999875,
+          "base_lrs": [
+            0.0001
+          ],
+          "last_epoch": 4,
+          "_step_count": 5,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            9.995000937421877e-05
+          ]
+        },
+        "scaler": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "e70cbdbb65f9e5d707a9144699d9657bf06d75d9aed353c599deafe4f99d6736",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "11a225b737428bbd2b3cd7393ffa4226ba66838dcb814c4d19fb5dfff9df350b",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "848c7bd5162876a56f0fb36c79ed6b51d8d1838786a30c734e0f1768d8ae36b8",
+          "torch_cuda": [
+            "2edeff83245d86495c669243f8f290cd569766866f9692c917883b707501b662"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "s1-u3-5d9400dab283": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\checkpoints\\s1-u3-5d9400dab283.pt",
+          "sha256": "d350b197c1e8a1a1fae358b4db3ab2ab45b24856f654ff18ad9f1ce05e8b8478",
+          "bytes": 931432061,
+          "stage": "s1",
+          "metrics": {
+            "state": "PAUSED",
+            "epoch": 1,
+            "completed_epochs": 1,
+            "batch_cursor": 4,
+            "processed_batches": 9,
+            "optimizer_updates": 3,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "53f769ec47c0ee8b6a10fb2a98cf2da391e218c00afefde9e4975cf9a0885447",
+            "trainable_parameters": 77606402,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 4,
+            "stage": "s1",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "b3e43784b71a70f0cbee28362e85f249bebc25b796dde4b868f1125034c7ef6c",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 691.6596069335938,
+            "learning_rate": 0.002,
+            "next_learning_rate": 0.002,
+            "seconds": 1.860000000000582,
+            "updates_per_second": 1.6129032258059468,
+            "peak_allocated_bytes": 2325302784,
+            "peak_reserved_bytes": 3068133376,
+            "batch_cycle_size": 4,
+            "actual_batch_sizes": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "scaler_scale": 128.0,
+            "update_applied": true,
+            "step": 3,
+            "peak_cuda_bytes": 2325302784,
+            "accuracy": 0.44554411619901657,
+            "final_parameters_sha256": "0828f624758a51cdbfd089201ddc915bca2e96c7cd101b607431f60735c1f5e0",
+            "grads_clear": true,
+            "accumulation_pending": 0
+          },
+          "kind": "pause",
+          "id": "s1-u3-5d9400dab283",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\snapshots\\s1-u3-5d9400dab283\\gpt.ckpt",
+            "sha256": "f95abc3d237e95bc583e71d3955271880c51c10425ea46b103d9c94d6f7a1ba8",
+            "bytes": 155306225
+          }
+        },
+        "snapshot_sha256": "f95abc3d237e95bc583e71d3955271880c51c10425ea46b103d9c94d6f7a1ba8",
+        "optimizer_state_entries": 11,
+        "optimizer_steps": [
+          3
+        ],
+        "scheduler": {
+          "base_lrs": [
+            0.002
+          ],
+          "last_epoch": 3,
+          "_step_count": 4,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            0.002
+          ],
+          "lr_lambdas": [
+            null
+          ]
+        },
+        "scaler": {
+          "scale": 128.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 3
+        },
+        "verified_trainable_sha256": "0828f624758a51cdbfd089201ddc915bca2e96c7cd101b607431f60735c1f5e0",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "49e1a12a3a0b6ca80867a166f06a000f411489c92649967ba7a0fa1bddd4ad2f",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "c3ea8f33717d03bd181f03553ed0c309cb1e2b03ace5f327ccf3a18dc09f2426",
+          "torch_cuda": [
+            "ca8bf22cfdd4fca9e986bf7f4affeb60e4064b1cb485dc3e5c16d62d76447db3"
+          ]
+        },
+        "batch_order": [
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            0
+          ]
+        ]
+      },
+      "s1-u20-41838fab351b": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\checkpoints\\s1-u20-41838fab351b.pt",
+          "sha256": "ebfceac6684051e2d7b3ca1c08ea913f912f5c7d103d78d52563cecdb06ad898",
+          "bytes": 931432445,
+          "stage": "s1",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 9,
+            "completed_epochs": 10,
+            "batch_cursor": 5,
+            "processed_batches": 50,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "53f769ec47c0ee8b6a10fb2a98cf2da391e218c00afefde9e4975cf9a0885447",
+            "trainable_parameters": 77606402,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 4,
+            "stage": "s1",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 341.494384765625,
+            "learning_rate": 0.002,
+            "next_learning_rate": 0.002,
+            "seconds": 8.06300000000192,
+            "updates_per_second": 2.480466327669011,
+            "peak_allocated_bytes": 2325302784,
+            "peak_reserved_bytes": 3068133376,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 128.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 2325302784,
+            "accuracy": 0.8595041036605835,
+            "final_parameters_sha256": "513c13b4e8ed632427f335a8c1abe98f6aada22ceddb72046fd0dd0ef2c4cce6",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s1-u3-5d9400dab283",
+            "restored_optimizer_updates": 3,
+            "restored_parameters_sha256": "0828f624758a51cdbfd089201ddc915bca2e96c7cd101b607431f60735c1f5e0"
+          },
+          "kind": "stage_final",
+          "id": "s1-u20-41838fab351b",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\be4045700e60491b95efb7101aaf411a\\snapshots\\s1-u20-41838fab351b\\gpt.ckpt",
+            "sha256": "46880aec74c32df8901b9c9c5c01753d9490834d9e3f3cfc74a51778bef7964b",
+            "bytes": 155306225
+          }
+        },
+        "snapshot_sha256": "46880aec74c32df8901b9c9c5c01753d9490834d9e3f3cfc74a51778bef7964b",
+        "optimizer_state_entries": 11,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "base_lrs": [
+            0.002
+          ],
+          "last_epoch": 20,
+          "_step_count": 21,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            0.002
+          ],
+          "lr_lambdas": [
+            null
+          ]
+        },
+        "scaler": {
+          "scale": 128.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "513c13b4e8ed632427f335a8c1abe98f6aada22ceddb72046fd0dd0ef2c4cce6",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "6c14fcdeec496819659efeaac03470b4b0bdb65315f2d78d12632f26fcb7a9d5",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "c3ea8f33717d03bd181f03553ed0c309cb1e2b03ace5f327ccf3a18dc09f2426",
+          "torch_cuda": [
+            "e80285234d026bf9b4c5540d85041878ea283801e66a146d222824b342a43454"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    },
+    "checked_checkpoint_ids": [
+      "s2-u3-423a198ece27",
+      "s2-u20-8ab0e08344a8",
+      "s1-u3-5d9400dab283",
+      "s1-u20-41838fab351b"
+    ]
+  },
+  "child": {
+    "run_id": "a1e76ef07ae34bedb9dbb45590216c2f",
+    "outcome": "COMPLETED",
+    "stages": {
+      "s2": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\checkpoints\\s2-u20-5a002bc68e93.pt",
+          "sha256": "623ded35724468847dc58fdc6f944df90152ff6c6f3714a16cae0b70b8580d2a",
+          "bytes": 1845472125,
+          "stage": "s2",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 3,
+            "completed_epochs": 4,
+            "batch_cursor": 5,
+            "processed_batches": 20,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "2043c0cd0b1a21038439b2cde67dbff3aa06bd13b8afe1f43024f152d2618af8",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": true,
+            "loss": 0.24200361967086792,
+            "learning_rate": 9.996250468730469e-05,
+            "next_learning_rate": 9.995000937421877e-05,
+            "seconds": 23.108000000000175,
+            "updates_per_second": 0.8655011251514562,
+            "peak_allocated_bytes": 4088996864,
+            "peak_reserved_bytes": 5117050880,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 4088996864,
+            "final_parameters_sha256": "5e5f61959bb7c2a5e98cea0db812cd020fe90e0250501273adff09114c674227",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s2-u5-fb84418957d4",
+            "restored_optimizer_updates": 5,
+            "restored_parameters_sha256": "30917f4b1cad2737c33255e49e4246ba2c9492e8e9178d015f918064222f4b82"
+          },
+          "kind": "stage_final",
+          "id": "s2-u20-5a002bc68e93",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\snapshots\\s2-u20-5a002bc68e93\\sovits.pth",
+            "sha256": "6ac25e8b10642cb3a158582103d6017ff1adb7fb2cf6717b10071495efd01ace",
+            "bytes": 75550971
+          }
+        },
+        "snapshot_sha256": "6ac25e8b10642cb3a158582103d6017ff1adb7fb2cf6717b10071495efd01ace",
+        "optimizer_state_entries": 233,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "gamma": 0.999875,
+          "base_lrs": [
+            0.0001
+          ],
+          "last_epoch": 4,
+          "_step_count": 5,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            9.995000937421877e-05
+          ]
+        },
+        "scaler": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "5e5f61959bb7c2a5e98cea0db812cd020fe90e0250501273adff09114c674227",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "11a225b737428bbd2b3cd7393ffa4226ba66838dcb814c4d19fb5dfff9df350b",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "848c7bd5162876a56f0fb36c79ed6b51d8d1838786a30c734e0f1768d8ae36b8",
+          "torch_cuda": [
+            "2edeff83245d86495c669243f8f290cd569766866f9692c917883b707501b662"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "s1": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\checkpoints\\s1-u20-c5515bebcedb.pt",
+          "sha256": "f1362e8410dc8ecbacad4dbafffa46522c533bb81163d4709b4ec481f2b8eed9",
+          "bytes": 931430525,
+          "stage": "s1",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 9,
+            "completed_epochs": 10,
+            "batch_cursor": 5,
+            "processed_batches": 50,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "53f769ec47c0ee8b6a10fb2a98cf2da391e218c00afefde9e4975cf9a0885447",
+            "trainable_parameters": 77606402,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 4,
+            "stage": "s1",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 341.54473876953125,
+            "learning_rate": 0.002,
+            "next_learning_rate": 0.002,
+            "seconds": 5.75,
+            "updates_per_second": 3.4782608695652173,
+            "peak_allocated_bytes": 2323367424,
+            "peak_reserved_bytes": 3068133376,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 128.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 2323367424,
+            "accuracy": 0.8636363744735718,
+            "final_parameters_sha256": "d0c77fc2d2d7a90d7c32173d134747f7ea2181bf2b9a4266980fadd8e9fd857d",
+            "grads_clear": true,
+            "accumulation_pending": 0
+          },
+          "kind": "stage_final",
+          "id": "s1-u20-c5515bebcedb",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\snapshots\\s1-u20-c5515bebcedb\\gpt.ckpt",
+            "sha256": "ea308ab6b1a3128be87c0644930d2714f2e9455e25a7ffb6ca0e053f0c40103b",
+            "bytes": 155306225
+          }
+        },
+        "snapshot_sha256": "ea308ab6b1a3128be87c0644930d2714f2e9455e25a7ffb6ca0e053f0c40103b",
+        "optimizer_state_entries": 11,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "base_lrs": [
+            0.002
+          ],
+          "last_epoch": 20,
+          "_step_count": 21,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            0.002
+          ],
+          "lr_lambdas": [
+            null
+          ]
+        },
+        "scaler": {
+          "scale": 128.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "d0c77fc2d2d7a90d7c32173d134747f7ea2181bf2b9a4266980fadd8e9fd857d",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "6c14fcdeec496819659efeaac03470b4b0bdb65315f2d78d12632f26fcb7a9d5",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "c3ea8f33717d03bd181f03553ed0c309cb1e2b03ace5f327ccf3a18dc09f2426",
+          "torch_cuda": [
+            "e80285234d026bf9b4c5540d85041878ea283801e66a146d222824b342a43454"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    },
+    "checkpoint_states": {
+      "s2-u5-fb84418957d4": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\checkpoints\\s2-u5-fb84418957d4.pt",
+          "sha256": "e2d24ab364e5dc538a6d4e443c444403988a6ec7d316443eab1aeed1cd50b50c",
+          "bytes": 1845472061,
+          "stage": "s2",
+          "metrics": {
+            "state": "PAUSED",
+            "epoch": 0,
+            "completed_epochs": 1,
+            "batch_cursor": 5,
+            "processed_batches": 5,
+            "optimizer_updates": 5,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "2043c0cd0b1a21038439b2cde67dbff3aa06bd13b8afe1f43024f152d2618af8",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "6890f31114aba6aa2f449389681e2c855762a812da22adbc4b7e0213e6be7c86",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": true,
+            "loss": 0.008844612166285515,
+            "learning_rate": 0.0001,
+            "next_learning_rate": 9.99875e-05,
+            "seconds": 7.998999999996158,
+            "updates_per_second": 0.625078134767146,
+            "peak_allocated_bytes": 4085313024,
+            "peak_reserved_bytes": 4831838208,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536.0,
+            "update_applied": true,
+            "step": 5,
+            "peak_cuda_bytes": 4085313024,
+            "final_parameters_sha256": "30917f4b1cad2737c33255e49e4246ba2c9492e8e9178d015f918064222f4b82",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s2-u3-423a198ece27",
+            "restored_optimizer_updates": 3,
+            "restored_parameters_sha256": "a824912232d9cc2ec15dd1ca5a71803b31ff8fd8c4b2d2e6636611c798a67584"
+          },
+          "kind": "pause",
+          "id": "s2-u5-fb84418957d4",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\snapshots\\s2-u5-fb84418957d4\\sovits.pth",
+            "sha256": "ba44df2a6f2a34cf6e5ecb74dc2480068e39f6afdf5a7627892f7d0f6584c6ac",
+            "bytes": 75550971
+          }
+        },
+        "snapshot_sha256": "ba44df2a6f2a34cf6e5ecb74dc2480068e39f6afdf5a7627892f7d0f6584c6ac",
+        "optimizer_state_entries": 233,
+        "optimizer_steps": [
+          5
+        ],
+        "scheduler": {
+          "gamma": 0.999875,
+          "base_lrs": [
+            0.0001
+          ],
+          "last_epoch": 1,
+          "_step_count": 2,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            9.99875e-05
+          ]
+        },
+        "scaler": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 5
+        },
+        "verified_trainable_sha256": "30917f4b1cad2737c33255e49e4246ba2c9492e8e9178d015f918064222f4b82",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "5a95ed2cba70676228396beb568f9055d0a3d1ae38a9f8e9473b37f8e07b4b1a",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "848c7bd5162876a56f0fb36c79ed6b51d8d1838786a30c734e0f1768d8ae36b8",
+          "torch_cuda": [
+            "3e30425fe5834b18538758eb8fa3e220ef591fc79d1ff56264d3ae6abb8f926f"
+          ]
+        },
+        "batch_order": [
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ],
+          [
+            0
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "s2-u20-5a002bc68e93": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\checkpoints\\s2-u20-5a002bc68e93.pt",
+          "sha256": "623ded35724468847dc58fdc6f944df90152ff6c6f3714a16cae0b70b8580d2a",
+          "bytes": 1845472125,
+          "stage": "s2",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 3,
+            "completed_epochs": 4,
+            "batch_cursor": 5,
+            "processed_batches": 20,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "2043c0cd0b1a21038439b2cde67dbff3aa06bd13b8afe1f43024f152d2618af8",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": true,
+            "loss": 0.24200361967086792,
+            "learning_rate": 9.996250468730469e-05,
+            "next_learning_rate": 9.995000937421877e-05,
+            "seconds": 23.108000000000175,
+            "updates_per_second": 0.8655011251514562,
+            "peak_allocated_bytes": 4088996864,
+            "peak_reserved_bytes": 5117050880,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 4088996864,
+            "final_parameters_sha256": "5e5f61959bb7c2a5e98cea0db812cd020fe90e0250501273adff09114c674227",
+            "grads_clear": true,
+            "accumulation_pending": 0,
+            "resumed_from": "s2-u5-fb84418957d4",
+            "restored_optimizer_updates": 5,
+            "restored_parameters_sha256": "30917f4b1cad2737c33255e49e4246ba2c9492e8e9178d015f918064222f4b82"
+          },
+          "kind": "stage_final",
+          "id": "s2-u20-5a002bc68e93",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\snapshots\\s2-u20-5a002bc68e93\\sovits.pth",
+            "sha256": "6ac25e8b10642cb3a158582103d6017ff1adb7fb2cf6717b10071495efd01ace",
+            "bytes": 75550971
+          }
+        },
+        "snapshot_sha256": "6ac25e8b10642cb3a158582103d6017ff1adb7fb2cf6717b10071495efd01ace",
+        "optimizer_state_entries": 233,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "gamma": 0.999875,
+          "base_lrs": [
+            0.0001
+          ],
+          "last_epoch": 4,
+          "_step_count": 5,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            9.995000937421877e-05
+          ]
+        },
+        "scaler": {
+          "scale": 65536.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "5e5f61959bb7c2a5e98cea0db812cd020fe90e0250501273adff09114c674227",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "11a225b737428bbd2b3cd7393ffa4226ba66838dcb814c4d19fb5dfff9df350b",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "848c7bd5162876a56f0fb36c79ed6b51d8d1838786a30c734e0f1768d8ae36b8",
+          "torch_cuda": [
+            "2edeff83245d86495c669243f8f290cd569766866f9692c917883b707501b662"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "s1-u20-c5515bebcedb": {
+        "checkpoint": {
+          "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\checkpoints\\s1-u20-c5515bebcedb.pt",
+          "sha256": "f1362e8410dc8ecbacad4dbafffa46522c533bb81163d4709b4ec481f2b8eed9",
+          "bytes": 931430525,
+          "stage": "s1",
+          "metrics": {
+            "state": "COMPLETED",
+            "epoch": 9,
+            "completed_epochs": 10,
+            "batch_cursor": 5,
+            "processed_batches": 50,
+            "optimizer_updates": 20,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "53f769ec47c0ee8b6a10fb2a98cf2da391e218c00afefde9e4975cf9a0885447",
+            "trainable_parameters": 77606402,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 4,
+            "stage": "s1",
+            "target": 20,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "151b768775b9321e2ff60e45d04b134dbe5134bc19efc3eed560696c2806edbd",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 341.54473876953125,
+            "learning_rate": 0.002,
+            "next_learning_rate": 0.002,
+            "seconds": 5.75,
+            "updates_per_second": 3.4782608695652173,
+            "peak_allocated_bytes": 2323367424,
+            "peak_reserved_bytes": 3068133376,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 128.0,
+            "update_applied": true,
+            "step": 20,
+            "peak_cuda_bytes": 2323367424,
+            "accuracy": 0.8636363744735718,
+            "final_parameters_sha256": "d0c77fc2d2d7a90d7c32173d134747f7ea2181bf2b9a4266980fadd8e9fd857d",
+            "grads_clear": true,
+            "accumulation_pending": 0
+          },
+          "kind": "stage_final",
+          "id": "s1-u20-c5515bebcedb",
+          "snapshot": {
+            "path": "E:\\DictionForge\\data\\runs\\a1e76ef07ae34bedb9dbb45590216c2f\\snapshots\\s1-u20-c5515bebcedb\\gpt.ckpt",
+            "sha256": "ea308ab6b1a3128be87c0644930d2714f2e9455e25a7ffb6ca0e053f0c40103b",
+            "bytes": 155306225
+          }
+        },
+        "snapshot_sha256": "ea308ab6b1a3128be87c0644930d2714f2e9455e25a7ffb6ca0e053f0c40103b",
+        "optimizer_state_entries": 11,
+        "optimizer_steps": [
+          20
+        ],
+        "scheduler": {
+          "base_lrs": [
+            0.002
+          ],
+          "last_epoch": 20,
+          "_step_count": 21,
+          "_is_initial": false,
+          "_get_lr_called_within_step": false,
+          "_last_lr": [
+            0.002
+          ],
+          "lr_lambdas": [
+            null
+          ]
+        },
+        "scaler": {
+          "scale": 128.0,
+          "growth_factor": 2.0,
+          "backoff_factor": 0.5,
+          "growth_interval": 2000,
+          "_growth_tracker": 20
+        },
+        "verified_trainable_sha256": "d0c77fc2d2d7a90d7c32173d134747f7ea2181bf2b9a4266980fadd8e9fd857d",
+        "snapshot_matches_checkpoint_fp16": true,
+        "rng_fields": [
+          "numpy",
+          "python",
+          "torch_cpu",
+          "torch_cuda"
+        ],
+        "rng_hashes": {
+          "python": "6c14fcdeec496819659efeaac03470b4b0bdb65315f2d78d12632f26fcb7a9d5",
+          "numpy": "84667b7abfc839a038c0c18bc23ea7dd9ca7e686eeae64f12d0bd165359107ce",
+          "torch_cpu": "c3ea8f33717d03bd181f03553ed0c309cb1e2b03ace5f327ccf3a18dc09f2426",
+          "torch_cuda": [
+            "e80285234d026bf9b4c5540d85041878ea283801e66a146d222824b342a43454"
+          ]
+        },
+        "batch_order": [
+          [
+            1
+          ],
+          [
+            0
+          ],
+          [
+            3
+          ],
+          [
+            2
+          ],
+          [
+            4
+          ]
+        ]
+      }
+    },
+    "checked_checkpoint_ids": [
+      "s2-u5-fb84418957d4",
+      "s2-u20-5a002bc68e93",
+      "s1-u20-c5515bebcedb"
+    ]
+  },
+  "comparison": {
+    "s2": {
+      "parameters": 36155748,
+      "different_values": 35412960,
+      "bitwise_equal": false,
+      "max_absolute_difference": 0.0002374362520640716,
+      "rms_difference": 9.378031927421545e-07,
+      "final_rng_hashes_equal": true,
+      "interpretation": "Observed fixed-run comparison only; no general bitwise determinism guarantee."
+    },
+    "s1": {
+      "parameters": 77606402,
+      "different_values": 77097039,
+      "bitwise_equal": false,
+      "max_absolute_difference": 0.003993988037109375,
+      "rms_difference": 4.264428446933878e-06,
+      "final_rng_hashes_equal": true,
+      "interpretation": "Observed fixed-run comparison only; no general bitwise determinism guarantee."
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
-import {active, api, errorText, finiteNumber, Job, JobError, optimizerUpdates, peakBytes, Progress, stateLabel} from './api';
+import {active, api, errorText, finiteNumber, Job, JobError, optimizerUpdates, peakBytes, Progress, requestId, stateLabel} from './api';
 import type {DatasetVersion} from './Datasets';
 
 type StageConfig = {batch_size: number; precision: string; stop_mode: 'steps' | 'epochs'; target: number; learning_rate: number; rank?: number; accumulate?: number};
@@ -30,8 +30,10 @@ function PreflightGpu({gpu}: {gpu?: Preflight['gpu']}) {
   </div>;
 }
 
-type RunStage = Progress & {state?: string};
-type RunView = Job & {run?: {config?: {s1?: StageConfig; s2?: StageConfig}; [key: string]: unknown}; stage_state?: {active_stage?: string | null; stages?: {s1?: RunStage; s2?: RunStage}; [key: string]: unknown} | null};
+type RunStage = Progress & {state?: string; error?: string | JobError};
+type Checkpoint = {id: string; path?: string; sha256?: string; stage: string; metrics?: Progress; kind?: string; valid: boolean; reason?: string; protected?: boolean | string[]};
+type CheckpointList = {checkpoints: Checkpoint[]; last_valid?: string | Checkpoint | null; invalid?: unknown[]; inherited_start_point?: {id?: string; stage?: string; valid: boolean; reason?: string; selection?: {source_run?: string; parent_seed_reason?: string}} | null};
+type RunView = Job & {run?: {config?: {s1?: StageConfig; s2?: StageConfig}; [key: string]: unknown}; stage_state?: {active_stage?: string | null; stages?: {s1?: RunStage; s2?: RunStage}; [key: string]: unknown} | null; pending_controls?: {action: string; request?: string}[]};
 
 export function RunStageCard({name, stage, current}: {name: 's1' | 's2'; stage?: RunStage; current: boolean}) {
   const unit = stage?.unit;
@@ -46,11 +48,24 @@ export function RunStageCard({name, stage, current}: {name: 's1' | 's2'; stage?:
   </article>;
 }
 
-export function TrainingRun({job}: {job: Job}) {
+export function TrainingRun({job, submit}: {job: Job; submit: Submit}) {
   const [view, setView] = useState<RunView>();
   const [loadError, setLoadError] = useState('');
   const [refreshKey, setRefreshKey] = useState(0);
-  useEffect(() => {setView(undefined); setLoadError('');}, [job.id]);
+  const [points, setPoints] = useState<CheckpointList>();
+  const [pointsError, setPointsError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [pendingAction, setPendingAction] = useState<'pause' | 'resume' | ''>('');
+  const [controlError, setControlError] = useState('');
+  useEffect(() => {setView(undefined); setLoadError(''); setPoints(undefined); setPointsError(''); setPendingAction(''); setControlError('');}, [job.id]);
+  useEffect(() => {
+    let disposed = false;
+    api<CheckpointList>('/training/' + encodeURIComponent(job.id) + '/checkpoints').then(next => {if (!disposed) {setPoints(next); setPointsError('');}}).catch(e => {if (!disposed) setPointsError(e.message);});
+    return () => {disposed = true;};
+  }, [job.id, job.state, refreshKey]);
+  useEffect(() => {
+    if (pendingAction === 'pause' && ['PAUSED', 'COMPLETED', 'FAILED', 'INTERRUPTED'].includes(job.state) || pendingAction === 'resume' && ['RUNNING', 'COMPLETED', 'FAILED', 'INTERRUPTED'].includes(job.state)) setPendingAction('');
+  }, [job.state]);
   useEffect(() => {
     let disposed = false;
     const read = () => api<RunView>('/training/' + encodeURIComponent(job.id)).then(next => {if (!disposed) {setView(next); setLoadError('');}}).catch(e => {if (!disposed) setLoadError(e.message);});
@@ -64,7 +79,44 @@ export function TrainingRun({job}: {job: Job}) {
     const frozen = view?.run?.config?.[stage];
     return {target: frozen?.target, unit: frozen?.stop_mode === 'epochs' ? 'epochs' : 'optimizer_updates', ...stageState?.stages?.[stage], ...(job.latest_progress?.stage === stage ? job.latest_progress : {})};
   };
-  return <div className="training-run"><div className="section-top"><h3>双阶段训练进度</h3><button className="quiet" onClick={() => setRefreshKey(value => value + 1)}>刷新运行快照</button></div><p className="muted small">每阶段独立计数，优化器更新与已处理 batch 分别记录。</p>{loadError && <p className="inline-error">运行快照读取失败：{loadError}</p>}<div className="grid"><RunStageCard name="s2" stage={merged('s2')} current={current === 's2'}/><RunStageCard name="s1" stage={merged('s1')} current={current === 's1'}/></div><details><summary>冻结运行配置与阶段快照</summary><pre>{view ? JSON.stringify({run: view.run, stage_state: view.stage_state}, null, 2) : '等待读取运行记录'}</pre></details></div>;
+  const control = async (action: 'pause' | 'resume') => {
+    setBusy(true); setControlError('');
+    try {await api('/training/' + encodeURIComponent(job.id) + '/controls', {...requestId(), action}); setPendingAction(action); setRefreshKey(value => value + 1);} catch (e) {setControlError((e as Error).message);} finally {setBusy(false);}
+  };
+  const derive = async (point: Checkpoint) => {
+    if (!point.valid) return;
+    setBusy(true); setControlError('');
+    try {await submit('/training/' + encodeURIComponent(job.id) + '/derive', {checkpoint_id: point.id});} catch (e) {setControlError((e as Error).message);} finally {setBusy(false);}
+  };
+  const waitingPause = pendingAction === 'pause' || view?.pending_controls?.some(command => command.action === 'pause');
+  const waitingResume = pendingAction === 'resume' || view?.pending_controls?.some(command => command.action === 'resume');
+  const canResume = ['PAUSED', 'INTERRUPTED', 'FAILED'].includes(job.state) && Boolean(points?.last_valid);
+  const parentRun = view?.run?.parent_run_id ?? view?.run?.parent_run;
+  const parentPoint = view?.run?.parent_checkpoint_id ?? view?.run?.parent_checkpoint;
+  return <div className="training-run">
+    <div className="section-top"><h3>双阶段训练进度</h3><button className="quiet" onClick={() => setRefreshKey(value => value + 1)}>刷新运行快照与恢复点</button></div>
+    <p className="muted small">每阶段独立计数，优化器更新与已处理 batch 分别记录。</p>
+    {typeof parentRun === 'string' && <p className="lineage">派生自运行 {parentRun}{typeof parentPoint === 'string' ? ` · 恢复点 ${parentPoint}` : ''}</p>}
+    {loadError && <p className="inline-error">运行快照读取失败：{loadError}</p>}
+    <div className="grid"><RunStageCard name="s2" stage={merged('s2')} current={current === 's2'}/><RunStageCard name="s1" stage={merged('s1')} current={current === 's1'}/></div>
+    <div className="actions training-controls">
+      {['RUNNING', 'PAUSE_REQUESTED', 'CHECKPOINTING'].includes(job.state) && <button disabled={busy || Boolean(waitingPause) || job.state !== 'RUNNING'} onClick={() => void control('pause')}>暂停并保存恢复点</button>}
+      {['PAUSED', 'INTERRUPTED', 'FAILED'].includes(job.state) && <button className="primary-button" disabled={busy || !canResume || Boolean(waitingResume)} onClick={() => void control('resume')}>继续训练</button>}
+    </div>
+    {waitingPause && active(job) && <div className="notice"><strong>暂停请求已受理 · 等待安全边界</strong><p>工作进程将在优化器更新边界写入完整恢复点，成功后显示「已暂停」。请等待保存完成。</p></div>}
+    {waitingPause && ['COMPLETED', 'EARLY_COMPLETED', 'CANCELLED'].includes(job.state) && <p className="muted small">任务已结束，无需继续等待暂停。请查看最终状态与恢复点记录。</p>}
+    {waitingResume && <p className="muted small" role="status">继续训练请求已受理，正在校验恢复点并等待工作进程。</p>}
+    {job.state === 'PAUSED' && <p className="success-note">{canResume ? '训练已暂停，可从文件校验通过的恢复点申请续训至原累计目标。' : '训练已暂停，需确认有效恢复点后再继续。'}</p>}
+    {controlError && <p className="inline-error" role="alert">{controlError}</p>}
+    <details open><summary>训练恢复点 · {points?.checkpoints.length ?? 0} 个</summary><p className="muted small">此处校验已登记文件的完整性；训练状态与配置兼容性由工作进程在恢复时继续验证。</p>
+      {pointsError && <p className="inline-error">恢复点读取失败：{pointsError}</p>}
+      {points && !points.last_valid && <p className="muted small">当前没有通过校验的恢复点，暂不能继续训练。</p>}
+      {points?.inherited_start_point && <div className="notice"><strong>{points.inherited_start_point.valid === true ? '尚无子运行恢复点，将从已冻结父起点继续' : '已冻结父起点校验失败，暂不能继续'}</strong><p className="path-text">{points.inherited_start_point.stage?.toUpperCase()} · {points.inherited_start_point.id ?? '未找到恢复点'}</p>{points.inherited_start_point.selection?.source_run && <p className="path-text">父运行：{points.inherited_start_point.selection.source_run}</p>}{points.inherited_start_point.reason && <p className="inline-error">{points.inherited_start_point.reason}</p>}<p>该起点用于继续当前子运行，原父运行与恢复点保持不变。</p></div>}
+      <div className="checkpoint-list">{points?.checkpoints.map(point => <article className="checkpoint-row" key={point.id}><div className="section-top"><strong>{point.stage.toUpperCase()} · {point.kind ?? '恢复点'}</strong><span className={'pill ' + (!point.valid ? 'checkpoint-invalid' : '')}>{point.valid === true ? '文件校验通过' : '文件校验失败'}</span></div><p className="muted small path-text">{point.id}</p><p className="muted small">{finiteNumber(point.metrics?.completed_epochs) ? `已完成 ${point.metrics.completed_epochs} 轮 · ` : ''}{point.metrics && finiteNumber(optimizerUpdates(point.metrics)) ? `优化器更新 ${optimizerUpdates(point.metrics)}` : '进度见恢复点记录'}{point.protected ? ' · 受引用保护' : ''}</p>{point.reason && <p className="inline-error">{point.reason}</p>}<button disabled={busy || !point.valid} onClick={() => void derive(point)}>从此恢复点派生</button><details><summary>恢复点详情</summary><pre>{JSON.stringify(point, null, 2)}</pre></details></article>)}</div>
+      {Boolean(points?.invalid?.length) && <details><summary>未通过校验的恢复点记录 · {points?.invalid?.length}</summary><pre>{JSON.stringify(points?.invalid, null, 2)}</pre></details>}
+    </details>
+    <details><summary>冻结运行配置与阶段快照</summary><pre>{view ? JSON.stringify({run: view.run, stage_state: view.stage_state}, null, 2) : '等待读取运行记录'}</pre></details>
+  </div>;
 }
 
 export function Training({jobs, submit, reportError, requestedVersion = ''}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; requestedVersion?: string}) {

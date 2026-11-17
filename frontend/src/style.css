@@ -9,3 +9,5 @@
 .preflight-gpu{margin-top:16px}.preflight-gpu p:last-child{margin-bottom:0}.preflight-gpu .memory-limit{border-top:1px solid #dce5d1;padding-top:12px;color:#7e7758}.preflight-gpu .memory-limit strong{color:#7e7046}
 
 .training-run{margin:20px 0;padding-top:18px;border-top:1px solid #e2e8da}.training-run>.grid{margin-top:15px}.run-stage.active-stage{border-color:#a4bd8a;background:#f3f8ed}.run-stage progress{width:100%;height:7px;accent-color:#6c9450}.run-stage h3{font-size:12px;margin:0}.run-stage .section-top{margin-bottom:16px}.run-stage dl{font-variant-numeric:tabular-nums}
+
+.training-controls{margin:18px 0}.checkpoint-list{display:grid;gap:12px}.checkpoint-row{padding:15px;border:1px solid #e0e7d8;border-radius:8px;background:#fcfdf9}.checkpoint-row>.section-top strong{font-size:12px}.checkpoint-row button{font-size:11px}.checkpoint-row details{margin-top:10px}.checkpoint-invalid{color:#ad6e50;border-color:#e6c5af}.lineage{font-size:11px;color:#778e65;overflow-wrap:anywhere;border-left:2px solid #b5c59f;padding-left:11px}

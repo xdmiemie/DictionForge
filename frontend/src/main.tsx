@@ -2,6 +2,7 @@ import {useCallback, useEffect, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {active, api, errorText, Job, JobEvent, kindLabel, Progress, requestId, stateLabel} from './api';
 import {Datasets} from './Datasets';
+import {Training} from './Training';
 import './style.css';
 
 type Settings = {data_root: string; upstream: string; worker_python: string; port: number};
@@ -34,6 +35,7 @@ export function TaskProgress({progress}: {progress?: Progress}) {
 
 function App() {
   const [tab, setTab] = useState<'training' | 'tts'>('training');
+  const [requestedVersion, setRequestedVersion] = useState('');
   const [health, setHealth] = useState<Health>();
   const [settings, setSettings] = useState<Settings>();
   const [system, setSystem] = useState<SystemStatus>();
@@ -109,7 +111,7 @@ function App() {
     <nav aria-label="主工作区"><button aria-current={tab === 'training' ? 'page' : undefined} onClick={() => setTab('training')}><span>01</span>微调训练</button><button aria-current={tab === 'tts' ? 'page' : undefined} onClick={() => setTab('tts')}><span>02</span>语音合成</button><a href="#tasks">后台任务{count > 0 && <b>{count}</b>}</a></nav>
     {error && <div className="alert" role="alert"><span>{error}</span><button aria-label="关闭错误提示" onClick={() => setError('')}>×</button></div>}
     <div className="workspace"><div className="primary">
-      <div hidden={tab !== 'training'}><Datasets jobs={jobs} submit={submit} reportError={setError}/></div>
+      <div hidden={tab !== 'training'}><Datasets jobs={jobs} submit={submit} reportError={setError} onPublished={setRequestedVersion}/><Training jobs={jobs} submit={submit} reportError={setError} requestedVersion={requestedVersion}/></div>
       {tab === 'tts' && <section className="panel workspace-start"><div className="section-top"><span className="eyebrow">合成工作区</span><span className="pill">模型 → 文本 → 语音</span></div><h2>把文字变成声音</h2><p>选择音色和参考，生成、试听并保存你满意的一句。</p><ol className="workflow">{['选择模型和参考', '输入目标文本', '试听与保存'].map((step, i) => <li key={step}><span>{i + 1}</span>{step}</li>)}</ol><div className="notice"><strong>先准备你的角色数据</strong><p>语音合成将在模型与推理阶段接入。当前可在微调训练页整理录音并校对标注。</p><button className="primary-button" onClick={() => setTab('training')}>整理角色录音 <span aria-hidden="true">↗</span></button></div></section>}
       <section className="panel" id="tasks"><div className="section-top"><div><p className="eyebrow">TASKS</p><h2>后台任务</h2></div><button className="quiet" onClick={() => void refresh()}>刷新状态</button></div><p className="muted">任务在后台运行，切换页面不会停止。</p>{jobs.length ? <div className="job-list">{jobs.map(job => <button key={job.id} className={'job-row ' + (selected === job.id ? 'selected' : '')} onClick={() => setSelected(job.id)}><span className="job-icon" aria-hidden="true">{active(job) ? '◌' : job.state === 'COMPLETED' ? '✓' : '·'}</span><span className="job-name"><strong>{kindLabel(job.kind)}</strong><small>{job.id.slice(0, 8)}{job.created ? ' · ' + new Date(job.created * 1000).toLocaleString('zh-CN', {timeZone: 'Asia/Hong_Kong'}) : ''}</small></span><span className={'state ' + job.state.toLowerCase()}>{stateLabel(job.state)}</span></button>)}</div> : <div className="empty"><span aria-hidden="true">◎</span><strong>还没有后台任务</strong><p>运行一次环境诊断，确认本地工作台已准备好。</p></div>}
       {current && <div className="task-detail"><div className="section-top"><h3>{kindLabel(current.kind)} · {stateLabel(current.state)}</h3><span className="muted small">{connection}</span></div><TaskProgress progress={current.latest_progress}/>{current.error && <div className="alert" role="alert">{errorText(current.error)}{typeof current.error === 'object' && <small>阶段：{current.error.stage ?? '未指定'} · {current.error.retryable ? '可重试' : '请先处理错误条件'}</small>}</div>}{active(current) && <button disabled={busy} onClick={cancel}>取消任务</button>}{current.result && <details open><summary>运行结果</summary><pre>{JSON.stringify(current.result, null, 2)}</pre></details>}<details><summary>任务日志 · {events.length} 条最近事件</summary><pre>{events.length ? events.map(event => JSON.stringify(event)).join('\n') : '等待事件记录'}</pre></details><details><summary>工作进程日志{current.error ? ' · 失败详情请在此查看' : ''}</summary><p className="muted small">保留每个日志文件最近 64 KiB，手动刷新获取最新内容。</p><button disabled={logsLoading} onClick={loadLogs}>{logsLoading ? '读取中…' : '刷新进程日志'}</button>{processLogs.map(log => <div key={log.name}><h3>{log.name}</h3><pre>{log.text || '日志尚无内容'}</pre></div>)}</details><p className="muted small">任务编号：{current.id}</p></div>}</section>

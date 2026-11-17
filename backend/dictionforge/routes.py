@@ -2,6 +2,7 @@ from fastapi import Request, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, ConfigDict
 from uuid import UUID
+from typing import Literal
 from pathlib import Path
 from . import datasets
 from .records import get, list_records
@@ -49,6 +50,30 @@ class Folder(Strict):
 class Identified(Strict):
     request_id: UUID
 
+class S2Config(Strict):
+    batch_size: int = Field(default=1, ge=1, le=64)
+    precision: Literal["fp16", "fp32"] = "fp16"
+    rank: int = Field(default=32, ge=1, le=128)
+    stop_mode: Literal["steps", "epochs"] = "epochs"
+    target: int = Field(default=1, ge=1)
+    learning_rate: float = Field(default=.0001, gt=0, le=1)
+
+class S1Config(Strict):
+    batch_size: int = Field(default=1, ge=1, le=64)
+    precision: Literal["fp16", "fp32"] = "fp16"
+    stop_mode: Literal["steps", "epochs"] = "epochs"
+    target: int = Field(default=1, ge=1)
+    learning_rate: float = Field(default=.01, gt=0, le=1)
+    accumulate: int = Field(default=4, ge=1, le=64)
+
+class TrainingConfiguration(Identified):
+    version_id: str
+    initial_model: str = "official"
+    stages: list[Literal["s2", "s1"]] = Field(default_factory=lambda: ["s2", "s1"])
+    seed: int = Field(default=42, ge=0, le=2147483647)
+    s2: S2Config = Field(default_factory=S2Config)
+    s1: S1Config = Field(default_factory=S1Config)
+
 def register(app):
     @app.post("/api/folders/pick")
     def folder(body: Folder):
@@ -74,6 +99,20 @@ def register(app):
     @app.post("/api/dataset-versions/{key}/draft")
     def edit_version(key: str, body: Identified, request: Request):
         return datasets.edit_version(request.app.state.jobs, key, str(body.request_id))
+
+    @app.post("/api/dataset-versions/{key}/features", status_code=202)
+    def features(key: str, body: Identified, request: Request):
+        jobs = request.app.state.jobs
+        get(jobs, "version", key)
+        return jobs.submit("features", {"version_id": key}, str(body.request_id))
+
+    @app.post("/api/training/preflight", status_code=202)
+    def preflight(body: TrainingConfiguration, request: Request):
+        from .training_config import normalize_config
+        jobs = request.app.state.jobs
+        get(jobs, "version", body.version_id)
+        config = normalize_config(body.model_dump(exclude={"request_id"}))
+        return jobs.submit("preflight", config, str(body.request_id))
 
     @app.get("/api/dataset-drafts")
     def drafts(request: Request):

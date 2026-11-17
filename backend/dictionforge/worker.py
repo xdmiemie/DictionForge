@@ -31,7 +31,8 @@ def main():
                     return
                 try:
                     result = run_task(jobs, job)
-                    jobs.status(job_id, result.get("outcome", "COMPLETED"), result=result, instance=instance)
+                    jobs.status(job_id, result.get("outcome", "COMPLETED"), result=result,
+                                error=result.get("error"), instance=instance)
                 except Cancelled:
                     jobs.status(job_id, "CANCELLED", instance=instance)
                 except Exception as exc:

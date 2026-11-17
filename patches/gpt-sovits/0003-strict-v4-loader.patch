@@ -1,0 +1,19 @@
+--- a/GPT_SoVITS/module/data_utils.py
++++ b/GPT_SoVITS/module/data_utils.py
+@@ -577,14 +577,8 @@
+                     typee = ssl.dtype
+                     ssl = F.pad(ssl.float(), (0, 1), mode="replicate").to(typee)
+                 ssl.requires_grad = False
+-        except:
+-            traceback.print_exc()
+-            mel = torch.zeros(100, 192)
+-            # wav = torch.zeros(1, 96 * self.hop_length)
+-            spec = torch.zeros(1025, 96)
+-            ssl = torch.zeros(1, 768, 96)
+-            text = text[-1:]
+-            print("load audio or ssl error!!!!!!", audiopath)
++        except Exception as exc:
++            raise RuntimeError(f"Invalid training audio/SSL: {audiopath}") from exc
+         return (ssl, spec, mel, text)
+ 
+     def get_audio(self, filename):

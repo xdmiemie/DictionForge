@@ -47,6 +47,10 @@ def scan(jobs, job):
         try:
             record.update(probe(path))
             record["source_sha256"] = digest(path)
+            label = path.with_suffix(".lab")
+            if label.is_file():
+                record["label_sha256"] = digest(label)
+                record["label_text"] = label.read_text(encoding="utf-8-sig").strip()
             pcm = decode(path)
             record["seconds"] = len(pcm) / RATE
             record["samples"] = len(pcm)
@@ -138,7 +142,9 @@ def transcribe(jobs, job, draft, clip_ids=None):
     from .settings import Settings, ROOT
     from .engine import invoke
     settings = Settings.from_environment()
-    selected = [c for c in draft["clips"] if not c["reviewed"] and not c["excluded"] and (clip_ids is None or c["id"] in clip_ids)]
+    selected = [c for c in draft["clips"] if not c["reviewed"] and not c["excluded"]
+                and not (c.get("label_source") == "manual" and c["text"].strip())
+                and (clip_ids is None or c["id"] in clip_ids)]
     if not selected:
         return draft
     area = jobs.root / "runs" / job["id"]
@@ -152,7 +158,8 @@ def transcribe(jobs, job, draft, clip_ids=None):
             return current
         by_id = {c["id"]: c for c in output["clips"]}
         for clip in current["clips"]:
-            if clip["id"] in by_id and not clip["reviewed"]:
+            if (clip["id"] in by_id and not clip["reviewed"]
+                    and not (clip.get("label_source") == "manual" and clip["text"].strip())):
                 row = by_id[clip["id"]]
                 clip.update(text=row.get("text", ""), asr_candidate=row.get("text", ""), asr_error=row.get("error"),
                             label_source="asr", confidence=None, asr_seconds=row.get("seconds"))
@@ -184,7 +191,9 @@ def prepare(jobs, job):
         if not ranges:
             rejected.append({"id": record["id"], "reason": "按当前规则未保留有效片段"})
         label = source.with_suffix(".lab")
-        text = label.read_text(encoding="utf-8-sig").strip() if label.is_file() and len(ranges) == 1 else ""
+        if record.get("label_sha256") and (not label.is_file() or digest(label) != record["label_sha256"]):
+            raise Conflict("源标注已变化，请重新扫描")
+        text = record.get("label_text", "") if len(ranges) == 1 else ""
         for start, stop in ranges:
             key = uuid.uuid4().hex
             path = area / (key + ".wav")

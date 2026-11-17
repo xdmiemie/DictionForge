@@ -25,6 +25,16 @@
           "after": "3496945fa2f9b5d4dfb39f397cd02aa88409cc578d182d31837bd7535d5f3dc6"
         }
       }
+    },
+    {
+      "path": "patches/gpt-sovits/0003-strict-v4-loader.patch",
+      "sha256": "f9dd870e6039d31019f67e925da46a6f5a5403470fcd05631bd914e68389a67a",
+      "files": {
+        "GPT_SoVITS/module/data_utils.py": {
+          "before": "fe11748110d2dd5d1ed5a743a293267550257054403545836173593f2f7b551f",
+          "after": "3c2aefa117781f9af8d757e8f33d8550366616fa38d698798b3db09e6bf8c5af"
+        }
+      }
     }
   ],
   "gpu_validation": "P02_CUDA_ASR_TTS_PASSED; training NOT_RUN"

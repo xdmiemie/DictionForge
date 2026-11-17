@@ -2,6 +2,9 @@ def execute(jobs, job):
     from .settings import Settings, ROOT
     from .engine import invoke
     settings = Settings.from_environment()
+    if job["kind"] in {"features", "preflight"}:
+        from . import features
+        return features.process(jobs, job) if job["kind"] == "features" else features.preflight(jobs, job)
     if job["kind"] in {"dataset_scan", "dataset_prepare", "dataset_asr"}:
         from . import datasets
         if job["kind"] == "dataset_scan":

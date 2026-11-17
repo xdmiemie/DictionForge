@@ -13,7 +13,7 @@ const seconds = (value?: number) => Number.isFinite(value) ? `${Number(value).to
 const playable = (id?: string) => id ? '/api/audio/' + encodeURIComponent(id) : undefined;
 const fileStatus = (file: ScanFile) => file.reason || ({valid: '可用', ready: '可用', ok: '可用', invalid: '不可用', duplicate: '重复', silent: '静音', damaged: '文件损坏', short: '时长过短'}[file.status?.toLowerCase() ?? ''] ?? file.status ?? '可用');
 
-export function Datasets({jobs, submit, reportError}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void}) {
+export function Datasets({jobs, submit, reportError, onPublished}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; onPublished?: (versionId: string) => void}) {
   const [source, setSource] = useState('');
   const [role, setRole] = useState('');
   const [language, setLanguage] = useState('zh');
@@ -91,6 +91,7 @@ export function Datasets({jobs, submit, reportError}: {jobs: Job[]; submit: Subm
     const saved = await saveDraft();
     const version = await api<DatasetVersion>('/dataset-drafts/' + encodeURIComponent(saved.id) + '/publish', {revision: saved.revision});
     await loadDraft(saved.id);
+    onPublished?.(version.id);
     await refreshLists(); setMessage(`已发布 ${version.role ?? saved.role} 的新数据版本 ${version.id.slice(0, 8)}。`);
   };
   const retryASR = async (ids: string[]) => {

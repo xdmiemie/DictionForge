@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69",
+  "version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+  "version_fingerprint": "e4e78be4675cf628afe57cdf38c282c32be6e6b2f0f30555aa349249182a3575",
+  "upstream_lock": "c8332db8ddeb77bffb92ddb5d645b05237bbdd82fbd0775c05eadbba6e4a562e",
+  "asset_lock": "dd66b73f1cb31a65ccd5736b64fe715d662a7d62884663f1d4b5d90bbbd93c07",
+  "ready": true,
+  "stages": {
+    "text": {
+      "total": 5,
+      "reused": 5,
+      "rebuilt": 0,
+      "valid": 5
+    },
+    "acoustic": {
+      "total": 5,
+      "reused": 5,
+      "rebuilt": 0,
+      "valid": 5
+    },
+    "semantic": {
+      "total": 5,
+      "reused": 5,
+      "rebuilt": 0,
+      "valid": 5
+    }
+  },
+  "errors": [],
+  "entries": {
+    "8784e7e4cecc4283a99e34eba5446926.wav": {
+      "keys": {
+        "text": "c87d0830bef15706912194ad596cdbec241a57459f89b4a854f1a81da7e61257",
+        "acoustic": "d87c65821ff3a70b87704a014d9c6de26350f7e5cd4a3a6d873474016ea4c82a",
+        "semantic": "0e135e0a548ef00d36a7abd6bc5237eb935c494932e5e0c4eb8d88ee8ee79808"
+      },
+      "files": {
+        "3-bert/8784e7e4cecc4283a99e34eba5446926.wav.pt": "965c770b992cee22ab0ba48c7dc2e713c8f01e4b3a0c311599dbf0841a999119",
+        "4-cnhubert/8784e7e4cecc4283a99e34eba5446926.wav.pt": "d1880ea489bb28dd13b3385afe8727b28cecad13b1434328897f54706f255860",
+        "5-wav32k/8784e7e4cecc4283a99e34eba5446926.wav": "a049a719ffaaa7698a1dd23756ea42b23794c488b1532c0712d335e458867744"
+      }
+    },
+    "35994dd5e702407f8455be9d41a0d67a.wav": {
+      "keys": {
+        "text": "4054b96b66d805568f2032fb50af34fd682413177ee23e67f2bb919ec8cdd358",
+        "acoustic": "68d0228034ec834dc84212142f44dc08cab32568e8f7e45ddf1c83744f8fc275",
+        "semantic": "29ef5ddfa42ba1554ca79146d1162ad075f17c020b08132afb9bbeb15f83903c"
+      },
+      "files": {
+        "3-bert/35994dd5e702407f8455be9d41a0d67a.wav.pt": "78075f0e6fc95b3074ee78ba89d98dacef35a28b35ed36e1443cd5c025ab6f7a",
+        "4-cnhubert/35994dd5e702407f8455be9d41a0d67a.wav.pt": "b0a651a2af4e5ccbe546fa4e9b07e0d90b3dfe5b54c2dc3bc40685e4cd402c47",
+        "5-wav32k/35994dd5e702407f8455be9d41a0d67a.wav": "85b76c83626b30fb1295b8ad4faa1073f7f77793494833730c61f4b3908cc244"
+      }
+    },
+    "0c2b942e2e5349b39c7bf6c9415fe340.wav": {
+      "keys": {
+        "text": "a3b147dafe3a8e2f5c5d2b36e15c80bc5982401b10e5207db5133d9b96c07ab8",
+        "acoustic": "c6442f92cdfffe23bff4d52cafa65420f6dc0acd68ccfa690c667ef2ad789c1c",
+        "semantic": "e1ac23fea45f4f3924e903ffb5a15d3aaeea0e5b63d508efe1a704bd161decfa"
+      },
+      "files": {
+        "3-bert/0c2b942e2e5349b39c7bf6c9415fe340.wav.pt": "a94a591498a8d162af8cda12a39657be8a59abea67c0a61f4f6ce87e2949b0fd",
+        "4-cnhubert/0c2b942e2e5349b39c7bf6c9415fe340.wav.pt": "06e49f8adadb6f34e233713c1b122afcec588100e51a1cf8752fafd2e47522ff",
+        "5-wav32k/0c2b942e2e5349b39c7bf6c9415fe340.wav": "53f3639a78d5e24939bcedcbf0205667ff17aa34aa1221c18ff2336b11520af9"
+      }
+    },
+    "b74d50823e474071a2c00ef1c260babf.wav": {
+      "keys": {
+        "text": "4b99b963ab2aff5d61bcd23be562502968c3d996563728f2aba234df520e56d6",
+        "acoustic": "ff91fbcbf74e9fa522a7b81d26f27d76ee05e00653fa0b8ef2ff8c564584654c",
+        "semantic": "54aca3c7902dd43345ef25dd1007441a5e79f70fdfc4da8e3237c779d35ece95"
+      },
+      "files": {
+        "3-bert/b74d50823e474071a2c00ef1c260babf.wav.pt": "f8a660317da0894254af163555dd201afe1fba786652763319a141cc2050f1cc",
+        "4-cnhubert/b74d50823e474071a2c00ef1c260babf.wav.pt": "2638cd5125b92ab3d8801174b87cd35fa594598260c5547b46d57d80edb673c6",
+        "5-wav32k/b74d50823e474071a2c00ef1c260babf.wav": "3ae63ad7922ccc057334c7cc537eb9697e2b3d940603e871d9c838879e1c5779"
+      }
+    },
+    "b70dd916f4884f30b2861a9a1ed177b2.wav": {
+      "keys": {
+        "text": "5f1fd3c1814037be78ceb80e39586e29d6a36cf905905bb9bdcc9b22af3456b8",
+        "acoustic": "bf13ef385bf2c682450fb358b90842f14e425588ee3bfc38b5bce27092917b48",
+        "semantic": "8dc1d35a38d0f9e4d9f97d90bb2dd2d26ea13c0e89c28279aa1d344f8f021a6c"
+      },
+      "files": {
+        "3-bert/b70dd916f4884f30b2861a9a1ed177b2.wav.pt": "af505fbf0fd2592b51e0445ab76235a317cc60c00e0d76f0c622f71e9abfa871",
+        "4-cnhubert/b70dd916f4884f30b2861a9a1ed177b2.wav.pt": "b6c7e485316b98cb27890486810f0ce9f58ffb035dc727ab6f8f1cee47f7ca52",
+        "5-wav32k/b70dd916f4884f30b2861a9a1ed177b2.wav": "e1aa5fd50cad9f50d82cdae421aae76acb230389695bdc9b46bde41c9bdee6b3"
+      }
+    }
+  },
+  "precision": "fp32",
+  "indexes": {
+    "2-name2text.txt": "f3febfe1f471340ec4fbec9d345cade78ebf27554af7f8e82da851566bf99bf4",
+    "6-name2semantic.tsv": "22feb1898eec5ed317dd1123e740c1a1cf82e700a5f9acd90bd348a91011ee4f"
+  },
+  "seconds": 3.702999999997701
+}

@@ -1,0 +1,14 @@
+{
+  "s2": {
+    "error": "NO_TRAIN_BATCH: ZeroDivisionError: division by zero",
+    "samples": 0,
+    "unique_samples": 0,
+    "batches": 0
+  },
+  "s1": {
+    "error": "NO_TRAIN_BATCH: ZeroDivisionError: division by zero",
+    "samples": 0,
+    "unique_samples": 0,
+    "batches": 0
+  }
+}

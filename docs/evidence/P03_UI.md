@@ -13,3 +13,5 @@
 | 实际浏览器扫描/校对/试听 | BLOCKED | CUA `getState()` 返回 `browsers=[]`，内置浏览器 provider 未恢复。沿用 P02 原生访问失败记录，不再次无限尝试，也未重复启动 GPU ASR |
 
 P03 实际录音准备、ASR 和音频验收由阶段主验收任务执行。本文件不将源码核对和成功构建视为浏览器业务操作通过。待浏览器可用后补跑：使用 `E:\DictionForge\data\fixtures` 扫描，试听/排除，选择已有草稿并校对发布。
+
+主任务于P04再次调用CUA getState，同样返回 GetCursorPos failed: 拒绝访问 (0x80070005)。浏览器阻塞仍存在。

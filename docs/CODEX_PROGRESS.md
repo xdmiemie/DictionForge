@@ -12,7 +12,7 @@
 - 网络：沙箱内 DNS 不可用，经已授权网络执行成功。
 - TimbreForge 作为只读功能基线，模型、数据与虚拟环境不作修改。
 
-## P04–P12 — NOT_STARTED
+## P05–P12 — NOT_STARTED
 
 尚未实施。逐阶段替换此条，验收证据不得预填 PASS。
 
@@ -41,3 +41,9 @@ P02 HTTP 实测任务 870efe7da6d54b1093168155e2fa1476 COMPLETED，实际CUDA探
 录音扫描/试听ID/排除、静音与长度切分、离线批量ASR、revision校对、发布不可变版本、从旧版修改标注均已接通。发布版本的音频ID指向正式目录，原版本与原录音保持哈希不变。仅开放已实测的 zh 普通话。
 
 验收：全套27 passed；真实HTTP数据集6片52.72秒，5train/1validation。新版本 `76b5a08af4ca471f9c6fa9c903347e69`，dataset `09e42df26bf30b98cea3880e`。真实ASR、校对保留、父版保护、正式媒体Range206见 docs/evidence/P03_DATASET*.json、P03_ASR.md。前端生产构建通过。CUA浏览器provider不可用，P03_UI.md如实标记浏览器检查BLOCKED，留待P12复验；继续可执行阶段。
+
+## P04 — DONE（浏览器补验沿用P03阻塞）
+
+正在实现三段特征缓存、逐项hash核对及真实S1/S2加载器预检。新增扫描同名.lab文本快照与hash，防止扫描后源标注变化未被检测。浏览器访问阻塞仍存在。
+
+P04验收：三段真实GPU特征通过，5片103.343秒；删除BERT后3.703秒从缓存补回；子版改1条文本仅重建1条文本，SSL/语义5条全复用。真实S1/S2各5独立样本、5批（batch1），去掉上游100条扩容；零批次拒绝。预检显存2058240字节只代表加载器张量，完整训练显存待P05。HTTP特征任务bfc3264d12e34c2e8b36b9fecc289dbe、预检a1d244cb3127420b865c76a64a9fa80e均ready。40项回归通过；前端构建通过。证据见docs/evidence/P04_*。新增.gitattributes保护补丁字节哈希、源.lab快照以及ASR重试保护未确认的手工文本。

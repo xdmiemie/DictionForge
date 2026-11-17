@@ -17,10 +17,10 @@
 | A11 | 切分正确性 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
 | A12 | ASR 重试和校对 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
 | A13 | 训练清单和分组 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
-| A14 | 上游特征 | NOT_RUN | 尚未执行 |
-| A15 | 特征修复 | NOT_RUN | 尚未执行 |
-| A16 | 修改输入使特征失效 | NOT_RUN | 尚未执行 |
-| A17 | 零批次与实际参数 | NOT_RUN | 尚未执行 |
+| A14 | 上游特征 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
+| A15 | 特征修复 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
+| A16 | 修改输入使特征失效 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
+| A17 | 零批次与实际参数 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
 | A18 | 实际双阶段微调 | NOT_RUN | 尚未执行 |
 | A19 | 累计停止目标 | NOT_RUN | 尚未执行 |
 | A20 | 阶段交接和单阶段训练 | NOT_RUN | 尚未执行 |

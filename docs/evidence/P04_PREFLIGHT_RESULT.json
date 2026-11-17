@@ -1,0 +1,82 @@
+{
+  "ready": true,
+  "blockers": [],
+  "stages": {
+    "s2": {
+      "samples": 5,
+      "unique_samples": 5,
+      "native_expanded_samples": 100,
+      "removed_native_repeats": 95,
+      "sampler_padding": 0,
+      "batches": 5,
+      "batch_size": 1,
+      "precision": "fp16",
+      "names": [
+        "0c2b942e2e5349b39c7bf6c9415fe340.wav",
+        "35994dd5e702407f8455be9d41a0d67a.wav",
+        "8784e7e4cecc4283a99e34eba5446926.wav",
+        "b70dd916f4884f30b2861a9a1ed177b2.wav",
+        "b74d50823e474071a2c00ef1c260babf.wav"
+      ],
+      "num_workers": 0,
+      "updates_per_epoch": 5,
+      "loader_read": "PASSED",
+      "filtered_names": []
+    },
+    "s1": {
+      "samples": 5,
+      "unique_samples": 5,
+      "native_expanded_samples": 100,
+      "removed_native_repeats": 95,
+      "sampler_padding": 0,
+      "batches": 5,
+      "batch_size": 1,
+      "precision": "fp16",
+      "names": [
+        "0c2b942e2e5349b39c7bf6c9415fe340.wav",
+        "35994dd5e702407f8455be9d41a0d67a.wav",
+        "8784e7e4cecc4283a99e34eba5446926.wav",
+        "b70dd916f4884f30b2861a9a1ed177b2.wav",
+        "b74d50823e474071a2c00ef1c260babf.wav"
+      ],
+      "num_workers": 0,
+      "updates_per_epoch": 2,
+      "loader_read": "PASSED",
+      "filtered_names": []
+    }
+  },
+  "config": {
+    "version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+    "initial_model": "official",
+    "stages": [
+      "s2",
+      "s1"
+    ],
+    "seed": 42,
+    "s2": {
+      "batch_size": 1,
+      "precision": "fp16",
+      "rank": 32,
+      "stop_mode": "steps",
+      "target": 2,
+      "learning_rate": 0.0001
+    },
+    "s1": {
+      "batch_size": 1,
+      "precision": "fp16",
+      "stop_mode": "steps",
+      "target": 2,
+      "learning_rate": 0.01,
+      "accumulate": 4
+    }
+  },
+  "config_fingerprint": "7428ef3bf211235b019ab63c28ee2962c9f4973abaf90db321c5bff398308c77",
+  "gpu": {
+    "device": "NVIDIA GeForce RTX 5080",
+    "free_bytes": 15689842688,
+    "total_bytes": 17066360832,
+    "peak_allocated_bytes": 2058240,
+    "probe": "loader_tensors_only",
+    "training_memory": "NOT_MEASURED"
+  }
+}

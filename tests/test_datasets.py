@@ -173,6 +173,16 @@ def test_source_drift_is_rejected_before_publication(jobs, recordings):
     assert datasets.versions(jobs) == []
 
 
+def test_sidecar_annotation_is_part_of_scan_snapshot(jobs, tmp_path):
+    source = waveform(tmp_path / "有标注" / "原始.wav")
+    label = source.with_suffix(".lab")
+    label.write_text("第一次准确标注", encoding="utf-8")
+    scanned = scan(jobs, source.parent)
+    label.write_text("后来改写的标注", encoding="utf-8")
+    with pytest.raises(Conflict, match="源标注"):
+        prepare(jobs, scanned["scan_id"])
+
+
 def test_single_source_group_warns_and_corrupt_clip_cannot_publish(jobs, tmp_path):
     from dictionforge import datasets
     folder = tmp_path / "单来源"

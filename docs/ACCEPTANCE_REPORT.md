@@ -5,9 +5,9 @@
 | 编号 | 场景 | 状态 | 证据/阻塞 |
 | --- | --- | --- | --- |
 | A01 | 仓库与模型基线 | PASS | origin/default main/空历史已核对；configs/upstream.lock.json、UPSTREAM_AUDIT.md、BASELINE_AUDIT.md |
-| A02 | 任务重复请求 | NOT_RUN | 尚未执行 |
-| A03 | 断线与刷新 | NOT_RUN | 尚未执行 |
-| A04 | 进程失联与构建 | NOT_RUN | 尚未执行 |
+| A02 | 任务重复请求 | PASS | tests/test_jobs.py（4 passed）；docs/evidence/P01_UI.md；pnpm run build |
+| A03 | 断线与刷新 | PASS | tests/test_jobs.py（4 passed）；docs/evidence/P01_UI.md；pnpm run build |
+| A04 | 进程失联与构建 | PASS | tests/test_jobs.py（4 passed）；docs/evidence/P01_UI.md；pnpm run build |
 | A05 | CUDA 与中文路径 | NOT_RUN | 尚未执行 |
 | A06 | 缺失或损坏的资产 | NOT_RUN | 尚未执行 |
 | A07 | 官方底模与 ASR | NOT_RUN | 尚未执行 |

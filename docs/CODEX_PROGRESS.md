@@ -12,10 +12,16 @@
 - 网络：沙箱内 DNS 不可用，经已授权网络执行成功。
 - TimbreForge 作为只读功能基线，模型、数据与虚拟环境不作修改。
 
-## P01–P12 — NOT_STARTED
+## P02–P12 — NOT_STARTED
 
 尚未实施。逐阶段替换此条，验收证据不得预填 PASS。
 
 基线 Git 核对：TimbreForge HEAD e2884c72604766ce6d4193ebdba56f6b4c040785；已有 `D DictionForge_Codex_Project_Plan.md`，予以保留。
 
 P00 验收：计划副本 SHA256 一致；GitHub API 与 ls-remote 核对；固定源码已读取，审计见 UPSTREAM_AUDIT.md、BASELINE_AUDIT.md。A01 PASS。
+
+## P01 — DONE
+
+FastAPI/React 双标签、SQLite WAL 幂等任务与事件、独立 worker、进程身份核对与排他租约、SSE 续读、错误区和诊断取消已接通。
+
+验收：`.venv-api/Scripts/python.exe -m pytest tests/test_jobs.py -q --basetemp=data/pytest-p01-final` 4 passed；`pnpm run build` PASS。浏览器实际诊断任务 `6966480b2359483982d547c60ab1347d` 完成 4/4，刷新仍恢复同一任务、7 条事件。见 docs/evidence/P01_UI.md。沙箱限制使 TestClient 启动挂起，改为授权实机执行通过，挂起进程已终止。

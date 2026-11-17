@@ -15,6 +15,7 @@ import uuid
 from .audio import atomic_json, digest
 from .settings import ROOT
 from .training_config import config_fingerprint
+from .source_lock import verify_source
 
 
 def key(value):
@@ -164,6 +165,7 @@ def features(request):
     area.mkdir(parents=True, exist_ok=True)
     pool = root / "feature-cache"
     checked_assets(upstream)
+    verify_source(ROOT, upstream)
     init_runtime(upstream)
     import torch
     if not torch.cuda.is_available():
@@ -309,6 +311,7 @@ def preflight(request):
             if digest(area/relative) != expected_hash:
                 raise ValueError(f"特征哈希变化：{relative}")
         checked_assets(Path(request["upstream"]))
+        verify_source(ROOT, Path(request["upstream"]))
         init_runtime(Path(request["upstream"]))
         import torch
         if not torch.cuda.is_available():

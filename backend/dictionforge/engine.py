@@ -38,6 +38,13 @@ def invoke(jobs, job, command, *, cwd=None, env=None, result=None):
                     raise Cancelled()
                 time.sleep(.2)
             if process.returncode:
+                if result and Path(result).is_file():
+                    failure = json.loads(Path(result).read_text(encoding="utf-8"))
+                    if failure.get("ok") is False:
+                        failure.update(outcome="FAILED", error="；".join(e.get("message", str(e)) for e in failure.get("errors", [])))
+                    if failure.get("outcome") == "FAILED":
+                        failure["child_exit_code"] = process.returncode
+                        return failure
                 raise JobError(f"子进程失败（退出码 {process.returncode}），详见 {area / 'process.log'}")
         finally:
             if tree:

@@ -21,9 +21,9 @@
 | A15 | 特征修复 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
 | A16 | 修改输入使特征失效 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
 | A17 | 零批次与实际参数 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
-| A18 | 实际双阶段微调 | NOT_RUN | 尚未执行 |
-| A19 | 累计停止目标 | NOT_RUN | 尚未执行 |
-| A20 | 阶段交接和单阶段训练 | NOT_RUN | 尚未执行 |
+| A18 | 实际双阶段微调 | PASS | docs/evidence/P05_TRAINING.md、P05_TRAINING.json、P05_HTTP.json；真实S2/S1更新、steps/epochs与单阶段；58项回归 |
+| A19 | 累计停止目标 | PASS | docs/evidence/P05_TRAINING.md、P05_TRAINING.json、P05_HTTP.json；真实S2/S1更新、steps/epochs与单阶段；58项回归 |
+| A20 | 阶段交接和单阶段训练 | PASS | docs/evidence/P05_TRAINING.md、P05_TRAINING.json、P05_HTTP.json；真实S2/S1更新、steps/epochs与单阶段；58项回归 |
 | A21 | SoVITS 暂停并重启 | NOT_RUN | 尚未执行 |
 | A22 | GPT 暂停并重启 | NOT_RUN | 尚未执行 |
 | A23 | 轮内恢复和交接中断 | NOT_RUN | 尚未执行 |

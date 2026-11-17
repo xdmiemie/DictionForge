@@ -1,0 +1,28 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {createServer} from 'vite';
+
+test('训练进度容忍 null/非有限指标并保留真实旧字段计数', async () => {
+  const vite = await createServer({server: {middlewareMode: true}, appType: 'custom'});
+  try {
+    const {TaskProgress} = await vite.ssrLoadModule('/src/Progress.tsx');
+    const {RunStageCard} = await vite.ssrLoadModule('/src/Training.tsx');
+    const metrics = {stage: 's1', unit: 'optimizer_updates', target: 2, step: null, optimizer_updates: 1, loss: null, learning_rate: null, peak_cuda_bytes: null, peak_allocated_bytes: 2 ** 30, processed_batches: 4, skipped_updates: 2};
+    for (const html of [renderToStaticMarkup(createElement(TaskProgress, {progress: metrics, training: true})), renderToStaticMarkup(createElement(RunStageCard, {name: 's1', stage: metrics, current: true}))]) {
+      assert.match(html, /value="1"/);
+      assert.match(html, /1\.00.*GiB/);
+      assert.match(html, /非有限，已省略/);
+      assert.doesNotMatch(html, /NaN|Infinity/);
+    }
+    const nonFinite = {...metrics, loss: Infinity, learning_rate: NaN, peak_allocated_bytes: Infinity};
+    assert.doesNotMatch(renderToStaticMarkup(createElement(TaskProgress, {progress: nonFinite})), /NaN|Infinity|GiB/);
+    assert.doesNotMatch(renderToStaticMarkup(createElement(RunStageCard, {name: 's1', stage: nonFinite, current: true})), /NaN|Infinity|GiB/);
+    for (const unit of ['epochs', '轮']) {
+      const epoch = {...metrics, unit, completed_epochs: 0, optimizer_updates: 9, target: 1};
+      assert.match(renderToStaticMarkup(createElement(TaskProgress, {progress: epoch})), /max="1" value="0"/);
+      assert.match(renderToStaticMarkup(createElement(RunStageCard, {name: 's1', stage: epoch, current: true})), /max="1" value="0"/);
+    }
+  } finally {await vite.close();}
+});

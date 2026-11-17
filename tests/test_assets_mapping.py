@@ -50,8 +50,12 @@ def test_patch_replay_idempotent_and_preserves_unknown_edits(tmp_path):
         files={"module.py": {"before": before, "after": after}})])
     (tmp_path / "configs").mkdir()
     (tmp_path / "configs/upstream.lock.json").write_text(json.dumps(lock))
+    with pytest.raises(ValueError, match="UPSTREAM_PATCHES_MISSING"):
+        tool.verify_locked(tmp_path)
+    assert tool.content_hash(source) == before
     assert tool.apply_locked(tmp_path)["applied"] == 1
     assert tool.apply_locked(tmp_path)["applied"] == 0
+    assert tool.verify_locked(tmp_path)["applied"] == 0
     source.write_bytes(b"user modification\n")
     with pytest.raises(ValueError, match="UPSTREAM_MODIFIED"):
         tool.apply_locked(tmp_path)

@@ -18,6 +18,8 @@ def normalize_config(payload):
     stages = payload.get("stages", ["s2", "s1"])
     if not isinstance(stages, list) or not stages or set(stages)-{"s1", "s2"} or len(set(stages)) != len(stages):
         raise ValueError("训练阶段必须是 s2、s1 的非空无重复列表")
+    if stages == ["s1", "s2"]:
+        raise ValueError("双阶段顺序固定为 SoVITS s2 → GPT s1；也可只选择一段")
     seed = payload.get("seed", 42)
     if type(seed) is not int or not 0 <= seed <= 2**32-1:
         raise ValueError("seed 必须是 0..4294967295 的整数")
@@ -27,7 +29,7 @@ def normalize_config(payload):
     result = dict(version_id=version, initial_model=initial, stages=stages, seed=seed)
     for stage in ("s1", "s2"):
         defaults = dict(batch_size=1, precision="fp16", stop_mode="epochs", target=1,
-                        learning_rate=.01 if stage == "s1" else .0001)
+                        learning_rate=.002 if stage == "s1" else .0001)
         defaults.update({"accumulate": 4} if stage == "s1" else {"rank": 32})
         supplied = payload.get(stage, {})
         if not isinstance(supplied, dict) or set(supplied)-set(defaults):

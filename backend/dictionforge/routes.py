@@ -63,7 +63,7 @@ class S1Config(Strict):
     precision: Literal["fp16", "fp32"] = "fp16"
     stop_mode: Literal["steps", "epochs"] = "epochs"
     target: int = Field(default=1, ge=1)
-    learning_rate: float = Field(default=.01, gt=0, le=1)
+    learning_rate: float = Field(default=.002, gt=0, le=1)
     accumulate: int = Field(default=4, ge=1, le=64)
 
 class TrainingConfiguration(Identified):
@@ -73,6 +73,9 @@ class TrainingConfiguration(Identified):
     seed: int = Field(default=42, ge=0, le=2147483647)
     s2: S2Config = Field(default_factory=S2Config)
     s1: S1Config = Field(default_factory=S1Config)
+
+class TrainingStart(Identified):
+    preflight_id: str
 
 def register(app):
     @app.post("/api/folders/pick")
@@ -113,6 +116,16 @@ def register(app):
         get(jobs, "version", body.version_id)
         config = normalize_config(body.model_dump(exclude={"request_id"}))
         return jobs.submit("preflight", config, str(body.request_id))
+
+    @app.post("/api/training", status_code=202)
+    def training_start(body: TrainingStart, request: Request):
+        from .training import submit
+        return submit(request.app.state.jobs, body.preflight_id, str(body.request_id))
+
+    @app.get("/api/training/{key}")
+    def training_snapshot(key: str, request: Request):
+        from .training import snapshot
+        return snapshot(request.app.state.jobs, key)
 
     @app.get("/api/dataset-drafts")
     def drafts(request: Request):

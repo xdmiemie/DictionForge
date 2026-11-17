@@ -15,6 +15,15 @@ def test_subprocess_result_and_identity_cleanup(tmp_path):
     with jobs.connect() as db:
         assert db.execute("SELECT count(*) FROM records WHERE kind='process'").fetchone()[0] == 0
 
+def test_failed_worker_preserves_structured_error(tmp_path):
+    jobs = Jobs(tmp_path)
+    job = jobs.submit("train", {}, "failed")
+    result = tmp_path / "failed.json"
+    script = "import json,sys;json.dump({'outcome':'FAILED','error':'CUDA out of memory','stage':'s2'},open(sys.argv[1],'w'));sys.exit(1)"
+    answer = invoke(jobs, job, [sys.executable, "-c", script, result], result=result)
+    assert answer["outcome"] == "FAILED" and answer["stage"] == "s2"
+    assert answer["child_exit_code"] == 1
+
 def test_orphan_child_reaped_by_exact_identity(tmp_path):
     import subprocess
     jobs = Jobs(tmp_path)

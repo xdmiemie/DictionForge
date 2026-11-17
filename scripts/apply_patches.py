@@ -22,9 +22,9 @@ def safe_path(base: Path, relative: str):
     return p
 
 
-def apply_locked(root: Path = ROOT):
+def apply_locked(root: Path = ROOT, *, verify_only=False, upstream=None):
     lock = json.loads((root / "configs/upstream.lock.json").read_text(encoding="utf-8-sig"))
-    vendor = safe_path(root, lock["directory"])
+    vendor = Path(upstream).resolve() if upstream is not None else safe_path(root, lock["directory"])
     head = subprocess.check_output(["git", "-C", str(vendor), "rev-parse", "HEAD"], text=True).strip()
     if head != lock["commit"]:
         raise ValueError(f"UPSTREAM_REVISION_MISMATCH: {head}")
@@ -54,6 +54,8 @@ def apply_locked(root: Path = ROOT):
     if not matches:
         raise ValueError("UPSTREAM_MODIFIED: source does not match a locked patch boundary; preserve and inspect")
     start = max(matches)
+    if verify_only and start != len(patches):
+        raise ValueError("UPSTREAM_PATCHES_MISSING: source is not at the final locked patch state")
     for patch in patches[start:]:
         command = ["git", "-C", str(vendor), "apply", "--ignore-whitespace"]
         file = str(safe_path(root, patch["path"]))
@@ -63,6 +65,11 @@ def apply_locked(root: Path = ROOT):
     if actual != states[-1]:
         raise ValueError("PATCH_RESULT_MISMATCH: source preserved for inspection")
     return {"commit": head, "patches": len(patches), "applied": len(patches) - start}
+
+
+def verify_locked(root: Path = ROOT, *, upstream=None):
+    """Read-only source verification for preflight, queue admission and worker startup."""
+    return apply_locked(root, verify_only=True, upstream=upstream)
 
 
 if __name__ == "__main__":

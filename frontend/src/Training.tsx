@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
-import {active, api, errorText, Job, JobError} from './api';
+import {active, api, errorText, finiteNumber, Job, JobError, optimizerUpdates, peakBytes, Progress, stateLabel} from './api';
 import type {DatasetVersion} from './Datasets';
 
 type StageConfig = {batch_size: number; precision: string; stop_mode: 'steps' | 'epochs'; target: number; learning_rate: number; rank?: number; accumulate?: number};
@@ -7,7 +7,7 @@ type StageResult = {samples?: number; unique_samples?: number; batches?: number;
 type Preflight = {config: Record<string, unknown>; config_fingerprint: string; stages: {s1?: StageResult; s2?: StageResult}; ready: boolean; blockers?: (string | JobError)[]; gpu?: {device?: string; free_bytes?: number; total_bytes?: number; peak_allocated_bytes?: number; probe?: string; training_memory?: string}};
 type Submit = (path: string, payload: object) => Promise<Job>;
 const initialS2: StageConfig = {batch_size: 1, precision: 'fp16', rank: 32, stop_mode: 'epochs', target: 1, learning_rate: .0001};
-const initialS1: StageConfig = {batch_size: 1, precision: 'fp16', stop_mode: 'epochs', target: 1, learning_rate: .01, accumulate: 4};
+const initialS1: StageConfig = {batch_size: 1, precision: 'fp16', stop_mode: 'epochs', target: 1, learning_rate: .002, accumulate: 4};
 
 function StageFields({name, value, enabled, onEnabled, onChange}: {name: 's1' | 's2'; value: StageConfig; enabled: boolean; onEnabled: (enabled: boolean) => void; onChange: (value: StageConfig) => void}) {
   const change = <K extends keyof StageConfig>(key: K, input: StageConfig[K]) => onChange({...value, [key]: input});
@@ -24,10 +24,47 @@ function PreflightGpu({gpu}: {gpu?: Preflight['gpu']}) {
   if (!gpu) return null;
   const loaderOnly = gpu.probe === 'loader_tensors_only';
   return <div className="notice preflight-gpu"><strong>{gpu.device ?? 'GPU 资源检查'}</strong>
-    {typeof gpu.free_bytes === 'number' && <p>采样时可用显存 {(gpu.free_bytes / 2 ** 30).toFixed(2)} GiB{typeof gpu.total_bytes === 'number' ? ` / ${(gpu.total_bytes / 2 ** 30).toFixed(2)} GiB` : ''}</p>}
-    {loaderOnly && typeof gpu.peak_allocated_bytes === 'number' && <p>数据张量搬运峰值 {(gpu.peak_allocated_bytes / 2 ** 20).toFixed(2)} MiB，仅覆盖加载器样本。</p>}
+    {finiteNumber(gpu.free_bytes) && <p>采样时可用显存 {(gpu.free_bytes / 2 ** 30).toFixed(2)} GiB{finiteNumber(gpu.total_bytes) ? ` / ${(gpu.total_bytes / 2 ** 30).toFixed(2)} GiB` : ''}</p>}
+    {loaderOnly && finiteNumber(gpu.peak_allocated_bytes) && <p>数据张量搬运峰值 {(gpu.peak_allocated_bytes / 2 ** 20).toFixed(2)} MiB，仅覆盖加载器样本。</p>}
     {(loaderOnly || gpu.training_memory === 'NOT_MEASURED') && <p className="memory-limit"><strong>完整训练显存尚未实测</strong><br/>本次探针没有加载完整训练模型、优化器，也没有执行前向和反向计算。以上数值不能用于估算训练显存；实际峰值由真实训练记录。</p>}
   </div>;
+}
+
+type RunStage = Progress & {state?: string};
+type RunView = Job & {run?: {config?: {s1?: StageConfig; s2?: StageConfig}; [key: string]: unknown}; stage_state?: {active_stage?: string | null; stages?: {s1?: RunStage; s2?: RunStage}; [key: string]: unknown} | null};
+
+export function RunStageCard({name, stage, current}: {name: 's1' | 's2'; stage?: RunStage; current: boolean}) {
+  const unit = stage?.unit;
+  const epochMode = unit === 'epochs' || unit === '轮';
+  const steps = stage && optimizerUpdates(stage);
+  const peak = stage && peakBytes(stage);
+  const value = epochMode ? stage?.completed_epochs : steps ?? stage?.completed;
+  const target = finiteNumber(stage?.target) ? stage.target : stage?.total;
+  return <article className={'preflight-stage run-stage ' + (current ? 'active-stage' : '')}>
+    <div className="section-top"><h3>{name === 's2' ? 'SoVITS v4 / S2' : 'GPT / S1'}</h3><span className="pill">{stage?.state ? stateLabel(stage.state) : current ? '活动阶段' : '等待阶段快照'}</span></div>
+    {stage ? <><dl>{finiteNumber(stage.completed_epochs) && <><dt>已完成轮次</dt><dd>{stage.completed_epochs}</dd></>}{finiteNumber(steps) && <><dt>实际优化器更新</dt><dd>{steps}</dd></>}{finiteNumber(stage.processed_batches) && <><dt>已处理 batch</dt><dd>{stage.processed_batches}</dd></>}{finiteNumber(stage.physical_batch_size) && <><dt>物理 batch</dt><dd>{stage.physical_batch_size}</dd></>}{finiteNumber(stage.skipped_updates) && <><dt>跳过的更新</dt><dd>{stage.skipped_updates}</dd></>}{finiteNumber(stage.loss) ? <><dt>Loss</dt><dd>{stage.loss.toPrecision(5)}</dd></> : stage.loss === null && <><dt>Loss</dt><dd>非有限，已省略</dd></>}{finiteNumber(stage.learning_rate) && <><dt>实际学习率</dt><dd>{stage.learning_rate.toExponential(3)}</dd></>}{finiteNumber(peak) && <><dt>实际训练显存峰值</dt><dd>{(peak / 2 ** 30).toFixed(2)} GiB</dd></>}</dl>{finiteNumber(value) && finiteNumber(target) && target > 0 && <><progress max={target} value={value} aria-label={(name === 's2' ? 'SoVITS' : 'GPT') + ' 阶段进度'}/><p className="muted small">{value} / {target} {epochMode ? '累计轮次' : '优化器更新'}</p></>}</> : <p className="muted small">等待工作进程写入真实计数。</p>}
+  </article>;
+}
+
+export function TrainingRun({job}: {job: Job}) {
+  const [view, setView] = useState<RunView>();
+  const [loadError, setLoadError] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
+  useEffect(() => {setView(undefined); setLoadError('');}, [job.id]);
+  useEffect(() => {
+    let disposed = false;
+    const read = () => api<RunView>('/training/' + encodeURIComponent(job.id)).then(next => {if (!disposed) {setView(next); setLoadError('');}}).catch(e => {if (!disposed) setLoadError(e.message);});
+    void read(); const timer = active(job) ? window.setInterval(() => void read(), 2500) : undefined;
+    return () => {disposed = true; if (timer) window.clearInterval(timer);};
+  }, [job.id, job.state, refreshKey]);
+  const stageState = view?.stage_state;
+  const current = stageState ? stageState.active_stage : active(job) ? job.latest_progress?.stage : undefined;
+  const merged = (stage: 's1' | 's2') => {
+    if (!stageState?.stages?.[stage] && job.latest_progress?.stage !== stage) return undefined;
+    const frozen = view?.run?.config?.[stage];
+    return {target: frozen?.target, unit: frozen?.stop_mode === 'epochs' ? 'epochs' : 'optimizer_updates', ...stageState?.stages?.[stage], ...(job.latest_progress?.stage === stage ? job.latest_progress : {})};
+  };
+  return <div className="training-run"><div className="section-top"><h3>双阶段训练进度</h3><button className="quiet" onClick={() => setRefreshKey(value => value + 1)}>刷新运行快照</button></div><p className="muted small">每阶段独立计数，优化器更新与已处理 batch 分别记录。</p>{loadError && <p className="inline-error">运行快照读取失败：{loadError}</p>}<div className="grid"><RunStageCard name="s2" stage={merged('s2')} current={current === 's2'}/><RunStageCard name="s1" stage={merged('s1')} current={current === 's1'}/></div><details><summary>冻结运行配置与阶段快照</summary><pre>{view ? JSON.stringify({run: view.run, stage_state: view.stage_state}, null, 2) : '等待读取运行记录'}</pre></details></div>;
 }
 
 export function Training({jobs, submit, reportError, requestedVersion = ''}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; requestedVersion?: string}) {
@@ -42,6 +79,7 @@ export function Training({jobs, submit, reportError, requestedVersion = ''}: {jo
   const [preflightId, setPreflightId] = useState('');
   const [submittedConfig, setSubmittedConfig] = useState('');
   const [featureId, setFeatureId] = useState('');
+  const [trainingId, setTrainingId] = useState('');
   const [versionError, setVersionError] = useState('');
   const jobsKey = jobs.map(job => `${job.id}:${job.state}`).join('|');
   const config = useMemo(() => ({version_id: versionId, initial_model: initialModel, stages, seed, s2, s1}), [versionId, initialModel, stages, seed, s2, s1]);
@@ -52,7 +90,8 @@ export function Training({jobs, submit, reportError, requestedVersion = ''}: {jo
   const version = versions.find(row => row.id === versionId);
   const preflightJob = jobs.find(job => job.id === preflightId);
   const featureJob = jobs.find(job => job.id === featureId);
-  const running = Boolean(preflightJob && active(preflightJob) || featureJob && active(featureJob));
+  const trainingJob = jobs.find(job => job.id === trainingId);
+  const running = Boolean(preflightJob && active(preflightJob) || featureJob && active(featureJob) || trainingJob && active(trainingJob));
   const report = submittedConfig === configKey && preflightJob?.state === 'COMPLETED' ? preflightJob.result as Preflight | undefined : undefined;
   const setStage = (name: string, enabled: boolean) => setStages(current => ['s2', 's1'].filter(stage => stage === name ? enabled : current.includes(stage)));
   const perform = async (operation: () => Promise<void>) => {
@@ -78,7 +117,8 @@ export function Training({jobs, submit, reportError, requestedVersion = ''}: {jo
     <div className="grid"><label>初始化权重<select value={initialModel} onChange={e => setInitialModel(e.target.value)}><option value="official">官方 GPT-SoVITS v4 底模</option></select></label><label>随机种子<input type="number" min="0" max="2147483647" step="1" value={seed} onChange={e => setSeed(e.target.valueAsNumber)}/></label></div>
     <StageFields name="s2" value={s2} enabled={stages.includes('s2')} onEnabled={enabled => setStage('s2', enabled)} onChange={setS2}/>
     <StageFields name="s1" value={s1} enabled={stages.includes('s1')} onEnabled={enabled => setStage('s1', enabled)} onChange={setS1}/>
-    <div className="actions"><button className="primary-button" disabled={busy || running || !version || !stages.length} onClick={() => void perform(check)}>检查训练配置与显存</button><p className="muted small">修改配置后需要重新预检。</p></div>
+    <div className="actions"><button disabled={busy || running || !version || !stages.length} onClick={() => void perform(check)}>检查训练配置与显存</button><button className="primary-button" disabled={busy || running || !report?.ready || submittedConfig !== configKey} onClick={() => void perform(async () => {if (!report?.ready || submittedConfig !== configKey) throw new Error('当前配置需要重新预检。'); const job = await submit('/training', {preflight_id: preflightId}); setTrainingId(job.id);})}>开始训练</button><p className="muted small">修改配置后需要重新预检。</p></div>
+    {trainingJob && <p className="muted small">训练 {trainingJob.id.slice(0, 8)} · {stateLabel(trainingJob.state)}。冻结配置和双阶段进度请见后台任务。</p>}
     {preflightJob && active(preflightJob) && <div className="notice"><strong>正在构造实际训练加载器</strong><p>任务 {preflightJob.id.slice(0, 8)}，结果会自动显示。GPU 忙碌时按队列执行。</p></div>}
     {preflightJob?.error && <p className="inline-error">预检失败：{errorText(preflightJob.error)}。请在后台任务查看阶段和进程日志。</p>}
     {report && <div className="preflight-report"><div className={report.ready ? 'success-note' : 'alert'} role="status">{report.ready ? '数据与加载器预检通过' : '预检未通过 · 请处理以下阻塞项'}</div>{Boolean(report.blockers?.length) && <ul className="blockers">{report.blockers?.map((blocker, i) => <li key={i}>{errorText(blocker)}</li>)}</ul>}<div className="grid"><PreflightStage name="s2" result={report.stages?.s2}/><PreflightStage name="s1" result={report.stages?.s1}/></div><PreflightGpu gpu={report.gpu}/><details><summary>完整生效配置与预检记录</summary><pre>{JSON.stringify(report, null, 2)}</pre></details><p className="muted small path-text">配置指纹：{report.config_fingerprint}</p></div>}

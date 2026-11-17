@@ -1,0 +1,74 @@
+[
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_1.wav",
+    "expected": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+    "actual": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_1.lab",
+    "expected": "f4a1a0a41057d0c9ab06192cf0a3778375689b1dcd0bfc4e50281769549ec4a7",
+    "actual": "f4a1a0a41057d0c9ab06192cf0a3778375689b1dcd0bfc4e50281769549ec4a7",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_11.wav",
+    "expected": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+    "actual": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_11.lab",
+    "expected": "a49582e6f913aae7629251a990e300759a6e7495b4a344188093b4905ab7a6fc",
+    "actual": "a49582e6f913aae7629251a990e300759a6e7495b4a344188093b4905ab7a6fc",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_12.wav",
+    "expected": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+    "actual": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_12.lab",
+    "expected": "04c7a47d8fb192877fa1e74e692896849bade1917a7b60dc140a3ca906a7b244",
+    "actual": "04c7a47d8fb192877fa1e74e692896849bade1917a7b60dc140a3ca906a7b244",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_13.wav",
+    "expected": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+    "actual": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_13.lab",
+    "expected": "fc12aad6356924f677f6206fee91e4e3e4530b3c4e6b90e973c4d85d9a608c96",
+    "actual": "fc12aad6356924f677f6206fee91e4e3e4530b3c4e6b90e973c4d85d9a608c96",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_14.wav",
+    "expected": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+    "actual": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_14.lab",
+    "expected": "16592d8145110e1898c61d5ae89dd721e96c3611d3ae72cb8c4bf752b84f7300",
+    "actual": "16592d8145110e1898c61d5ae89dd721e96c3611d3ae72cb8c4bf752b84f7300",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_15.wav",
+    "expected": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+    "actual": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+    "unchanged": true
+  },
+  {
+    "path": "D:\\中文 - Chinese\\景元\\archive_jingyuan_15.lab",
+    "expected": "8afd1344d1d46b1e97bde4d5d48017f3982f7e77ed9ef4eadadd38f8b504d55c",
+    "actual": "8afd1344d1d46b1e97bde4d5d48017f3982f7e77ed9ef4eadadd38f8b504d55c",
+    "unchanged": true
+  }
+]

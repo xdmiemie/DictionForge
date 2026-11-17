@@ -106,7 +106,31 @@ class ReferenceImport(Identified):
 class DefaultReference(Identified):
     reference_id: str
 
+class TextSynthesis(Identified):
+    model_version_id: str
+    text: str
+    language: str = 'zh'
+    split_rule: str = 'punctuation'
+    parameters: dict = Field(default_factory=dict)
+    reference_id: str | None = None
+
 def register(app):
+    @app.post('/api/tts', status_code=202)
+    def text_synthesis(body: TextSynthesis, request: Request):
+        from .synthesis import submit
+        return submit(request.app.state.jobs, request_id=str(body.request_id),
+                      **body.model_dump(exclude={'request_id'}))
+
+    @app.get('/api/tts/current')
+    def current_synthesis(request: Request):
+        from .synthesis import current
+        return current(request.app.state.jobs)
+
+    @app.get('/api/tts/{key}')
+    def synthesis_snapshot(key: str, request: Request):
+        from .synthesis import snapshot
+        return snapshot(request.app.state.jobs, key)
+
     @app.get('/api/synthesis/selection')
     def selection(request: Request):
         from .references_service import selection

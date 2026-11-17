@@ -71,6 +71,17 @@ def references_for(jobs, kind, key):
             add('reference', row_id, '该版本的音频正在复制或处理中')
         elif category == 'model_selection' and kind == 'model' and row.get('model_id') == key:
             add('model_selection', row_id, '逻辑启用的模型，关闭或切换后可删除')
+        elif category == 'tts' and states.get(row_id) in {'QUEUED', 'RUNNING'}:
+            if kind == 'model' and row.get('model_id') == key:
+                add('tts', row_id, '合成任务冻结了该模型版本')
+            if kind == 'version':
+                reference = row.get('reference', {})
+                base = Path(get(jobs, 'version', key)['path']).resolve()
+                if reference.get('audio_id') in media_ids or (reference.get('path') and Path(reference['path']).resolve().is_relative_to(base)):
+                    add('tts', row_id, '合成任务冻结的参考仍使用该数据版本')
+        elif category == 'tts_result' and kind == 'model' and row.get('outcome') == 'COMPLETED':
+            if row.get('provenance', {}).get('model_version_id') == key:
+                add('tts_result', row_id, '保留的合成结果记录了该来源模型；结果回收前保留依赖')
         elif category == 'run':
             uses = row.get('config', {}).get('initial_model') == key if kind == 'model' else row.get('version', {}).get('id') == key
             if uses:

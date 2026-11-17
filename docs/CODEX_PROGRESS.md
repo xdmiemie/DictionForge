@@ -12,9 +12,9 @@
 - 网络：沙箱内 DNS 不可用，经已授权网络执行成功。
 - TimbreForge 作为只读功能基线，模型、数据与虚拟环境不作修改。
 
-## P09–P12 — NOT_STARTED
+## P10–P12 — NOT_STARTED（按用户要求停在 P09）
 
-尚未实施。逐阶段替换此条，验收证据不得预填 PASS。
+尚未实施。用户最新指令为「完成P9后停下任务，保存好相关信息方便下次继续」。后续从P10继续；尚不推送，待P12完成才按原计划尝试并核对远端哈希。交接见 `docs/CODEX_HANDOFF.md`。
 
 基线 Git 核对：TimbreForge HEAD e2884c72604766ce6d4193ebdba56f6b4c040785；已有 `D DictionForge_Codex_Project_Plan.md`，予以保留。
 
@@ -81,3 +81,13 @@ P07浏览器补验：本机Playwright 1.62.1 + Edge157独立headless上下文9�
 130项全套回归通过、6项API环境跳过；参考/模型28项专项、错误结果记录3项通过。真实浏览器7项及前端build/3组件回归通过，主选择恢复且没有新增GPU任务。A33–A35证据见 `docs/evidence/P08_*`，主观音色评价仍待P12。
 
 P08收尾定向：参考服务20项通过，包含坏文件HTTP422及本地MP3/FLAC导入；上传取消等待真实导入线程后再清输入，错误输出也登记FAILED条件，相关4项通过。未将这些CPU/异常合同称为额外GPU成功。
+
+## P09 — DONE（完成后按用户要求停止）
+
+已接中文正文、标点/按行/不分句、语速与采样参数；受理事务冻结原文、模型与参考并更新current，幂等重放不倒退指针。单GPU实例逐句生成原生48k PCM16，独立句WAV与全段逐样本对应，记录Unicode码点范围、稳定句ID、实际seed、规范文本及静音样本边界。页面支持冻结原文、完整和逐句播放、点选定位、播放高亮、刷新恢复；失败直接定位阶段和句子。
+
+真实HTTP四组7句均PASS，总24.56秒；每任务只加载一次模型，峰值2318460416字节。七句真实离线GPU ASR复核，六句去标点逐字一致，末句1字同音差异。七种非法输入HTTP422均保留current。真实浏览器10项PASS后，追加一次有效页面按钮端到端验收5项PASS：job `70f2d6554c8548afa3d8bab86a1effba`，seed2026/speed1.15/sample_steps16，原生48k、117120样本/2.44秒，实际生成5.21秒，成为最终current。没有将ASR或静音浏览器播放称为主观音质评价。
+
+全套189 passed/6 skipped（API环境没有Torch的训练循环合同）；收尾取消/发布竞态与损坏重验修复后服务专项41 passed，worker合同19 passed，前端build及4项组件测试PASS。A36–A38证据在 `docs/evidence/P09_*`。修复Windows浏览器残留媒体连接导致无限等待停机的问题，为已有serve加入15秒HTTP关闭上限；最终服务PID47264经安全endpoint正常exit0，无活动任务/worker/7867监听，SQLite integrity_check=ok，当前音频hash仍一致。
+
+新增 `docs/USER_MANUAL.md`、`docs/CODEX_HANDOFF.md`；保留全部data/vendor/venv和本地历史。原始12份景元wav/lab哈希不变。只读TimbreForge发现外部已提交到309adfe，工作树干净，未改动或回滚。P03完整页面补验、A26及P10–P12仍按既有记录待办。完成唯一P09本地提交后停止，不推送。

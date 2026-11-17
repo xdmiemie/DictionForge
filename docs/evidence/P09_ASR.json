@@ -1,0 +1,99 @@
+{
+  "method": "Real offline CUDA FunASR per independent sentence WAV; punctuation ignored.",
+  "limitations": "ASR text comparison is an objective content/order check, not subjective voice quality evaluation.",
+  "asset_revision": {
+    "lock_sha256": "dd66b73f1cb31a65ccd5736b64fe715d662a7d62884663f1d4b5d90bbbd93c07",
+    "repositories": {
+      "funasr/paraformer-zh": "d7811ee3ac581fbcfdeb37c98c6ba674028433dc",
+      "funasr/fsmn-vad": "df20e6b30c653645fa4ff125cacfcabd1020a669",
+      "funasr/ct-punc": "d0e55e2b8722a78b63705ff443d09c4f86e5d750"
+    }
+  },
+  "clips": [
+    {
+      "id": "d4fcf300fef45978b0eb9339540ecd06",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\d0dcdf7654654c7b8bb4ed514c62728e\\sentence-df277023125243618e7dfc2217ef575a-0000.wav",
+      "expected": "今天天气很好，我们一起去公园散步。",
+      "recognized": "今天天气很好，我们一起去公园散步。",
+      "error": null,
+      "seconds": 20.3440000000046,
+      "edits": 0,
+      "characters": 15,
+      "cer": 0.0,
+      "content_check": "PASS"
+    },
+    {
+      "id": "1b36466b739f598fbe98ff35a5a62d6c",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\sentence-5e24943e6f4747c7979cca00cba28d98-0000.wav",
+      "expected": "你好，今天我们一起去公园散步。",
+      "recognized": "你好，今天我们一起去公园散步。",
+      "error": null,
+      "seconds": 0.20299999999406282,
+      "edits": 0,
+      "characters": 13,
+      "cer": 0.0,
+      "content_check": "PASS"
+    },
+    {
+      "id": "82b44cd7693d53debcdb740a2c673612",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\sentence-5e24943e6f4747c7979cca00cba28d98-0001.wav",
+      "expected": "我们先去湖边看风景。",
+      "recognized": "我们先去湖边看风景。",
+      "error": null,
+      "seconds": 0.14100000000325963,
+      "edits": 0,
+      "characters": 9,
+      "cer": 0.0,
+      "content_check": "PASS"
+    },
+    {
+      "id": "48337be3c96c5cd7a6d1eef614d2c4f1",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\sentence-5e24943e6f4747c7979cca00cba28d98-0002.wav",
+      "expected": "你好，今天我们一起去公园散步。",
+      "recognized": "你好，今天我们一起去公园散步。",
+      "error": null,
+      "seconds": 0.17100000000209548,
+      "edits": 0,
+      "characters": 13,
+      "cer": 0.0,
+      "content_check": "PASS"
+    },
+    {
+      "id": "d2a9824931e752c08cdcc3749d1eaf31",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\faac676251e249428b6c3a7f5a5fcefd\\sentence-1af2efe9f3bc4b9d96db08dd7e86e0ed-0000.wav",
+      "expected": "第一行保持原样，先看蓝天。再看白云。",
+      "recognized": "第一行保持原样，先看蓝天，再看白云。",
+      "error": null,
+      "seconds": 0.17199999999866122,
+      "edits": 0,
+      "characters": 15,
+      "cer": 0.0,
+      "content_check": "PASS"
+    },
+    {
+      "id": "827873e7eb1752d08dc45d964f689363",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\faac676251e249428b6c3a7f5a5fcefd\\sentence-1af2efe9f3bc4b9d96db08dd7e86e0ed-0001.wav",
+      "expected": "第二行开始，慢慢读完这段话。",
+      "recognized": "第二行开始慢慢读完这段话。",
+      "error": null,
+      "seconds": 0.17199999999866122,
+      "edits": 0,
+      "characters": 12,
+      "cer": 0.0,
+      "content_check": "PASS"
+    },
+    {
+      "id": "c351019cc5585abd96805da97049c485",
+      "path": "E:\\DictionForge\\data\\runtime\\tts\\1411e75b99634c35a7d4ca357adbd264\\sentence-bdd2523e099d466e96ac538627c92943-0000.wav",
+      "expected": "这是没有分句的测试。两句话使用同一个单元。",
+      "recognized": "这是没有分据的，测试两句话，使用同一个单元。",
+      "error": null,
+      "seconds": 0.17199999999866122,
+      "edits": 1,
+      "characters": 19,
+      "cer": 0.05263157894736842,
+      "content_check": "PASS"
+    }
+  ],
+  "outcome": "PASS"
+}

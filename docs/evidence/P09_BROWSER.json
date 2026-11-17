@@ -1,0 +1,334 @@
+{
+  "stage": "P09",
+  "started": "2026-11-17T11:51:16.591Z",
+  "runDir": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z",
+  "checks": [
+    {
+      "name": "中文输入与参数编辑不改冻结结果",
+      "status": "PASS",
+      "detail": {
+        "id": "1411e75b99634c35a7d4ca357adbd264",
+        "frozenText": "这是没有分句的测试。两句话使用同一个单元。",
+        "input": "🌙只修改下一次输入，不改变已经冻结的语音结果。"
+      }
+    },
+    {
+      "name": "真实 single 结果浏览器播放",
+      "status": "PASS",
+      "detail": {
+        "id": "d0dcdf7654654c7b8bb4ed514c62728e",
+        "splitRule": "punctuation",
+        "sentenceCount": 1,
+        "played": {
+          "src": "http://127.0.0.1:7867/api/audio/4123fd89aa0547449d2d0c65b89510d5",
+          "duration": 3.6,
+          "currentTime": 0.222033,
+          "readyState": 4,
+          "events": [
+            "play",
+            "playing"
+          ],
+          "muted": true,
+          "subjectiveListening": "NOT_PERFORMED"
+        }
+      }
+    },
+    {
+      "name": "真实 repeated 结果浏览器播放",
+      "status": "PASS",
+      "detail": {
+        "id": "6b81ed20c2544475813973878e0bd687",
+        "splitRule": "punctuation",
+        "sentenceCount": 3,
+        "played": {
+          "src": "http://127.0.0.1:7867/api/audio/c26e20d64ec849b0b00dca799f8bb936",
+          "duration": 8.32,
+          "currentTime": 0.2503,
+          "readyState": 4,
+          "events": [
+            "play",
+            "playing"
+          ],
+          "muted": true,
+          "subjectiveListening": "NOT_PERFORMED"
+        }
+      }
+    },
+    {
+      "name": "真实 lines 结果浏览器播放",
+      "status": "PASS",
+      "detail": {
+        "id": "faac676251e249428b6c3a7f5a5fcefd",
+        "splitRule": "lines",
+        "sentenceCount": 2,
+        "played": {
+          "src": "http://127.0.0.1:7867/api/audio/40531f2b5c564211ab8f926b0e4acbda",
+          "duration": 8,
+          "currentTime": 0.250536,
+          "readyState": 4,
+          "events": [
+            "play",
+            "playing"
+          ],
+          "muted": true,
+          "subjectiveListening": "NOT_PERFORMED"
+        }
+      }
+    },
+    {
+      "name": "真实 none 结果浏览器播放",
+      "status": "PASS",
+      "detail": {
+        "id": "1411e75b99634c35a7d4ca357adbd264",
+        "splitRule": "none",
+        "sentenceCount": 1,
+        "played": {
+          "src": "http://127.0.0.1:7867/api/audio/18d16fc3f0484cbb8dfbaa20525e0653",
+          "duration": 4.64,
+          "currentTime": 0.251194,
+          "readyState": 4,
+          "events": [
+            "play",
+            "loadedmetadata",
+            "canplay",
+            "playing"
+          ],
+          "muted": true,
+          "subjectiveListening": "NOT_PERFORMED"
+        }
+      }
+    },
+    {
+      "name": "逐句定位、独立句互斥及完整播放跨句同步",
+      "status": "PASS",
+      "detail": {
+        "id": "6b81ed20c2544475813973878e0bd687",
+        "secondSeekSeconds": 3.088051,
+        "selectedSentenceId": "82b44cd7693d53debcdb740a2c673612",
+        "selectedSourceRange": [
+          17,
+          27
+        ],
+        "repeatedIds": [
+          "1b36466b739f598fbe98ff35a5a62d6c",
+          "48337be3c96c5cd7a6d1eef614d2c4f1"
+        ]
+      }
+    },
+    {
+      "name": "刷新恢复服务端当前结果并保留独立编辑文本",
+      "status": "PASS",
+      "detail": {
+        "id": "1411e75b99634c35a7d4ca357adbd264"
+      }
+    },
+    {
+      "name": "真实无效 POST 返回422并保留当前有效结果",
+      "status": "PASS",
+      "detail": {
+        "error": "INVALID_TEXT：文本须包含文字或数字，不能只有空白或标点",
+        "currentId": "1411e75b99634c35a7d4ca357adbd264",
+        "playedAfterRejection": {
+          "src": "http://127.0.0.1:7867/api/audio/18d16fc3f0484cbb8dfbaa20525e0653",
+          "duration": 4.64,
+          "currentTime": 0.248893,
+          "readyState": 4,
+          "events": [
+            "play",
+            "playing"
+          ],
+          "muted": true,
+          "subjectiveListening": "NOT_PERFORMED"
+        }
+      }
+    },
+    {
+      "name": "390px 窄屏文本与结果布局",
+      "status": "PASS",
+      "detail": {
+        "viewport": 390,
+        "scroll": 390
+      }
+    },
+    {
+      "name": "无新增GPU任务、浏览器未捕获异常",
+      "status": "PASS",
+      "detail": "仅1次预期无效POST；HTTP422及对应console资源错误按预期记录，其他HTTP/console/page异常为零。"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z\\01-input-and-frozen-result.png",
+      "sha256": "bc2e90dceb916a16168fedb9394f159b160f8fd471789a851a0c93f4713452dc"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z\\04-lines-result.png",
+      "sha256": "5a68e335f37dde0c8fc1a0e10f212ca66315a2b868e1a4816dde7f552eb1f290"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z\\05-none-result.png",
+      "sha256": "c45edc721f5e98f001e5d3a57ee1e6d0ef818e55d43a818a4b1936c4fd9714e9"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z\\02-repeated-sentence-selection.png",
+      "sha256": "2da97d61ec028d41b145c798d5f3038df2637931b22fdc5c74498ce49f71f3ea"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z\\06-invalid-request-preserved.png",
+      "sha256": "5c6bc8db0a7a43f44f1772c5407e9cf00ab636838deb84654298a09738ec6ef2"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p09-browser\\2026-11-17T11-51-16-441Z\\07-narrow-text-synthesis.png",
+      "sha256": "fb683036af5d5de40d893712dc5ebe0afbdef5f179051a949067cfeb99035786"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "text": "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)",
+      "url": "http://127.0.0.1:7867/api/tts"
+    }
+  ],
+  "pageErrors": [],
+  "httpErrors": [
+    {
+      "status": 422,
+      "url": "http://127.0.0.1:7867/api/tts"
+    }
+  ],
+  "requestFailures": [
+    {
+      "url": "http://127.0.0.1:7867/api/audio/18d16fc3f0484cbb8dfbaa20525e0653",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/audio/4123fd89aa0547449d2d0c65b89510d5",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/audio/c26e20d64ec849b0b00dca799f8bb936",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/audio/40531f2b5c564211ab8f926b0e4acbda",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/audio/c26e20d64ec849b0b00dca799f8bb936",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/audio/40531f2b5c564211ab8f926b0e4acbda",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/audio/18d16fc3f0484cbb8dfbaa20525e0653",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "blockedRequests": [],
+  "submitted": [
+    {
+      "request_id": "03f1990e-33ab-4127-b271-609c3a78acc9",
+      "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+      "text": "？！……",
+      "language": "zh",
+      "split_rule": "punctuation",
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 32,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      }
+    }
+  ],
+  "httpEvidence": {
+    "path": "E:\\DictionForge\\data\\p09-http.json",
+    "sha256": "bb4adc8e8d0407467d1b463043f455fc11a3aa90f56b7d2872d5cf04a81c55e7"
+  },
+  "playwright": "1.62.1",
+  "browser": "157.0.4341.60",
+  "before": {
+    "currentId": "1411e75b99634c35a7d4ca357adbd264",
+    "jobIds": [
+      "121fb15c59ae4aa7829b0c7c4c1d6ece",
+      "1411e75b99634c35a7d4ca357adbd264",
+      "25e4fce108d5482390fd3f6f1347f3dc",
+      "278c506666fa4876bff2ec0bf0d7d053",
+      "2a120641dadf4f0fa1249de0da6b86b5",
+      "3ac853ab9d8945b49c1a015a7f22d880",
+      "44852e0b7cf4438fb5b2f695796f3c2b",
+      "4cdfb4b783e24a98971485f0a77c9cfe",
+      "5cd28d453d3b4474addfce1c97bec49c",
+      "6966480b2359483982d547c60ab1347d",
+      "6b81ed20c2544475813973878e0bd687",
+      "712e81ed370e4ca4ae4e04be0ff583b5",
+      "7397f63ad17f43d1b0fb7c98f9313bbf",
+      "7a00f578a57f4c8895e481e5ba67413e",
+      "870efe7da6d54b1093168155e2fa1476",
+      "97972fe4e3ab4c2dafc5f100a3716784",
+      "9ae20a27c7164079964967435c2339c6",
+      "a1d244cb3127420b865c76a64a9fa80e",
+      "a1e76ef07ae34bedb9dbb45590216c2f",
+      "a44ae960010743569d216d1dae5b0368",
+      "bc4cbe9ef0c642b694a7e38b1f5b3519",
+      "be4045700e60491b95efb7101aaf411a",
+      "bf903e14229847a68d6bb5a1301e74bc",
+      "bfc3264d12e34c2e8b36b9fecc289dbe",
+      "c7b78acd75ca41b686d709e18fc3a1aa",
+      "c91e14b22d304483b5d96926d4ae0e87",
+      "cca9eda7641b4436b238c936a9b23ffd",
+      "d0dcdf7654654c7b8bb4ed514c62728e",
+      "e6dafc6cb472472eb23151a1c3b05234",
+      "ee9f4f70f07741a4bcc8acc455dd20f7",
+      "f12c5be80cbe493d9b146a3ba85af85b",
+      "fa9ee16f3a6241a882648f3819a66eda",
+      "faac676251e249428b6c3a7f5a5fcefd"
+    ],
+    "audioSha256": "d8eac1e5c87908b891bb8229f8aa6b61724c033a1687f460a857959a3181ae1e"
+  },
+  "after": {
+    "currentId": "1411e75b99634c35a7d4ca357adbd264",
+    "jobIds": [
+      "121fb15c59ae4aa7829b0c7c4c1d6ece",
+      "1411e75b99634c35a7d4ca357adbd264",
+      "25e4fce108d5482390fd3f6f1347f3dc",
+      "278c506666fa4876bff2ec0bf0d7d053",
+      "2a120641dadf4f0fa1249de0da6b86b5",
+      "3ac853ab9d8945b49c1a015a7f22d880",
+      "44852e0b7cf4438fb5b2f695796f3c2b",
+      "4cdfb4b783e24a98971485f0a77c9cfe",
+      "5cd28d453d3b4474addfce1c97bec49c",
+      "6966480b2359483982d547c60ab1347d",
+      "6b81ed20c2544475813973878e0bd687",
+      "712e81ed370e4ca4ae4e04be0ff583b5",
+      "7397f63ad17f43d1b0fb7c98f9313bbf",
+      "7a00f578a57f4c8895e481e5ba67413e",
+      "870efe7da6d54b1093168155e2fa1476",
+      "97972fe4e3ab4c2dafc5f100a3716784",
+      "9ae20a27c7164079964967435c2339c6",
+      "a1d244cb3127420b865c76a64a9fa80e",
+      "a1e76ef07ae34bedb9dbb45590216c2f",
+      "a44ae960010743569d216d1dae5b0368",
+      "bc4cbe9ef0c642b694a7e38b1f5b3519",
+      "be4045700e60491b95efb7101aaf411a",
+      "bf903e14229847a68d6bb5a1301e74bc",
+      "bfc3264d12e34c2e8b36b9fecc289dbe",
+      "c7b78acd75ca41b686d709e18fc3a1aa",
+      "c91e14b22d304483b5d96926d4ae0e87",
+      "cca9eda7641b4436b238c936a9b23ffd",
+      "d0dcdf7654654c7b8bb4ed514c62728e",
+      "e6dafc6cb472472eb23151a1c3b05234",
+      "ee9f4f70f07741a4bcc8acc455dd20f7",
+      "f12c5be80cbe493d9b146a3ba85af85b",
+      "fa9ee16f3a6241a882648f3819a66eda",
+      "faac676251e249428b6c3a7f5a5fcefd"
+    ],
+    "audioSha256": "d8eac1e5c87908b891bb8229f8aa6b61724c033a1687f460a857959a3181ae1e"
+  },
+  "status": "PASS",
+  "finished": "2026-11-17T11:51:22.273Z"
+}

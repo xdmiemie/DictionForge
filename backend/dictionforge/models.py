@@ -118,7 +118,7 @@ def describe(jobs, model_version_id, db=None):
     return official(jobs, verify=False, db=db) if model_version_id == 'official' else _presentation(jobs, get(jobs, 'model', model_version_id, db), db)
 
 
-def resolve(jobs, model_version_id='official'):
+def resolve(jobs, model_version_id='official', *, check_reference=True):
     if model_version_id == 'official':
         return official(jobs)
     result = describe(jobs, model_version_id)
@@ -127,7 +127,7 @@ def resolve(jobs, model_version_id='official'):
     for item in [*result['weights'].values(), *result.get('dependencies', [])]:
         verify_artifact(item)
     reference = result.get('default_reference')
-    if reference and (not Path(reference['path']).is_file() or digest(Path(reference['path'])) != reference['sha256']):
+    if check_reference and reference and (not Path(reference['path']).is_file() or digest(Path(reference['path'])) != reference['sha256']):
         raise Conflict('MODEL_REFERENCE_CHANGED')
     return result
 

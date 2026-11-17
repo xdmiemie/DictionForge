@@ -1,0 +1,449 @@
+{
+  "outcome": "PASS",
+  "audit": "independent read-only CPU inspection of actual GPU worker artifacts",
+  "inspected_at": 1794916365.9265256,
+  "report_path": "E:\\DictionForge\\data\\p09-http.json",
+  "report_sha256": "bb4adc8e8d0407467d1b463043f455fc11a3aa90f56b7d2872d5cf04a81c55e7",
+  "upstream_commit": "6a1ece89928f6e5042a3ae0e092c2f47bdbae596",
+  "parameters": {
+    "seed": 42,
+    "sample_steps": 32,
+    "top_k": 5,
+    "top_p": 1.0,
+    "temperature": 1.0,
+    "speed_factor": 1.0,
+    "repetition_penalty": 1.35,
+    "fragment_interval": 0.3
+  },
+  "precision": "fp16",
+  "cases": {
+    "single": {
+      "job_id": "d0dcdf7654654c7b8bb4ed514c62728e",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "request_sha256": "79861acb757beb9b00d602550372695cfbcc7c746f6330d4956d9444afe16f07",
+      "worker_result_path": "E:\\DictionForge\\data\\runtime\\tts\\d0dcdf7654654c7b8bb4ed514c62728e\\inference-result.json",
+      "worker_result_sha256": "51ee0ff41b806e9099c31aa41cea4456cb2f8cf8c1559a2248ca9a42584fddb1",
+      "process_log_path": "E:\\DictionForge\\data\\runs\\d0dcdf7654654c7b8bb4ed514c62728e\\process.log",
+      "process_log_sha256": "f534fd1af448cbca6e66247e9dcc6289393684a4596db6d024f9107c3d7c1586",
+      "source_text": "今天天气很好，我们一起去公园散步。",
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\d0dcdf7654654c7b8bb4ed514c62728e\\audio-df277023125243618e7dfc2217ef575a.wav",
+        "sha256": "c866795eb9b6c3bdfb0f2b518b0cd797967113ed7458c0d3a2a5bd07b09e8d66",
+        "bytes": 345644,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 172800,
+        "seconds": 3.6,
+        "decode_verified": true,
+        "peak": 0.9150390625,
+        "rms": 0.10848318339964634
+      },
+      "sentences": [
+        {
+          "sentence_id": "d4fcf300fef45978b0eb9339540ecd06",
+          "index": 0,
+          "text": "今天天气很好，我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 17,
+          "seed": 42,
+          "actual_seed": 42,
+          "actual_text": "今天天气很好,我们一起去公园散步.",
+          "normalized_texts": [
+            "今天天气很好,我们一起去公园散步."
+          ],
+          "start_sample": 0,
+          "end_sample": 172800,
+          "leading_silence_samples": 6098,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 9.062814500000968,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\d0dcdf7654654c7b8bb4ed514c62728e\\sentence-df277023125243618e7dfc2217ef575a-0000.wav",
+            "sha256": "c866795eb9b6c3bdfb0f2b518b0cd797967113ed7458c0d3a2a5bd07b09e8d66",
+            "bytes": 345644,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 172800,
+            "seconds": 3.6,
+            "decode_verified": true,
+            "peak": 0.9150390625,
+            "rms": 0.10848318339964634
+          }
+        }
+      ],
+      "metrics": {
+        "generation_seconds": 9.062814500000968,
+        "load_seconds": 16.501221200000145,
+        "total_seconds": 26.126222799997777,
+        "peak_cuda_bytes": 2318460416,
+        "peak_reserved_bytes": 2428502016,
+        "device": "NVIDIA GeForce RTX 5080"
+      },
+      "one_model_ready_event": true,
+      "completed_progress_counts": [
+        1
+      ],
+      "logged_set_seed_values": [
+        42
+      ],
+      "exact_pcm_concatenation": true,
+      "full_decode_and_hashes_verified": true,
+      "normalized_texts_present": true
+    },
+    "repeated": {
+      "job_id": "6b81ed20c2544475813973878e0bd687",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "request_sha256": "471f3e14db574aa2b4aa7bb274592a2442d3c1dcec7e94a0c21944a6c1709741",
+      "worker_result_path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\inference-result.json",
+      "worker_result_sha256": "ef1ff60e12edeea277364d90e7a352ca29ed13b55aebbed49879b68cc82ddb9e",
+      "process_log_path": "E:\\DictionForge\\data\\runs\\6b81ed20c2544475813973878e0bd687\\process.log",
+      "process_log_sha256": "92f01eac34f30308180b66818165de39bb680ae7fd77a5819061a05cbd706d12",
+      "source_text": " 你好，今天我们一起去公园散步。\n我们先去湖边看风景。\n你好，今天我们一起去公园散步。 ",
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\audio-5e24943e6f4747c7979cca00cba28d98.wav",
+        "sha256": "790e1caf1a9852c181f9820e282bf5027b6ba9af2c77bc5d8f3b7c0a72b0c234",
+        "bytes": 798764,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 399360,
+        "seconds": 8.32,
+        "decode_verified": true,
+        "peak": 0.92822265625,
+        "rms": 0.11139176750155727
+      },
+      "sentences": [
+        {
+          "sentence_id": "1b36466b739f598fbe98ff35a5a62d6c",
+          "index": 0,
+          "text": "你好，今天我们一起去公园散步。",
+          "source_start": 1,
+          "source_end": 16,
+          "seed": 42,
+          "actual_seed": 42,
+          "actual_text": ".你好,今天我们一起去公园散步.",
+          "normalized_texts": [
+            ".你好,今天我们一起去公园散步."
+          ],
+          "start_sample": 0,
+          "end_sample": 147840,
+          "leading_silence_samples": 5294,
+          "trailing_silence_samples": 9608,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 7.452381600000081,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\sentence-5e24943e6f4747c7979cca00cba28d98-0000.wav",
+            "sha256": "83b498da9ba2b001ce57ca865529d2038166544a45f4c076dbb94d2588b91c85",
+            "bytes": 295724,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 147840,
+            "seconds": 3.08,
+            "decode_verified": true,
+            "peak": 0.9091796875,
+            "rms": 0.11798881540347214
+          }
+        },
+        {
+          "sentence_id": "82b44cd7693d53debcdb740a2c673612",
+          "index": 1,
+          "text": "我们先去湖边看风景。",
+          "source_start": 17,
+          "source_end": 27,
+          "seed": 43,
+          "actual_seed": 43,
+          "actual_text": "我们先去湖边看风景.",
+          "normalized_texts": [
+            "我们先去湖边看风景."
+          ],
+          "start_sample": 147840,
+          "end_sample": 257280,
+          "leading_silence_samples": 70,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 2.251167499998701,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\sentence-5e24943e6f4747c7979cca00cba28d98-0001.wav",
+            "sha256": "5172b91ae8c231e849b667e7f83b9b7afc25559a8d1843c637965720e807ac67",
+            "bytes": 218924,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 109440,
+            "seconds": 2.28,
+            "decode_verified": true,
+            "peak": 0.92822265625,
+            "rms": 0.10266606788423861
+          }
+        },
+        {
+          "sentence_id": "48337be3c96c5cd7a6d1eef614d2c4f1",
+          "index": 2,
+          "text": "你好，今天我们一起去公园散步。",
+          "source_start": 28,
+          "source_end": 43,
+          "seed": 44,
+          "actual_seed": 44,
+          "actual_text": ".你好,今天我们一起去公园散步.",
+          "normalized_texts": [
+            ".你好,今天我们一起去公园散步."
+          ],
+          "start_sample": 257280,
+          "end_sample": 399360,
+          "leading_silence_samples": 5498,
+          "trailing_silence_samples": 9604,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.832038399996236,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\6b81ed20c2544475813973878e0bd687\\sentence-5e24943e6f4747c7979cca00cba28d98-0002.wav",
+            "sha256": "0e5b2de97bcc3c2fdf7fc72e69cd335e47493a1234d78ba8ea3a9d5b1d5a6e27",
+            "bytes": 284204,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 142080,
+            "seconds": 2.96,
+            "decode_verified": true,
+            "peak": 0.904296875,
+            "rms": 0.11078022386767292
+          }
+        }
+      ],
+      "metrics": {
+        "generation_seconds": 11.535587499995017,
+        "load_seconds": 13.550064600000042,
+        "total_seconds": 27.154142400002456,
+        "peak_cuda_bytes": 2318460416,
+        "peak_reserved_bytes": 2430599168,
+        "device": "NVIDIA GeForce RTX 5080"
+      },
+      "one_model_ready_event": true,
+      "completed_progress_counts": [
+        1,
+        2,
+        3
+      ],
+      "logged_set_seed_values": [
+        42,
+        43,
+        44
+      ],
+      "exact_pcm_concatenation": true,
+      "full_decode_and_hashes_verified": true,
+      "normalized_texts_present": true
+    },
+    "lines": {
+      "job_id": "faac676251e249428b6c3a7f5a5fcefd",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "request_sha256": "98e78c35566d704d19d4c056c5ed8af005cd3797e908c52a55b54803a7c38b4d",
+      "worker_result_path": "E:\\DictionForge\\data\\runtime\\tts\\faac676251e249428b6c3a7f5a5fcefd\\inference-result.json",
+      "worker_result_sha256": "33fe0daa29ebe56969a37cb4d8d26af0aa4a88db885681e0e432a1ca13b5f62a",
+      "process_log_path": "E:\\DictionForge\\data\\runs\\faac676251e249428b6c3a7f5a5fcefd\\process.log",
+      "process_log_sha256": "6e60efe6ce57e3c4c40837119645f3759e954ab64607213ec3d5cb9ba38d85d6",
+      "source_text": "第一行保持原样，先看蓝天。再看白云。\n第二行开始，慢慢读完这段话。",
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\faac676251e249428b6c3a7f5a5fcefd\\audio-1af2efe9f3bc4b9d96db08dd7e86e0ed.wav",
+        "sha256": "d5c3dbd1267d33d3b609528a087eb6a31f4980ebe6b1f319929f8d618bd15218",
+        "bytes": 768044,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 384000,
+        "seconds": 8.0,
+        "decode_verified": true,
+        "peak": 0.9375,
+        "rms": 0.10687613487728782
+      },
+      "sentences": [
+        {
+          "sentence_id": "d2a9824931e752c08cdcc3749d1eaf31",
+          "index": 0,
+          "text": "第一行保持原样，先看蓝天。再看白云。",
+          "source_start": 0,
+          "source_end": 18,
+          "seed": 42,
+          "actual_seed": 42,
+          "actual_text": "第一行保持原样,先看蓝天.再看白云.",
+          "normalized_texts": [
+            "第一行保持原样,先看蓝天.再看白云."
+          ],
+          "start_sample": 0,
+          "end_sample": 230400,
+          "leading_silence_samples": 6617,
+          "trailing_silence_samples": 9709,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 6.5837602999963565,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\faac676251e249428b6c3a7f5a5fcefd\\sentence-1af2efe9f3bc4b9d96db08dd7e86e0ed-0000.wav",
+            "sha256": "7a0d44af0940545687cbc8ed826f4e49f7642a4b6b54588eae475aa007f46d75",
+            "bytes": 460844,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 230400,
+            "seconds": 4.8,
+            "decode_verified": true,
+            "peak": 0.9375,
+            "rms": 0.10251820017824727
+          }
+        },
+        {
+          "sentence_id": "827873e7eb1752d08dc45d964f689363",
+          "index": 1,
+          "text": "第二行开始，慢慢读完这段话。",
+          "source_start": 19,
+          "source_end": 33,
+          "seed": 43,
+          "actual_seed": 43,
+          "actual_text": "第二行开始,慢慢读完这段话.",
+          "normalized_texts": [
+            "第二行开始,慢慢读完这段话."
+          ],
+          "start_sample": 230400,
+          "end_sample": 384000,
+          "leading_silence_samples": 5,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.9194600999981049,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\faac676251e249428b6c3a7f5a5fcefd\\sentence-1af2efe9f3bc4b9d96db08dd7e86e0ed-0001.wav",
+            "sha256": "7c0ee74878c8b6e3a6a026782403f78ee0f4685675372da7498471ff651bce86",
+            "bytes": 307244,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 153600,
+            "seconds": 3.2,
+            "decode_verified": true,
+            "peak": 0.8603515625,
+            "rms": 0.11309862273294834
+          }
+        }
+      ],
+      "metrics": {
+        "generation_seconds": 8.503220399994461,
+        "load_seconds": 14.690509800006112,
+        "total_seconds": 23.54645540000638,
+        "peak_cuda_bytes": 2318460416,
+        "peak_reserved_bytes": 2428502016,
+        "device": "NVIDIA GeForce RTX 5080"
+      },
+      "one_model_ready_event": true,
+      "completed_progress_counts": [
+        1,
+        2
+      ],
+      "logged_set_seed_values": [
+        42,
+        43
+      ],
+      "exact_pcm_concatenation": true,
+      "full_decode_and_hashes_verified": true,
+      "normalized_texts_present": true
+    },
+    "none": {
+      "job_id": "1411e75b99634c35a7d4ca357adbd264",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "request_sha256": "88ce3451863e2206d56504c272b36e098b65f4911cde54f153d118c8a5bd8e64",
+      "worker_result_path": "E:\\DictionForge\\data\\runtime\\tts\\1411e75b99634c35a7d4ca357adbd264\\inference-result.json",
+      "worker_result_sha256": "f6c543f6b93465f02cfec36cf1fa7854bdcbb06a4a667db8ef56932c17cabe7a",
+      "process_log_path": "E:\\DictionForge\\data\\runs\\1411e75b99634c35a7d4ca357adbd264\\process.log",
+      "process_log_sha256": "2a0370f881bbb95481070fe08a42b566c923a34a30976ee6716f11c96fb63e30",
+      "source_text": "这是没有分句的测试。两句话使用同一个单元。",
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\1411e75b99634c35a7d4ca357adbd264\\audio-bdd2523e099d466e96ac538627c92943.wav",
+        "sha256": "d8eac1e5c87908b891bb8229f8aa6b61724c033a1687f460a857959a3181ae1e",
+        "bytes": 445484,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 222720,
+        "seconds": 4.64,
+        "decode_verified": true,
+        "peak": 0.9501953125,
+        "rms": 0.11525252466211754
+      },
+      "sentences": [
+        {
+          "sentence_id": "c351019cc5585abd96805da97049c485",
+          "index": 0,
+          "text": "这是没有分句的测试。两句话使用同一个单元。",
+          "source_start": 0,
+          "source_end": 21,
+          "seed": 42,
+          "actual_seed": 42,
+          "actual_text": "这是没有分句的测试.两句话使用同一个单元.",
+          "normalized_texts": [
+            "这是没有分句的测试.两句话使用同一个单元."
+          ],
+          "start_sample": 0,
+          "end_sample": 222720,
+          "leading_silence_samples": 5264,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 6.618223699995724,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1411e75b99634c35a7d4ca357adbd264\\sentence-bdd2523e099d466e96ac538627c92943-0000.wav",
+            "sha256": "d8eac1e5c87908b891bb8229f8aa6b61724c033a1687f460a857959a3181ae1e",
+            "bytes": 445484,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 222720,
+            "seconds": 4.64,
+            "decode_verified": true,
+            "peak": 0.9501953125,
+            "rms": 0.11525252466211754
+          }
+        }
+      ],
+      "metrics": {
+        "generation_seconds": 6.618223699995724,
+        "load_seconds": 14.077293100002862,
+        "total_seconds": 21.40750410000328,
+        "peak_cuda_bytes": 2318460416,
+        "peak_reserved_bytes": 2430599168,
+        "device": "NVIDIA GeForce RTX 5080"
+      },
+      "one_model_ready_event": true,
+      "completed_progress_counts": [
+        1
+      ],
+      "logged_set_seed_values": [
+        42
+      ],
+      "exact_pcm_concatenation": true,
+      "full_decode_and_hashes_verified": true,
+      "normalized_texts_present": true
+    }
+  },
+  "totals": {
+    "sentences": 7,
+    "samples": 1178880,
+    "seconds": 24.56
+  },
+  "cpu_contract_tests": {
+    "command": ".venv-api/Scripts/python.exe -m pytest tests/test_inference_contract.py tests/test_sentence_inference_worker.py -q",
+    "passed": 19,
+    "gpu_used": false
+  },
+  "scope_notes": [
+    "Actual generation was performed by the parent-coordinated GPU HTTP acceptance; this audit did not allocate GPU memory.",
+    "Normalized text is upstream text frontend output, not an ASR transcript or a human listening judgment.",
+    "Sample intervals include upstream existing silence; there is no claimed word-level forced alignment.",
+    "No P10 saved-work operations, P11 feedback operations, Git commits or remote pushes were performed by this worker task."
+  ]
+}

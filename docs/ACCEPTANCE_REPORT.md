@@ -39,9 +39,9 @@
 | A33 | 默认参考和缓存 | PASS | docs/evidence/P08_EFFECTS.md、P08_HTTP.json、P08_GPU.md、P08_BROWSER.md；固定条件真实推理/参考失效/租约与受控外部占用 |
 | A34 | 固定条件试听 | PASS | docs/evidence/P08_EFFECTS.md、P08_HTTP.json、P08_GPU.md、P08_BROWSER.md；固定条件真实推理/参考失效/租约与受控外部占用 |
 | A35 | GPU 排他和外部占用 | PASS | docs/evidence/P08_EFFECTS.md、P08_HTTP.json、P08_GPU.md、P08_BROWSER.md；固定条件真实推理/参考失效/租约与受控外部占用 |
-| A36 | 单句合成 | NOT_RUN | 尚未执行 |
-| A37 | 多句、重复句和断句 | NOT_RUN | 尚未执行 |
-| A38 | 无效文本和语言 | NOT_RUN | 尚未执行 |
+| A36 | 单句合成 | PASS | P09_SYNTHESIS.md、P09_HTTP.json、P09_BROWSER.md：真实v4原生48k、浏览器解码播放 |
+| A37 | 多句、重复句和断句 | PASS | P09_WORKER.md/.json、P09_ASR.json、P09_BROWSER.md：4组7句PCM逐样本与原文范围一致、真实ASR与播放同步 |
+| A38 | 无效文本和语言 | PASS | P09_HTTP.json、P09_BROWSER.md：7种HTTP422均保留current，页面真实非法标点请求后仍可播放 |
 | A39 | 合成与旧结果 | NOT_RUN | 尚未执行 |
 | A40 | WAV、MP3 与 Range | NOT_RUN | 尚未执行 |
 | A41 | 永久作品 | NOT_RUN | 尚未执行 |

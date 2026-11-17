@@ -1,4 +1,4 @@
-"""One frozen model/reference/text request, native v4 48 kHz output, then exit."""
+"""One frozen model/reference request, sequential native v4 sentences, then exit."""
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -24,6 +24,9 @@ from .jobs import Jobs
 LANGUAGES = {'zh': 'all_zh', 'en': 'en', 'ja': 'all_ja', 'ko': 'all_ko', 'yue': 'all_yue'}
 DEFAULTS = {'seed': 42, 'sample_steps': 32, 'top_k': 5, 'top_p': 1., 'temperature': 1.,
             'speed_factor': 1., 'repetition_penalty': 1.35, 'fragment_interval': .3}
+COORDINATES = {'text': 'unicode_code_point_half_open', 'audio': 'sample_half_open', 'sample_rate': 48000,
+               'concatenation': 'exact_sequential_pcm_no_added_silence'}
+SILENCE_THRESHOLD = {'amplitude': 32, 'unit': 'pcm16'}
 
 
 class InferenceFailure(RuntimeError):
@@ -47,6 +50,11 @@ class InferenceProgress:
         self.started = time.perf_counter()
         self.last_exception = None
         self.failure_phase = None
+        self.current_sentence = None
+        self.total_sentences = 0
+        self.completed_sentences = 0
+        self.completed_results = []
+        self.normalized_texts = []
         self.jobs = Jobs(Path(request['data_root'])) if request.get('job_id') else None
         import psutil
         self.worker_process_start = psutil.Process(os.getpid()).create_time()
@@ -58,20 +66,26 @@ class InferenceProgress:
         payload = {'stage': stage, 'model_id': self.request.get('model_id'),
                    'gpu_resident': self.gpu_resident, 'worker_pid': os.getpid(),
                    'worker_process_start': self.worker_process_start,
+                   'completed_sentences': self.completed_sentences, 'total_sentences': self.total_sentences,
                    'elapsed_seconds': time.perf_counter()-self.started, **extra}
+        if self.current_sentence is not None:
+            payload.update(sentence_id=self.current_sentence['sentence_id'], sentence_index=self.current_sentence['index'])
         self.events.append(payload)
         print(json.dumps({'inference_phase': payload}, ensure_ascii=False), flush=True)
         if self.jobs is not None:
             self.jobs.progress(self.request['job_id'], payload)
 
-    def observe(self, owner, name, phase):
+    def observe(self, owner, name, phase, on_success=None):
         original = getattr(owner, name)
         @functools.wraps(original)
         def wrapped(*args, **kwargs):
             if self.phase != phase:
                 self.emit(phase)
             try:
-                return original(*args, **kwargs)
+                result = original(*args, **kwargs)
+                if on_success is not None:
+                    on_success(result)
+                return result
             except Exception as exc:
                 self.last_exception, self.failure_phase = exc, phase
                 raise
@@ -83,7 +97,14 @@ class InferenceProgress:
                   'phase': phase, 'model_id': self.request.get('model_id'),
                   'parameters': self.parameters, 'requested_parameters': self.request.get('parameters', {}),
                   'precision': self.request.get('precision', 'fp16'), 'parameters_changed': False,
-                  'gpu_resident_at_failure': self.gpu_resident, 'worker_pid': os.getpid()}
+                  'gpu_resident_at_failure': self.gpu_resident, 'worker_pid': os.getpid(),
+                  'source_text': self.request.get('source_text', self.request.get('text')),
+                  'completed_sentences': self.completed_sentences, 'total_sentences': self.total_sentences,
+                  'completed_sentence_results': self.completed_results, 'coordinate_system': dict(COORDINATES)}
+        if self.current_sentence is not None:
+            report.update(sentence=dict(self.current_sentence), sentence_id=self.current_sentence['sentence_id'],
+                          sentence_index=self.current_sentence['index'], sentence_text=self.current_sentence['text'],
+                          actual_seed=self.current_sentence['seed'], normalized_texts=list(self.normalized_texts))
         torch = sys.modules.get('torch')
         if torch is not None and torch.cuda.is_initialized():
             try:
@@ -114,7 +135,11 @@ def assert_cuda_models(model):
 def observe_model(model, progress):
     progress.observe(model, 'set_ref_audio', 'reference_processing')
     progress.observe(model.text_preprocessor, 'segment_and_extract_feature_for_text', 'text_frontend')
-    progress.observe(model.text_preprocessor, 'preprocess', 'text_frontend')
+    def record_target_text(rows):
+        # This return value is the target frontend output; prompt processing uses
+        # segment_and_extract_feature_for_text directly and is not mixed in.
+        progress.normalized_texts = [row['norm_text'] for row in rows]
+    progress.observe(model.text_preprocessor, 'preprocess', 'text_frontend', record_target_text)
     progress.observe(model, 'to_batch', 'text_frontend')
     progress.observe(model.t2s_model.model, 'infer_panel_naive_batched', 'synthesizing')
     progress.observe(model, 'using_vocoder_synthesis', 'synthesizing')
@@ -155,6 +180,35 @@ def normalize_parameters(supplied):
     return result
 
 
+def normalize_sentences(request, parameters):
+    source = request.get('source_text', request.get('text'))
+    if not isinstance(source, str) or not source.strip() or len(source) > 5000 or source != request.get('text'):
+        raise ValueError('INFERENCE_TEXT_INVALID: require frozen original text of 1–5000 code points')
+    rows = request.get('sentences')
+    if rows is None:
+        # P07/P08 probes remain valid single-sentence requests.
+        rows = [{'sentence_id': 'sentence-0000', 'index': 0, 'text': source,
+                 'source_start': 0, 'source_end': len(source), 'seed': parameters['seed']}]
+    if not isinstance(rows, list) or not rows:
+        raise ValueError('INFERENCE_SENTENCES_INVALID: require at least one sentence')
+    normalized, seen, previous_end = [], set(), 0
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise ValueError('INFERENCE_SENTENCES_INVALID: sentence must be an object')
+        identity = row.get('sentence_id')
+        start, end = row.get('source_start'), row.get('source_end')
+        if (not isinstance(identity, str) or not identity or identity in seen or
+                type(row.get('index')) is not int or row['index'] != index or
+                type(start) is not int or type(end) is not int or not previous_end <= start < end <= len(source) or
+                not isinstance(row.get('text'), str) or not row['text'].strip() or row['text'] != source[start:end] or
+                type(row.get('seed')) is not int or row['seed'] != (parameters['seed']+index) % 2**32):
+            raise ValueError(f'INFERENCE_SENTENCES_INVALID: identity/range/text/seed at index {index}')
+        normalized.append(dict(row))
+        seen.add(identity)
+        previous_end = end
+    return normalized
+
+
 def validate_request(request):
     data_root, output = Path(request['data_root']).resolve(), Path(request['output_dir']).resolve()
     if not output.is_relative_to(data_root) or output == data_root:
@@ -163,9 +217,8 @@ def validate_request(request):
         raise ValueError('INFERENCE_PRECISION_INVALID')
     if request.get('language', 'zh') not in LANGUAGES:
         raise ValueError('INFERENCE_LANGUAGE_INVALID')
-    text = request.get('text', '').strip()
-    if not text or len(text) > 5000:
-        raise ValueError('INFERENCE_TEXT_INVALID: require 1–5000 characters')
+    parameters = normalize_parameters(request.get('parameters', {}))
+    normalize_sentences(request, parameters)
     reference = request['reference']
     if not reference.get('text', '').strip() or reference.get('language', 'zh') not in LANGUAGES:
         raise ValueError('REFERENCE_TEXT_LANGUAGE_INVALID')
@@ -178,7 +231,114 @@ def validate_request(request):
     path = Path(reference['path'])
     if not path.is_absolute() or not path.is_file() or digest(path) != reference.get('sha256'):
         raise ValueError('REFERENCE_CHANGED')
-    return normalize_parameters(request.get('parameters', {}))
+    return parameters
+
+
+def validate_pcm(pcm):
+    import numpy as np
+    if (not isinstance(pcm, np.ndarray) or pcm.ndim != 1 or pcm.dtype != np.int16 or not pcm.size or
+            not np.any(np.abs(pcm.astype(np.int32)) > SILENCE_THRESHOLD['amplitude'])):
+        raise RuntimeError('INFERENCE_AUDIO_INVALID: require nonempty non-silent mono native int16 PCM (abs > 32)')
+
+
+def silence_samples(pcm):
+    import numpy as np
+    sounding = np.flatnonzero(np.abs(pcm.astype(np.int32)) > SILENCE_THRESHOLD['amplitude'])
+    return (int(sounding[0]), len(pcm)-1-int(sounding[-1])) if len(sounding) else (len(pcm), len(pcm))
+
+
+def write_verified_pcm(output, pcm):
+    """Publish an immutable WAV only after full PCM16 decode equality succeeds."""
+    import numpy as np
+    import soundfile as sf
+    validate_pcm(pcm)
+    output = Path(output)
+    if output.exists():
+        raise FileExistsError(f'INFERENCE_OUTPUT_EXISTS: {output}')
+    temporary = output.with_suffix('.wav.part')
+    owned_temporary = False
+    try:
+        with temporary.open('xb') as stream:
+            owned_temporary = True
+            sf.write(stream, pcm, 48000, format='WAV', subtype='PCM_16')
+            stream.flush()
+            os.fsync(stream.fileno())
+        info = sf.info(temporary)
+        decoded, rate = sf.read(temporary, dtype='int16', always_2d=False)
+        if (info.format != 'WAV' or info.subtype != 'PCM_16' or rate != 48000 or
+                info.channels != 1 or info.frames != len(pcm) or not np.array_equal(decoded, pcm)):
+            raise RuntimeError('INFERENCE_FILE_INVALID: full decoded PCM differs from native output')
+        checksum = digest(temporary)
+        os.replace(temporary, output)
+    finally:
+        if owned_temporary:
+            temporary.unlink(missing_ok=True)
+    floating = pcm.astype(np.float64)/32768
+    return {'path': str(output), 'sha256': checksum, 'bytes': output.stat().st_size, 'sample_rate': 48000,
+            'channels': 1, 'samples': len(pcm), 'seconds': len(pcm)/48000, 'decode_verified': True,
+            'peak': float(np.abs(floating).max()), 'rms': float(np.sqrt(np.mean(floating**2)))}
+
+
+def synthesize_sentences(model, inputs, sentences, output_dir, identifier, progress, synchronize):
+    """Reuse one loaded TTS object; retain every upstream sample, including silence."""
+    import numpy as np
+    rows, cursor, generation_seconds = [], 0, 0.
+    progress.total_sentences = len(sentences)
+    for sentence in sentences:
+        progress.current_sentence = dict(sentence)
+        progress.normalized_texts = []
+        progress.last_exception = progress.failure_phase = None
+        progress.emit('sentence_started', actual_seed=sentence['seed'])
+        actual_inputs = dict(inputs, text=sentence['text'], seed=sentence['seed'])
+        before = time.perf_counter()
+        chunks = collect_native_chunks(model, actual_inputs, progress)
+        synchronize()
+        seconds = time.perf_counter()-before
+        generation_seconds += seconds
+        if not chunks:
+            raise RuntimeError('INFERENCE_AUDIO_INVALID: upstream returned no chunks')
+        progress.emit('sentence_audio_validation')
+        pcm = np.concatenate([pcm for _, pcm in chunks])
+        validate_pcm(pcm)
+        progress.emit('sentence_audio_writing')
+        audio = write_verified_pcm(Path(output_dir)/f'sentence-{identifier}-{sentence["index"]:04d}.wav', pcm)
+        leading, trailing = silence_samples(pcm)
+        row = dict(sentence, actual_seed=actual_inputs['seed'], audio=audio,
+                   start_sample=cursor, end_sample=cursor+len(pcm),
+                   leading_silence_samples=leading, trailing_silence_samples=trailing,
+                   silence_threshold=dict(SILENCE_THRESHOLD), generation_seconds=seconds,
+                   actual_text=''.join(progress.normalized_texts), normalized_texts=list(progress.normalized_texts))
+        rows.append(row)
+        cursor += len(pcm)
+        progress.completed_sentences += 1
+        progress.completed_results = list(rows)
+        progress.emit('sentence_completed', audio_sha256=audio['sha256'], samples=len(pcm),
+                      start_sample=row['start_sample'], end_sample=row['end_sample'])
+    progress.current_sentence = None
+    return rows, generation_seconds
+
+
+def concatenate_sentences(rows, output):
+    """Decode persisted sentence files and concatenate exactly, without silence edits."""
+    import numpy as np
+    import soundfile as sf
+    chunks, cursor = [], 0
+    for row in rows:
+        item = row['audio']
+        path = Path(item['path'])
+        if digest(path) != item['sha256'] or path.stat().st_size != item['bytes']:
+            raise ValueError('INFERENCE_SENTENCE_CHANGED_BEFORE_CONCATENATION')
+        pcm, rate = sf.read(path, dtype='int16', always_2d=False)
+        if (rate != 48000 or pcm.ndim != 1 or len(pcm) != item['samples'] or
+                row['start_sample'] != cursor or row['end_sample'] != cursor+len(pcm)):
+            raise ValueError('INFERENCE_SENTENCE_RANGE_INVALID')
+        if digest(path) != item['sha256']:
+            raise ValueError('INFERENCE_SENTENCE_CHANGED_DURING_CONCATENATION')
+        chunks.append(pcm)
+        cursor += len(pcm)
+    if not chunks:
+        raise ValueError('INFERENCE_SENTENCES_INVALID: no generated sentences')
+    return write_verified_pcm(Path(output), np.concatenate(chunks))
 
 
 @contextmanager
@@ -198,11 +358,12 @@ def _run(request, progress):
     progress.emit('request_validation')
     parameters = validate_request(request)
     progress.parameters = parameters
+    sentences = normalize_sentences(request, parameters)
+    progress.total_sentences = len(sentences)
     upstream, output_dir = Path(request['upstream']).resolve(), Path(request['output_dir']).resolve()
     progress.emit('dependency_validation')
     verify_source(ROOT, upstream)
     checked_assets(upstream)
-    import numpy as np
     import soundfile as sf
     import torch
     reference = dict(request['reference'])
@@ -221,13 +382,16 @@ def _run(request, progress):
               't2s_weights_path': request['weights']['gpt'], 'vits_weights_path': request['weights']['sovits'],
               'cnhuhbert_base_path': str(assets/'chinese-hubert-base'),
               'bert_base_path': str(assets/'chinese-roberta-wwm-ext-large')}
-    inputs = dict(parameters, text=request['text'].strip(), text_lang=LANGUAGES[request.get('language', 'zh')],
+    inputs = dict(parameters, text=request['text'], text_lang=LANGUAGES[request.get('language', 'zh')],
                   ref_audio_path=reference['path'], prompt_text=reference['text'].strip(),
                   prompt_lang=LANGUAGES[reference.get('language', 'zh')], text_split_method='cut0',
                   batch_size=1, parallel_infer=False, split_bucket=False, return_fragment=False)
     effective = {'config': config, 'inputs': inputs, 'upstream_lock': digest(ROOT/'configs/upstream.lock.json'),
                  'asset_lock': digest(ROOT/'configs/assets.lock.json'), 'weight_hashes': request['weight_hashes'],
-                 'reference_sha256': reference['sha256'], 'native_sample_rate_required': 48000}
+                 'reference_sha256': reference['sha256'], 'native_sample_rate_required': 48000,
+                 'source_text': request['text'], 'sentences': sentences,
+                 'sentence_inputs': [dict(inputs, text=row['text'], seed=row['seed']) for row in sentences],
+                 'coordinate_system': dict(COORDINATES), 'silence_threshold': dict(SILENCE_THRESHOLD)}
     atomic_json(output_dir/f'inference-{identifier}.effective.json', effective)
     torch.cuda.reset_peak_memory_stats()
     progress.emit('model_loading', gpu_resident=False, parameters=parameters,
@@ -247,40 +411,18 @@ def _run(request, progress):
                       allocated_bytes=torch.cuda.memory_allocated(), reserved_bytes=torch.cuda.memory_reserved())
         observe_model(model, progress)
         load_seconds = time.perf_counter() - started
-        before = time.perf_counter()
-        chunks = collect_native_chunks(model, inputs, progress)
-        torch.cuda.synchronize()
-        generation_seconds = time.perf_counter() - before
-    if not chunks or any(rate != 48000 for rate, _ in chunks):
-        raise RuntimeError('INFERENCE_NATIVE_RATE_INVALID: upstream must return 48000 Hz')
-    pcm = np.concatenate([pcm for _, pcm in chunks])
-    if pcm.ndim != 1 or pcm.dtype != np.int16 or not pcm.size or not np.any(pcm):
-        raise RuntimeError('INFERENCE_AUDIO_INVALID: require nonempty mono native int16 PCM')
+        rows, generation_seconds = synthesize_sentences(model, inputs, sentences, output_dir, identifier,
+                                                       progress, torch.cuda.synchronize)
     if digest(Path(reference['path'])) != reference['sha256']:
         raise ValueError('REFERENCE_CHANGED_DURING_INFERENCE')
     progress.emit('audio_writing')
     output = output_dir/f'audio-{identifier}.wav'
-    temporary = output.with_suffix('.wav.part')
-    try:
-        sf.write(temporary, pcm, 48000, format='WAV', subtype='PCM_16')
-        with temporary.open('r+b') as stream:
-            stream.flush()
-            os.fsync(stream.fileno())
-        info = sf.info(temporary)
-        if info.samplerate != 48000 or info.channels != 1 or info.frames != len(pcm):
-            raise RuntimeError('INFERENCE_FILE_INVALID')
-        checksum = digest(temporary)
-        os.replace(temporary, output)
-    finally:
-        temporary.unlink(missing_ok=True)
-    audio = {'path': str(output), 'sha256': checksum, 'bytes': output.stat().st_size, 'sample_rate': 48000,
-             'channels': 1, 'samples': len(pcm), 'seconds': len(pcm)/48000,
-             'peak': float(np.abs(pcm.astype(np.float64)/32768).max()),
-             'rms': float(np.sqrt(np.mean((pcm.astype(np.float64)/32768)**2)))}
-    progress.emit('audio_written', audio_sha256=checksum, sample_rate=48000, samples=len(pcm))
+    audio = concatenate_sentences(rows, output)
+    progress.emit('audio_written', audio_sha256=audio['sha256'], sample_rate=48000, samples=audio['samples'])
     result = {'outcome': 'COMPLETED', 'model_id': request.get('model_id'), 'audio': audio,
               'weights': request['weights'], 'weight_hashes': request['weight_hashes'], 'reference': reference,
-              'text': request['text'].strip(), 'language': request.get('language', 'zh'),
+              'text': request['text'], 'source_text': request['text'], 'language': request.get('language', 'zh'),
+              'sentences': rows, 'coordinate_system': dict(COORDINATES),
               'parameters': parameters, 'effective': effective, 'phase_events': progress.events,
               'metrics': {'generation_seconds': generation_seconds, 'load_seconds': load_seconds,
                           'total_seconds': time.perf_counter()-started,

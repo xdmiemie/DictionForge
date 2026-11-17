@@ -1,6 +1,6 @@
 export type JobError = {code?: string; message: string; stage?: string; retryable?: boolean};
 type Metric = number | null;
-export type Progress = {phase?: string; stage?: string; completed?: Metric; total?: Metric; unit?: string; step?: Metric; optimizer_updates?: Metric; target?: Metric; epoch?: Metric; completed_epochs?: Metric; processed_batches?: Metric; physical_batch_size?: Metric; skipped_updates?: Metric; loss?: Metric; learning_rate?: Metric; peak_cuda_bytes?: Metric; peak_allocated_bytes?: Metric};
+export type Progress = {completed_sentences?: Metric; total_sentences?: Metric; sentence_index?: Metric; phase?: string; stage?: string; completed?: Metric; total?: Metric; unit?: string; step?: Metric; optimizer_updates?: Metric; target?: Metric; epoch?: Metric; completed_epochs?: Metric; processed_batches?: Metric; physical_batch_size?: Metric; skipped_updates?: Metric; loss?: Metric; learning_rate?: Metric; peak_cuda_bytes?: Metric; peak_allocated_bytes?: Metric};
 export const finiteNumber = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
 export const optimizerUpdates = (progress: Progress) => finiteNumber(progress.step) ? progress.step : finiteNumber(progress.optimizer_updates) ? progress.optimizer_updates : undefined;
 export const peakBytes = (progress: Progress) => finiteNumber(progress.peak_cuda_bytes) ? progress.peak_cuda_bytes : finiteNumber(progress.peak_allocated_bytes) ? progress.peak_allocated_bytes : undefined;

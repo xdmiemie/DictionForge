@@ -100,6 +100,7 @@ def _references(jobs):
     result = set()
     with jobs.connect() as db:
         rows = db.execute("SELECT id,metadata FROM records WHERE kind='run'").fetchall()
+        exports = db.execute("SELECT id,metadata FROM records WHERE kind='export_snapshot'").fetchall()
     for row in rows:
         try:
             run = json.loads(row["metadata"])
@@ -114,6 +115,13 @@ def _references(jobs):
         except (ValueError, TypeError, AttributeError):
             # A corrupt reference registry must never make deletion appear safe.
             raise CheckpointInvalid(f"CHECKPOINT_REFERENCE_INVALID：运行 {row['id']} 的引用记录损坏") from None
+    for row in exports:
+        try:
+            snapshot = json.loads(row['metadata'])
+            if not snapshot.get('retired') and snapshot.get('run_id') and snapshot.get('checkpoint_id'):
+                result.add((snapshot['run_id'], snapshot['checkpoint_id']))
+        except (ValueError, TypeError, AttributeError):
+            raise CheckpointInvalid(f"CHECKPOINT_REFERENCE_INVALID：导出快照 {row['id']} 引用损坏") from None
     return result
 
 

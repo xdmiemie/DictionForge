@@ -106,7 +106,7 @@ def main():
     area.mkdir(parents=True, exist_ok=True)
     upstream = ROOT/'vendor/gpt-sovits'
     request = dict(run_id=job['id'], data_root=str(data_root), upstream=str(upstream), run_dir=str(area),
-        config=config, version=version, resume_checkpoint=None,
+        config=config, version=version, role=version['role'], dataset_id=version['dataset_id'], resume_checkpoint=None,
         initial_weights=dict(gpt=str(upstream/'GPT_SoVITS/pretrained_models/s1v3.ckpt'),
                              sovits=str(upstream/'GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth')))
     request['initial_hashes'] = {name: digest(Path(path)) for name,path in request['initial_weights'].items()}

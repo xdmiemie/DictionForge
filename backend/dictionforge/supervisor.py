@@ -59,20 +59,24 @@ class Supervisor:
 
     def run(self):
         while not self.stop.is_set():
-            try:
-                with exclusive(self.jobs.state / "worker.lock"):
-                    running = self.jobs.running()
-                    for job in running:
-                        if not live_identity(job):
-                            reap_owned_child(self.jobs, job["id"])
-                            self.jobs.status(job["id"], "INTERRUPTED", error="工作进程已退出，检查最后有效产物")
-                    if not any(live_identity(j) for j in running):
-                        job = self.jobs.claim()
-                        if job:
-                            self.launch(job)
-            except OSError:
-                pass
+            for lane in ("gpu", "cpu"):
+                self.tick(lane)
             self.stop.wait(0.2)
+
+    def tick(self, lane):
+        try:
+            with exclusive(self.jobs.state / ("cpu-worker.lock" if lane == "cpu" else "worker.lock")):
+                running = self.jobs.running(lane)
+                for job in running:
+                    if not live_identity(job):
+                        reap_owned_child(self.jobs, job["id"])
+                        self.jobs.status(job["id"], "INTERRUPTED", error="工作进程已退出，检查最后有效产物")
+                if not any(live_identity(j) for j in running):
+                    job = self.jobs.claim(lane)
+                    if job:
+                        self.launch(job)
+        except OSError:
+            pass
 
     def launch(self, job):
         from .settings import ROOT

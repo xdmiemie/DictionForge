@@ -118,3 +118,47 @@ def test_historical_resume_does_not_inherit_later_completed_stage(tmp_path, monk
     result = resumed_stage_state(request, checkpoint, state)
     assert result['stages']['s1'] == {'state': 'PENDING'}
     assert result['stages']['s2']['checkpoint']['id'] == entry['id']
+
+
+def test_export_enqueue_retry_keeps_the_original_frozen_pair(tmp_path, monkeypatch):
+    from dictionforge import training_worker as worker, exports
+    files = {}
+    for name in ('gpt', 'sovits', 'first', 'later'):
+        path = tmp_path/name
+        path.write_bytes(name.encode())
+        files[name] = str(path)
+    request = {'run_id': 'run', 'run_dir': str(tmp_path/'run'),
+               'initial_weights': {'gpt': files['gpt'], 'sovits': files['sovits']}}
+    state = {'active_stage': 's2', 'stages': {'s2': {'state': 'RUNNING', 'snapshot': {'path': files['first']}},
+                                             's1': {'state': 'PENDING'}}}
+    calls = []
+    def enqueue(_jobs, _request, stages, weights, reason, request_id, checkpoint_id=None):
+        calls.append((copy.deepcopy(stages), dict(weights), checkpoint_id))
+        if len(calls) == 1:
+            raise OSError('temporary registry failure')
+        return {'id': 'export-job'}
+    monkeypatch.setattr(exports, 'enqueue_snapshot', enqueue)
+    first = worker.enqueue_export(request, None, state, 'export', 'same-control', 'u1')
+    assert not first['ok']
+    state['stages']['s2']['snapshot']['path'] = files['later']
+    second = worker.enqueue_export(request, None, state, 'export', 'same-control', 'u9')
+    assert second['ok'] and second['job_id'] == 'export-job'
+    assert calls[0] == calls[1]
+    assert calls[1][1] == {'gpt': files['gpt'], 'sovits': files['first']}
+    assert worker.export_intent_results(request)[0]['state'] == 'QUEUED'
+
+
+def test_export_intent_rejects_changed_frozen_weights_without_refreezing(tmp_path, monkeypatch):
+    from dictionforge import training_worker as worker, exports
+    files = {}
+    for name in ('gpt', 'sovits'):
+        path = tmp_path/name
+        path.write_bytes(name.encode())
+        files[name] = str(path)
+    request = {'run_id': 'run', 'run_dir': str(tmp_path/'run'), 'initial_weights': files}
+    state = {'active_stage': None, 'stages': {'s2': {'state': 'SKIPPED'}, 's1': {'state': 'SKIPPED'}}}
+    monkeypatch.setattr(exports, 'enqueue_snapshot', lambda *args, **kwargs: {'id': 'once'})
+    assert worker.enqueue_export(request, None, state, 'completed', 'run:completed', None)['ok']
+    Path(files['gpt']).write_bytes(b'changed')
+    result = worker.enqueue_export(request, None, state, 'completed', 'run:completed', None)
+    assert not result['ok'] and 'WEIGHTS_CHANGED' in result['error']

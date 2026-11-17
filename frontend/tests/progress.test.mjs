@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {createServer} from 'vite';
+import {fileURLToPath} from 'node:url';
 
 test('训练进度容忍 null/非有限指标并保留真实旧字段计数', async () => {
   // This SSR-only check never serves the browser: do not start a dependency
   // crawler that can race server.close() after the assertions have finished.
-  const vite = await createServer({server: {middlewareMode: true}, appType: 'custom',
+  const vite = await createServer({root: fileURLToPath(new URL('../', import.meta.url)), server: {middlewareMode: true, hmr: false, ws: false}, appType: 'custom',
     optimizeDeps: {noDiscovery: true, include: []}});
   try {
     const {TaskProgress} = await vite.ssrLoadModule('/src/Progress.tsx');

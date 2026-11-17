@@ -2,6 +2,12 @@ def execute(jobs, job):
     from .settings import Settings, ROOT
     from .engine import invoke
     settings = Settings.from_environment()
+    if job["kind"] == "model_probe":
+        from .model_probe import process
+        return process(jobs, job)
+    if job["kind"] == "model_export":
+        from .exports import process
+        return process(jobs, job)
     if job["kind"] == "train":
         from .training import process
         return process(jobs, job)

@@ -1,0 +1,1277 @@
+{
+  "untrusted_refused": [
+    422,
+    {
+      "detail": "仅可导入用户确认来源可信的本地权重",
+      "code": "ValueError",
+      "stage": "request",
+      "retryable": false
+    }
+  ],
+  "import_job": {
+    "id": "2a120641dadf4f0fa1249de0da6b86b5",
+    "request": "09d379c6-94dd-43b0-8ab4-0d60690eccf4",
+    "kind": "model_export",
+    "state": "QUEUED",
+    "payload": {
+      "model_version_id": "2b66095bc2565946a309ac2b46e93005",
+      "reason": "import",
+      "run_id": null,
+      "snapshot_id": "4c428c8e990c5f7a8ece45c33f2ee434"
+    },
+    "result": null,
+    "error": null,
+    "created": 1794912624.911271,
+    "updated": 1794912624.911271,
+    "pid": null,
+    "process_start": null,
+    "instance": null
+  },
+  "locked_directory_failure": {
+    "id": "2a120641dadf4f0fa1249de0da6b86b5",
+    "request": "09d379c6-94dd-43b0-8ab4-0d60690eccf4",
+    "kind": "model_export",
+    "state": "FAILED",
+    "payload": {
+      "model_version_id": "2b66095bc2565946a309ac2b46e93005",
+      "reason": "import",
+      "run_id": null,
+      "snapshot_id": "4c428c8e990c5f7a8ece45c33f2ee434"
+    },
+    "result": null,
+    "error": "[WinError 32] 另一个程序正在使用此文件，进程无法访问。: 'E:\\\\DictionForge\\\\data\\\\models\\\\external-4c428c8e990c5f7a\\\\.2b66095bc2565946a309ac2b46e93005.part' -> 'E:\\\\DictionForge\\\\data\\\\models\\\\external-4c428c8e990c5f7a\\\\2b66095bc2565946a309ac2b46e93005'",
+    "created": 1794912624.911271,
+    "updated": 1794912637.851883,
+    "pid": 46632,
+    "process_start": 1794912625.087778,
+    "instance": "8fd08b3ba5794910bc3f8fe9fe2ca9e7"
+  },
+  "retry": {
+    "id": "fa9ee16f3a6241a882648f3819a66eda",
+    "request": "966e8d47-4062-49b3-9708-bd9241489ff7",
+    "kind": "model_export",
+    "state": "COMPLETED",
+    "payload": {
+      "model_version_id": "2b66095bc2565946a309ac2b46e93005",
+      "reason": "import",
+      "run_id": null,
+      "snapshot_id": "4c428c8e990c5f7a8ece45c33f2ee434"
+    },
+    "result": {
+      "status": "PUBLISHED",
+      "snapshot_id": "4c428c8e990c5f7a8ece45c33f2ee434",
+      "model_version_id": "2b66095bc2565946a309ac2b46e93005",
+      "model": {
+        "schema_version": 1,
+        "id": "2b66095bc2565946a309ac2b46e93005",
+        "version_id": "2b66095bc2565946a309ac2b46e93005",
+        "model_id": "external-4c428c8e990c5f7a",
+        "role": "P07 导入与重试验收副本",
+        "status": "READY",
+        "created": 1794912624.9087617,
+        "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005",
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\gpt.ckpt",
+            "sha256": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+            "bytes": 155306289
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\sovits.pth",
+            "sha256": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b",
+            "bytes": 75550971
+          }
+        },
+        "dependencies": [
+          {
+            "id": "GPT-SoVITS/chinese-hubert-base/config.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\config.json",
+            "sha256": "c3e5060a1277e0f078cc6be9da4528a605dba6ece93018981fe2c820e5c7b103",
+            "bytes": 1449,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/config.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-hubert-base/preprocessor_config.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\preprocessor_config.json",
+            "sha256": "dcd684124d06722947939d41ea6ae58dbf10968c60a11a29f23ddc602c64a29b",
+            "bytes": 212,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/preprocessor_config.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-hubert-base/pytorch_model.bin",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\pytorch_model.bin",
+            "sha256": "24164f129c66499d1346e2aa55f183250c223161ec2770c0da3d3b08cf432d3c",
+            "bytes": 188811417,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/pytorch_model.bin",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/config.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\config.json",
+            "sha256": "3d57de2fd7e80d0e5c8ff194f0bbb6baa10df7e43fc262a0cc71298a78b0a3e5",
+            "bytes": 963,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/config.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\pytorch_model.bin",
+            "sha256": "e53a693acc59ace251d143d068096ae0d7b79e4b1b503fa84c9dcf576448c1d8",
+            "bytes": 651225145,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/tokenizer.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\tokenizer.json",
+            "sha256": "173796956820ea27bd14f76bf28162607ff4254807e2948253eb5b46f5bb643b",
+            "bytes": 268962,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/tokenizer.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/gsv-v4-pretrained/s2Gv4.pth",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\gsv-v4-pretrained\\s2Gv4.pth",
+            "sha256": "906fe22f48c3e037a389df291d4d32a9414e15dbb8f9628643e83aaced109ea4",
+            "bytes": 769025545,
+            "upstream_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/gsv-v4-pretrained/vocoder.pth",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\gsv-v4-pretrained\\vocoder.pth",
+            "sha256": "4d611913df7b12d49e8976c944558d2d096816365edfc6c35a9e85b67dd14ed9",
+            "bytes": 57781109,
+            "upstream_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/vocoder.pth",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/s1v3.ckpt",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\s1v3.ckpt",
+            "sha256": "87133414860ea14ff6620c483a3db5ed07b44be42e2c3fcdad65523a729a745a",
+            "bytes": 155284856,
+            "upstream_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "text/G2PWModel/char_bopomofo_dict.json",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\char_bopomofo_dict.json",
+            "sha256": "4832fb6a553a9c5ee0c18b5cb698ce0acc312f324ee77ee61c340266d228184d",
+            "bytes": 1851143,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/char_bopomofo_dict.json",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/POLYPHONIC_CHARS.txt",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\POLYPHONIC_CHARS.txt",
+            "sha256": "cc7e5a3eb377e3289af5e3a6be7505ac11a0d21422f80cfbf161059798f8671b",
+            "bytes": 102444,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/POLYPHONIC_CHARS.txt",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/MONOPHONIC_CHARS.txt",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\MONOPHONIC_CHARS.txt",
+            "sha256": "fe7ed53098648441a94f414ed5fd3395789d1dceb98dc1e584489c2d43036b69",
+            "bytes": 120744,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/MONOPHONIC_CHARS.txt",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/record.log",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\record.log",
+            "sha256": "d56fd692e4fd0090b3e11741f10238ea69bf4b380c0d65894646941e1231aed4",
+            "bytes": 81808,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/record.log",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/config.py",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\config.py",
+            "sha256": "b6154e494355d14a8d2c8a38d07720f77b34479e26aab21a5f63495ae904da76",
+            "bytes": 347,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/config.py",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/g2pW.onnx",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\g2pW.onnx",
+            "sha256": "2eb3c71fd95117b2e1abef8d2d0cd78aae894bbe7f0fac105ddc9c32ce63cbd0",
+            "bytes": 635212732,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/g2pW.onnx",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/bopomofo_to_pinyin_wo_tune_dict.json",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\bopomofo_to_pinyin_wo_tune_dict.json",
+            "sha256": "0fe90e26be7653023772b3ad2d08952961bbf295fb39ba685c7172d3d9769f52",
+            "bytes": 7739,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/bopomofo_to_pinyin_wo_tune_dict.json",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/version",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\version",
+            "sha256": "cf063c2ce8ac1403d4dca358f0568dfd32684e7a4412e24bc6e7cd1a7cd0cefb",
+            "bytes": 5,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/version",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          }
+        ],
+        "stage_progress": {
+          "s1": {
+            "state": "IMPORTED"
+          },
+          "s2": {
+            "state": "IMPORTED"
+          }
+        },
+        "default_reference": null,
+        "provenance": {
+          "run_id": null,
+          "version_id": null,
+          "initial_model": null,
+          "reason": "import",
+          "snapshot_id": "4c428c8e990c5f7a8ece45c33f2ee434",
+          "checkpoint_id": null
+        },
+        "validation": {
+          "structure": "PASS",
+          "gpu": "NOT_RUN",
+          "device": "cpu",
+          "torch": "2.9.0+cu128",
+          "gpt": {
+            "tensors": 295,
+            "architecture": {
+              "vocab_size": 1025,
+              "phoneme_vocab_size": 732,
+              "embedding_dim": 512,
+              "hidden_dim": 512,
+              "head": 16,
+              "linear_units": 2048,
+              "n_layer": 24,
+              "dropout": 0,
+              "EOS": 1024,
+              "random_bert": 0
+            },
+            "precision": [
+              "torch.float16"
+            ]
+          },
+          "sovits": {
+            "format": "v4_lora",
+            "lora_rank": 32,
+            "tensors": 258,
+            "base_required": true
+          },
+          "sample_rate": 48000,
+          "super_sampling": false
+        },
+        "inference_defaults": {
+          "seed": 42,
+          "sample_rate": 48000,
+          "super_sampling": false
+        }
+      }
+    },
+    "error": null,
+    "created": 1794912638.8990278,
+    "updated": 1794912650.6048574,
+    "pid": 30000,
+    "process_start": 1794912639.6953232,
+    "instance": "9a21121d72454764bc7d4cc0c44fe2d4"
+  },
+  "snapshot_unchanged_sha256": "23310e9c59b2f46a09d45730384c572203c776c54993b2b6de327655ce236720",
+  "model_preview": {
+    "kind": "model",
+    "id": "2b66095bc2565946a309ac2b46e93005",
+    "token": "b111e008ff9041fbae668bbda7555aab",
+    "preview_id": "b111e008ff9041fbae668bbda7555aab",
+    "files": [
+      {
+        "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\gpt.ckpt",
+        "bytes": 155306289,
+        "sha256": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\manifest.json",
+        "bytes": 9180,
+        "sha256": "eef8109663925f604d215f457c9a07ed07cc2a61310132ac408a2a551cdae625"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\sovits.pth",
+        "bytes": 75550971,
+        "sha256": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\training_summary.json",
+        "bytes": 235,
+        "sha256": "1bd34bee6bf0bc96ad5493f809621f1edfa12941787e741d3b941ca0d4cf2cc7"
+      }
+    ],
+    "references": [],
+    "deletable": true,
+    "total_bytes": 230866675,
+    "expires": 1794913251.0461016,
+    "bases": [
+      "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005"
+    ],
+    "fingerprint": "c138f1da2ab26a78984cd0cbcfbb8e312150c2bb903c3deb0e2d7ab94a8176dd",
+    "state": "PREVIEW"
+  },
+  "model_deleted": {
+    "kind": "model",
+    "id": "2b66095bc2565946a309ac2b46e93005",
+    "token": "b111e008ff9041fbae668bbda7555aab",
+    "state": "DELETED",
+    "created": 1794912651.1696868,
+    "moves": [
+      {
+        "source": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005",
+        "trash": "E:\\DictionForge\\data\\trash\\b111e008ff9041fbae668bbda7555aab\\0"
+      }
+    ],
+    "metadata": {
+      "schema_version": 1,
+      "id": "2b66095bc2565946a309ac2b46e93005",
+      "version_id": "2b66095bc2565946a309ac2b46e93005",
+      "model_id": "external-4c428c8e990c5f7a",
+      "role": "P07 导入与重试验收副本",
+      "status": "READY",
+      "created": 1794912624.9087617,
+      "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005",
+      "weights": {
+        "gpt": {
+          "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\gpt.ckpt",
+          "sha256": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+          "bytes": 155306289
+        },
+        "sovits": {
+          "path": "E:\\DictionForge\\data\\models\\external-4c428c8e990c5f7a\\2b66095bc2565946a309ac2b46e93005\\sovits.pth",
+          "sha256": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b",
+          "bytes": 75550971
+        }
+      },
+      "dependencies": [
+        {
+          "id": "GPT-SoVITS/chinese-hubert-base/config.json",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\config.json",
+          "sha256": "c3e5060a1277e0f078cc6be9da4528a605dba6ece93018981fe2c820e5c7b103",
+          "bytes": 1449,
+          "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/config.json",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/chinese-hubert-base/preprocessor_config.json",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\preprocessor_config.json",
+          "sha256": "dcd684124d06722947939d41ea6ae58dbf10968c60a11a29f23ddc602c64a29b",
+          "bytes": 212,
+          "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/preprocessor_config.json",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/chinese-hubert-base/pytorch_model.bin",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\pytorch_model.bin",
+          "sha256": "24164f129c66499d1346e2aa55f183250c223161ec2770c0da3d3b08cf432d3c",
+          "bytes": 188811417,
+          "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/pytorch_model.bin",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/config.json",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\config.json",
+          "sha256": "3d57de2fd7e80d0e5c8ff194f0bbb6baa10df7e43fc262a0cc71298a78b0a3e5",
+          "bytes": 963,
+          "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/config.json",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\pytorch_model.bin",
+          "sha256": "e53a693acc59ace251d143d068096ae0d7b79e4b1b503fa84c9dcf576448c1d8",
+          "bytes": 651225145,
+          "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/tokenizer.json",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\tokenizer.json",
+          "sha256": "173796956820ea27bd14f76bf28162607ff4254807e2948253eb5b46f5bb643b",
+          "bytes": 268962,
+          "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/tokenizer.json",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/gsv-v4-pretrained/s2Gv4.pth",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\gsv-v4-pretrained\\s2Gv4.pth",
+          "sha256": "906fe22f48c3e037a389df291d4d32a9414e15dbb8f9628643e83aaced109ea4",
+          "bytes": 769025545,
+          "upstream_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/gsv-v4-pretrained/vocoder.pth",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\gsv-v4-pretrained\\vocoder.pth",
+          "sha256": "4d611913df7b12d49e8976c944558d2d096816365edfc6c35a9e85b67dd14ed9",
+          "bytes": 57781109,
+          "upstream_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/vocoder.pth",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "GPT-SoVITS/s1v3.ckpt",
+          "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\s1v3.ckpt",
+          "sha256": "87133414860ea14ff6620c483a3db5ed07b44be42e2c3fcdad65523a729a745a",
+          "bytes": 155284856,
+          "upstream_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
+          "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+        },
+        {
+          "id": "text/G2PWModel/char_bopomofo_dict.json",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\char_bopomofo_dict.json",
+          "sha256": "4832fb6a553a9c5ee0c18b5cb698ce0acc312f324ee77ee61c340266d228184d",
+          "bytes": 1851143,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/char_bopomofo_dict.json",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/POLYPHONIC_CHARS.txt",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\POLYPHONIC_CHARS.txt",
+          "sha256": "cc7e5a3eb377e3289af5e3a6be7505ac11a0d21422f80cfbf161059798f8671b",
+          "bytes": 102444,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/POLYPHONIC_CHARS.txt",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/MONOPHONIC_CHARS.txt",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\MONOPHONIC_CHARS.txt",
+          "sha256": "fe7ed53098648441a94f414ed5fd3395789d1dceb98dc1e584489c2d43036b69",
+          "bytes": 120744,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/MONOPHONIC_CHARS.txt",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/record.log",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\record.log",
+          "sha256": "d56fd692e4fd0090b3e11741f10238ea69bf4b380c0d65894646941e1231aed4",
+          "bytes": 81808,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/record.log",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/config.py",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\config.py",
+          "sha256": "b6154e494355d14a8d2c8a38d07720f77b34479e26aab21a5f63495ae904da76",
+          "bytes": 347,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/config.py",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/g2pW.onnx",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\g2pW.onnx",
+          "sha256": "2eb3c71fd95117b2e1abef8d2d0cd78aae894bbe7f0fac105ddc9c32ce63cbd0",
+          "bytes": 635212732,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/g2pW.onnx",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/bopomofo_to_pinyin_wo_tune_dict.json",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\bopomofo_to_pinyin_wo_tune_dict.json",
+          "sha256": "0fe90e26be7653023772b3ad2d08952961bbf295fb39ba685c7172d3d9769f52",
+          "bytes": 7739,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/bopomofo_to_pinyin_wo_tune_dict.json",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        },
+        {
+          "id": "text/G2PWModel/version",
+          "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\version",
+          "sha256": "cf063c2ce8ac1403d4dca358f0568dfd32684e7a4412e24bc6e7cd1a7cd0cefb",
+          "bytes": 5,
+          "upstream_path": "GPT_SoVITS/text/G2PWModel/version",
+          "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+        }
+      ],
+      "stage_progress": {
+        "s1": {
+          "state": "IMPORTED"
+        },
+        "s2": {
+          "state": "IMPORTED"
+        }
+      },
+      "default_reference": null,
+      "provenance": {
+        "run_id": null,
+        "version_id": null,
+        "initial_model": null,
+        "reason": "import",
+        "snapshot_id": "4c428c8e990c5f7a8ece45c33f2ee434",
+        "checkpoint_id": null
+      },
+      "validation": {
+        "structure": "PASS",
+        "gpu": "NOT_RUN",
+        "device": "cpu",
+        "torch": "2.9.0+cu128",
+        "gpt": {
+          "tensors": 295,
+          "architecture": {
+            "vocab_size": 1025,
+            "phoneme_vocab_size": 732,
+            "embedding_dim": 512,
+            "hidden_dim": 512,
+            "head": 16,
+            "linear_units": 2048,
+            "n_layer": 24,
+            "dropout": 0,
+            "EOS": 1024,
+            "random_bert": 0
+          },
+          "precision": [
+            "torch.float16"
+          ]
+        },
+        "sovits": {
+          "format": "v4_lora",
+          "lora_rank": 32,
+          "tensors": 258,
+          "base_required": true
+        },
+        "sample_rate": 48000,
+        "super_sampling": false
+      },
+      "inference_defaults": {
+        "seed": 42,
+        "sample_rate": 48000,
+        "super_sampling": false
+      }
+    },
+    "errors": []
+  },
+  "retired_retry_refused": [
+    409,
+    {
+      "detail": "MODEL_DELETED: 该模型版本已删除，不能通过旧导出重新发布",
+      "code": "Conflict",
+      "stage": "request",
+      "retryable": false
+    }
+  ],
+  "source_weights_unchanged": {
+    "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\a974c5da69695d0aba3477bff5c7b768\\gpt.ckpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+    "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\a974c5da69695d0aba3477bff5c7b768\\sovits.pth": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+  },
+  "protected_dataset": {
+    "kind": "version",
+    "id": "76b5a08af4ca471f9c6fa9c903347e69",
+    "token": "20373e76439c4a25b25267757e7f3ec8",
+    "preview_id": "20373e76439c4a25b25267757e7f3ec8",
+    "files": [
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\0c2b942e2e5349b39c7bf6c9415fe340.wav",
+        "bytes": 889004,
+        "sha256": "03ae6d485acf180308d8666fe7dbac5a54a7ccc777863826b4d97d9dea187770"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+        "bytes": 960044,
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\8784e7e4cecc4283a99e34eba5446926.wav",
+        "bytes": 842924,
+        "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\90cbb6fc64264c3887d42bc27664b512.wav",
+        "bytes": 635564,
+        "sha256": "6ebf03c1694f058097d6874baf61f66b07d88734de12cdb3d59a2119dbfe6d1a"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\b70dd916f4884f30b2861a9a1ed177b2.wav",
+        "bytes": 796844,
+        "sha256": "e894af4b656d25956351ddcc772626d2bd178c3f021150b4af72ab6efc7718ee"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\b74d50823e474071a2c00ef1c260babf.wav",
+        "bytes": 937004,
+        "sha256": "907b0a2491c81d7e9ad131857df5dd7419158c080816a325e8c2fd33722bef18"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\manifest.json",
+        "bytes": 10333,
+        "sha256": "5eed0c1c26d2bbba083589fc68b4a07f539e8d6144328223009de06137719014"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\train.list",
+        "bytes": 1354,
+        "sha256": "e747818399073bcc90ee4ffa0631b423e4aeab531415d5e71b493eb168691efa"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\2-name2text-0.txt",
+        "bytes": 2363,
+        "sha256": "f3febfe1f471340ec4fbec9d345cade78ebf27554af7f8e82da851566bf99bf4"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\2-name2text.txt",
+        "bytes": 2363,
+        "sha256": "f3febfe1f471340ec4fbec9d345cade78ebf27554af7f8e82da851566bf99bf4"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\0c2b942e2e5349b39c7bf6c9415fe340.wav.pt",
+        "bytes": 280189,
+        "sha256": "a94a591498a8d162af8cda12a39657be8a59abea67c0a61f4f6ce87e2949b0fd"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\35994dd5e702407f8455be9d41a0d67a.wav.pt",
+        "bytes": 337533,
+        "sha256": "78075f0e6fc95b3074ee78ba89d98dacef35a28b35ed36e1443cd5c025ab6f7a"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\8784e7e4cecc4283a99e34eba5446926.wav.pt",
+        "bytes": 271997,
+        "sha256": "965c770b992cee22ab0ba48c7dc2e713c8f01e4b3a0c311599dbf0841a999119"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\b70dd916f4884f30b2861a9a1ed177b2.wav.pt",
+        "bytes": 267901,
+        "sha256": "af505fbf0fd2592b51e0445ab76235a317cc60c00e0d76f0c622f71e9abfa871"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\b74d50823e474071a2c00ef1c260babf.wav.pt",
+        "bytes": 325238,
+        "sha256": "f8a660317da0894254af163555dd201afe1fba786652763319a141cc2050f1cc"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\0c2b942e2e5349b39c7bf6c9415fe340.wav.pt",
+        "bytes": 1420925,
+        "sha256": "06e49f8adadb6f34e233713c1b122afcec588100e51a1cf8752fafd2e47522ff"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\35994dd5e702407f8455be9d41a0d67a.wav.pt",
+        "bytes": 1534589,
+        "sha256": "b0a651a2af4e5ccbe546fa4e9b07e0d90b3dfe5b54c2dc3bc40685e4cd402c47"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\8784e7e4cecc4283a99e34eba5446926.wav.pt",
+        "bytes": 1347197,
+        "sha256": "d1880ea489bb28dd13b3385afe8727b28cecad13b1434328897f54706f255860"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\b70dd916f4884f30b2861a9a1ed177b2.wav.pt",
+        "bytes": 1273469,
+        "sha256": "b6c7e485316b98cb27890486810f0ce9f58ffb035dc727ab6f8f1cee47f7ca52"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\b74d50823e474071a2c00ef1c260babf.wav.pt",
+        "bytes": 1497725,
+        "sha256": "2638cd5125b92ab3d8801174b87cd35fa594598260c5547b46d57d80edb673c6"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\0c2b942e2e5349b39c7bf6c9415fe340.wav",
+        "bytes": 592684,
+        "sha256": "53f3639a78d5e24939bcedcbf0205667ff17aa34aa1221c18ff2336b11520af9"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\35994dd5e702407f8455be9d41a0d67a.wav",
+        "bytes": 640044,
+        "sha256": "85b76c83626b30fb1295b8ad4faa1073f7f77793494833730c61f4b3908cc244"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\8784e7e4cecc4283a99e34eba5446926.wav",
+        "bytes": 561964,
+        "sha256": "a049a719ffaaa7698a1dd23756ea42b23794c488b1532c0712d335e458867744"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\b70dd916f4884f30b2861a9a1ed177b2.wav",
+        "bytes": 531244,
+        "sha256": "e1aa5fd50cad9f50d82cdae421aae76acb230389695bdc9b46bde41c9bdee6b3"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\b74d50823e474071a2c00ef1c260babf.wav",
+        "bytes": 624684,
+        "sha256": "3ae63ad7922ccc057334c7cc537eb9697e2b3d940603e871d9c838879e1c5779"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\6-name2semantic-0.tsv",
+        "bytes": 4646,
+        "sha256": "04d7114af1f4e4ad0905aa73665b48c525ac5c94b729d618c29251f17093fdc2"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\6-name2semantic.tsv",
+        "bytes": 4674,
+        "sha256": "22feb1898eec5ed317dd1123e740c1a1cf82e700a5f9acd90bd348a91011ee4f"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\input-acoustic.list",
+        "bytes": 1294,
+        "sha256": "70cc3e92e616442d47e2d8e7dd335485229daf512f4550997360dec7b90ea42f"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\input-semantic.list",
+        "bytes": 1294,
+        "sha256": "70cc3e92e616442d47e2d8e7dd335485229daf512f4550997360dec7b90ea42f"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\input-text.list",
+        "bytes": 1294,
+        "sha256": "70cc3e92e616442d47e2d8e7dd335485229daf512f4550997360dec7b90ea42f"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\manifest.json",
+        "bytes": 4851,
+        "sha256": "4a37bc6306412e6db2512c27fb746caaecd662447c31b6a6443a88f1e486230b"
+      }
+    ],
+    "references": [
+      {
+        "kind": "run",
+        "id": "7a00f578a57f4c8895e481e5ba67413e",
+        "reason": "活跃训练或完整恢复点依赖该版本"
+      },
+      {
+        "kind": "run",
+        "id": "be4045700e60491b95efb7101aaf411a",
+        "reason": "活跃训练或完整恢复点依赖该版本"
+      },
+      {
+        "kind": "run",
+        "id": "a1e76ef07ae34bedb9dbb45590216c2f",
+        "reason": "活跃训练或完整恢复点依赖该版本"
+      },
+      {
+        "kind": "run",
+        "id": "278c506666fa4876bff2ec0bf0d7d053",
+        "reason": "活跃训练或完整恢复点依赖该版本"
+      },
+      {
+        "kind": "export_snapshot",
+        "id": "2d1a2b41d27e56cbaf8003deaf5628a9",
+        "reason": "不可变导出快照仍依赖该版本"
+      },
+      {
+        "kind": "export_snapshot",
+        "id": "6db64db0d5b054239c0bc310b365dc98",
+        "reason": "不可变导出快照仍依赖该版本"
+      },
+      {
+        "kind": "model",
+        "id": "a974c5da69695d0aba3477bff5c7b768",
+        "reason": "已发布模型使用该数据版本"
+      },
+      {
+        "kind": "run",
+        "id": "cca9eda7641b4436b238c936a9b23ffd",
+        "reason": "活跃训练或完整恢复点依赖该版本"
+      },
+      {
+        "kind": "export_snapshot",
+        "id": "b1b1c530eb2354b99185bcbabb84db77",
+        "reason": "不可变导出快照仍依赖该版本"
+      },
+      {
+        "kind": "model",
+        "id": "1d9b77725c935da2af1a8f7279e0c7be",
+        "reason": "已发布模型使用该数据版本"
+      },
+      {
+        "kind": "model",
+        "id": "042ba87417df5c67b75f9ef27777be74",
+        "reason": "已发布模型使用该数据版本"
+      }
+    ],
+    "deletable": false,
+    "total_bytes": 16603233,
+    "expires": 1794913251.860483,
+    "bases": [
+      "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69",
+      "E:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69"
+    ],
+    "fingerprint": "ace246655e30e56ca466e19508cd0972aa8907cc5771afbfaa15a5ffd8839094",
+    "state": "PREVIEW"
+  },
+  "protected_delete_refused": [
+    409,
+    {
+      "detail": "DELETE_REFERENCED: [{\"kind\": \"run\", \"id\": \"7a00f578a57f4c8895e481e5ba67413e\", \"reason\": \"活跃训练或完整恢复点依赖该版本\"}, {\"kind\": \"run\", \"id\": \"be4045700e60491b95efb7101aaf411a\", \"reason\": \"活跃训练或完整恢复点依赖该版本\"}, {\"kind\": \"run\", \"id\": \"a1e76ef07ae34bedb9dbb45590216c2f\", \"reason\": \"活跃训练或完整恢复点依赖该版本\"}, {\"kind\": \"run\", \"id\": \"278c506666fa4876bff2ec0bf0d7d053\", \"reason\": \"活跃训练或完整恢复点依赖该版本\"}, {\"kind\": \"export_snapshot\", \"id\": \"2d1a2b41d27e56cbaf8003deaf5628a9\", \"reason\": \"不可变导出快照仍依赖该版本\"}, {\"kind\": \"export_snapshot\", \"id\": \"6db64db0d5b054239c0bc310b365dc98\", \"reason\": \"不可变导出快照仍依赖该版本\"}, {\"kind\": \"model\", \"id\": \"a974c5da69695d0aba3477bff5c7b768\", \"reason\": \"已发布模型使用该数据版本\"}, {\"kind\": \"run\", \"id\": \"cca9eda7641b4436b238c936a9b23ffd\", \"reason\": \"活跃训练或完整恢复点依赖该版本\"}, {\"kind\": \"export_snapshot\", \"id\": \"b1b1c530eb2354b99185bcbabb84db77\", \"reason\": \"不可变导出快照仍依赖该版本\"}, {\"kind\": \"model\", \"id\": \"1d9b77725c935da2af1a8f7279e0c7be\", \"reason\": \"已发布模型使用该数据版本\"}, {\"kind\": \"model\", \"id\": \"042ba87417df5c67b75f9ef27777be74\", \"reason\": \"已发布模型使用该数据版本\"}]",
+      "code": "Conflict",
+      "stage": "request",
+      "retryable": false
+    }
+  ],
+  "clone_version": {
+    "id": "d6da434e25044779ab2b8c3d5bf51417",
+    "dataset_id": "09e42df26bf30b98cea3880e",
+    "role": "景元",
+    "parent_id": "76b5a08af4ca471f9c6fa9c903347e69",
+    "created": 1794912652.0092108,
+    "clips": [
+      {
+        "id": "8784e7e4cecc4283a99e34eba5446926",
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\8784e7e4cecc4283a99e34eba5446926.wav",
+        "audio_id": "68441fd7921d4fd898578311fa0d629d",
+        "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+        "seconds": 8.78,
+        "sample_rate": 48000,
+        "start_sample": 0,
+        "end_sample": 421440,
+        "source_sample_rate": 44100,
+        "source_start_sample": 0,
+        "source_end_sample": 387198,
+        "source_id": "6bed8b0240c04d399c8478259a24dc26",
+        "source_sha256": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+        "group": "e6cb321119e868ff4ac278881b99edb5d79c358485d18d8111b6eaa29adcd099",
+        "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_1.wav",
+        "source": "recording",
+        "language": "zh",
+        "text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+        "label_source": "manual",
+        "reviewed": true,
+        "excluded": false,
+        "asr_error": null,
+        "clipping_ratio": 0.0,
+        "asr_candidate": "我是罗父云奇将军警员啊，不必拘谨将军只是一时的身份，你称呼我警员便可。",
+        "confidence": null,
+        "asr_seconds": 10.515999999999622,
+        "raw_text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+        "split": "train"
+      },
+      {
+        "id": "35994dd5e702407f8455be9d41a0d67a",
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\35994dd5e702407f8455be9d41a0d67a.wav",
+        "audio_id": "eb6100efe40a415c814a88cf391d69f9",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "seconds": 10.0,
+        "sample_rate": 48000,
+        "start_sample": 0,
+        "end_sample": 480000,
+        "source_sample_rate": 44100,
+        "source_start_sample": 0,
+        "source_end_sample": 441000,
+        "source_id": "431a97a691b840ee88c6cf9458980634",
+        "source_sha256": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+        "group": "849b74f14fd9d1dc750dfc2cd2730008bf23d694239415a388d8594b607eabb6",
+        "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_11.wav",
+        "source": "recording",
+        "language": "zh",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "label_source": "manual",
+        "reviewed": true,
+        "excluded": false,
+        "asr_error": null,
+        "clipping_ratio": 2.0833333333333334e-06,
+        "asr_candidate": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "confidence": null,
+        "asr_seconds": 0.23400000000037835,
+        "raw_text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "split": "train"
+      },
+      {
+        "id": "0c2b942e2e5349b39c7bf6c9415fe340",
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\0c2b942e2e5349b39c7bf6c9415fe340.wav",
+        "audio_id": "7c275eaf6db9495e918f5537808f1158",
+        "sha256": "03ae6d485acf180308d8666fe7dbac5a54a7ccc777863826b4d97d9dea187770",
+        "seconds": 9.26,
+        "sample_rate": 48000,
+        "start_sample": 0,
+        "end_sample": 444480,
+        "source_sample_rate": 44100,
+        "source_start_sample": 0,
+        "source_end_sample": 408366,
+        "source_id": "d790b41869ec477ca211b43ddfc31b15",
+        "source_sha256": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+        "group": "3add390798ad00db4edd9973b2101b3cbda71b9b47865e056aae308213f12464",
+        "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_12.wav",
+        "source": "recording",
+        "language": "zh",
+        "text": "符卿的心思我明白，所以还得多让她等一等，她要是有耐心等下去，便到时机了。",
+        "label_source": "manual",
+        "reviewed": true,
+        "excluded": false,
+        "asr_error": null,
+        "clipping_ratio": 4.499640028797696e-06,
+        "asr_candidate": "福清的心思我明白，所以还得多让他等一等，他要是有耐心，等下去便到时机了。",
+        "confidence": null,
+        "asr_seconds": 0.23399999999674037,
+        "raw_text": "符卿的心思我明白，所以还得多让她等一等，她要是有耐心等下去，便到时机了。",
+        "split": "train"
+      },
+      {
+        "id": "b74d50823e474071a2c00ef1c260babf",
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\b74d50823e474071a2c00ef1c260babf.wav",
+        "audio_id": "636ce02fe72e4e0abd8cf4766bf85d99",
+        "sha256": "907b0a2491c81d7e9ad131857df5dd7419158c080816a325e8c2fd33722bef18",
+        "seconds": 9.76,
+        "sample_rate": 48000,
+        "start_sample": 0,
+        "end_sample": 468480,
+        "source_sample_rate": 44100,
+        "source_start_sample": 0,
+        "source_end_sample": 430416,
+        "source_id": "7d0111ef4298410c9daabc3bf33380b7",
+        "source_sha256": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+        "group": "26c5e7ebb52e830fffa92d09fe4e62920bdfaf8d6aa5561512e0b3f3af333628",
+        "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_13.wav",
+        "source": "recording",
+        "language": "zh",
+        "text": "人人都当驭空司舵是退休了…殊不知她在放下最热爱的飞行后，选择了另一条更艰难的道路。",
+        "label_source": "manual",
+        "reviewed": true,
+        "excluded": false,
+        "asr_error": null,
+        "clipping_ratio": 0.0,
+        "asr_candidate": "人人都当御空思堕是退休了。殊不知，他在放下最热爱的飞行后，选择了另一条更艰难的道路。",
+        "confidence": null,
+        "asr_seconds": 0.23500000000058208,
+        "raw_text": "人人都当驭空司舵是退休了…殊不知她在放下最热爱的飞行后，选择了另一条更艰难的道路。",
+        "split": "train"
+      },
+      {
+        "id": "90cbb6fc64264c3887d42bc27664b512",
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\90cbb6fc64264c3887d42bc27664b512.wav",
+        "audio_id": "b7438bafbf6347909c9291e16f4de6c5",
+        "sha256": "6ebf03c1694f058097d6874baf61f66b07d88734de12cdb3d59a2119dbfe6d1a",
+        "seconds": 6.62,
+        "sample_rate": 48000,
+        "start_sample": 0,
+        "end_sample": 317760,
+        "source_sample_rate": 44100,
+        "source_start_sample": 0,
+        "source_end_sample": 291942,
+        "source_id": "7219eae419804044ac9479e02202d1a1",
+        "source_sha256": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+        "group": "1a2caf781fb2c6ef62f83b7c2deb63740ff50d5cb184ab0e03ec792c2abb5f2a",
+        "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_14.wav",
+        "source": "recording",
+        "language": "zh",
+        "text": "正是像停云小姐这样的接渡使往来周旋，仙舟的贸易才能有如今的繁盛。",
+        "label_source": "manual",
+        "reviewed": true,
+        "excluded": false,
+        "asr_error": null,
+        "clipping_ratio": 0.0,
+        "asr_candidate": "正是像亭云小姐这样的节度使往来，周旋仙州的贸易才能有如今的繁盛。",
+        "confidence": null,
+        "asr_seconds": 0.2649999999994179,
+        "raw_text": "正是像停云小姐这样的接渡使往来周旋，仙舟的贸易才能有如今的繁盛。",
+        "split": "validation"
+      },
+      {
+        "id": "b70dd916f4884f30b2861a9a1ed177b2",
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\b70dd916f4884f30b2861a9a1ed177b2.wav",
+        "audio_id": "511538544ca24353a91937da09d259ac",
+        "sha256": "e894af4b656d25956351ddcc772626d2bd178c3f021150b4af72ab6efc7718ee",
+        "seconds": 8.3,
+        "sample_rate": 48000,
+        "start_sample": 0,
+        "end_sample": 398400,
+        "source_sample_rate": 44100,
+        "source_start_sample": 0,
+        "source_end_sample": 366030,
+        "source_id": "f1a08188b21c4644befe3d5e6abd6493",
+        "source_sha256": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+        "group": "970697619fa0503e9e1225718707473afa60cf504fdb2d0f8f8a3d76d46850ba",
+        "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_15.wav",
+        "source": "recording",
+        "language": "zh",
+        "text": "我也见过不少行商，但你不觉得，像他这般不急于做成生意的行商并不多么？",
+        "label_source": "manual",
+        "reviewed": true,
+        "excluded": false,
+        "asr_error": null,
+        "clipping_ratio": 5.020080321285141e-06,
+        "asr_candidate": "我也见过不少行商，但你不觉得像他这般不急于做成生意的行商并不多吗？",
+        "confidence": null,
+        "asr_seconds": 0.21900000000096043,
+        "raw_text": "我也见过不少行商，但你不觉得，像他这般不急于做成生意的行商并不多么？",
+        "split": "train"
+      }
+    ],
+    "seconds": 52.72,
+    "feature_status": "MISSING",
+    "config": {
+      "min_seconds": 1.0,
+      "max_seconds": 12.0,
+      "silence_db": -40.0,
+      "silence_seconds": 3.0
+    },
+    "fingerprint": "c27c4d94c9e69f99afcd944d08fb003110bdba2598342f21e66d9d17de520f50",
+    "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417",
+    "list_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\train.list",
+    "warnings": []
+  },
+  "dataset_preview": {
+    "kind": "version",
+    "id": "d6da434e25044779ab2b8c3d5bf51417",
+    "token": "b2f81d70cb484b22a577bf64711ac0c6",
+    "preview_id": "b2f81d70cb484b22a577bf64711ac0c6",
+    "files": [
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\0c2b942e2e5349b39c7bf6c9415fe340.wav",
+        "bytes": 889004,
+        "sha256": "03ae6d485acf180308d8666fe7dbac5a54a7ccc777863826b4d97d9dea187770"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\35994dd5e702407f8455be9d41a0d67a.wav",
+        "bytes": 960044,
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\8784e7e4cecc4283a99e34eba5446926.wav",
+        "bytes": 842924,
+        "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\90cbb6fc64264c3887d42bc27664b512.wav",
+        "bytes": 635564,
+        "sha256": "6ebf03c1694f058097d6874baf61f66b07d88734de12cdb3d59a2119dbfe6d1a"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\b70dd916f4884f30b2861a9a1ed177b2.wav",
+        "bytes": 796844,
+        "sha256": "e894af4b656d25956351ddcc772626d2bd178c3f021150b4af72ab6efc7718ee"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\b74d50823e474071a2c00ef1c260babf.wav",
+        "bytes": 937004,
+        "sha256": "907b0a2491c81d7e9ad131857df5dd7419158c080816a325e8c2fd33722bef18"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\manifest.json",
+        "bytes": 10333,
+        "sha256": "66e30dfeac6645646deb688bd2b21c9f26b27a0b498a6193e6a1e786b3930910"
+      },
+      {
+        "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\train.list",
+        "bytes": 1354,
+        "sha256": "484534606a5932b1a9b782d089c9cbcd2d0332846ee7c0e56a23d542b3c48ae5"
+      }
+    ],
+    "references": [],
+    "deletable": true,
+    "total_bytes": 5073071,
+    "expires": 1794913252.1009438,
+    "bases": [
+      "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417"
+    ],
+    "fingerprint": "0e0754b67bf7060ec935f2caede4dfd1667b66848b045920c4df26d5b1f040ef",
+    "state": "PREVIEW"
+  },
+  "dataset_deleted": {
+    "kind": "version",
+    "id": "d6da434e25044779ab2b8c3d5bf51417",
+    "token": "b2f81d70cb484b22a577bf64711ac0c6",
+    "state": "DELETED",
+    "created": 1794912652.164851,
+    "moves": [
+      {
+        "source": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417",
+        "trash": "E:\\DictionForge\\data\\trash\\b2f81d70cb484b22a577bf64711ac0c6\\0"
+      }
+    ],
+    "metadata": {
+      "id": "d6da434e25044779ab2b8c3d5bf51417",
+      "dataset_id": "09e42df26bf30b98cea3880e",
+      "role": "景元",
+      "parent_id": "76b5a08af4ca471f9c6fa9c903347e69",
+      "created": 1794912652.0092108,
+      "clips": [
+        {
+          "id": "8784e7e4cecc4283a99e34eba5446926",
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\8784e7e4cecc4283a99e34eba5446926.wav",
+          "audio_id": "68441fd7921d4fd898578311fa0d629d",
+          "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+          "seconds": 8.78,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 421440,
+          "source_sample_rate": 44100,
+          "source_start_sample": 0,
+          "source_end_sample": 387198,
+          "source_id": "6bed8b0240c04d399c8478259a24dc26",
+          "source_sha256": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+          "group": "e6cb321119e868ff4ac278881b99edb5d79c358485d18d8111b6eaa29adcd099",
+          "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_1.wav",
+          "source": "recording",
+          "language": "zh",
+          "text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+          "label_source": "manual",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "clipping_ratio": 0.0,
+          "asr_candidate": "我是罗父云奇将军警员啊，不必拘谨将军只是一时的身份，你称呼我警员便可。",
+          "confidence": null,
+          "asr_seconds": 10.515999999999622,
+          "raw_text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+          "split": "train"
+        },
+        {
+          "id": "35994dd5e702407f8455be9d41a0d67a",
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "audio_id": "eb6100efe40a415c814a88cf391d69f9",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "seconds": 10.0,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 480000,
+          "source_sample_rate": 44100,
+          "source_start_sample": 0,
+          "source_end_sample": 441000,
+          "source_id": "431a97a691b840ee88c6cf9458980634",
+          "source_sha256": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+          "group": "849b74f14fd9d1dc750dfc2cd2730008bf23d694239415a388d8594b607eabb6",
+          "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_11.wav",
+          "source": "recording",
+          "language": "zh",
+          "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+          "label_source": "manual",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "clipping_ratio": 2.0833333333333334e-06,
+          "asr_candidate": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+          "confidence": null,
+          "asr_seconds": 0.23400000000037835,
+          "raw_text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+          "split": "train"
+        },
+        {
+          "id": "0c2b942e2e5349b39c7bf6c9415fe340",
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\0c2b942e2e5349b39c7bf6c9415fe340.wav",
+          "audio_id": "7c275eaf6db9495e918f5537808f1158",
+          "sha256": "03ae6d485acf180308d8666fe7dbac5a54a7ccc777863826b4d97d9dea187770",
+          "seconds": 9.26,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 444480,
+          "source_sample_rate": 44100,
+          "source_start_sample": 0,
+          "source_end_sample": 408366,
+          "source_id": "d790b41869ec477ca211b43ddfc31b15",
+          "source_sha256": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+          "group": "3add390798ad00db4edd9973b2101b3cbda71b9b47865e056aae308213f12464",
+          "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_12.wav",
+          "source": "recording",
+          "language": "zh",
+          "text": "符卿的心思我明白，所以还得多让她等一等，她要是有耐心等下去，便到时机了。",
+          "label_source": "manual",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "clipping_ratio": 4.499640028797696e-06,
+          "asr_candidate": "福清的心思我明白，所以还得多让他等一等，他要是有耐心，等下去便到时机了。",
+          "confidence": null,
+          "asr_seconds": 0.23399999999674037,
+          "raw_text": "符卿的心思我明白，所以还得多让她等一等，她要是有耐心等下去，便到时机了。",
+          "split": "train"
+        },
+        {
+          "id": "b74d50823e474071a2c00ef1c260babf",
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\b74d50823e474071a2c00ef1c260babf.wav",
+          "audio_id": "636ce02fe72e4e0abd8cf4766bf85d99",
+          "sha256": "907b0a2491c81d7e9ad131857df5dd7419158c080816a325e8c2fd33722bef18",
+          "seconds": 9.76,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 468480,
+          "source_sample_rate": 44100,
+          "source_start_sample": 0,
+          "source_end_sample": 430416,
+          "source_id": "7d0111ef4298410c9daabc3bf33380b7",
+          "source_sha256": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+          "group": "26c5e7ebb52e830fffa92d09fe4e62920bdfaf8d6aa5561512e0b3f3af333628",
+          "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_13.wav",
+          "source": "recording",
+          "language": "zh",
+          "text": "人人都当驭空司舵是退休了…殊不知她在放下最热爱的飞行后，选择了另一条更艰难的道路。",
+          "label_source": "manual",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "clipping_ratio": 0.0,
+          "asr_candidate": "人人都当御空思堕是退休了。殊不知，他在放下最热爱的飞行后，选择了另一条更艰难的道路。",
+          "confidence": null,
+          "asr_seconds": 0.23500000000058208,
+          "raw_text": "人人都当驭空司舵是退休了…殊不知她在放下最热爱的飞行后，选择了另一条更艰难的道路。",
+          "split": "train"
+        },
+        {
+          "id": "90cbb6fc64264c3887d42bc27664b512",
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\90cbb6fc64264c3887d42bc27664b512.wav",
+          "audio_id": "b7438bafbf6347909c9291e16f4de6c5",
+          "sha256": "6ebf03c1694f058097d6874baf61f66b07d88734de12cdb3d59a2119dbfe6d1a",
+          "seconds": 6.62,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 317760,
+          "source_sample_rate": 44100,
+          "source_start_sample": 0,
+          "source_end_sample": 291942,
+          "source_id": "7219eae419804044ac9479e02202d1a1",
+          "source_sha256": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+          "group": "1a2caf781fb2c6ef62f83b7c2deb63740ff50d5cb184ab0e03ec792c2abb5f2a",
+          "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_14.wav",
+          "source": "recording",
+          "language": "zh",
+          "text": "正是像停云小姐这样的接渡使往来周旋，仙舟的贸易才能有如今的繁盛。",
+          "label_source": "manual",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "clipping_ratio": 0.0,
+          "asr_candidate": "正是像亭云小姐这样的节度使往来，周旋仙州的贸易才能有如今的繁盛。",
+          "confidence": null,
+          "asr_seconds": 0.2649999999994179,
+          "raw_text": "正是像停云小姐这样的接渡使往来周旋，仙舟的贸易才能有如今的繁盛。",
+          "split": "validation"
+        },
+        {
+          "id": "b70dd916f4884f30b2861a9a1ed177b2",
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\b70dd916f4884f30b2861a9a1ed177b2.wav",
+          "audio_id": "511538544ca24353a91937da09d259ac",
+          "sha256": "e894af4b656d25956351ddcc772626d2bd178c3f021150b4af72ab6efc7718ee",
+          "seconds": 8.3,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 398400,
+          "source_sample_rate": 44100,
+          "source_start_sample": 0,
+          "source_end_sample": 366030,
+          "source_id": "f1a08188b21c4644befe3d5e6abd6493",
+          "source_sha256": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+          "group": "970697619fa0503e9e1225718707473afa60cf504fdb2d0f8f8a3d76d46850ba",
+          "source_path": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_15.wav",
+          "source": "recording",
+          "language": "zh",
+          "text": "我也见过不少行商，但你不觉得，像他这般不急于做成生意的行商并不多么？",
+          "label_source": "manual",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "clipping_ratio": 5.020080321285141e-06,
+          "asr_candidate": "我也见过不少行商，但你不觉得像他这般不急于做成生意的行商并不多吗？",
+          "confidence": null,
+          "asr_seconds": 0.21900000000096043,
+          "raw_text": "我也见过不少行商，但你不觉得，像他这般不急于做成生意的行商并不多么？",
+          "split": "train"
+        }
+      ],
+      "seconds": 52.72,
+      "feature_status": "MISSING",
+      "config": {
+        "min_seconds": 1.0,
+        "max_seconds": 12.0,
+        "silence_db": -40.0,
+        "silence_seconds": 3.0
+      },
+      "fingerprint": "c27c4d94c9e69f99afcd944d08fb003110bdba2598342f21e66d9d17de520f50",
+      "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417",
+      "list_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\d6da434e25044779ab2b8c3d5bf51417\\train.list",
+      "warnings": []
+    },
+    "errors": []
+  },
+  "result": "PASS"
+}

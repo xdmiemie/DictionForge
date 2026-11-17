@@ -1,0 +1,182 @@
+"""One frozen model/reference/text request, native v4 48 kHz output, then exit."""
+from __future__ import annotations
+
+from contextlib import contextmanager
+import json
+import math
+import os
+from pathlib import Path
+import socket
+import sys
+import time
+import traceback
+import uuid
+
+from .audio import atomic_json, digest
+from .feature_worker import checked_assets, init_runtime
+from .settings import ROOT
+from .source_lock import verify_source
+
+
+LANGUAGES = {'zh': 'all_zh', 'en': 'en', 'ja': 'all_ja', 'ko': 'all_ko', 'yue': 'all_yue'}
+DEFAULTS = {'seed': 42, 'sample_steps': 32, 'top_k': 5, 'top_p': 1., 'temperature': 1.,
+            'speed_factor': 1., 'repetition_penalty': 1.35, 'fragment_interval': .3}
+
+
+def normalize_parameters(supplied):
+    if not isinstance(supplied, dict) or set(supplied) - set(DEFAULTS):
+        raise ValueError('INFERENCE_PARAMETERS_INVALID: unsupported parameter')
+    result = dict(DEFAULTS, **supplied)
+    for key, low, high in (('seed', 0, 2**32-1), ('top_k', 1, 100)):
+        if type(result[key]) is not int or not low <= result[key] <= high:
+            raise ValueError(f'INFERENCE_PARAMETERS_INVALID: {key}')
+    if type(result['sample_steps']) is not int or result['sample_steps'] not in (8, 16, 32):
+        raise ValueError('INFERENCE_PARAMETERS_INVALID: sample_steps must be 8, 16 or 32')
+    for key, low, high in (('top_p', .01, 1.), ('temperature', .1, 2.), ('speed_factor', .5, 2.),
+                           ('repetition_penalty', 1., 2.), ('fragment_interval', 0., 1.)):
+        value = result[key]
+        if type(value) not in (int, float) or not math.isfinite(value) or not low <= value <= high:
+            raise ValueError(f'INFERENCE_PARAMETERS_INVALID: {key}')
+    return result
+
+
+def validate_request(request):
+    data_root, output = Path(request['data_root']).resolve(), Path(request['output_dir']).resolve()
+    if not output.is_relative_to(data_root) or output == data_root:
+        raise ValueError('INFERENCE_OUTPUT_OUTSIDE_DATA')
+    if request.get('precision', 'fp16') not in ('fp16', 'fp32'):
+        raise ValueError('INFERENCE_PRECISION_INVALID')
+    if request.get('language', 'zh') not in LANGUAGES:
+        raise ValueError('INFERENCE_LANGUAGE_INVALID')
+    text = request.get('text', '').strip()
+    if not text or len(text) > 5000:
+        raise ValueError('INFERENCE_TEXT_INVALID: require 1–5000 characters')
+    reference = request['reference']
+    if not reference.get('text', '').strip() or reference.get('language', 'zh') not in LANGUAGES:
+        raise ValueError('REFERENCE_TEXT_LANGUAGE_INVALID')
+    if set(request['weights']) != {'gpt', 'sovits'} or set(request['weight_hashes']) != {'gpt', 'sovits'}:
+        raise ValueError('MODEL_PAIR_REQUIRED')
+    for key, value in request['weights'].items():
+        path = Path(value)
+        if not path.is_absolute() or not path.is_file() or digest(path) != request['weight_hashes'][key]:
+            raise ValueError(f'MODEL_WEIGHT_CHANGED: {key}')
+    path = Path(reference['path'])
+    if not path.is_absolute() or not path.is_file() or digest(path) != reference.get('sha256'):
+        raise ValueError('REFERENCE_CHANGED')
+    return normalize_parameters(request.get('parameters', {}))
+
+
+@contextmanager
+def offline():
+    previous = socket.socket.connect, socket.socket.connect_ex, socket.getaddrinfo
+    def deny(*_args, **_kwargs):
+        raise RuntimeError('NETWORK_DISABLED: inference requires prepared, locked local assets')
+    socket.socket.connect = socket.socket.connect_ex = socket.getaddrinfo = deny
+    try:
+        yield
+    finally:
+        socket.socket.connect, socket.socket.connect_ex, socket.getaddrinfo = previous
+
+
+def run(request):
+    started = time.perf_counter()
+    parameters = validate_request(request)
+    upstream, output_dir = Path(request['upstream']).resolve(), Path(request['output_dir']).resolve()
+    verify_source(ROOT, upstream)
+    checked_assets(upstream)
+    import numpy as np
+    import soundfile as sf
+    import torch
+    reference = dict(request['reference'])
+    reference_info = sf.info(reference['path'])
+    if reference_info.channels != 1 or not 3 <= reference_info.duration <= 10:
+        raise ValueError('REFERENCE_DURATION_INVALID: require mono reference of 3–10 seconds')
+    if not torch.cuda.is_available():
+        raise RuntimeError('GPU_UNAVAILABLE')
+    output_dir.mkdir(parents=True, exist_ok=True)
+    init_runtime(upstream)
+    os.environ['MODELSCOPE_OFFLINE'] = '1'
+    identifier = uuid.uuid4().hex
+    assets = upstream/'GPT_SoVITS/pretrained_models'
+    config = {'version': 'v4', 'device': 'cuda', 'is_half': request.get('precision', 'fp16') == 'fp16',
+              't2s_weights_path': request['weights']['gpt'], 'vits_weights_path': request['weights']['sovits'],
+              'cnhuhbert_base_path': str(assets/'chinese-hubert-base'),
+              'bert_base_path': str(assets/'chinese-roberta-wwm-ext-large')}
+    inputs = dict(parameters, text=request['text'].strip(), text_lang=LANGUAGES[request.get('language', 'zh')],
+                  ref_audio_path=reference['path'], prompt_text=reference['text'].strip(),
+                  prompt_lang=LANGUAGES[reference.get('language', 'zh')], text_split_method='cut0',
+                  batch_size=1, parallel_infer=False, split_bucket=False, return_fragment=False)
+    effective = {'config': config, 'inputs': inputs, 'upstream_lock': digest(ROOT/'configs/upstream.lock.json'),
+                 'asset_lock': digest(ROOT/'configs/assets.lock.json'), 'weight_hashes': request['weight_hashes'],
+                 'reference_sha256': reference['sha256'], 'native_sample_rate_required': 48000}
+    atomic_json(output_dir/f'inference-{identifier}.effective.json', effective)
+    torch.cuda.reset_peak_memory_stats()
+    with offline():
+        from TTS_infer_pack.TTS import TTS, TTS_Config
+        from process_ckpt import get_sovits_version_from_path_fast
+        _, version, _ = get_sovits_version_from_path_fast(request['weights']['sovits'])
+        if version != 'v4':
+            raise ValueError('MODEL_VERSION_INVALID: native 48 kHz requires the v4 route')
+        tts_config = TTS_Config({'version': 'v4', 'custom': config})
+        tts_config.configs_path = str(output_dir/f'inference-{identifier}.effective.yaml')
+        model = TTS(tts_config)
+        load_seconds = time.perf_counter() - started
+        before = time.perf_counter()
+        chunks = list(model.run(inputs))
+        torch.cuda.synchronize()
+        generation_seconds = time.perf_counter() - before
+    if not chunks or any(rate != 48000 for rate, _ in chunks):
+        raise RuntimeError('INFERENCE_NATIVE_RATE_INVALID: upstream must return 48000 Hz')
+    pcm = np.concatenate([pcm for _, pcm in chunks])
+    if pcm.ndim != 1 or pcm.dtype != np.int16 or not pcm.size or not np.any(pcm):
+        raise RuntimeError('INFERENCE_AUDIO_INVALID: require nonempty mono native int16 PCM')
+    if digest(Path(reference['path'])) != reference['sha256']:
+        raise ValueError('REFERENCE_CHANGED_DURING_INFERENCE')
+    output = output_dir/f'audio-{identifier}.wav'
+    temporary = output.with_suffix('.wav.part')
+    try:
+        sf.write(temporary, pcm, 48000, format='WAV', subtype='PCM_16')
+        with temporary.open('r+b') as stream:
+            stream.flush()
+            os.fsync(stream.fileno())
+        info = sf.info(temporary)
+        if info.samplerate != 48000 or info.channels != 1 or info.frames != len(pcm):
+            raise RuntimeError('INFERENCE_FILE_INVALID')
+        checksum = digest(temporary)
+        os.replace(temporary, output)
+    finally:
+        temporary.unlink(missing_ok=True)
+    audio = {'path': str(output), 'sha256': checksum, 'bytes': output.stat().st_size, 'sample_rate': 48000,
+             'channels': 1, 'samples': len(pcm), 'seconds': len(pcm)/48000,
+             'peak': float(np.abs(pcm.astype(np.float64)/32768).max()),
+             'rms': float(np.sqrt(np.mean((pcm.astype(np.float64)/32768)**2)))}
+    result = {'outcome': 'COMPLETED', 'model_id': request.get('model_id'), 'audio': audio,
+              'weights': request['weights'], 'weight_hashes': request['weight_hashes'], 'reference': reference,
+              'text': request['text'].strip(), 'language': request.get('language', 'zh'),
+              'parameters': parameters, 'effective': effective,
+              'metrics': {'generation_seconds': generation_seconds, 'load_seconds': load_seconds,
+                          'total_seconds': time.perf_counter()-started,
+                          'peak_cuda_bytes': torch.cuda.max_memory_allocated(),
+                          'peak_reserved_bytes': torch.cuda.max_memory_reserved(), 'device': torch.cuda.get_device_name(0)}}
+    del model
+    torch.cuda.empty_cache()
+    return result
+
+
+def main(argv=None):
+    args = sys.argv[1:] if argv is None else argv
+    if len(args) != 2:
+        raise SystemExit('usage: python -m dictionforge.inference_worker request.json result.json')
+    source, output = [Path(value).resolve() for value in args]
+    try:
+        result = run(json.loads(source.read_text(encoding='utf-8-sig')))
+    except Exception as exc:
+        traceback.print_exc()
+        atomic_json(output, {'outcome': 'FAILED', 'error': str(exc), 'code': type(exc).__name__})
+        return 1
+    atomic_json(output, result)
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

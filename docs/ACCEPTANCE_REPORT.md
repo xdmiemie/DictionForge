@@ -30,12 +30,12 @@
 | A24 | 半写、磁盘满、损坏恢复点 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
 | A25 | 从较早恢复点派生 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
 | A26 | 更换数据和权重初始化 | NOT_RUN | 依赖P07模型注册，随P11新数据和来源模型实训补验 |
-| A27 | 训练中导出 | NOT_RUN | 尚未执行 |
-| A28 | 中止并导出 | NOT_RUN | 尚未执行 |
-| A29 | 自然完成自动发布 | NOT_RUN | 尚未执行 |
-| A30 | 导出失败重试 | NOT_RUN | 尚未执行 |
-| A31 | 外部权重对 | NOT_RUN | 尚未执行 |
-| A32 | 模型和数据集管理 | NOT_RUN | 尚未执行 |
+| A27 | 训练中导出 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
+| A28 | 中止并导出 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
+| A29 | 自然完成自动发布 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
+| A30 | 导出失败重试 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
+| A31 | 外部权重对 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
+| A32 | 模型和数据集管理 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
 | A33 | 默认参考和缓存 | NOT_RUN | 尚未执行 |
 | A34 | 固定条件试听 | NOT_RUN | 尚未执行 |
 | A35 | GPU 排他和外部占用 | NOT_RUN | 尚未执行 |

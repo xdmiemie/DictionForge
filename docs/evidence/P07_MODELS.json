@@ -1,0 +1,139 @@
+{
+  "date": "2026-11-17",
+  "tests": {
+    "command": ".venv-api/Scripts/python.exe -m pytest tests/test_models_exports.py tests/test_model_worker_cpu.py -q --basetemp data/pytest-p07-models-final",
+    "result": "16 passed in 12.68s",
+    "publication_reference_cases": 15,
+    "torch_cpu_contract_cases": 1
+  },
+  "positive": {
+    "structure": "PASS",
+    "gpu": "NOT_RUN",
+    "device": "cpu",
+    "torch": "2.9.0+cu128",
+    "gpt": {
+      "tensors": 295,
+      "architecture": {
+        "vocab_size": 1025,
+        "phoneme_vocab_size": 732,
+        "embedding_dim": 512,
+        "hidden_dim": 512,
+        "head": 16,
+        "linear_units": 2048,
+        "n_layer": 24,
+        "dropout": 0,
+        "EOS": 1024,
+        "random_bert": 0
+      },
+      "precision": [
+        "torch.float16"
+      ]
+    },
+    "sovits": {
+      "format": "v4_lora",
+      "lora_rank": 32,
+      "tensors": 258,
+      "base_required": true
+    },
+    "sample_rate": 48000,
+    "super_sampling": false
+  },
+  "negative": {
+    "device": "cpu",
+    "request": "E:\\DictionForge\\data\\diagnostics\\p07-model-request.json",
+    "original_hashes": {
+      "gpt": "b3fb4f0553ed54f88d564f0ae6d9d3c60140efa2de4d8ceee5be6980f219e648",
+      "sovits": "101c4911eb2e662dd5f833334f733bf3754aef4646dc7ba6bf6bf73f8083b29d"
+    },
+    "cases": {
+      "real_lora_wrong_rank": {
+        "result": "REJECTED",
+        "error": "LORA_STRUCTURE_INVALID: missing=[], extra=[], shape=['cfm.base_model.model.estimator.transformer_blocks.0.attn.to_out.0.lora_A.default.weight', 'cfm.base_model.model.estimator.transformer_blocks.2.attn.to_out.0.lora_A.default.weight', 'cfm.base_model.model.estimator.transformer_blocks.8.attn.to_k.lora_A.default.weight', 'cfm.base_model.model.estimator.transformer_blocks.2.attn.to_v.lora_A.default.weight', 'cfm.base_model.model.estimator.transformer_blocks.9.attn.to_q.lora_A.default.weight']",
+        "seconds": 8.171999999998661,
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s1\\gpt.ckpt",
+            "sha256": "b3fb4f0553ed54f88d564f0ae6d9d3c60140efa2de4d8ceee5be6980f219e648",
+            "bytes": 155305713
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\diagnostics\\p07-model-negative-final\\wrong-rank.pth",
+            "sha256": "15eafd8f641c726c932416c0c7a65ff977cf9e653fef86f530e20b4bf618d1e3",
+            "bytes": 75551763
+          }
+        }
+      },
+      "real_lora_missing_branch": {
+        "result": "REJECTED",
+        "error": "LORA_STRUCTURE_INVALID: missing=['bridge.0.weight'], extra=[], shape=[]",
+        "seconds": 2.2819999999992433,
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s1\\gpt.ckpt",
+            "sha256": "b3fb4f0553ed54f88d564f0ae6d9d3c60140efa2de4d8ceee5be6980f219e648",
+            "bytes": 155305713
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\diagnostics\\p07-model-negative-final\\missing-trainable.pth",
+            "sha256": "509a208b7987fe08e8b53852a5f4a9978e7260a93e9dd5fa3bbd0384be777ab3",
+            "bytes": 75356675
+          }
+        },
+        "removed_tensor": "bridge.0.weight"
+      },
+      "real_lora_wrong_audio_config": {
+        "result": "REJECTED",
+        "error": "SOVITS_AUDIO_CONFIG_MISMATCH: sampling_rate",
+        "seconds": 2.0930000000007567,
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s1\\gpt.ckpt",
+            "sha256": "b3fb4f0553ed54f88d564f0ae6d9d3c60140efa2de4d8ceee5be6980f219e648",
+            "bytes": 155305713
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\diagnostics\\p07-model-negative-final\\wrong-audio-config.pth",
+            "sha256": "bdf374a1baf58330471094f7b74cecc9b91d010e307ba3e82b6da3d6f222ae7e",
+            "bytes": 75553875
+          }
+        }
+      },
+      "missing_base_dependency": {
+        "result": "REJECTED",
+        "error": "MODEL_FILE_CHANGED: E:\\DictionForge\\data\\diagnostics\\p07-model-negative-final\\not-present\\s2Gv4.pth",
+        "seconds": 0.7660000000032596,
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s1\\gpt.ckpt",
+            "sha256": "b3fb4f0553ed54f88d564f0ae6d9d3c60140efa2de4d8ceee5be6980f219e648",
+            "bytes": 155305713
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s2\\sovits.pth",
+            "sha256": "101c4911eb2e662dd5f833334f733bf3754aef4646dc7ba6bf6bf73f8083b29d",
+            "bytes": 75550395
+          }
+        }
+      },
+      "swapped_real_gpt_sovits_pair": {
+        "result": "REJECTED",
+        "error": "GPT_ARCHITECTURE_MISMATCH: tensor keys/shapes or model config differ from v4 GPT",
+        "seconds": 1.75,
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s2\\sovits.pth",
+            "sha256": "101c4911eb2e662dd5f833334f733bf3754aef4646dc7ba6bf6bf73f8083b29d",
+            "bytes": 75550395
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\runs\\7a00f578a57f4c8895e481e5ba67413e\\snapshots\\s1\\gpt.ckpt",
+            "sha256": "b3fb4f0553ed54f88d564f0ae6d9d3c60140efa2de4d8ceee5be6980f219e648",
+            "bytes": 155305713
+          }
+        }
+      }
+    },
+    "originals_unchanged": true,
+    "cuda_initialized": false
+  }
+}

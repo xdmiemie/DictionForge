@@ -78,12 +78,67 @@ class TrainingStart(Identified):
     preflight_id: str
 
 class TrainingControl(Identified):
-    action: Literal["pause", "resume"]
+    action: Literal["pause", "resume", "export", "stop_export"]
 
 class Derive(Identified):
     checkpoint_id: str
 
+class ModelImport(Identified):
+    gpt_path: str
+    sovits_path: str
+    role: str = Field(min_length=1, max_length=80)
+    trusted: bool = False
+
+class DeleteConfirmation(Strict):
+    preview_id: str
+
+class ModelProbe(Identified):
+    reference_audio_id: str | None = None
+    reference_text: str | None = None
+    reference_language: Literal['zh'] = 'zh'
+
 def register(app):
+    @app.get("/api/models")
+    def models(request: Request):
+        from .models import list_models
+        return list_models(request.app.state.jobs)
+
+    @app.post("/api/models/import", status_code=202)
+    def model_import(body: ModelImport, request: Request):
+        from .models import import_submit
+        return import_submit(request.app.state.jobs, body.gpt_path, body.sovits_path,
+                             body.role, trusted=body.trusted, request_id=str(body.request_id))
+
+    @app.post("/api/models/{key}/probe", status_code=202)
+    def model_probe(key: str, body: ModelProbe, request: Request):
+        from .model_probe import submit
+        return submit(request.app.state.jobs,key,str(body.request_id),body.reference_audio_id,body.reference_text,body.reference_language)
+
+    @app.post("/api/model-exports/{key}/retry", status_code=202)
+    def export_retry(key: str, body: Identified, request: Request):
+        from .exports import retry
+        return retry(request.app.state.jobs, key, str(body.request_id))
+
+    @app.get("/api/models/{key}/delete-preview")
+    def model_delete_preview(key: str, request: Request):
+        from .references import delete_preview
+        return delete_preview(request.app.state.jobs, "model", key)
+
+    @app.delete("/api/models/{key}")
+    def model_delete(key: str, body: DeleteConfirmation, request: Request):
+        from .references import delete
+        return delete(request.app.state.jobs, "model", key, body.preview_id)
+
+    @app.get("/api/dataset-versions/{key}/delete-preview")
+    def dataset_delete_preview(key: str, request: Request):
+        from .references import delete_preview
+        return delete_preview(request.app.state.jobs, "version", key)
+
+    @app.delete("/api/dataset-versions/{key}")
+    def dataset_delete(key: str, body: DeleteConfirmation, request: Request):
+        from .references import delete
+        return delete(request.app.state.jobs, "version", key, body.preview_id)
+
     @app.post("/api/folders/pick")
     def folder(body: Folder):
         from .folder_picker import pick_folder
@@ -147,6 +202,11 @@ def register(app):
     def training_derive(key: str, body: Derive, request: Request):
         from .training import derive
         return derive(request.app.state.jobs, key, body.checkpoint_id, str(body.request_id))
+
+    @app.post("/api/training/{key}/export-intents/{intent_id}/retry", status_code=202)
+    def retry_export_intent(key: str, intent_id: str, body: Identified, request: Request):
+        from .exports import retry_intent
+        return retry_intent(request.app.state.jobs, key, intent_id)
 
     @app.get("/api/dataset-drafts")
     def drafts(request: Request):

@@ -8,6 +8,15 @@ import uuid
 
 ACTIVE = ("QUEUED", "RUNNING")
 TERMINAL = ("COMPLETED", "FAILED", "INTERRUPTED", "CANCELLED", "PAUSED", "EARLY_COMPLETED")
+CPU_KINDS = ("model_export",)
+
+
+def lane_for(kind):
+    return "cpu" if kind in CPU_KINDS else "gpu"
+
+
+def lock_for(kind):
+    return "cpu-worker.lock" if lane_for(kind) == "cpu" else "worker.lock"
 
 
 class Conflict(ValueError):
@@ -109,13 +118,18 @@ class Jobs:
                 FROM jobs j ORDER BY j.created DESC LIMIT 100
             """)]
 
-    def running(self):
+    def running(self, lane=None):
         with self.connect() as db:
-            return [self.decode(row) for row in db.execute("SELECT * FROM jobs WHERE state='RUNNING'")]
+            return [self.decode(row) for row in db.execute("SELECT * FROM jobs WHERE state='RUNNING'")
+                    if lane is None or lane_for(row["kind"]) == lane]
 
-    def claim(self):
+    def claim(self, lane="gpu"):
+        if lane not in ("gpu", "cpu"):
+            raise ValueError("未知资源队列")
         with self.connect(write=True) as db:
-            row = db.execute("SELECT * FROM jobs WHERE state='QUEUED' ORDER BY created LIMIT 1").fetchone()
+            predicate = "IN" if lane == "cpu" else "NOT IN"
+            placeholders = ",".join("?" for _ in CPU_KINDS)
+            row = db.execute(f"SELECT * FROM jobs WHERE state='QUEUED' AND kind {predicate} ({placeholders}) ORDER BY created LIMIT 1", CPU_KINDS).fetchone()
             if row is None:
                 return None
             instance = uuid.uuid4().hex

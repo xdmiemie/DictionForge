@@ -33,7 +33,10 @@ function PreflightGpu({gpu}: {gpu?: Preflight['gpu']}) {
 type RunStage = Progress & {state?: string; error?: string | JobError};
 type Checkpoint = {id: string; path?: string; sha256?: string; stage: string; metrics?: Progress; kind?: string; valid: boolean; reason?: string; protected?: boolean | string[]};
 type CheckpointList = {checkpoints: Checkpoint[]; last_valid?: string | Checkpoint | null; invalid?: unknown[]; inherited_start_point?: {id?: string; stage?: string; valid: boolean; reason?: string; selection?: {source_run?: string; parent_seed_reason?: string}} | null};
-type RunView = Job & {run?: {config?: {s1?: StageConfig; s2?: StageConfig}; [key: string]: unknown}; stage_state?: {active_stage?: string | null; stages?: {s1?: RunStage; s2?: RunStage}; [key: string]: unknown} | null; pending_controls?: {action: string; request?: string}[]};
+type ExportJob = Job & {snapshot?: {id?: string; reason?: string; stage_progress?: Record<string, unknown>; [key: string]: unknown}};
+type ExportIntent = {id?: string; intent_id?: string; state: string; error?: string | JobError; reason?: string; checkpoint_id?: string; job_id?: string};
+type RunView = Job & {run?: {config?: {s1?: StageConfig; s2?: StageConfig}; [key: string]: unknown}; stage_state?: {active_stage?: string | null; stages?: {s1?: RunStage; s2?: RunStage}; [key: string]: unknown} | null; pending_controls?: {action: string; request?: string}[]; exports?: ExportJob[]; export_intents?: ExportIntent[]};
+const exportReason = (reason?: string) => ({export: '手动导出', stop_export: '中止并导出', completed: '完成自动导出', import: '外部权重导入'}[reason ?? ''] ?? reason ?? '权重快照');
 
 export function RunStageCard({name, stage, current}: {name: 's1' | 's2'; stage?: RunStage; current: boolean}) {
   const unit = stage?.unit;
@@ -44,20 +47,23 @@ export function RunStageCard({name, stage, current}: {name: 's1' | 's2'; stage?:
   const target = finiteNumber(stage?.target) ? stage.target : stage?.total;
   return <article className={'preflight-stage run-stage ' + (current ? 'active-stage' : '')}>
     <div className="section-top"><h3>{name === 's2' ? 'SoVITS v4 / S2' : 'GPT / S1'}</h3><span className="pill">{stage?.state ? stateLabel(stage.state) : current ? '活动阶段' : '等待阶段快照'}</span></div>
+    {stage?.error && <p className="inline-error">{errorText(stage.error)}</p>}
     {stage ? <><dl>{finiteNumber(stage.completed_epochs) && <><dt>已完成轮次</dt><dd>{stage.completed_epochs}</dd></>}{finiteNumber(steps) && <><dt>实际优化器更新</dt><dd>{steps}</dd></>}{finiteNumber(stage.processed_batches) && <><dt>已处理 batch</dt><dd>{stage.processed_batches}</dd></>}{finiteNumber(stage.physical_batch_size) && <><dt>物理 batch</dt><dd>{stage.physical_batch_size}</dd></>}{finiteNumber(stage.skipped_updates) && <><dt>跳过的更新</dt><dd>{stage.skipped_updates}</dd></>}{finiteNumber(stage.loss) ? <><dt>Loss</dt><dd>{stage.loss.toPrecision(5)}</dd></> : stage.loss === null && <><dt>Loss</dt><dd>非有限，已省略</dd></>}{finiteNumber(stage.learning_rate) && <><dt>实际学习率</dt><dd>{stage.learning_rate.toExponential(3)}</dd></>}{finiteNumber(peak) && <><dt>实际训练显存峰值</dt><dd>{(peak / 2 ** 30).toFixed(2)} GiB</dd></>}</dl>{finiteNumber(value) && finiteNumber(target) && target > 0 && <><progress max={target} value={value} aria-label={(name === 's2' ? 'SoVITS' : 'GPT') + ' 阶段进度'}/><p className="muted small">{value} / {target} {epochMode ? '累计轮次' : '优化器更新'}</p></>}</> : <p className="muted small">等待工作进程写入真实计数。</p>}
   </article>;
 }
 
-export function TrainingRun({job, submit}: {job: Job; submit: Submit}) {
+export function TrainingRun({job, submit, jobs = []}: {job: Job; submit: Submit; jobs?: Job[]}) {
   const [view, setView] = useState<RunView>();
   const [loadError, setLoadError] = useState('');
   const [refreshKey, setRefreshKey] = useState(0);
   const [points, setPoints] = useState<CheckpointList>();
   const [pointsError, setPointsError] = useState('');
   const [busy, setBusy] = useState(false);
-  const [pendingAction, setPendingAction] = useState<'pause' | 'resume' | ''>('');
+  const [pendingAction, setPendingAction] = useState<'pause' | 'resume' | 'stop_export' | ''>('');
   const [controlError, setControlError] = useState('');
-  useEffect(() => {setView(undefined); setLoadError(''); setPoints(undefined); setPointsError(''); setPendingAction(''); setControlError('');}, [job.id]);
+  const [controlNotice, setControlNotice] = useState('');
+  const exportKey = jobs.filter(item => item.kind === 'model_export').map(item => `${item.id}:${item.state}`).join('|');
+  useEffect(() => {setView(undefined); setLoadError(''); setPoints(undefined); setPointsError(''); setPendingAction(''); setControlError(''); setControlNotice('');}, [job.id]);
   useEffect(() => {
     let disposed = false;
     api<CheckpointList>('/training/' + encodeURIComponent(job.id) + '/checkpoints').then(next => {if (!disposed) {setPoints(next); setPointsError('');}}).catch(e => {if (!disposed) setPointsError(e.message);});
@@ -65,13 +71,14 @@ export function TrainingRun({job, submit}: {job: Job; submit: Submit}) {
   }, [job.id, job.state, refreshKey]);
   useEffect(() => {
     if (pendingAction === 'pause' && ['PAUSED', 'COMPLETED', 'FAILED', 'INTERRUPTED'].includes(job.state) || pendingAction === 'resume' && ['RUNNING', 'COMPLETED', 'FAILED', 'INTERRUPTED'].includes(job.state)) setPendingAction('');
+    if (pendingAction === 'stop_export' && ['EARLY_COMPLETED', 'COMPLETED', 'FAILED', 'INTERRUPTED'].includes(job.state)) setPendingAction('');
   }, [job.state]);
   useEffect(() => {
     let disposed = false;
     const read = () => api<RunView>('/training/' + encodeURIComponent(job.id)).then(next => {if (!disposed) {setView(next); setLoadError('');}}).catch(e => {if (!disposed) setLoadError(e.message);});
     void read(); const timer = active(job) ? window.setInterval(() => void read(), 2500) : undefined;
     return () => {disposed = true; if (timer) window.clearInterval(timer);};
-  }, [job.id, job.state, refreshKey]);
+  }, [job.id, job.state, refreshKey, exportKey]);
   const stageState = view?.stage_state;
   const current = stageState ? stageState.active_stage : active(job) ? job.latest_progress?.stage : undefined;
   const merged = (stage: 's1' | 's2') => {
@@ -79,18 +86,25 @@ export function TrainingRun({job, submit}: {job: Job; submit: Submit}) {
     const frozen = view?.run?.config?.[stage];
     return {target: frozen?.target, unit: frozen?.stop_mode === 'epochs' ? 'epochs' : 'optimizer_updates', ...stageState?.stages?.[stage], ...(job.latest_progress?.stage === stage ? job.latest_progress : {})};
   };
-  const control = async (action: 'pause' | 'resume') => {
+  const control = async (action: 'pause' | 'resume' | 'export' | 'stop_export') => {
     setBusy(true); setControlError('');
-    try {await api('/training/' + encodeURIComponent(job.id) + '/controls', {...requestId(), action}); setPendingAction(action); setRefreshKey(value => value + 1);} catch (e) {setControlError((e as Error).message);} finally {setBusy(false);}
+    try {await api('/training/' + encodeURIComponent(job.id) + '/controls', {...requestId(), action}); if (action === 'export') setControlNotice(active(job) ? '导出请求已受理，将在安全边界冻结权重对，训练继续；发布进度单独显示。' : '导出请求已受理，正在从已保存的完整权重对发布模型。'); else setPendingAction(action); setRefreshKey(value => value + 1);} catch (e) {setControlError((e as Error).message);} finally {setBusy(false);}
   };
   const derive = async (point: Checkpoint) => {
     if (!point.valid) return;
     setBusy(true); setControlError('');
     try {await submit('/training/' + encodeURIComponent(job.id) + '/derive', {checkpoint_id: point.id});} catch (e) {setControlError((e as Error).message);} finally {setBusy(false);}
   };
+  const retryExport = async (path: string) => {
+    setBusy(true); setControlError('');
+    try {await submit(path, {}); setRefreshKey(value => value + 1);} catch (e) {setControlError((e as Error).message);} finally {setBusy(false);}
+  };
   const waitingPause = pendingAction === 'pause' || view?.pending_controls?.some(command => command.action === 'pause');
   const waitingResume = pendingAction === 'resume' || view?.pending_controls?.some(command => command.action === 'resume');
-  const canResume = ['PAUSED', 'INTERRUPTED', 'FAILED'].includes(job.state) && Boolean(points?.last_valid);
+  const waitingStop = pendingAction === 'stop_export' || view?.pending_controls?.some(command => command.action === 'stop_export');
+  const waitingExport = view?.pending_controls?.some(command => command.action === 'export');
+  const canResume = ['PAUSED', 'INTERRUPTED', 'FAILED', 'EARLY_COMPLETED'].includes(job.state) && Boolean(points?.last_valid);
+  const exports = view?.exports?.map(item => ({...item, ...jobs.find(candidate => candidate.id === item.id)}));
   const parentRun = view?.run?.parent_run_id ?? view?.run?.parent_run;
   const parentPoint = view?.run?.parent_checkpoint_id ?? view?.run?.parent_checkpoint;
   return <div className="training-run">
@@ -100,14 +114,21 @@ export function TrainingRun({job, submit}: {job: Job; submit: Submit}) {
     {loadError && <p className="inline-error">运行快照读取失败：{loadError}</p>}
     <div className="grid"><RunStageCard name="s2" stage={merged('s2')} current={current === 's2'}/><RunStageCard name="s1" stage={merged('s1')} current={current === 's1'}/></div>
     <div className="actions training-controls">
-      {['RUNNING', 'PAUSE_REQUESTED', 'CHECKPOINTING'].includes(job.state) && <button disabled={busy || Boolean(waitingPause) || job.state !== 'RUNNING'} onClick={() => void control('pause')}>暂停并保存恢复点</button>}
-      {['PAUSED', 'INTERRUPTED', 'FAILED'].includes(job.state) && <button className="primary-button" disabled={busy || !canResume || Boolean(waitingResume)} onClick={() => void control('resume')}>继续训练</button>}
+      {['RUNNING', 'PAUSE_REQUESTED', 'CHECKPOINTING'].includes(job.state) && <button disabled={busy || Boolean(waitingPause || waitingStop) || job.state !== 'RUNNING'} onClick={() => void control('pause')}>暂停并保存恢复点</button>}
+      {job.state === 'RUNNING' && <><button disabled={busy || Boolean(waitingPause || waitingStop || waitingExport)} onClick={() => void control('export')}>导出模型并继续训练</button><button disabled={busy || Boolean(waitingPause || waitingStop)} onClick={() => void control('stop_export')}>中止并导出模型</button></>}
+      {['PAUSED', 'COMPLETED', 'EARLY_COMPLETED'].includes(job.state) && <button disabled={busy || Boolean(waitingResume)} onClick={() => void control('export')}>导出已保存权重对</button>}
+      {['PAUSED', 'INTERRUPTED', 'FAILED', 'EARLY_COMPLETED'].includes(job.state) && <button className="primary-button" disabled={busy || !canResume || Boolean(waitingResume)} onClick={() => void control('resume')}>继续训练</button>}
     </div>
     {waitingPause && active(job) && <div className="notice"><strong>暂停请求已受理 · 等待安全边界</strong><p>工作进程将在优化器更新边界写入完整恢复点，成功后显示「已暂停」。请等待保存完成。</p></div>}
     {waitingPause && ['COMPLETED', 'EARLY_COMPLETED', 'CANCELLED'].includes(job.state) && <p className="muted small">任务已结束，无需继续等待暂停。请查看最终状态与恢复点记录。</p>}
     {waitingResume && <p className="muted small" role="status">继续训练请求已受理，正在校验恢复点并等待工作进程。</p>}
+    {waitingStop && active(job) && <div className="notice"><strong>中止并导出请求已受理</strong><p>等待安全边界保存恢复点和权重快照，完成后停止后续训练并独立发布模型包。</p></div>}
+    {controlNotice && <p className="muted small" role="status">{controlNotice}</p>}
     {job.state === 'PAUSED' && <p className="success-note">{canResume ? '训练已暂停，可从文件校验通过的恢复点申请续训至原累计目标。' : '训练已暂停，需确认有效恢复点后再继续。'}</p>}
     {controlError && <p className="inline-error" role="alert">{controlError}</p>}
+    <details open><summary>模型导出 · {exports?.length ?? 0} 项</summary><p className="muted small">训练状态与发布状态独立。完成后自动导出；失败可从原快照重试，保持相同模型版本。</p>
+      {view?.export_intents?.filter(intent => intent.state !== 'QUEUED').map(intent => {const id = intent.intent_id ?? intent.id; return <article className="checkpoint-row" key={id}><strong>{intent.state === 'FAILED' ? '冻结权重对后，导出登记失败' : '正在登记导出任务'}</strong><p className="muted small path-text">{exportReason(intent.reason)} · 意图 {id ?? '未记录'}{intent.checkpoint_id ? ` · 恢复点 ${intent.checkpoint_id}` : ''}</p>{intent.error && <p className="inline-error">{errorText(intent.error)}</p>}{intent.state === 'FAILED' && id && <button disabled={busy} onClick={() => void retryExport('/training/' + encodeURIComponent(job.id) + '/export-intents/' + encodeURIComponent(id) + '/retry')}>从原冻结快照重试登记</button>}</article>;})}
+      {exports?.length ? <div className="checkpoint-list">{exports.map(item => <article className="checkpoint-row" key={item.id}><div className="section-top"><strong>{item.result?.status === 'PUBLISHED' ? '模型已发布' : stateLabel(item.state)}</strong><span className="pill">{exportReason(item.snapshot?.reason ?? String(item.payload?.reason ?? '权重快照'))}</span></div><p className="muted small path-text">导出任务 {item.id}<br/>快照 {String(item.payload?.snapshot_id ?? item.result?.snapshot_id ?? item.snapshot?.id ?? '等待登记')}<br/>模型版本 {String(item.payload?.model_version_id ?? item.result?.model_version_id ?? '等待登记')}</p>{item.error && <p className="inline-error">{errorText(item.error)}</p>}{item.state === 'FAILED' && <button disabled={busy} onClick={() => void retryExport('/model-exports/' + encodeURIComponent(item.id) + '/retry')}>从同一快照重试导出</button>}<details><summary>阶段来源与导出记录</summary><pre>{JSON.stringify({snapshot: item.snapshot, result: item.result}, null, 2)}</pre></details></article>)}</div> : <p className="muted small">尚未登记导出任务。运行中可请求导出，正常结束后自动发布。</p>}</details>
     <details open><summary>训练恢复点 · {points?.checkpoints.length ?? 0} 个</summary><p className="muted small">此处校验已登记文件的完整性；训练状态与配置兼容性由工作进程在恢复时继续验证。</p>
       {pointsError && <p className="inline-error">恢复点读取失败：{pointsError}</p>}
       {points && !points.last_valid && <p className="muted small">当前没有通过校验的恢复点，暂不能继续训练。</p>}
@@ -119,7 +140,7 @@ export function TrainingRun({job, submit}: {job: Job; submit: Submit}) {
   </div>;
 }
 
-export function Training({jobs, submit, reportError, requestedVersion = ''}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; requestedVersion?: string}) {
+export function Training({jobs, submit, reportError, requestedVersion = '', refreshToken = 0}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; requestedVersion?: string; refreshToken?: number}) {
   const [versions, setVersions] = useState<DatasetVersion[]>([]);
   const [versionId, setVersionId] = useState('');
   const [initialModel, setInitialModel] = useState('official');
@@ -136,7 +157,7 @@ export function Training({jobs, submit, reportError, requestedVersion = ''}: {jo
   const jobsKey = jobs.map(job => `${job.id}:${job.state}`).join('|');
   const config = useMemo(() => ({version_id: versionId, initial_model: initialModel, stages, seed, s2, s1}), [versionId, initialModel, stages, seed, s2, s1]);
   const configKey = JSON.stringify(config);
-  useEffect(() => {api<DatasetVersion[]>('/datasets').then(rows => {setVersions(rows); setVersionError('');}).catch(e => setVersionError(e.message));}, [jobsKey, requestedVersion]);
+  useEffect(() => {api<DatasetVersion[]>('/datasets').then(rows => {setVersions(rows); setVersionError('');}).catch(e => setVersionError(e.message));}, [jobsKey, requestedVersion, refreshToken]);
   useEffect(() => {if (requestedVersion) setVersionId(requestedVersion);}, [requestedVersion]);
   useEffect(() => {setPreflightId(''); setSubmittedConfig('');}, [configKey]);
   const version = versions.find(row => row.id === versionId);
@@ -169,7 +190,7 @@ export function Training({jobs, submit, reportError, requestedVersion = ''}: {jo
     <div className="grid"><label>初始化权重<select value={initialModel} onChange={e => setInitialModel(e.target.value)}><option value="official">官方 GPT-SoVITS v4 底模</option></select></label><label>随机种子<input type="number" min="0" max="2147483647" step="1" value={seed} onChange={e => setSeed(e.target.valueAsNumber)}/></label></div>
     <StageFields name="s2" value={s2} enabled={stages.includes('s2')} onEnabled={enabled => setStage('s2', enabled)} onChange={setS2}/>
     <StageFields name="s1" value={s1} enabled={stages.includes('s1')} onEnabled={enabled => setStage('s1', enabled)} onChange={setS1}/>
-    <div className="actions"><button disabled={busy || running || !version || !stages.length} onClick={() => void perform(check)}>检查训练配置与显存</button><button className="primary-button" disabled={busy || running || !report?.ready || submittedConfig !== configKey} onClick={() => void perform(async () => {if (!report?.ready || submittedConfig !== configKey) throw new Error('当前配置需要重新预检。'); const job = await submit('/training', {preflight_id: preflightId}); setTrainingId(job.id);})}>开始训练</button><p className="muted small">修改配置后需要重新预检。</p></div>
+    <div className="actions"><button disabled={busy || running || !version || !stages.length} onClick={() => void perform(check)}>检查训练配置与显存</button><button className="primary-button" disabled={busy || running || !version || !report?.ready || submittedConfig !== configKey} onClick={() => void perform(async () => {if (!version || !report?.ready || submittedConfig !== configKey) throw new Error('当前配置需要重新预检。'); const job = await submit('/training', {preflight_id: preflightId}); setTrainingId(job.id);})}>开始训练</button><p className="muted small">修改配置后需要重新预检。</p></div>
     {trainingJob && <p className="muted small">训练 {trainingJob.id.slice(0, 8)} · {stateLabel(trainingJob.state)}。冻结配置和双阶段进度请见后台任务。</p>}
     {preflightJob && active(preflightJob) && <div className="notice"><strong>正在构造实际训练加载器</strong><p>任务 {preflightJob.id.slice(0, 8)}，结果会自动显示。GPU 忙碌时按队列执行。</p></div>}
     {preflightJob?.error && <p className="inline-error">预检失败：{errorText(preflightJob.error)}。请在后台任务查看阶段和进程日志。</p>}

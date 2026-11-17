@@ -61,7 +61,7 @@ def finalize_effective_config(effective, stage, config, seed):
         gradient_clip_policy='ScaledAdam_internal_clipping_scale_2' if stage == 's1' else 'none')
     effective['data']['num_workers'] = 0
     effective['checkpoint_policy'] = {'interval_optimizer_updates': 100, 'periodic_keep': 3,
-                                     'protected_kinds': ['pause', 'stage_final', 'stop_export'],
+                                     'protected_kinds': ['pause', 'export', 'stage_final', 'stop_export'],
                                      'immutable_snapshot_per_checkpoint': True}
     effective['training_loop'] = 'DictionForge application loop; upstream model, loss, optimizer and dataset'
     return effective
@@ -307,6 +307,78 @@ def resumed_stage_state(request, checkpoint, state):
     return state
 
 
+def available_weights(request, state):
+    """Pair every current/preceding snapshot with the frozen unstarted side."""
+    weights = dict(request['initial_weights'])
+    for stage, key in (('s2', 'sovits'), ('s1', 'gpt')):
+        snapshot = state['stages'][stage].get('snapshot')
+        if snapshot:
+            weights[key] = snapshot['path']
+    return weights
+
+
+def export_intent_path(request, request_id):
+    identifier = hashlib.sha256(request_id.encode('utf-8')).hexdigest()
+    return Path(request['run_dir'])/'export_intents'/(identifier + '.json')
+
+
+def _enqueue_export(request, jobs, state, reason, request_id, checkpoint_id):
+    """Persist an immutable intent before queue registration; retries never refreeze."""
+    from .exports import enqueue_snapshot
+    path = export_intent_path(request, request_id)
+    if path.is_file():
+        intent = json.loads(path.read_text(encoding='utf-8'))
+        if intent['run_id'] != request['run_id'] or intent['request_id'] != request_id or intent['reason'] != reason:
+            raise ValueError('EXPORT_INTENT_IDENTITY_MISMATCH')
+    else:
+        weights = available_weights(request, state)
+        intent = {'schema_version': 1, 'run_id': request['run_id'], 'request_id': request_id,
+                  'reason': reason, 'checkpoint_id': checkpoint_id, 'stage_state': copy.deepcopy(state),
+                  'weights': weights, 'weight_hashes': {key: digest(Path(value)) for key, value in weights.items()},
+                  'state': 'PENDING'}
+        path.parent.mkdir(parents=True, exist_ok=True)
+        atomic_json(path, intent)
+    try:
+        if any(digest(Path(value)) != intent['weight_hashes'][key] for key, value in intent['weights'].items()):
+            raise ValueError('EXPORT_INTENT_WEIGHTS_CHANGED')
+        job = enqueue_snapshot(jobs, request, intent['stage_state'], intent['weights'],
+                               intent['reason'], intent['request_id'], checkpoint_id=intent['checkpoint_id'])
+    except Exception as exc:
+        intent.update(state='FAILED', error=str(exc))
+        atomic_json(path, intent)
+        return {'ok': False, 'intent_id': path.stem, 'intent_path': str(path), 'error': str(exc),
+                'checkpoint_id': intent['checkpoint_id'], 'request_id': request_id}
+    intent.update(state='QUEUED', job_id=job['id'])
+    intent.pop('error', None)
+    result = {'ok': True, 'intent_id': path.stem, 'intent_path': str(path), 'job_id': job['id'],
+              'checkpoint_id': intent['checkpoint_id'], 'request_id': request_id}
+    try:
+        atomic_json(path, intent)
+    except OSError as exc:
+        # Queue registration already committed; an intent status update cannot
+        # turn the registered export into a training failure or duplicate job.
+        result['intent_status_warning'] = str(exc)
+    return result
+
+
+def enqueue_export(request, jobs, state, reason, request_id, checkpoint_id):
+    try:
+        return _enqueue_export(request, jobs, state, reason, request_id, checkpoint_id)
+    except Exception as exc:
+        path = export_intent_path(request, request_id)
+        return {'ok': False, 'intent_id': path.stem, 'intent_path': str(path), 'request_id': request_id,
+                'checkpoint_id': checkpoint_id, 'error': str(exc)}
+
+
+def export_intent_results(request):
+    fields = ('run_id', 'request_id', 'reason', 'checkpoint_id', 'state', 'error', 'job_id')
+    result = []
+    for path in sorted((Path(request['run_dir'])/'export_intents').glob('*.json')):
+        value = json.loads(path.read_text(encoding='utf-8'))
+        result.append(dict({key: value[key] for key in fields if key in value}, intent_id=path.stem, intent_path=str(path)))
+    return result
+
+
 def train_stage(request, stage, loader, report, emit, stage_state, resume=None):
     import numpy as np
     import torch
@@ -377,7 +449,8 @@ def train_stage(request, stage, loader, report, emit, stage_state, resume=None):
         entry = save_checkpoint(request, stage, model, optimizer, scheduler, scaler, effective,
                                 metrics, order, report, stage_state, implementation, kind)
         checkpoints.append(entry)
-        emit(dict(metrics, checkpoint_id=entry['id'], checkpoint=entry, snapshot=entry['snapshot']))
+        stage_state['stages'][stage] = dict(metrics, checkpoint_id=entry['id'], checkpoint=entry, snapshot=entry['snapshot'])
+        emit(stage_state['stages'][stage])
         return entry
     def post_step(_optimizer, _args, _kwargs):
         metrics['optimizer_updates'] += 1
@@ -487,6 +560,27 @@ def train_stage(request, stage, loader, report, emit, stage_state, resume=None):
                 if control and control['action'] == 'pause':
                     checkpoint = save_boundary('pause', 'PAUSED')
                     return metrics, checkpoint, checkpoint['snapshot'], checkpoints, dict(control)
+                if control and control['action'] in ('export', 'stop_export'):
+                    action = control['action']
+                    intent_path = export_intent_path(request, control['request'])
+                    if intent_path.is_file():
+                        intent = json.loads(intent_path.read_text(encoding='utf-8'))
+                        frozen_stage = intent['stage_state']['active_stage']
+                        checkpoint = intent['stage_state']['stages'][frozen_stage]['checkpoint']
+                    else:
+                        checkpoint = save_boundary(action, 'EARLY_COMPLETED' if action == 'stop_export' else 'RUNNING')
+                    exported = enqueue_export(request, jobs, stage_state, action, control['request'], checkpoint['id'])
+                    metrics['last_export_intent'] = exported
+                    if exported['ok']:
+                        metrics.pop('export_enqueue_error', None)
+                        if action == 'export':
+                            jobs.complete_control(request['run_id'], control['request'])
+                    else:
+                        metrics['export_enqueue_error'] = exported['error']
+                    if action == 'stop_export':
+                        metrics['state'] = 'EARLY_COMPLETED' if exported['ok'] else 'PAUSED'
+                        return metrics, checkpoint, checkpoint['snapshot'], checkpoints, dict(control, export_result=exported)
+                    emit(dict(metrics))
                 if completed >= config['target']:
                     checkpoint = save_boundary('stage_final', 'COMPLETED')
                     return metrics, checkpoint, checkpoint['snapshot'], checkpoints, None
@@ -585,16 +679,43 @@ def run(request):
                     # A request arriving during final checkpoint I/O is satisfied
                     # by that durable boundary before constructing the next stage.
                     control = dict(pending)
+                elif pending and pending['action'] in ('export', 'stop_export'):
+                    exported = enqueue_export(request, jobs, state, pending['action'], pending['request'], checkpoint['id'])
+                    metrics['last_export_intent'] = exported
+                    if pending['action'] == 'stop_export':
+                        control = dict(pending, export_result=exported)
+                    elif exported['ok']:
+                        jobs.complete_control(request['run_id'], pending['request'])
+                    else:
+                        metrics['export_enqueue_error'] = exported['error']
             jobs.progress(request['run_id'], dict(metrics, stage=stage, checkpoint_id=checkpoint['id']))
             if control is not None:
-                jobs.complete_control(request['run_id'], control['request'])
-                outcome = 'PAUSED'
+                exported = control.get('export_result')
+                if exported is None or exported['ok']:
+                    jobs.complete_control(request['run_id'], control['request'])
+                outcome = 'EARLY_COMPLETED' if exported is not None and exported['ok'] else 'PAUSED'
+                state['stages'][stage]['state'] = outcome
+                if exported is not None and not exported['ok']:
+                    state['stages'][stage]['export_enqueue_error'] = exported['error']
+                if outcome == 'EARLY_COMPLETED':
+                    for remaining in state['stages'].values():
+                        if remaining['state'] == 'PENDING':
+                            remaining.update(state='SKIPPED', reason='stopped_early')
                 break
         if outcome == 'COMPLETED':
             state['active_stage'] = None
         atomic_json(area/'stage_state.json', state)
+        if outcome == 'COMPLETED':
+            exported = enqueue_export(request, jobs, state, 'completed', request['run_id'] + ':completed',
+                                      checkpoints[-1]['id'] if checkpoints else None)
         result = dict(outcome=outcome, stages=state['stages'], snapshots=snapshots, checkpoints=checkpoints,
-                      loader_reports=reports, config=config, config_fingerprint=config_fingerprint(config))
+                      loader_reports=reports, config=config, config_fingerprint=config_fingerprint(config),
+                      export_intents=export_intent_results(request))
+        failed_exports = [intent for intent in result['export_intents'] if intent['state'] == 'FAILED']
+        if failed_exports:
+            result['export_enqueue_errors'] = failed_exports
+            if outcome == 'PAUSED':
+                result['error'] = '导出登记失败；完整恢复点已保存，可重试相同快照：' + failed_exports[-1].get('error', '')
         atomic_json(area/'training_summary.json', result)
         return result
     except Exception as exc:

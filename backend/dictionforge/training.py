@@ -108,7 +108,19 @@ def snapshot(jobs, run_id):
         pending = [dict(row) for row in db.execute("""SELECT c.* FROM controls c
             LEFT JOIN control_receipts r ON c.request=r.request
             WHERE c.job_id=? AND r.request IS NULL ORDER BY c.created""", (run_id,))]
-    return {**job, "run": run, "pending_controls": pending,
+    with jobs.connect() as db:
+        export_jobs = [jobs.decode(row) for row in db.execute("SELECT * FROM jobs WHERE kind='model_export' ORDER BY created DESC")]
+    export_jobs = [item for item in export_jobs if item["payload"].get("run_id") == run_id]
+    intents = []
+    for intent_path in (Path(run["run_dir"]) / "export_intents").glob("*.json"):
+        if intent_path.is_symlink() or not intent_path.resolve().is_relative_to(Path(run["run_dir"]).resolve()):
+            continue
+        try:
+            intents.append(dict(json.loads(intent_path.read_text(encoding="utf-8")), intent_id=intent_path.stem))
+        except (OSError, ValueError):
+            intents.append({"intent_id": intent_path.stem, "state": "FAILED", "error": "导出意图记录无法读取"})
+    return {**job, "run": run, "pending_controls": pending, "exports": export_jobs,
+            "export_intents": intents,
             "stage_state": json.loads(path.read_text(encoding="utf-8")) if path.is_file() else None}
 
 
@@ -149,7 +161,17 @@ def _validate_run(jobs, run):
 
 
 def control(jobs, run_id, action, request_id):
-    if action == "pause":
+    if action == "export" and jobs.get(run_id)["state"] in {"PAUSED", "COMPLETED", "EARLY_COMPLETED"}:
+        from .exports import enqueue_snapshot, retry_intent
+        view = snapshot(jobs, run_id)
+        failed = next((item for item in view["export_intents"] if item["state"] in {"PENDING", "FAILED"}), None)
+        if failed:
+            return retry_intent(jobs, run_id, failed["intent_id"])
+        weights = (view.get("result") or {}).get("snapshots")
+        if not weights or set(weights) != {"gpt", "sovits"}:
+            raise Conflict("没有已保存的完整权重对")
+        return enqueue_snapshot(jobs, view["run"], view["stage_state"], weights, "export", request_id)
+    if action in {"pause", "export", "stop_export"}:
         return jobs.control(run_id, action, request_id)
     if action != "resume":
         raise ValueError("未支持的训练控制")

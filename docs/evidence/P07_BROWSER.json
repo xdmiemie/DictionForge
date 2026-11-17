@@ -1,0 +1,336 @@
+{
+  "stage": "P07",
+  "started": "2026-11-17T11:02:11.429Z",
+  "base": "http://127.0.0.1:7867",
+  "runDir": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z",
+  "playwright": "1.62.1",
+  "executablePath": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  "headless": true,
+  "scope": "Existing UI only; no training, synthesis, import, save, or deletion submitted.",
+  "checks": [
+    {
+      "name": "中文双标签切换",
+      "status": "PASS",
+      "detail": "语音合成与微调训练标签均由真实 DOM 点击切换。"
+    },
+    {
+      "name": "模型卡真实校验状态与官方底模禁删",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "1d9b77725c935da2af1a8f7279e0c7be",
+          "validation": {
+            "structure": "PASS",
+            "gpu": "PASS",
+            "device": "cpu",
+            "torch": "2.9.0+cu128",
+            "gpt": {
+              "tensors": 295,
+              "architecture": {
+                "vocab_size": 1025,
+                "phoneme_vocab_size": 732,
+                "embedding_dim": 512,
+                "hidden_dim": 512,
+                "head": 16,
+                "linear_units": 2048,
+                "n_layer": 24,
+                "dropout": 0,
+                "EOS": 1024,
+                "random_bert": 0
+              },
+              "precision": [
+                "torch.float16"
+              ]
+            },
+            "sovits": {
+              "format": "v4_lora",
+              "lora_rank": 32,
+              "tensors": 258,
+              "base_required": true
+            },
+            "sample_rate": 48000,
+            "super_sampling": false,
+            "gpu_test_id": "712e81ed370e4ca4ae4e04be0ff583b5"
+          },
+          "text": "景元\n已注册\n\n版本 1d9b77725c935da2af1a8f7279e0c7be · 模型 09e42df26bf30b98cea3880e\n\n结构检查 通过\nGPU 试听 通过\n\n导出时阶段进度（冻结快照）\n\nSoVITS v4 · 已提前完成 · 更新 3\n\nGPT · 尚未开始 · 使用初始化权重（官方底模）\n\n权重、依赖与来源\n查看删除范围"
+        },
+        {
+          "id": "a974c5da69695d0aba3477bff5c7b768",
+          "validation": {
+            "structure": "PASS",
+            "gpu": "PASS",
+            "device": "cpu",
+            "torch": "2.9.0+cu128",
+            "gpt": {
+              "tensors": 295,
+              "architecture": {
+                "vocab_size": 1025,
+                "phoneme_vocab_size": 732,
+                "embedding_dim": 512,
+                "hidden_dim": 512,
+                "head": 16,
+                "linear_units": 2048,
+                "n_layer": 24,
+                "dropout": 0,
+                "EOS": 1024,
+                "random_bert": 0
+              },
+              "precision": [
+                "torch.float16"
+              ]
+            },
+            "sovits": {
+              "format": "v4_lora",
+              "lora_rank": 32,
+              "tensors": 258,
+              "base_required": true
+            },
+            "sample_rate": 48000,
+            "super_sampling": false,
+            "gpu_test_id": "e6dafc6cb472472eb23151a1c3b05234"
+          },
+          "text": "景元\n已注册\n\n版本 a974c5da69695d0aba3477bff5c7b768 · 模型 09e42df26bf30b98cea3880e\n\n结构检查 通过\nGPU 试听 通过\n\n导出时阶段进度（冻结快照）\n\nSoVITS v4 · 已完成 · 更新 40\n\nGPT · 已完成 · 更新 4\n\n权重、依赖与来源\n查看删除范围"
+        },
+        {
+          "id": "042ba87417df5c67b75f9ef27777be74",
+          "validation": {
+            "structure": "PASS",
+            "gpu": "PASS",
+            "device": "cpu",
+            "torch": "2.9.0+cu128",
+            "gpt": {
+              "tensors": 295,
+              "architecture": {
+                "vocab_size": 1025,
+                "phoneme_vocab_size": 732,
+                "embedding_dim": 512,
+                "hidden_dim": 512,
+                "head": 16,
+                "linear_units": 2048,
+                "n_layer": 24,
+                "dropout": 0,
+                "EOS": 1024,
+                "random_bert": 0
+              },
+              "precision": [
+                "torch.float16"
+              ]
+            },
+            "sovits": {
+              "format": "v4_lora",
+              "lora_rank": 32,
+              "tensors": 258,
+              "base_required": true
+            },
+            "sample_rate": 48000,
+            "super_sampling": false,
+            "gpu_test_id": "5cd28d453d3b4474addfce1c97bec49c"
+          },
+          "text": "景元\n已注册\n\n版本 042ba87417df5c67b75f9ef27777be74 · 模型 09e42df26bf30b98cea3880e\n\n结构检查 通过\nGPU 试听 通过\n\n导出时阶段进度（冻结快照）\n\nSoVITS v4 · 运行中 · 更新 3\n\nGPT · 尚未开始 · 使用初始化权重（官方底模）\n\n权重、依赖与来源\n查看删除范围"
+        },
+        {
+          "id": "official",
+          "validation": {
+            "structure": "PASS",
+            "gpu": "NOT_RUN",
+            "basis": "pinned_official_assets"
+          },
+          "text": "官方 GPT-SoVITS v4\n已注册\n\n版本 official · 模型 official\n\n结构检查 通过\nGPU 试听 尚未运行\n\n底模来源\n\nSoVITS v4 · 官方底模\n\nGPT · 官方底模\n\n权重、依赖与来源\n\n共享官方底模，由预训练资产统一管理。"
+        }
+      ]
+    },
+    {
+      "name": "模型删除预览与取消",
+      "status": "PASS",
+      "detail": {
+        "modelId": "1d9b77725c935da2af1a8f7279e0c7be",
+        "text": "删除模型版本\n取消\n\n景元 · 1d9b7772\n\n以下是本次确认的文件范围：5 项 · 221.0 MiB\n\nE:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\gpt.ckpt 148.1 MiB\n\nE:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\manifest.json 0.0 MiB\n\nE:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\reference.wav 0.8 MiB\n\nE:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\sovits.pth 72.1 MiB\n\nE:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\training_summary.json 0.0 MiB\n\n未发现阻止删除的引用。确认后删除以上指定版本文件。\n\n确认删除此模型版本",
+        "deleteSubmitted": false
+      }
+    },
+    {
+      "name": "数据删除引用保护与取消",
+      "status": "PASS",
+      "detail": {
+        "text": "删除数据版本\n取消\n\n景元 · 76b5a08a\n\n以下是本次确认的文件范围：31 项 · 15.8 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\0c2b942e2e5349b39c7bf6c9415fe340.wav 0.8 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav 0.9 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\8784e7e4cecc4283a99e34eba5446926.wav 0.8 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\90cbb6fc64264c3887d42bc27664b512.wav 0.6 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\b70dd916f4884f30b2861a9a1ed177b2.wav 0.8 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\b74d50823e474071a2c00ef1c260babf.wav 0.9 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\manifest.json 0.0 MiB\n\nE:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\train.list 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\2-name2text-0.txt 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\2-name2text.txt 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\0c2b942e2e5349b39c7bf6c9415fe340.wav.pt 0.3 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\35994dd5e702407f8455be9d41a0d67a.wav.pt 0.3 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\8784e7e4cecc4283a99e34eba5446926.wav.pt 0.3 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\b70dd916f4884f30b2861a9a1ed177b2.wav.pt 0.3 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\3-bert\\b74d50823e474071a2c00ef1c260babf.wav.pt 0.3 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\0c2b942e2e5349b39c7bf6c9415fe340.wav.pt 1.4 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\35994dd5e702407f8455be9d41a0d67a.wav.pt 1.5 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\8784e7e4cecc4283a99e34eba5446926.wav.pt 1.3 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\b70dd916f4884f30b2861a9a1ed177b2.wav.pt 1.2 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\4-cnhubert\\b74d50823e474071a2c00ef1c260babf.wav.pt 1.4 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\0c2b942e2e5349b39c7bf6c9415fe340.wav 0.6 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\35994dd5e702407f8455be9d41a0d67a.wav 0.6 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\8784e7e4cecc4283a99e34eba5446926.wav 0.5 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\b70dd916f4884f30b2861a9a1ed177b2.wav 0.5 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\5-wav32k\\b74d50823e474071a2c00ef1c260babf.wav 0.6 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\6-name2semantic-0.tsv 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\6-name2semantic.tsv 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\input-acoustic.list 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\input-semantic.list 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\input-text.list 0.0 MiB\n\nE:\\DictionForge\\data\\features\\76b5a08af4ca471f9c6fa9c903347e69\\manifest.json 0.0 MiB\n\n此版本受到引用保护，暂不能删除。\n\n活跃训练或完整恢复点依赖该版本 · run / 7a00f578a57f4c8895e481e5ba67413e\n活跃训练或完整恢复点依赖该版本 · run / be4045700e60491b95efb7101aaf411a\n活跃训练或完整恢复点依赖该版本 · run / a1e76ef07ae34bedb9dbb45590216c2f\n活跃训练或完整恢复点依赖该版本 · run / 278c506666fa4876bff2ec0bf0d7d053\n不可变导出快照仍依赖该版本 · export_snapshot / 2d1a2b41d27e56cbaf8003deaf5628a9\n不可变导出快照仍依赖该版本 · export_snapshot / 6db64db0d5b054239c0bc310b365dc98\n活跃训练或完整恢复点依赖该版本 · run / cca9eda7641b4436b238c936a9b23ffd\n不可变导出快照仍依赖该版本 · export_snapshot / b1b1c530eb2354b99185bcbabb84db77\n已发布模型使用该数据版本 · model / 042ba87417df5c67b75f9ef27777be74\n已发布模型使用该数据版本 · model / a974c5da69695d0aba3477bff5c7b768\n已发布模型使用该数据版本 · model / 1d9b77725c935da2af1a8f7279e0c7be\n确认删除此数据版本",
+        "deleteSubmitted": false
+      }
+    },
+    {
+      "name": "既有训练阶段与独立导出状态",
+      "status": "PASS",
+      "detail": {
+        "runId": "cca9eda7641b4436b238c936a9b23ffd",
+        "state": "EARLY_COMPLETED",
+        "exportIds": [
+          "bf903e14229847a68d6bb5a1301e74bc"
+        ],
+        "text": "双阶段训练进度\n刷新运行快照与恢复点\n\n每阶段独立计数，优化器更新与已处理 batch 分别记录。\n\nSoVITS v4 / S2\n已提前完成\n已完成轮次\n0\n实际优化器更新\n3\n已处理 batch\n3\n物理 batch\n1\n跳过的更新\n0\nLoss\n0.0053949\n实际学习率\n1.000e-4\n实际训练显存峰值\n3.79 GiB\n\n3 / 40 优化器更新\n\nGPT / S1\n已跳过\n导出已保存权重对\n继续训练\n模型导出 · 1 项\n\n训练状态与发布状态独立。完成后自动导出；失败可从原快照重试，保持相同模型版本。\n\n模型已发布\n中止并导出\n\n导出任务 bf903e14229847a68d6bb5a1301e74bc\n快照 b1b1c530eb2354b99185bcbabb84db77\n模型版本 1d9b77725c935da2af1a8f7279e0c7be\n\n阶段来源与导出记录\n训练恢复点 · 1 个\n\n此处校验已登记文件的完整性；训练状态与配置兼容性由工作进程在恢复时继续验证。\n\nS2 · stop_export\n文件校验通过\n\ns2-u3-d2b6948a9406\n\n已完成 0 轮 · 优化器更新 3 · 受引用保护\n\n从此恢复点派生\n恢复点详情\n冻结运行配置与阶段快照"
+      }
+    },
+    {
+      "name": "失败导出提供原快照重试入口",
+      "status": "PASS",
+      "detail": {
+        "jobId": "2a120641dadf4f0fa1249de0da6b86b5",
+        "clicked": false
+      }
+    },
+    {
+      "name": "既有草稿音频浏览器解码与播放事件",
+      "status": "PASS",
+      "detail": {
+        "src": "http://127.0.0.1:7867/api/audio/28cc2b7e72844e1ba20578ea847df57d",
+        "duration": 8.78,
+        "currentTime": 0.31001,
+        "readyState": 4,
+        "events": [
+          "play",
+          "loadedmetadata",
+          "canplay",
+          "playing"
+        ],
+        "muted": true,
+        "subjectiveListening": "NOT_PERFORMED"
+      }
+    },
+    {
+      "name": "390px 窄屏布局",
+      "status": "PASS",
+      "detail": {
+        "viewport": 390,
+        "scroll": 390,
+        "overflow": []
+      }
+    },
+    {
+      "name": "浏览器异常与应用数据范围",
+      "status": "PASS",
+      "detail": "无 pageerror / console.error / HTTP >=400；无非 GET/HEAD 请求；模型、数据与任务 ID 集合不变。"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "httpErrors": [],
+  "requestFailures": [
+    {
+      "url": "http://127.0.0.1:7867/api/jobs/cca9eda7641b4436b238c936a9b23ffd/events",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/jobs/2a120641dadf4f0fa1249de0da6b86b5/events",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "blockedMutations": [],
+  "screenshots": [
+    {
+      "path": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z\\01-training-workspace.png",
+      "sha256": "5db6a5a8a21b4dd1925ad3f034f7acf33b4c2e57cec42d0f332f4ce6607765e1"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z\\02-model-cards.png",
+      "sha256": "c9c7ab7b4da9a29ba5c65b8fad72f350a7d4ab4403cd73d067403c78b465cbcd"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z\\03-model-delete-preview.png",
+      "sha256": "21a88d2b6adeee96b2e3df3ecf8fe1be111350b5a8ff0600c8756f776bd414f5"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z\\04-protected-dataset-preview.png",
+      "sha256": "ae5635442c93ba81d3cb3ac38462d4476cedf3c1afb6f2c787a22c20066edaec"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z\\05-training-export-status.png",
+      "sha256": "4679e5e66fa9121bd2e3ba4e6abf0dafbd9f7c092920e4e2a880dc42f668e7dd"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p07-browser\\2026-11-17T11-02-11-281Z\\06-narrow-layout.png",
+      "sha256": "691cbcc158e079913cd3ea626284c21d42f3cb2595bfb011b7ca06deb3b370c8"
+    }
+  ],
+  "browserVersion": "157.0.4341.60",
+  "before": {
+    "modelIds": [
+      "042ba87417df5c67b75f9ef27777be74",
+      "1d9b77725c935da2af1a8f7279e0c7be",
+      "a974c5da69695d0aba3477bff5c7b768",
+      "official"
+    ],
+    "datasetIds": [
+      "76b5a08af4ca471f9c6fa9c903347e69",
+      "eabb1d2c8a494054bfcb4eac28f6c31f"
+    ],
+    "jobIds": [
+      "121fb15c59ae4aa7829b0c7c4c1d6ece",
+      "25e4fce108d5482390fd3f6f1347f3dc",
+      "278c506666fa4876bff2ec0bf0d7d053",
+      "2a120641dadf4f0fa1249de0da6b86b5",
+      "3ac853ab9d8945b49c1a015a7f22d880",
+      "4cdfb4b783e24a98971485f0a77c9cfe",
+      "5cd28d453d3b4474addfce1c97bec49c",
+      "6966480b2359483982d547c60ab1347d",
+      "712e81ed370e4ca4ae4e04be0ff583b5",
+      "7a00f578a57f4c8895e481e5ba67413e",
+      "870efe7da6d54b1093168155e2fa1476",
+      "97972fe4e3ab4c2dafc5f100a3716784",
+      "a1d244cb3127420b865c76a64a9fa80e",
+      "a1e76ef07ae34bedb9dbb45590216c2f",
+      "a44ae960010743569d216d1dae5b0368",
+      "bc4cbe9ef0c642b694a7e38b1f5b3519",
+      "be4045700e60491b95efb7101aaf411a",
+      "bf903e14229847a68d6bb5a1301e74bc",
+      "bfc3264d12e34c2e8b36b9fecc289dbe",
+      "c7b78acd75ca41b686d709e18fc3a1aa",
+      "cca9eda7641b4436b238c936a9b23ffd",
+      "e6dafc6cb472472eb23151a1c3b05234",
+      "f12c5be80cbe493d9b146a3ba85af85b",
+      "fa9ee16f3a6241a882648f3819a66eda"
+    ]
+  },
+  "narrowLayout": {
+    "viewport": 390,
+    "scroll": 390,
+    "overflow": []
+  },
+  "after": {
+    "modelIds": [
+      "042ba87417df5c67b75f9ef27777be74",
+      "1d9b77725c935da2af1a8f7279e0c7be",
+      "a974c5da69695d0aba3477bff5c7b768",
+      "official"
+    ],
+    "datasetIds": [
+      "76b5a08af4ca471f9c6fa9c903347e69",
+      "eabb1d2c8a494054bfcb4eac28f6c31f"
+    ],
+    "jobIds": [
+      "121fb15c59ae4aa7829b0c7c4c1d6ece",
+      "25e4fce108d5482390fd3f6f1347f3dc",
+      "278c506666fa4876bff2ec0bf0d7d053",
+      "2a120641dadf4f0fa1249de0da6b86b5",
+      "3ac853ab9d8945b49c1a015a7f22d880",
+      "4cdfb4b783e24a98971485f0a77c9cfe",
+      "5cd28d453d3b4474addfce1c97bec49c",
+      "6966480b2359483982d547c60ab1347d",
+      "712e81ed370e4ca4ae4e04be0ff583b5",
+      "7a00f578a57f4c8895e481e5ba67413e",
+      "870efe7da6d54b1093168155e2fa1476",
+      "97972fe4e3ab4c2dafc5f100a3716784",
+      "a1d244cb3127420b865c76a64a9fa80e",
+      "a1e76ef07ae34bedb9dbb45590216c2f",
+      "a44ae960010743569d216d1dae5b0368",
+      "bc4cbe9ef0c642b694a7e38b1f5b3519",
+      "be4045700e60491b95efb7101aaf411a",
+      "bf903e14229847a68d6bb5a1301e74bc",
+      "bfc3264d12e34c2e8b36b9fecc289dbe",
+      "c7b78acd75ca41b686d709e18fc3a1aa",
+      "cca9eda7641b4436b238c936a9b23ffd",
+      "e6dafc6cb472472eb23151a1c3b05234",
+      "f12c5be80cbe493d9b146a3ba85af85b",
+      "fa9ee16f3a6241a882648f3819a66eda"
+    ]
+  },
+  "status": "PASS",
+  "finished": "2026-11-17T11:02:19.559Z"
+}

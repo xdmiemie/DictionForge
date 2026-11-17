@@ -33,6 +33,8 @@ def create_app(settings=None):
     async def lifespan(app):
         jobs = Jobs(settings.root)
         with exclusive(jobs.state / "app.lock"):
+            from .references import reconcile_deletions
+            reconcile_deletions(jobs)
             with jobs.connect(write=True) as db:
                 db.execute("DELETE FROM records WHERE kind='service' AND id='draining'")
             supervisor = Supervisor(jobs)

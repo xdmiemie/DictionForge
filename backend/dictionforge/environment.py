@@ -21,6 +21,7 @@ def status(settings, jobs):
             assets.append({"id": asset.get("id", asset.get("path")), "present": path.is_file(),
                            "status": "待哈希验证" if path.is_file() else "缺失", "path": str(path)})
     disk = shutil.disk_usage(settings.root)
-    return {"gpu": gpu, "active_jobs": len(jobs.running()), "assets": assets,
+    return {"gpu": gpu, "active_jobs": len(jobs.running()), "gpu_jobs": jobs.running("gpu"),
+            "cpu_jobs": jobs.running("cpu"), "assets": assets,
             "worker_python": settings.worker_python, "worker_present": Path(settings.worker_python).is_file(),
             "disk_free_bytes": disk.free}

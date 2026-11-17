@@ -33,6 +33,8 @@ def create_app(settings=None):
     async def lifespan(app):
         jobs = Jobs(settings.root)
         with exclusive(jobs.state / "app.lock"):
+            with jobs.connect(write=True) as db:
+                db.execute("DELETE FROM records WHERE kind='service' AND id='draining'")
             supervisor = Supervisor(jobs)
             app.state.jobs = jobs
             supervisor.thread.start()
@@ -80,6 +82,7 @@ def create_app(settings=None):
         with store.connect(write=True) as db:
             if db.execute("SELECT 1 FROM jobs WHERE state IN ('QUEUED','RUNNING')").fetchone():
                 raise Conflict("存在排队或运行中的任务，请先暂停训练或等待任务结束")
+            db.execute("INSERT OR REPLACE INTO records VALUES('service','draining','{}')")
             server.should_exit = True
         return {"stopping": True, "pid": os.getpid()}
 
@@ -94,6 +97,19 @@ def create_app(settings=None):
     @app.get("/api/jobs/{job_id}")
     def job(job_id: str, request: Request):
         return request.app.state.jobs.get(job_id)
+
+    @app.get("/api/jobs/{job_id}/log")
+    def job_log(job_id: str, request: Request):
+        store = request.app.state.jobs
+        store.get(job_id)
+        logs = []
+        for name in ("worker.log", "process.log"):
+            path = store.root / "runs" / job_id / name
+            if path.is_file():
+                with path.open("rb") as stream:
+                    stream.seek(max(0, path.stat().st_size - 65536))
+                    logs.append({"name": name, "text": stream.read().decode("utf-8", errors="replace")})
+        return logs
 
     @app.post("/api/jobs/{job_id}/control", status_code=202)
     def control(job_id: str, body: Control, request: Request):
@@ -134,7 +150,16 @@ def create_app(settings=None):
 
     @app.get("/api/system/status")
     def system_status(request: Request):
-        return {"gpu": "环境探测待执行", "active_jobs": len(request.app.state.jobs.running())}
+        from .environment import status
+        return status(settings, request.app.state.jobs)
+
+    @app.post("/api/system/probe", status_code=202)
+    def system_probe(body: Submission, request: Request):
+        return request.app.state.jobs.submit("system_probe", {}, str(body.request_id))
+
+    @app.post("/api/assets/prepare", status_code=202)
+    def assets_prepare(body: Submission, request: Request):
+        return request.app.state.jobs.submit("asset_prepare", {}, str(body.request_id))
 
     from .routes import register
     register(app)

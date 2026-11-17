@@ -27,6 +27,16 @@ def test_pid_reuse_is_not_live():
     assert not live_identity({"pid": current.pid, "process_start": current.create_time()-1})
 
 
+def test_shutdown_gate_refuses_new_work_but_preserves_receipt(tmp_path):
+    jobs = Jobs(tmp_path)
+    original = jobs.submit("diagnostic", {}, "receipt")
+    with jobs.connect(write=True) as db:
+        db.execute("INSERT INTO records VALUES('service','draining','{}')")
+    with pytest.raises(Conflict, match="安全停止"):
+        jobs.submit("diagnostic", {}, "new")
+    assert jobs.submit("diagnostic", {}, "receipt")["id"] == original["id"]
+
+
 def test_lost_worker_reconciles(tmp_path):
     from dictionforge.supervisor import Supervisor
     jobs = Jobs(tmp_path)

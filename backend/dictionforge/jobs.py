@@ -87,6 +87,8 @@ class Jobs:
                 if existing["kind"] != kind or existing["payload"] != snapshot:
                     raise Conflict("该请求 ID 已绑定其他配置")
                 return self.decode(existing)
+            if db.execute("SELECT 1 FROM records WHERE kind='service' AND id='draining'").fetchone():
+                raise Conflict("服务正在安全停止，无法受理新任务")
             job_id, now = uuid.uuid4().hex, time.time()
             db.execute("INSERT INTO jobs(id,request,kind,state,payload,created,updated) VALUES(?,?,?,?,?,?,?)",
                        (job_id, request, kind, "QUEUED", snapshot, now, now))

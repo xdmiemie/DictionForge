@@ -1,0 +1,31 @@
+{
+  "ok": false,
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "executable": "E:\\DictionForge\\.venv-worker\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "errors": [
+    {
+      "code": "RuntimeError",
+      "message": "Could not load libtorchcodec. Likely causes:\n          1. FFmpeg is not properly installed in your environment. We support\n             versions 4, 5, 6, and 7 on all platforms, and 8 on Mac and Linux.\n          2. The PyTorch version (2.9.0+cu128) is not compatible with\n             this version of TorchCodec. Refer to the version compatibility\n             table:\n             https://github.com/pytorch/torchcodec?tab=readme-ov-file#installing-torchcodec.\n          3. Another runtime dependency; see exceptions below.\n        The following exceptions were raised as we tried to load libtorchcodec:\n        \n[start of libtorchcodec loading traceback]\nFFmpeg version 8: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core8.dll\nFFmpeg version 7: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core7.dll\nFFmpeg version 6: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core6.dll\nFFmpeg version 5: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core5.dll\nFFmpeg version 4: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core4.dll\n[end of libtorchcodec loading traceback].",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\DictionForge\\scripts\\probe.py\", line 119, in main\n    chunks = list(model.run(request))\n             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torch\\utils\\_contextlib.py\", line 38, in generator_context\n    response = gen.send(None)\n               ^^^^^^^^^^^^^^\n  File \"E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\TTS_infer_pack\\TTS.py\", line 1041, in run\n    self.set_ref_audio(ref_audio_path)\n  File \"E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\TTS_infer_pack\\TTS.py\", line 704, in set_ref_audio\n    self._set_ref_spec(ref_audio_path)\n  File \"E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\TTS_infer_pack\\TTS.py\", line 711, in _set_ref_spec\n    spec = self._get_ref_spec(ref_audio_path)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\TTS_infer_pack\\TTS.py\", line 718, in _get_ref_spec\n    raw_audio, raw_sr = torchaudio.load(ref_audio_path)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchaudio\\__init__.py\", line 86, in load\n    return load_with_torchcodec(\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchaudio\\_torchcodec.py\", line 82, in load_with_torchcodec\n    from torchcodec.decoders import AudioDecoder\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\__init__.py\", line 10, in <module>\n    from . import decoders, samplers  # noqa\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\decoders\\__init__.py\", line 7, in <module>\n    from .._core import AudioStreamMetadata, VideoStreamMetadata\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\_core\\__init__.py\", line 8, in <module>\n    from ._metadata import (\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\_core\\_metadata.py\", line 16, in <module>\n    from torchcodec._core.ops import (\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\_core\\ops.py\", line 84, in <module>\n    load_torchcodec_shared_libraries()\n  File \"E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\_core\\ops.py\", line 69, in load_torchcodec_shared_libraries\n    raise RuntimeError(\nRuntimeError: Could not load libtorchcodec. Likely causes:\n          1. FFmpeg is not properly installed in your environment. We support\n             versions 4, 5, 6, and 7 on all platforms, and 8 on Mac and Linux.\n          2. The PyTorch version (2.9.0+cu128) is not compatible with\n             this version of TorchCodec. Refer to the version compatibility\n             table:\n             https://github.com/pytorch/torchcodec?tab=readme-ov-file#installing-torchcodec.\n          3. Another runtime dependency; see exceptions below.\n        The following exceptions were raised as we tried to load libtorchcodec:\n        \n[start of libtorchcodec loading traceback]\nFFmpeg version 8: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core8.dll\nFFmpeg version 7: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core7.dll\nFFmpeg version 6: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core6.dll\nFFmpeg version 5: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core5.dll\nFFmpeg version 4: Could not load this library: E:\\DictionForge\\.venv-worker\\Lib\\site-packages\\torchcodec\\libtorchcodec_core4.dll\n[end of libtorchcodec loading traceback].\n"
+    }
+  ],
+  "imports": {
+    "torch": "2.9.0+cu128",
+    "torchaudio": "2.9.0+cu128",
+    "numpy": "1.26.4",
+    "transformers": "4.48.3",
+    "funasr": "1.0.27",
+    "pytorch-lightning": "2.5.5",
+    "peft": "0.14.0"
+  },
+  "imports_note": "installed distribution metadata; actual CUDA and optional ASR/TTS imports run below",
+  "ffmpeg": "ffmpeg version 8.1.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "torch": "2.9.0+cu128",
+  "cuda": "12.8",
+  "device": "NVIDIA GeForce RTX 5080",
+  "free_vram_bytes": 15712911360,
+  "total_vram_bytes": 17066360832,
+  "tensor_check": true,
+  "elapsed_seconds": 33.34400000000096
+}

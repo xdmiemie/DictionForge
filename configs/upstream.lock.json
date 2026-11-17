@@ -5,6 +5,27 @@
   "commit": "6a1ece89928f6e5042a3ae0e092c2f47bdbae596",
   "directory": "vendor/gpt-sovits",
   "verified_date": "2026-11-17",
-  "patches": [],
-  "gpu_validation": "NOT_RUN"
+  "patches": [
+    {
+      "path": "patches/gpt-sovits/0001-headless-audio.patch",
+      "sha256": "e4c8e3e392664593f6c727dde88f079c7d5f2835aa2e57c82dcc8302750cc96d",
+      "files": {
+        "tools/my_utils.py": {
+          "before": "8174a44cc425130f0be32f92cb7a99955343e8889d78781fc447c508296ed230",
+          "after": "22377ad0f442b52fa963685254a2c4f7631bd36beb2e28b34179156cf34cdf18"
+        }
+      }
+    },
+    {
+      "path": "patches/gpt-sovits/0002-reference-soundfile.patch",
+      "sha256": "f57d84443de5ed1786ed3b3fe6ded6115d827c23b229f54b80675147b9ccb3d4",
+      "files": {
+        "GPT_SoVITS/TTS_infer_pack/TTS.py": {
+          "before": "ef63f91078ba9cafe427ba92d10bd52f2f8a8b1877befa2790b728fc93d3e8d0",
+          "after": "3496945fa2f9b5d4dfb39f397cd02aa88409cc578d182d31837bd7535d5f3dc6"
+        }
+      }
+    }
+  ],
+  "gpu_validation": "P02_CUDA_ASR_TTS_PASSED; training NOT_RUN"
 }

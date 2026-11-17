@@ -2,6 +2,7 @@ from contextlib import contextmanager
 import os
 import subprocess
 import sys
+import json
 from threading import Event, Thread
 import psutil
 
@@ -29,6 +30,27 @@ def live_identity(job):
     except psutil.AccessDenied:
         return True
 
+def reap_owned_child(jobs, job_id):
+    with jobs.connect() as db:
+        row = db.execute("SELECT metadata FROM records WHERE kind='process' AND id=?", (job_id,)).fetchone()
+    if not row:
+        return
+    child = json.loads(row["metadata"])
+    if live_identity(child):
+        try:
+            parent = psutil.Process(child["pid"])
+            processes = parent.children(recursive=True) + [parent]
+            for p in processes:
+                try: p.kill()
+                except psutil.NoSuchProcess: pass
+            _, alive = psutil.wait_procs(processes, timeout=10)
+            if alive:
+                raise OSError("工作进程树尚未退出，继续保护 GPU 租约")
+        except psutil.NoSuchProcess:
+            pass
+    with jobs.connect(write=True) as db:
+        db.execute("DELETE FROM records WHERE kind='process' AND id=?", (job_id,))
+
 class Supervisor:
     def __init__(self, jobs):
         self.jobs = jobs
@@ -42,6 +64,7 @@ class Supervisor:
                     running = self.jobs.running()
                     for job in running:
                         if not live_identity(job):
+                            reap_owned_child(self.jobs, job["id"])
                             self.jobs.status(job["id"], "INTERRUPTED", error="工作进程已退出，检查最后有效产物")
                     if not any(live_identity(j) for j in running):
                         job = self.jobs.claim()

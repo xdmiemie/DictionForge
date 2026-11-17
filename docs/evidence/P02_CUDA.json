@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "executable": "E:\\DictionForge\\.venv-worker\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "errors": [],
+  "imports": {
+    "torch": "2.9.0+cu128",
+    "torchaudio": "2.9.0+cu128",
+    "numpy": "1.26.4",
+    "transformers": "4.48.3",
+    "funasr": "1.0.27",
+    "pytorch-lightning": "2.5.5",
+    "peft": "0.14.0"
+  },
+  "ffmpeg": "ffmpeg version 8.1.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "audio": {
+    "path": "E:\\DictionForge\\data\\fixtures\\知更鸟 原始.wav",
+    "sha256": "4cd4e3f25c7e5a8d237761d6d6cd85f994b0706bcf7b4ff22f62b365ef89b28d",
+    "decoded": true
+  },
+  "torch": "2.9.0+cu128",
+  "cuda": "12.8",
+  "device": "NVIDIA GeForce RTX 5080",
+  "free_vram_bytes": 15712911360,
+  "total_vram_bytes": 17066360832,
+  "tensor_check": true,
+  "peak_vram_bytes": 8581120,
+  "elapsed_seconds": 7.4209999999984575
+}

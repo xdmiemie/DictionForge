@@ -1,0 +1,26 @@
+--- a/tools/my_utils.py
++++ b/tools/my_utils.py
+@@ -2,7 +2,6 @@
+ import traceback
+ import ffmpeg
+ import numpy as np
+-import gradio as gr
+ from tools.i18n.i18n import I18nAuto
+ import pandas as pd
+ 
+@@ -39,6 +38,7 @@
+ 
+ 
+ def check_for_existance(file_list: list = None, is_train=False, is_dataset_processing=False):
++    import gradio as gr
+     files_status = []
+     if is_train == True and file_list:
+         file_list.append(os.path.join(file_list[0], "2-name2text.txt"))
+@@ -80,6 +80,7 @@
+ 
+ 
+ def check_details(path_list=None, is_train=False, is_dataset_processing=False):
++    import gradio as gr
+     if is_dataset_processing:
+         list_path, audio_path = path_list
+         if not list_path.endswith(".list"):

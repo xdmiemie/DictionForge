@@ -1,0 +1,14 @@
+--- a/GPT_SoVITS/TTS_infer_pack/TTS.py
++++ b/GPT_SoVITS/TTS_infer_pack/TTS.py
+@@ -715,7 +715,10 @@
+             self.prompt_cache["refer_spec"][0] = spec
+ 
+     def _get_ref_spec(self, ref_audio_path):
+-        raw_audio, raw_sr = torchaudio.load(ref_audio_path)
++        # Managed references are lossless WAV; avoid TorchCodec/FFmpeg DLL coupling on Windows.
++        import soundfile as sf
++        raw_pcm, raw_sr = sf.read(ref_audio_path, dtype="float32", always_2d=True)
++        raw_audio = torch.from_numpy(raw_pcm.T.copy())
+         raw_audio = raw_audio.to(self.configs.device).float()
+         self.prompt_cache["raw_audio"] = raw_audio
+         self.prompt_cache["raw_sr"] = raw_sr

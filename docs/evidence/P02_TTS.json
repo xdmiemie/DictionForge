@@ -1,0 +1,60 @@
+{
+  "ok": true,
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "executable": "E:\\DictionForge\\.venv-worker\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "errors": [],
+  "imports": {
+    "torch": "2.9.0+cu128",
+    "torchaudio": "2.9.0+cu128",
+    "numpy": "1.26.4",
+    "transformers": "4.48.3",
+    "funasr": "1.0.27",
+    "pytorch-lightning": "2.5.5",
+    "peft": "0.14.0"
+  },
+  "imports_note": "installed distribution metadata; actual CUDA and optional ASR/TTS imports run below",
+  "ffmpeg": "ffmpeg version 8.1.2-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "torch": "2.9.0+cu128",
+  "cuda": "12.8",
+  "device": "NVIDIA GeForce RTX 5080",
+  "free_vram_bytes": 15712911360,
+  "total_vram_bytes": 17066360832,
+  "tensor_check": true,
+  "tts": {
+    "config": {
+      "version": "v4",
+      "device": "cuda",
+      "is_half": true,
+      "t2s_weights_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\s1v3.ckpt",
+      "vits_weights_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\gsv-v4-pretrained\\s2Gv4.pth",
+      "cnhuhbert_base_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\chinese-hubert-base",
+      "bert_base_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\chinese-roberta-wwm-ext-large"
+    },
+    "request": {
+      "text": "你好，欢迎来到声句工坊。",
+      "text_lang": "all_zh",
+      "ref_audio_path": "E:\\DictionForge\\data\\fixtures\\景元 参考.wav",
+      "prompt_text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+      "prompt_lang": "all_zh",
+      "top_k": 5,
+      "top_p": 1.0,
+      "temperature": 1.0,
+      "text_split_method": "cut0",
+      "batch_size": 1,
+      "speed_factor": 1.0,
+      "seed": 42,
+      "sample_steps": 32,
+      "parallel_infer": false,
+      "fragment_interval": 0.3,
+      "repetition_penalty": 1.35
+    },
+    "output": "E:\\DictionForge\\data\\diagnostics\\official-tts.wav",
+    "sha256": "0e34ab5f7d6a0810d2218f68f9292db76ad39c9f22aea8e6b3c3e00063f8ab55",
+    "sample_rate": 48000,
+    "samples": 170880,
+    "seconds": 68.21900000000096
+  },
+  "peak_vram_bytes": 2329732608,
+  "elapsed_seconds": 78.98400000000038
+}

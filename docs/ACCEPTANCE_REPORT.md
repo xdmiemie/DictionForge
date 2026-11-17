@@ -8,9 +8,9 @@
 | A02 | 任务重复请求 | PASS | tests/test_jobs.py（4 passed）；docs/evidence/P01_UI.md；pnpm run build |
 | A03 | 断线与刷新 | PASS | tests/test_jobs.py（4 passed）；docs/evidence/P01_UI.md；pnpm run build |
 | A04 | 进程失联与构建 | PASS | tests/test_jobs.py（4 passed）；docs/evidence/P01_UI.md；pnpm run build |
-| A05 | CUDA 与中文路径 | NOT_RUN | 尚未执行 |
-| A06 | 缺失或损坏的资产 | NOT_RUN | 尚未执行 |
-| A07 | 官方底模与 ASR | NOT_RUN | 尚未执行 |
+| A05 | CUDA 与中文路径 | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
+| A06 | 缺失或损坏的资产 | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
+| A07 | 官方底模与 ASR | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
 | A08 | 扫描混合格式 | NOT_RUN | 尚未执行 |
 | A09 | 源录音保护 | NOT_RUN | 尚未执行 |
 | A10 | 无效素材与统计 | NOT_RUN | 尚未执行 |

@@ -2,6 +2,15 @@ def execute(jobs, job):
     from .settings import Settings, ROOT
     from .engine import invoke
     settings = Settings.from_environment()
+    if job["kind"] in {"dataset_scan", "dataset_prepare", "dataset_asr"}:
+        from . import datasets
+        if job["kind"] == "dataset_scan":
+            return datasets.scan(jobs, job)
+        if job["kind"] == "dataset_prepare":
+            return datasets.prepare(jobs, job)
+        draft = datasets.get_draft(jobs, job["payload"]["draft_id"])
+        updated = datasets.transcribe(jobs, job, draft, job["payload"]["clip_ids"])
+        return {"draft_id": updated["id"], "revision": updated["revision"]}
     if job["kind"] == "system_probe":
         result = jobs.root / "runs" / job["id"] / "probe.json"
         return invoke(jobs, job, [settings.worker_python, ROOT / "scripts/probe.py", "--output", result], result=result)

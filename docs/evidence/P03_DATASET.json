@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "base_url": "http://127.0.0.1:7867",
+  "run_tag": "stable-media",
+  "source": "D:\\中文 - Chinese\\景元",
+  "fixture": "E:\\DictionForge\\data\\fixtures\\景元 训练",
+  "source_files": [
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_1.wav",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_1.wav",
+      "before": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+      "copy_sha256": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+      "after": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_1.lab",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_1.lab",
+      "before": "f4a1a0a41057d0c9ab06192cf0a3778375689b1dcd0bfc4e50281769549ec4a7",
+      "copy_sha256": "f4a1a0a41057d0c9ab06192cf0a3778375689b1dcd0bfc4e50281769549ec4a7",
+      "after": "f4a1a0a41057d0c9ab06192cf0a3778375689b1dcd0bfc4e50281769549ec4a7",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_11.wav",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_11.wav",
+      "before": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+      "copy_sha256": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+      "after": "14ca564ec3ebe060b4f0bd1fe8518287d03e420348edf905cd00edb40257043d",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_11.lab",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_11.lab",
+      "before": "a49582e6f913aae7629251a990e300759a6e7495b4a344188093b4905ab7a6fc",
+      "copy_sha256": "a49582e6f913aae7629251a990e300759a6e7495b4a344188093b4905ab7a6fc",
+      "after": "a49582e6f913aae7629251a990e300759a6e7495b4a344188093b4905ab7a6fc",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_12.wav",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_12.wav",
+      "before": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+      "copy_sha256": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+      "after": "b93b66564b57783a8195f5b4a626c3144b66734984583f7752562dad15cdf3b1",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_12.lab",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_12.lab",
+      "before": "04c7a47d8fb192877fa1e74e692896849bade1917a7b60dc140a3ca906a7b244",
+      "copy_sha256": "04c7a47d8fb192877fa1e74e692896849bade1917a7b60dc140a3ca906a7b244",
+      "after": "04c7a47d8fb192877fa1e74e692896849bade1917a7b60dc140a3ca906a7b244",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_13.wav",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_13.wav",
+      "before": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+      "copy_sha256": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+      "after": "4cd1b33a3f00d7e37e42b422369f03e63314913992a27d1edef503577625d285",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_13.lab",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_13.lab",
+      "before": "fc12aad6356924f677f6206fee91e4e3e4530b3c4e6b90e973c4d85d9a608c96",
+      "copy_sha256": "fc12aad6356924f677f6206fee91e4e3e4530b3c4e6b90e973c4d85d9a608c96",
+      "after": "fc12aad6356924f677f6206fee91e4e3e4530b3c4e6b90e973c4d85d9a608c96",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_14.wav",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_14.wav",
+      "before": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+      "copy_sha256": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+      "after": "98f14d8bacc1f2952341caf42a5a5cae79a4efad697c02e48ef9779d8d6fabee",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_14.lab",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_14.lab",
+      "before": "16592d8145110e1898c61d5ae89dd721e96c3611d3ae72cb8c4bf752b84f7300",
+      "copy_sha256": "16592d8145110e1898c61d5ae89dd721e96c3611d3ae72cb8c4bf752b84f7300",
+      "after": "16592d8145110e1898c61d5ae89dd721e96c3611d3ae72cb8c4bf752b84f7300",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_15.wav",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_15.wav",
+      "before": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+      "copy_sha256": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+      "after": "50bc0119fe8af220dffd80993538b34472431b344cd5cd9e6a622752254f6185",
+      "unchanged": true
+    },
+    {
+      "original": "D:\\中文 - Chinese\\景元\\archive_jingyuan_15.lab",
+      "copy": "E:\\DictionForge\\data\\fixtures\\景元 训练\\archive_jingyuan_15.lab",
+      "before": "8afd1344d1d46b1e97bde4d5d48017f3982f7e77ed9ef4eadadd38f8b504d55c",
+      "copy_sha256": "8afd1344d1d46b1e97bde4d5d48017f3982f7e77ed9ef4eadadd38f8b504d55c",
+      "after": "8afd1344d1d46b1e97bde4d5d48017f3982f7e77ed9ef4eadadd38f8b504d55c",
+      "unchanged": true
+    }
+  ],
+  "stages": {
+    "publish": {
+      "id": "76b5a08af4ca471f9c6fa9c903347e69",
+      "dataset_id": "09e42df26bf30b98cea3880e",
+      "parent_id": "eabb1d2c8a494054bfcb4eac28f6c31f",
+      "seconds": 52.72,
+      "fingerprint": "e4e78be4675cf628afe57cdf38c282c32be6e6b2f0f30555aa349249182a3575",
+      "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69",
+      "list_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\train.list",
+      "feature_status": "MISSING",
+      "version_id": "76b5a08af4ca471f9c6fa9c903347e69"
+    }
+  },
+  "parent_manifest": {
+    "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\eabb1d2c8a494054bfcb4eac28f6c31f\\manifest.json",
+    "before": "b32ef8981c8dde309808c4de3c25a82012eae9c178309e71761b18985bb4ae7a",
+    "after": "b32ef8981c8dde309808c4de3c25a82012eae9c178309e71761b18985bb4ae7a"
+  },
+  "clips": [
+    {
+      "id": "8784e7e4cecc4283a99e34eba5446926",
+      "split": "train",
+      "seconds": 8.78,
+      "audio_id": "28cc2b7e72844e1ba20578ea847df57d",
+      "media_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\8784e7e4cecc4283a99e34eba5446926.wav",
+      "range_status": 206,
+      "content_range": "bytes 0-255/842924",
+      "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6"
+    },
+    {
+      "id": "35994dd5e702407f8455be9d41a0d67a",
+      "split": "train",
+      "seconds": 10.0,
+      "audio_id": "478fd36e3df74843aeff2bed9b8f0118",
+      "media_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+      "range_status": 206,
+      "content_range": "bytes 0-255/960044",
+      "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7"
+    },
+    {
+      "id": "0c2b942e2e5349b39c7bf6c9415fe340",
+      "split": "train",
+      "seconds": 9.26,
+      "audio_id": "65fb6b2ab90c4ea4af4919457cdf5bb6",
+      "media_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\0c2b942e2e5349b39c7bf6c9415fe340.wav",
+      "range_status": 206,
+      "content_range": "bytes 0-255/889004",
+      "sha256": "03ae6d485acf180308d8666fe7dbac5a54a7ccc777863826b4d97d9dea187770"
+    },
+    {
+      "id": "b74d50823e474071a2c00ef1c260babf",
+      "split": "train",
+      "seconds": 9.76,
+      "audio_id": "3415a32c636d416e834a57dce3fbbac1",
+      "media_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\b74d50823e474071a2c00ef1c260babf.wav",
+      "range_status": 206,
+      "content_range": "bytes 0-255/937004",
+      "sha256": "907b0a2491c81d7e9ad131857df5dd7419158c080816a325e8c2fd33722bef18"
+    },
+    {
+      "id": "90cbb6fc64264c3887d42bc27664b512",
+      "split": "validation",
+      "seconds": 6.62,
+      "audio_id": "8a1bea59bddd429f8125555a7381621a",
+      "media_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\90cbb6fc64264c3887d42bc27664b512.wav",
+      "range_status": 206,
+      "content_range": "bytes 0-255/635564",
+      "sha256": "6ebf03c1694f058097d6874baf61f66b07d88734de12cdb3d59a2119dbfe6d1a"
+    },
+    {
+      "id": "b70dd916f4884f30b2861a9a1ed177b2",
+      "split": "train",
+      "seconds": 8.3,
+      "audio_id": "201d8e339ed649efa1f8ec36f658fdbd",
+      "media_path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\b70dd916f4884f30b2861a9a1ed177b2.wav",
+      "range_status": 206,
+      "content_range": "bytes 0-255/796844",
+      "sha256": "e894af4b656d25956351ddcc772626d2bd178c3f021150b4af72ab6efc7718ee"
+    }
+  ],
+  "ok": true
+}

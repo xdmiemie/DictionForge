@@ -12,7 +12,7 @@
 - 网络：沙箱内 DNS 不可用，经已授权网络执行成功。
 - TimbreForge 作为只读功能基线，模型、数据与虚拟环境不作修改。
 
-## P03–P12 — NOT_STARTED
+## P04–P12 — NOT_STARTED
 
 尚未实施。逐阶段替换此条，验收证据不得预填 PASS。
 
@@ -35,3 +35,9 @@ FastAPI/React 双标签、SQLite WAL 幂等任务与事件、独立 worker、进
 P02 最终验收：16项回归PASS；157项worker依赖锁，pip check与锁dry-run通过；真实ASR、TTS、CUDA与资产证据见 docs/evidence/P02_*。P02环境与UI说明记录实际限制（ASR项目名同音字、尚未做主观音色评价）。
 
 P02 HTTP 实测任务 870efe7da6d54b1093168155e2fa1476 COMPLETED，实际CUDA探针4.782秒。CUA补点诊断按钮时provider消失，补验记NOT_RUN；页面/日志此前已通过，HTTP调用链另有实测证据。
+
+## P03 — BLOCKED（浏览器补验；实现与数据验收完成）
+
+录音扫描/试听ID/排除、静音与长度切分、离线批量ASR、revision校对、发布不可变版本、从旧版修改标注均已接通。发布版本的音频ID指向正式目录，原版本与原录音保持哈希不变。仅开放已实测的 zh 普通话。
+
+验收：全套27 passed；真实HTTP数据集6片52.72秒，5train/1validation。新版本 `76b5a08af4ca471f9c6fa9c903347e69`，dataset `09e42df26bf30b98cea3880e`。真实ASR、校对保留、父版保护、正式媒体Range206见 docs/evidence/P03_DATASET*.json、P03_ASR.md。前端生产构建通过。CUA浏览器provider不可用，P03_UI.md如实标记浏览器检查BLOCKED，留待P12复验；继续可执行阶段。

@@ -11,12 +11,12 @@
 | A05 | CUDA 与中文路径 | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
 | A06 | 缺失或损坏的资产 | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
 | A07 | 官方底模与 ASR | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
-| A08 | 扫描混合格式 | NOT_RUN | 尚未执行 |
-| A09 | 源录音保护 | NOT_RUN | 尚未执行 |
-| A10 | 无效素材与统计 | NOT_RUN | 尚未执行 |
-| A11 | 切分正确性 | NOT_RUN | 尚未执行 |
-| A12 | ASR 重试和校对 | NOT_RUN | 尚未执行 |
-| A13 | 训练清单和分组 | NOT_RUN | 尚未执行 |
+| A08 | 扫描混合格式 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
+| A09 | 源录音保护 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
+| A10 | 无效素材与统计 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
+| A11 | 切分正确性 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
+| A12 | ASR 重试和校对 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
+| A13 | 训练清单和分组 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
 | A14 | 上游特征 | NOT_RUN | 尚未执行 |
 | A15 | 特征修复 | NOT_RUN | 尚未执行 |
 | A16 | 修改输入使特征失效 | NOT_RUN | 尚未执行 |

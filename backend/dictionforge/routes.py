@@ -1,4 +1,4 @@
-from fastapi import Request, HTTPException
+from fastapi import Request, HTTPException, Query
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, ConfigDict
 from uuid import UUID
@@ -97,7 +97,102 @@ class ModelProbe(Identified):
     reference_text: str | None = None
     reference_language: Literal['zh'] = 'zh'
 
+class ReferenceImport(Identified):
+    source_path: str | None = None
+    audio_id: str | None = None
+    text: str = Field(min_length=1,max_length=1000)
+    language: Literal['zh'] = 'zh'
+
+class DefaultReference(Identified):
+    reference_id: str
+
 def register(app):
+    @app.get('/api/synthesis/selection')
+    def selection(request: Request):
+        from .references_service import selection
+        return selection(request.app.state.jobs)
+
+    @app.get('/api/references')
+    def references(request: Request):
+        from .references_service import list_references
+        return list_references(request.app.state.jobs)
+
+    @app.post('/api/references/import')
+    def reference_import(body: ReferenceImport, request: Request):
+        from .references_service import import_reference
+        return import_reference(request.app.state.jobs,source_path=body.source_path,audio_id=body.audio_id,
+            text=body.text,language=body.language,request_id=str(body.request_id))
+
+    @app.post('/api/references/upload')
+    async def reference_upload(request: Request, request_id: UUID, text: str = Query(min_length=1,max_length=1000),
+                               language: Literal['zh'] = 'zh', name: str = Query(default='reference',max_length=255)):
+        import asyncio
+        import os
+        from .references_service import import_reference
+        area=request.app.state.jobs.root/'uploads'
+        area.mkdir(parents=True,exist_ok=True)
+        incoming=area/(request_id.hex+'.upload')
+        try:
+            stream=incoming.open('xb')
+        except FileExistsError:
+            raise HTTPException(409,'同一参考上传正在处理，请稍后重试') from None
+        try:
+            size=0
+            with stream:
+                async for chunk in request.stream():
+                    size+=len(chunk)
+                    if size>25*1024**2:raise HTTPException(413,'参考文件最大25 MiB')
+                    stream.write(chunk)
+                stream.flush();os.fsync(stream.fileno())
+            if not size:raise ValueError('参考音频文件不能为空')
+            importing=asyncio.create_task(asyncio.to_thread(import_reference,request.app.state.jobs,source_path=str(incoming),
+                text=text,language=language,request_id=str(request_id)))
+            cancelled=False
+            while True:
+                try:
+                    result=await asyncio.shield(importing)
+                    break
+                except asyncio.CancelledError:
+                    cancelled=True
+                    if importing.done():
+                        # A completed/cancelled importer no longer owns this request.
+                        result=importing.result()
+                        break
+            if cancelled:raise asyncio.CancelledError()
+            return result
+        finally:
+            incoming.unlink(missing_ok=True)
+
+    @app.post('/api/models/{key}/reference')
+    def default_reference(key: str,body: DefaultReference,request: Request):
+        from .references_service import set_default
+        return set_default(request.app.state.jobs,key,body.reference_id,str(body.request_id))
+
+    @app.post('/api/models/{key}/enable')
+    def enable_model(key: str,body: Identified,request: Request):
+        from .references_service import enable
+        return enable(request.app.state.jobs,key,str(body.request_id))
+
+    @app.post('/api/models/disable')
+    def disable_model(body: Identified,request: Request):
+        from .references_service import disable
+        return disable(request.app.state.jobs)
+
+    @app.post('/api/models/{key}/compare',status_code=202)
+    def compare_model(key: str,body: Identified,request: Request):
+        from .model_probe import compare
+        return compare(request.app.state.jobs,key,str(body.request_id))
+
+    @app.get('/api/comparisons')
+    def comparisons(request: Request):
+        from .model_probe import comparisons
+        return comparisons(request.app.state.jobs)
+
+    @app.get('/api/comparisons/{key}')
+    def comparison(key: str,request: Request):
+        from .model_probe import comparison_view
+        return comparison_view(request.app.state.jobs,key)
+
     @app.get("/api/models")
     def models(request: Request):
         from .models import list_models

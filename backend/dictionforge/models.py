@@ -8,6 +8,58 @@ from .audio import digest
 from .jobs import Conflict
 from .records import get, list_records
 from .settings import ROOT, Settings
+from .training_config import config_fingerprint
+
+
+def reference_fingerprint(reference):
+    if not reference:
+        return None
+    return config_fingerprint({key: reference[key] for key in ('sha256', 'text', 'language')})
+
+
+def _presentation(jobs, model, db=None):
+    """Small metadata reads only; full asset hashing belongs to resolve/enable."""
+    if db is None:
+        with jobs.connect() as connection:
+            return _presentation(jobs, model, connection)
+    model = dict(model, validation=dict(model.get('validation', {})))
+    if model['id'] == 'official':
+        try:
+            defaults = get(jobs, 'model_defaults', 'official', db)
+            model['default_reference'] = defaults.get('default_reference')
+        except KeyError:
+            pass
+    fingerprint = reference_fingerprint(model.get('default_reference'))
+    model['reference_fingerprint'] = fingerprint
+    history = [dict(json.loads(row['metadata']), id=row['id'])
+               for row in db.execute("SELECT id,metadata FROM records WHERE kind='model_test'")]
+    history = sorted((item for item in history if item.get('model_version_id') == model['id']),
+                     key=lambda item: item.get('created', 0), reverse=True)
+    if history:
+        model['latest_gpu_test_id'] = history[0].get('job_id') or history[0].get('id')
+    matching = []
+    for test in history:
+        test_fingerprint = test.get('reference_fingerprint')
+        if not test_fingerprint and test.get('request', {}).get('reference'):
+            test_fingerprint = reference_fingerprint(test['request']['reference'])
+        if not test_fingerprint:
+            try:
+                test_fingerprint = reference_fingerprint(get(jobs, 'model_probe', test['id'], db)['reference'])
+            except KeyError:
+                pass
+        test['reference_fingerprint'] = test_fingerprint
+        if fingerprint is None or test_fingerprint == fingerprint:
+            matching.append(test)
+    if fingerprint is not None:
+        model['validation'].update(gpu='NOT_RUN', reference_fingerprint=fingerprint)
+        model['validation'].pop('gpu_test_id', None)
+    if matching:
+        test = matching[0]
+        model['validation'].update(gpu='FAILED' if test.get('outcome') == 'FAILED' else 'PASS',
+                                   reference_fingerprint=test.get('reference_fingerprint'))
+        if test.get('job_id') or test.get('id'):
+            model['validation']['gpu_test_id'] = test.get('job_id') or test.get('id')
+    return model
 
 
 def artifact(path):
@@ -43,29 +95,33 @@ def dependencies(jobs, verify=True):
     return result
 
 
-def official(jobs, verify=True):
+def official(jobs, verify=True, db=None):
     required = dependencies(jobs, verify)
     def weight(suffix):
         return next(item for item in required if item['path'].replace('\\', '/').endswith(suffix))
-    return dict(id='official', version_id='official', model_id='official', role='官方 GPT-SoVITS v4',
+    return _presentation(jobs, dict(id='official', version_id='official', model_id='official', role='官方 GPT-SoVITS v4',
         status='READY', created=0, weights={'gpt': weight('/s1v3.ckpt'), 'sovits': weight('/s2Gv4.pth')},
         dependencies=required, stage_progress={'s1': {'state': 'OFFICIAL'}, 's2': {'state': 'OFFICIAL'}},
         provenance={'reason': 'official', 'initial_model': 'official'}, default_reference=None,
         validation={'structure': 'PASS', 'gpu': 'NOT_RUN', 'basis': 'pinned_official_assets'},
-        inference_defaults={'seed': 42, 'sample_rate': 48000, 'super_sampling': False})
+        inference_defaults={'seed': 42, 'sample_rate': 48000, 'super_sampling': False}), db)
 
 
 def list_models(jobs):
-    rows = [item for item in list_records(jobs, 'model') if item.get('status') == 'READY']
+    rows = [_presentation(jobs, item) for item in list_records(jobs, 'model') if item.get('status') == 'READY']
     rows.sort(key=lambda item: (item.get('created', 0), item['id']), reverse=True)
     rows.append(official(jobs, verify=False))
     return rows
 
 
+def describe(jobs, model_version_id, db=None):
+    return official(jobs, verify=False, db=db) if model_version_id == 'official' else _presentation(jobs, get(jobs, 'model', model_version_id, db), db)
+
+
 def resolve(jobs, model_version_id='official'):
     if model_version_id == 'official':
         return official(jobs)
-    result = get(jobs, 'model', model_version_id)
+    result = describe(jobs, model_version_id)
     if result.get('status') != 'READY' or result.get('validation', {}).get('structure') != 'PASS':
         raise ValueError('MODEL_NOT_READY')
     for item in [*result['weights'].values(), *result.get('dependencies', [])]:

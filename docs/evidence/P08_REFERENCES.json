@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-17",
+  "tests": {
+    "command": ".venv-api/Scripts/python.exe -m pytest tests/test_references_service.py tests/test_models_exports.py -q --basetemp data/pytest-p08-references-complete",
+    "result": "28 passed in 14.09s",
+    "reference_cases": 13,
+    "model_regression_cases": 15
+  },
+  "actual_import": {
+    "source_model": "1d9b77725c935da2af1a8f7279e0c7be",
+    "source_manifest": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\manifest.json",
+    "original_sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+    "original_unchanged": true,
+    "idempotent": true,
+    "separate_immutable_files": true,
+    "gpu_used": false,
+    "first": {
+      "id": "5dcc0c6509c54c0891b806ad3a757f08",
+      "path": "E:\\DictionForge\\data\\diagnostics\\p08-real-reference\\references\\5dcc0c6509c54c0891b806ad3a757f08\\reference.wav",
+      "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+      "text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+      "language": "zh",
+      "seconds": 8.78,
+      "samples": 421440,
+      "sample_rate": 48000,
+      "channels": 1,
+      "subtype": "PCM_16",
+      "source": {
+        "path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\reference.wav",
+        "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+        "audio_id": null
+      },
+      "status": "READY",
+      "created": 1794914024.8574116,
+      "fingerprint": "591cebc9e916045ec1393a9685965ec085cc37e567774db41ed5fb92bdfa0eed",
+      "audio_id": "83d6a33ffe98403b861ad5a0797c01b1"
+    },
+    "second": {
+      "id": "eeba4c5bb70e4d439516283a7a988555",
+      "path": "E:\\DictionForge\\data\\diagnostics\\p08-real-reference\\references\\eeba4c5bb70e4d439516283a7a988555\\reference.wav",
+      "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+      "text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+      "language": "zh",
+      "seconds": 8.78,
+      "samples": 421440,
+      "sample_rate": 48000,
+      "channels": 1,
+      "subtype": "PCM_16",
+      "source": {
+        "path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\1d9b77725c935da2af1a8f7279e0c7be\\reference.wav",
+        "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+        "audio_id": null
+      },
+      "status": "READY",
+      "created": 1794914024.9867642,
+      "fingerprint": "591cebc9e916045ec1393a9685965ec085cc37e567774db41ed5fb92bdfa0eed",
+      "audio_id": "3de5372ab250475a8c71100e8e6d9e04"
+    }
+  },
+  "supplemental_tests": {
+    "command": ".venv-api/Scripts/python.exe -m pytest tests/test_references_service.py -q --basetemp E:/DictionForge/data/pytest-p08-reference-http-native",
+    "result": "20 passed, 1 Starlette TestClient deprecation warning in 8.33s",
+    "native_permissions": true,
+    "bad_upload_http_status": 422,
+    "temporary_upload_removed": true,
+    "original_unchanged": true,
+    "allowed_protocols": [
+      "file",
+      "pipe"
+    ],
+    "accepted_formats": [
+      "wav",
+      "mp3",
+      "flac"
+    ],
+    "reject_url_unc": true
+  },
+  "independent_review": {
+    "upload_cancel_lifetime": "FIXED: shield import task, wait before removing input",
+    "regression": "tests/test_reference_upload_lifetime.py",
+    "output_validation_failed_history": "FIXED: invalid audio output records model_test FAILED",
+    "root_targeted_result": "4 passed"
+  }
+}

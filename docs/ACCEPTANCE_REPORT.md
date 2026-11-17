@@ -36,9 +36,9 @@
 | A30 | 导出失败重试 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
 | A31 | 外部权重对 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
 | A32 | 模型和数据集管理 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
-| A33 | 默认参考和缓存 | NOT_RUN | 尚未执行 |
-| A34 | 固定条件试听 | NOT_RUN | 尚未执行 |
-| A35 | GPU 排他和外部占用 | NOT_RUN | 尚未执行 |
+| A33 | 默认参考和缓存 | PASS | docs/evidence/P08_EFFECTS.md、P08_HTTP.json、P08_GPU.md、P08_BROWSER.md；固定条件真实推理/参考失效/租约与受控外部占用 |
+| A34 | 固定条件试听 | PASS | docs/evidence/P08_EFFECTS.md、P08_HTTP.json、P08_GPU.md、P08_BROWSER.md；固定条件真实推理/参考失效/租约与受控外部占用 |
+| A35 | GPU 排他和外部占用 | PASS | docs/evidence/P08_EFFECTS.md、P08_HTTP.json、P08_GPU.md、P08_BROWSER.md；固定条件真实推理/参考失效/租约与受控外部占用 |
 | A36 | 单句合成 | NOT_RUN | 尚未执行 |
 | A37 | 多句、重复句和断句 | NOT_RUN | 尚未执行 |
 | A38 | 无效文本和语言 | NOT_RUN | 尚未执行 |

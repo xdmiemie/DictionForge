@@ -1,0 +1,828 @@
+{
+  "result": "PASS",
+  "audit_kind": "CPU-only read-only inspection of existing GPU artifacts and SQLite events",
+  "audited_at": "2026-11-17T19:22:19.086+08:00",
+  "source_report": {
+    "path": "E:\\DictionForge\\data\\p08-http.json",
+    "sha256": "1a6cad02125119dc76c76979713f8aea1aa0643c66669c47914fe1a14c0402d8"
+  },
+  "platform": {
+    "gpu": "NVIDIA GeForce RTX 5080",
+    "driver": "621.01",
+    "torch": "2.9.0+cu128",
+    "cuda": "12.8"
+  },
+  "comparisons": {
+    "a": {
+      "comparison_id": "d5f42268-4077-4e74-a360-cd73501bebfa",
+      "reference_sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+      "reference_seconds": 8.78,
+      "jobs": [
+        {
+          "job_id": "9ae20a27c7164079964967435c2339c6",
+          "model_id": "a974c5da69695d0aba3477bff5c7b768",
+          "parameters": {
+            "seed": 42,
+            "sample_steps": 32,
+            "top_k": 5,
+            "top_p": 1.0,
+            "temperature": 1.0,
+            "speed_factor": 1.0,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3
+          },
+          "precision": "fp16",
+          "conditions_fingerprint": "cb16a82c71d842c283ee196bb044c67f74a724984c43dfff0c1ff4677a210a7c",
+          "reference_sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runs\\9ae20a27c7164079964967435c2339c6\\audio-f65eaa079d8d4de499458e22a007b122.wav",
+            "sha256": "b63737c2b75cec3cabf9a2f76506e689184c183b6593ab2ea2c6d404bdaa2d4d",
+            "bytes": 364844,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 182400,
+            "seconds": 3.8,
+            "peak": 0.8994140625,
+            "rms": 0.1058966196418538,
+            "audio_id": "5b1c376345ef4b1c8db44beebb3dda6d"
+          },
+          "verified_wav_header": {
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 182400,
+            "sample_width": 2
+          },
+          "metrics": {
+            "generation_seconds": 6.701811499995529,
+            "load_seconds": 15.125375099996745,
+            "total_seconds": 22.06614360000094,
+            "peak_cuda_bytes": 2318460416,
+            "peak_reserved_bytes": 2376073216,
+            "device": "NVIDIA GeForce RTX 5080"
+          },
+          "phase_events": [
+            {
+              "stage": "request_validation",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 0.03928109999833396
+            },
+            {
+              "stage": "dependency_validation",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 0.21078030000353465
+            },
+            {
+              "stage": "reference_validation",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 3.214876500001992
+            },
+            {
+              "stage": "model_loading",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 3.366976799996337,
+              "parameters": {
+                "seed": 42,
+                "sample_steps": 32,
+                "top_k": 5,
+                "top_p": 1.0,
+                "temperature": 1.0,
+                "speed_factor": 1.0,
+                "repetition_penalty": 1.35,
+                "fragment_interval": 0.3
+              },
+              "precision": "fp16"
+            },
+            {
+              "stage": "model_ready",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 14.11418969999795,
+              "model_parameter_bytes": {
+                "t2s_model": 155212804,
+                "vits_model": 765642128,
+                "bert_model": 651091216,
+                "cnhuhbert_model": 188743424,
+                "vocoder": 28850818
+              },
+              "allocated_bytes": 1823197184,
+              "reserved_bytes": 2344615936
+            },
+            {
+              "stage": "reference_processing",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 15.166576999996323
+            },
+            {
+              "stage": "text_frontend",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 16.946827799998573
+            },
+            {
+              "stage": "synthesizing",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 18.917367499998363
+            },
+            {
+              "stage": "audio_writing",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 21.86751930000173
+            },
+            {
+              "stage": "audio_written",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 46484,
+              "worker_process_start": 1794914148.154108,
+              "elapsed_seconds": 22.06764269999985,
+              "audio_sha256": "b63737c2b75cec3cabf9a2f76506e689184c183b6593ab2ea2c6d404bdaa2d4d",
+              "sample_rate": 48000,
+              "samples": 182400
+            }
+          ],
+          "run_started": 1794914147.908949,
+          "run_started_local": "2026-11-17T19:15:47.908+08:00",
+          "run_completed": 1794914171.8614993,
+          "run_completed_local": "2026-11-17T19:16:11.861+08:00",
+          "gpu_released_event": {
+            "kind": "progress",
+            "payload": {
+              "stage": "gpu_released",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false
+            },
+            "created": 1794914171.8354833
+          },
+          "process": {
+            "pid": 46484,
+            "recorded_start": 1794914148.154108,
+            "original_process_running": false
+          }
+        },
+        {
+          "job_id": "c91e14b22d304483b5d96926d4ae0e87",
+          "model_id": "official",
+          "parameters": {
+            "seed": 42,
+            "sample_steps": 32,
+            "top_k": 5,
+            "top_p": 1.0,
+            "temperature": 1.0,
+            "speed_factor": 1.0,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3
+          },
+          "precision": "fp16",
+          "conditions_fingerprint": "cb16a82c71d842c283ee196bb044c67f74a724984c43dfff0c1ff4677a210a7c",
+          "reference_sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runs\\c91e14b22d304483b5d96926d4ae0e87\\audio-2ee511c4112e4176a69728c7ae78905c.wav",
+            "sha256": "6460043770ce9dc40239adc943c3421572460bda58e6fdddde52030666e016b6",
+            "bytes": 337964,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 168960,
+            "seconds": 3.52,
+            "peak": 0.9560546875,
+            "rms": 0.11190234233751241,
+            "audio_id": "7803527df17645c9b70f1837dce06d58"
+          },
+          "verified_wav_header": {
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 168960,
+            "sample_width": 2
+          },
+          "metrics": {
+            "generation_seconds": 7.288233300001593,
+            "load_seconds": 13.026764499998535,
+            "total_seconds": 21.100327499996638,
+            "peak_cuda_bytes": 2318460416,
+            "peak_reserved_bytes": 2373976064,
+            "device": "NVIDIA GeForce RTX 5080"
+          },
+          "phase_events": [
+            {
+              "stage": "request_validation",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 0.07006309999997029
+            },
+            {
+              "stage": "dependency_validation",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 0.67020390000107
+            },
+            {
+              "stage": "reference_validation",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 4.247955200000433
+            },
+            {
+              "stage": "model_loading",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 4.413148899999214,
+              "parameters": {
+                "seed": 42,
+                "sample_steps": 32,
+                "top_k": 5,
+                "top_p": 1.0,
+                "temperature": 1.0,
+                "speed_factor": 1.0,
+                "repetition_penalty": 1.35,
+                "fragment_interval": 0.3
+              },
+              "precision": "fp16"
+            },
+            {
+              "stage": "model_ready",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 12.924308399997244,
+              "model_parameter_bytes": {
+                "t2s_model": 155212804,
+                "vits_model": 765642128,
+                "bert_model": 651091216,
+                "cnhuhbert_model": 188743424,
+                "vocoder": 28850818
+              },
+              "allocated_bytes": 1823197184,
+              "reserved_bytes": 2344615936
+            },
+            {
+              "stage": "reference_processing",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 13.09878259999823
+            },
+            {
+              "stage": "text_frontend",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 14.999290499996278
+            },
+            {
+              "stage": "synthesizing",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 17.779946399998153
+            },
+            {
+              "stage": "audio_writing",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 20.386051900000894
+            },
+            {
+              "stage": "audio_written",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 46808,
+              "worker_process_start": 1794914174.4770613,
+              "elapsed_seconds": 21.134062400000403,
+              "audio_sha256": "6460043770ce9dc40239adc943c3421572460bda58e6fdddde52030666e016b6",
+              "sample_rate": 48000,
+              "samples": 168960
+            }
+          ],
+          "run_started": 1794914172.1185677,
+          "run_started_local": "2026-11-17T19:16:12.118+08:00",
+          "run_completed": 1794914197.8560941,
+          "run_completed_local": "2026-11-17T19:16:37.856+08:00",
+          "gpu_released_event": {
+            "kind": "progress",
+            "payload": {
+              "stage": "gpu_released",
+              "model_id": "official",
+              "gpu_resident": false
+            },
+            "created": 1794914197.8180652
+          },
+          "process": {
+            "pid": 46808,
+            "recorded_start": 1794914174.4770613,
+            "original_process_running": false
+          }
+        }
+      ]
+    },
+    "b": {
+      "comparison_id": "e2426a04-7e35-40d3-a034-91c413a1df19",
+      "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+      "reference_seconds": 10.0,
+      "jobs": [
+        {
+          "job_id": "7397f63ad17f43d1b0fb7c98f9313bbf",
+          "model_id": "a974c5da69695d0aba3477bff5c7b768",
+          "parameters": {
+            "seed": 42,
+            "sample_steps": 32,
+            "top_k": 5,
+            "top_p": 1.0,
+            "temperature": 1.0,
+            "speed_factor": 1.0,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3
+          },
+          "precision": "fp16",
+          "conditions_fingerprint": "9421e38b165d762ea835673e52693f61151c606ce9172822d0a1a992e94f84fd",
+          "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runs\\7397f63ad17f43d1b0fb7c98f9313bbf\\audio-b4d86c66b9cd455ab230a75ce8b8208e.wav",
+            "sha256": "f2228136706e02cb2b43025ecda83564a6eb8ed0e59217d0a78a3e9ab38846b4",
+            "bytes": 272684,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 136320,
+            "seconds": 2.84,
+            "peak": 0.95068359375,
+            "rms": 0.11793446352385284,
+            "audio_id": "30c8ed0332044333af11ae5b0ec1a3c8"
+          },
+          "verified_wav_header": {
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 136320,
+            "sample_width": 2
+          },
+          "metrics": {
+            "generation_seconds": 7.674448900004791,
+            "load_seconds": 15.604818100000557,
+            "total_seconds": 23.756269900004554,
+            "peak_cuda_bytes": 2318460416,
+            "peak_reserved_bytes": 2430599168,
+            "device": "NVIDIA GeForce RTX 5080"
+          },
+          "phase_events": [
+            {
+              "stage": "request_validation",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 0.0789950000034878
+            },
+            {
+              "stage": "dependency_validation",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 0.334749900001043
+            },
+            {
+              "stage": "reference_validation",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 4.2932451000015135
+            },
+            {
+              "stage": "model_loading",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 6.677411999997275,
+              "parameters": {
+                "seed": 42,
+                "sample_steps": 32,
+                "top_k": 5,
+                "top_p": 1.0,
+                "temperature": 1.0,
+                "speed_factor": 1.0,
+                "repetition_penalty": 1.35,
+                "fragment_interval": 0.3
+              },
+              "precision": "fp16"
+            },
+            {
+              "stage": "model_ready",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 15.623580400002538,
+              "model_parameter_bytes": {
+                "t2s_model": 155212804,
+                "vits_model": 765642128,
+                "bert_model": 651091216,
+                "cnhuhbert_model": 188743424,
+                "vocoder": 28850818
+              },
+              "allocated_bytes": 1823197184,
+              "reserved_bytes": 2344615936
+            },
+            {
+              "stage": "reference_processing",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 15.686155100003816
+            },
+            {
+              "stage": "text_frontend",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 17.50111260000267
+            },
+            {
+              "stage": "synthesizing",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 19.14375989999826
+            },
+            {
+              "stage": "audio_writing",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 23.359280700002273
+            },
+            {
+              "stage": "audio_written",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": true,
+              "worker_pid": 49108,
+              "worker_process_start": 1794914207.370761,
+              "elapsed_seconds": 23.803665899999032,
+              "audio_sha256": "f2228136706e02cb2b43025ecda83564a6eb8ed0e59217d0a78a3e9ab38846b4",
+              "sample_rate": 48000,
+              "samples": 136320
+            }
+          ],
+          "run_started": 1794914207.0681949,
+          "run_started_local": "2026-11-17T19:16:47.068+08:00",
+          "run_completed": 1794914232.948107,
+          "run_completed_local": "2026-11-17T19:17:12.948+08:00",
+          "gpu_released_event": {
+            "kind": "progress",
+            "payload": {
+              "stage": "gpu_released",
+              "model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "gpu_resident": false
+            },
+            "created": 1794914232.9065115
+          },
+          "process": {
+            "pid": 49108,
+            "recorded_start": 1794914207.370761,
+            "original_process_running": false
+          }
+        },
+        {
+          "job_id": "44852e0b7cf4438fb5b2f695796f3c2b",
+          "model_id": "official",
+          "parameters": {
+            "seed": 42,
+            "sample_steps": 32,
+            "top_k": 5,
+            "top_p": 1.0,
+            "temperature": 1.0,
+            "speed_factor": 1.0,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3
+          },
+          "precision": "fp16",
+          "conditions_fingerprint": "9421e38b165d762ea835673e52693f61151c606ce9172822d0a1a992e94f84fd",
+          "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runs\\44852e0b7cf4438fb5b2f695796f3c2b\\audio-8a47ab8573604e3ab9e4f53b2beb11b8.wav",
+            "sha256": "00917dce60927598302cb4dbe3894d81acbd7a450e9aa12ccf566082b8d968d1",
+            "bytes": 276524,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 138240,
+            "seconds": 2.88,
+            "peak": 0.90966796875,
+            "rms": 0.11343576044718627,
+            "audio_id": "328bea0ba3e84f6a8f1c46539a97348e"
+          },
+          "verified_wav_header": {
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 138240,
+            "sample_width": 2
+          },
+          "metrics": {
+            "generation_seconds": 8.926221200003056,
+            "load_seconds": 13.24009020000085,
+            "total_seconds": 22.226567700003216,
+            "peak_cuda_bytes": 2318460416,
+            "peak_reserved_bytes": 2430599168,
+            "device": "NVIDIA GeForce RTX 5080"
+          },
+          "phase_events": [
+            {
+              "stage": "request_validation",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 0.0650314000013168
+            },
+            {
+              "stage": "dependency_validation",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 0.6410947999975178
+            },
+            {
+              "stage": "reference_validation",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 4.212525000002643
+            },
+            {
+              "stage": "model_loading",
+              "model_id": "official",
+              "gpu_resident": false,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 4.292762299999595,
+              "parameters": {
+                "seed": 42,
+                "sample_steps": 32,
+                "top_k": 5,
+                "top_p": 1.0,
+                "temperature": 1.0,
+                "speed_factor": 1.0,
+                "repetition_penalty": 1.35,
+                "fragment_interval": 0.3
+              },
+              "precision": "fp16"
+            },
+            {
+              "stage": "model_ready",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 13.286607499998354,
+              "model_parameter_bytes": {
+                "t2s_model": 155212804,
+                "vits_model": 765642128,
+                "bert_model": 651091216,
+                "cnhuhbert_model": 188743424,
+                "vocoder": 28850818
+              },
+              "allocated_bytes": 1823197184,
+              "reserved_bytes": 2344615936
+            },
+            {
+              "stage": "reference_processing",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 13.307117000003927
+            },
+            {
+              "stage": "text_frontend",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 15.219171199998527
+            },
+            {
+              "stage": "synthesizing",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 19.02898709999863
+            },
+            {
+              "stage": "audio_writing",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 22.232378300002893
+            },
+            {
+              "stage": "audio_written",
+              "model_id": "official",
+              "gpu_resident": true,
+              "worker_pid": 49120,
+              "worker_process_start": 1794914235.7576728,
+              "elapsed_seconds": 22.269919899998058,
+              "audio_sha256": "00917dce60927598302cb4dbe3894d81acbd7a450e9aa12ccf566082b8d968d1",
+              "sample_rate": 48000,
+              "samples": 138240
+            }
+          ],
+          "run_started": 1794914233.1093917,
+          "run_started_local": "2026-11-17T19:17:13.109+08:00",
+          "run_completed": 1794914259.729451,
+          "run_completed_local": "2026-11-17T19:17:39.729+08:00",
+          "gpu_released_event": {
+            "kind": "progress",
+            "payload": {
+              "stage": "gpu_released",
+              "model_id": "official",
+              "gpu_resident": false
+            },
+            "created": 1794914259.702153
+          },
+          "process": {
+            "pid": 49120,
+            "recorded_start": 1794914235.7576728,
+            "original_process_running": false
+          }
+        }
+      ]
+    }
+  },
+  "gpu_exclusion": {
+    "training_run": "cca9eda7641b4436b238c936a9b23ffd",
+    "training_completed": 1794914147.870811,
+    "training_completed_local": "2026-11-17T19:15:47.870+08:00",
+    "first_comparison_started": 1794914147.908949,
+    "gap_seconds": 0.03813791275024414
+  },
+  "observations": {
+    "count": 232,
+    "resident_visible_count": 57,
+    "max_application_gpu_jobs": 1,
+    "max_resident_models": 1,
+    "first": "2026-11-17T19:14:59.298+08:00",
+    "last": "2026-11-17T19:17:40.217+08:00"
+  },
+  "cache_checks": {
+    "queued_a_kept_reference_a": true,
+    "changing_to_b_invalidated_test_status": true,
+    "comparison_conditions_changed_for_b": true
+  },
+  "external_hold": {
+    "path": "E:\\DictionForge\\data\\diagnostics\\p08-1f36add0a7c1410588a9a317cf652bce\\hold.json",
+    "sha256": "38a5251e63287d37b5707799376d52c1c2f8d545a40734820907ff25d419c434",
+    "report": {
+      "probe": "owned_external_cuda_process",
+      "mode": "hold",
+      "state": "RELEASED",
+      "pid": 44624,
+      "process_start": 1794914198.2413664,
+      "executable": "E:\\astrbot-chat\\external\\Python312\\python.exe",
+      "command": [
+        "E:\\astrbot-chat\\external\\Python312\\python.exe",
+        "E:\\DictionForge\\scripts\\gpu_occupancy_probe.py",
+        "--mode",
+        "hold",
+        "--mib",
+        "512",
+        "--output",
+        "E:\\DictionForge\\data\\diagnostics\\p08-1f36add0a7c1410588a9a317cf652bce\\hold.json",
+        "--release-file",
+        "E:\\DictionForge\\data\\diagnostics\\p08-1f36add0a7c1410588a9a317cf652bce\\release",
+        "--timeout-seconds",
+        "600"
+      ],
+      "requested_mib": 512,
+      "release_file": "E:\\DictionForge\\data\\diagnostics\\p08-1f36add0a7c1410588a9a317cf652bce\\release",
+      "dtype": "uint8",
+      "attempts": 1,
+      "parameters_changed": false,
+      "other_processes_modified": false,
+      "device": "NVIDIA GeForce RTX 5080",
+      "torch": "2.9.0+cu128",
+      "cuda": "12.8",
+      "free_before_bytes": 15712911360,
+      "total_bytes": 17066360832,
+      "requested_bytes": 536870912,
+      "allocated_bytes": 536870912,
+      "reserved_bytes": 536870912,
+      "free_while_held_bytes": 15106834432,
+      "release_reason": "release_file",
+      "allocated_after_release_bytes": 0,
+      "reserved_after_release_bytes": 0,
+      "peak_allocated_bytes": 536870912,
+      "free_after_release_bytes": 15643705344,
+      "process_exit_pending": true,
+      "elapsed_seconds": 61.132538599995314
+    },
+    "process": {
+      "pid": 44624,
+      "recorded_start": 1794914198.2413664,
+      "original_process_running": false
+    }
+  },
+  "oom": {
+    "path": "E:\\DictionForge\\data\\diagnostics\\p08-1f36add0a7c1410588a9a317cf652bce\\oom.json",
+    "sha256": "c184733633c1fcae710ea406e84477fdfdc156989a173ddb53331027e2a7b5ac",
+    "report": {
+      "probe": "owned_external_cuda_process",
+      "mode": "oom",
+      "state": "OOM_CONFIRMED",
+      "pid": 48544,
+      "process_start": 1794914260.6245935,
+      "executable": "E:\\astrbot-chat\\external\\Python312\\python.exe",
+      "command": [
+        "E:\\astrbot-chat\\external\\Python312\\python.exe",
+        "E:\\DictionForge\\scripts\\gpu_occupancy_probe.py",
+        "--mode",
+        "oom",
+        "--output",
+        "E:\\DictionForge\\data\\diagnostics\\p08-1f36add0a7c1410588a9a317cf652bce\\oom.json"
+      ],
+      "requested_mib": null,
+      "release_file": null,
+      "dtype": "uint8",
+      "attempts": 1,
+      "parameters_changed": false,
+      "other_processes_modified": false,
+      "device": "NVIDIA GeForce RTX 5080",
+      "torch": "2.9.0+cu128",
+      "cuda": "12.8",
+      "free_before_bytes": 15712911360,
+      "total_bytes": 17066360832,
+      "requested_bytes": 68265443328,
+      "code": "CUDA_OOM",
+      "error": "CUDA out of memory. Tried to allocate 63.58 GiB. GPU 0 has a total capacity of 15.89 GiB of which 14.63 GiB is free. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "note": "Dedicated allocation probe; no TTS/training model was loaded and no fallback allocation was attempted",
+      "allocated_after_release_bytes": 0,
+      "reserved_after_release_bytes": 0,
+      "peak_allocated_bytes": 0,
+      "free_after_release_bytes": 15712911360,
+      "process_exit_pending": true,
+      "elapsed_seconds": 3.603408399998443
+    },
+    "process": {
+      "pid": 48544,
+      "recorded_start": 1794914260.6245935,
+      "original_process_running": false
+    }
+  },
+  "code_audit": {
+    "file": "backend/dictionforge/inference_worker.py",
+    "sha256": "546928d78362653b4f8ce739c35d774f3c8732f590098df93f7b10ab2083ef25",
+    "original_phase_and_parameters_preserved": true,
+    "precision_preserved": true,
+    "auto_parameter_fallback": false,
+    "placeholder_stops_before_model_reinitialization": true,
+    "fragment_interval_rejects_below_0_01": true
+  },
+  "limitations": [
+    "OOM was a dedicated one-attempt uint8 allocation probe, not an OOM during TTS or training.",
+    "Phase/error parameter preservation is additionally covered by CPU contract tests; the four real TTS tasks succeeded.",
+    "This inspection does not claim subjective listening or voice quality."
+  ]
+}

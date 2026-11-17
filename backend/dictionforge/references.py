@@ -67,6 +67,10 @@ def references_for(jobs, kind, key):
     for category, row_id, row in rows:
         if category == 'reference' and row.get('kind') == kind and row.get('id') == key:
             add('reference', row_id, f"正在使用：{row.get('owner')}")
+        elif category == 'reference' and row.get('kind') == 'media' and row.get('id') in media_ids:
+            add('reference', row_id, '该版本的音频正在复制或处理中')
+        elif category == 'model_selection' and kind == 'model' and row.get('model_id') == key:
+            add('model_selection', row_id, '逻辑启用的模型，关闭或切换后可删除')
         elif category == 'run':
             uses = row.get('config', {}).get('initial_model') == key if kind == 'model' else row.get('version', {}).get('id') == key
             if uses:

@@ -1,24 +1,33 @@
 from contextlib import contextmanager
+import errno
 import os
 import subprocess
 import sys
 import json
-import logging
 import time
-from threading import Event, Thread
+import traceback
+from threading import Event, Lock, Thread
 import psutil
+
+class LeaseBusy(OSError):
+    """Expected resource contention, distinct from launch and storage failures."""
 
 @contextmanager
 def exclusive(path):
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a+b") as lock:
         lock.seek(0)
-        if os.name == "nt":
-            import msvcrt
-            msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
-        else:
-            import fcntl
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        try:
+            if os.name == "nt":
+                import msvcrt
+                msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError as exc:
+            if exc.errno in {errno.EACCES, errno.EAGAIN, errno.EDEADLK}:
+                raise LeaseBusy(str(exc)) from exc
+            raise
         yield
 
 def live_identity(job):
@@ -59,11 +68,55 @@ class Supervisor:
         self.stop = Event()
         self.thread = Thread(target=self.run, daemon=True)
         self.last_media_reconcile = 0.
+        self.state_lock = Lock()
+        self.last_cycle = None
+        self.errors = {}
+        self.last_error = None
+        self.logged_errors = {}
+
+    def status(self):
+        with self.state_lock:
+            age = time.time() - self.last_cycle if self.last_cycle is not None else None
+            alive = self.thread.is_alive()
+            state = 'stopped' if not alive else 'stalled' if age is not None and age > 60 else 'retrying' if self.errors else 'ready'
+            return dict(alive=alive, state=state, heartbeat_age_seconds=age,
+                        current_errors=dict(self.errors), last_error=self.last_error)
+
+    def record_error(self, lane, exc):
+        now = time.time()
+        error = dict(lane=lane, at=now, message=f'{type(exc).__name__}: {exc}')
+        with self.state_lock:
+            self.errors[lane] = error
+            self.last_error = error
+            previous = self.logged_errors.get(lane)
+            write_log = previous is None or previous['message'] != error['message'] or now-previous['at'] >= 30
+            if write_log:
+                self.logged_errors[lane] = error
+        if write_log:
+            # Service stdout may be unavailable after Windows detachment. Keep
+            # a direct workspace log, independent of SQLite and console handles.
+            try:
+                path = self.jobs.root/'logs'/'scheduler-errors.jsonl'
+                path.parent.mkdir(parents=True, exist_ok=True)
+                with path.open('a', encoding='utf-8', errors='backslashreplace') as stream:
+                    stream.write(json.dumps(dict(error, traceback=traceback.format_exc()), ensure_ascii=False)+'\n')
+            except OSError:
+                pass  # A failed diagnostic write must not kill the scheduler.
+
+    def recovered(self, lane):
+        with self.state_lock:
+            self.errors.pop(lane, None)
 
     def run(self):
         while not self.stop.is_set():
+            with self.state_lock:
+                self.last_cycle = time.time()
             for lane in ("gpu", "cpu"):
-                self.tick(lane)
+                try:
+                    self.tick(lane)
+                    self.recovered(lane)
+                except Exception as exc:
+                    self.record_error(lane, exc)
             if time.monotonic() - self.last_media_reconcile >= 2:
                 self.last_media_reconcile = time.monotonic()
                 try:
@@ -71,8 +124,9 @@ class Supervisor:
                     from .saved_speech import reconcile_deletions
                     reconcile(self.jobs)
                     reconcile_deletions(self.jobs)
-                except Exception:
-                    logging.exception('媒体清理待重试；保留产物和恢复记录')
+                    self.recovered('media')
+                except Exception as exc:
+                    self.record_error('media', exc)
             self.stop.wait(0.2)
 
     def tick(self, lane):
@@ -87,7 +141,7 @@ class Supervisor:
                     job = self.jobs.claim(lane)
                     if job:
                         self.launch(job)
-        except OSError:
+        except LeaseBusy:
             pass
 
     def launch(self, job):

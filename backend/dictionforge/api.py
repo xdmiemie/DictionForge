@@ -43,6 +43,7 @@ def create_app(settings=None):
                 db.execute("DELETE FROM records WHERE kind='service' AND id='draining'")
             supervisor = Supervisor(jobs)
             app.state.jobs = jobs
+            app.state.supervisor = supervisor
             supervisor.thread.start()
             try:
                 yield
@@ -82,8 +83,10 @@ def create_app(settings=None):
 
     @app.get("/api/health")
     def health():
+        supervisor = getattr(app.state, 'supervisor', None)
         return {"service": "ready", "name": app.title, "version": "0.1.0",
-                "workspace": str(ROOT.resolve()), "data_root": str(settings.root.resolve()), "pid": os.getpid()}
+                "workspace": str(ROOT.resolve()), "data_root": str(settings.root.resolve()), "pid": os.getpid(),
+                "scheduler": supervisor.status() if supervisor else None}
 
     @app.post("/api/system/stop")
     def stop(request: Request):

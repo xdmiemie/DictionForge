@@ -10,7 +10,7 @@ import {Synthesis} from './Synthesis';
 import './style.css';
 
 type Settings = {data_root: string; upstream: string; worker_python: string; port: number};
-type Health = {name: string; service: string; version: string};
+type Health = {name: string; service: string; version: string; scheduler?: {alive:boolean;state:'ready'|'retrying'|'stopped'|'stalled'} | null};
 type Asset = {id?: string; name?: string; path?: string; status?: string; present?: boolean; exists?: boolean; valid?: boolean; error?: string};
 type SystemStatus = {gpu?: string | Record<string, unknown>; gpu_jobs?: Job[]; gpu_resident_models?: {job_id: string; model_id: string; stage?: string}[]; active_jobs: number; assets?: Asset[]; worker_python?: string};
 
@@ -118,6 +118,7 @@ function App() {
     <div className="intro"><div><p className="eyebrow">让每一句，更像你的声音</p><h2>从角色录音，到自然表达。</h2><p>整理录音、微调音色，再用文字生成语音。</p></div><div className="engine-badge"><span>GPT-SoVITS</span><strong>v4</strong><small>原生 48 kHz 语音合成</small></div></div>
     <nav aria-label="主工作区"><button aria-current={tab === 'training' ? 'page' : undefined} onClick={() => setTab('training')}><span>01</span>微调训练</button><button aria-current={tab === 'tts' ? 'page' : undefined} onClick={() => setTab('tts')}><span>02</span>语音合成</button><button aria-current={tab === 'management' ? 'page' : undefined} onClick={() => setTab('management')}><span>03</span>数据与模型管理</button><a href="#tasks">后台任务{count > 0 && <b>{count}</b>}</a></nav>
     {error && <div className="alert" role="alert"><span>{error}</span><button aria-label="关闭错误提示" onClick={() => setError('')}>×</button></div>}
+    {health?.scheduler && health.scheduler.state !== 'ready' && <div className="alert" role="alert" aria-label="后台调度状态"><span>{health.scheduler.state === 'retrying' ? '后台服务遇到异常，正在自动重试；已提交的任务会保留。' : '后台调度未响应，排队任务已保留。请查看服务日志排查，避免重复提交。'}</span></div>}
     <div className="workspace"><div className="primary">
       <div hidden={tab !== 'training'}><Datasets jobs={jobs} submit={submit} reportError={setError} onPublished={id => {setRequestedVersion(id); setRequestedModel('official'); setCatalogVersion(value => value + 1);}} refreshToken={catalogVersion}/><Training jobs={jobs} submit={submit} reportError={setError} requestedVersion={requestedVersion} requestedModel={requestedModel} selectionToken={selectionToken} refreshToken={catalogVersion}/></div>
       <div hidden={tab !== 'tts'}><Synthesis jobs={jobs} submit={submit} reportError={setError} refreshToken={catalogVersion} onCatalogChange={() => setCatalogVersion(value => value + 1)} system={system} onTrain={(version,model)=>{setSelectionToken(value=>value+1);setRequestedVersion(version);setRequestedModel(model);setCatalogVersion(value=>value+1);setTab('training');setTimeout(()=>document.getElementById('training-config')?.scrollIntoView({behavior:'smooth'}),0);}}/></div>
@@ -127,6 +128,7 @@ function App() {
       <section className="panel environment">
         <p className="eyebrow">WORKSPACE</p><h2>本机环境</h2>
         <div className="env-line"><span>服务状态</span><strong>{health ? '可用' : '未连接'}</strong></div>
+        {health?.scheduler && <div className="env-line"><span>任务调度</span><strong>{health.scheduler.state === 'ready' ? '正常' : health.scheduler.state === 'retrying' ? '自动恢复中' : '未响应'}</strong></div>}
         <div className="env-line"><span>活动任务</span><strong>{system?.active_jobs ?? count}</strong></div>
         <div className="env-line"><span>服务端口</span><strong>{settings?.port ?? '—'}</strong></div>
         {system?.gpu && <details><summary>GPU 资源状态</summary><pre>{typeof system.gpu === 'string' ? system.gpu : JSON.stringify(system.gpu, null, 2)}</pre></details>}

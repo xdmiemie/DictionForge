@@ -1,0 +1,193 @@
+{
+  "recorded_at": "2026-11-18T11:13:49.6944979Z",
+  "status": "PASS",
+  "observation": {
+    "service_responded": true,
+    "only_active_job": "07a322f3df85440a9258b5bce1d257af",
+    "state": "QUEUED",
+    "worker_pid": null,
+    "cpu_lease_available": true,
+    "gpu_lease_available": true,
+    "worker_or_benchmark_running": false,
+    "old_server_logs_empty": true,
+    "original_trigger": "UNKNOWN: no usable original traceback; injected database faults are tests, not evidence of the original trigger"
+  },
+  "recovery": {
+    "target": "07a322f3df85440a9258b5bce1d257af",
+    "before": {
+      "id": "07a322f3df85440a9258b5bce1d257af",
+      "kind": "model_export",
+      "state": "QUEUED",
+      "created": 1794998251.537714,
+      "updated": 1794998251.537714,
+      "pid": null
+    },
+    "tick": "returned",
+    "after": {
+      "id": "07a322f3df85440a9258b5bce1d257af",
+      "kind": "model_export",
+      "state": "COMPLETED",
+      "created": 1794998251.537714,
+      "updated": 1794999410.4633102,
+      "pid": 39544,
+      "error": null
+    }
+  },
+  "recovery_method": "Normal Supervisor.tick(cpu), using existing atomic claim and exclusive lock; no direct job state edit or retraining",
+  "source_run": "11e7b6344fcc41af930651d9c9736076",
+  "recovered_model": {
+    "id": "8ae85643f5a059f380454c7a3e586687",
+    "role": "流萤",
+    "status": "READY",
+    "path": "E:\\DictionForge\\data\\models\\af2b799d7833c2aa8645b752\\8ae85643f5a059f380454c7a3e586687",
+    "validation": {
+      "structure": "PASS",
+      "gpu": "NOT_RUN",
+      "device": "cpu",
+      "torch": "2.9.0+cu128",
+      "gpt": {
+        "tensors": 295,
+        "architecture": {
+          "vocab_size": 1025,
+          "phoneme_vocab_size": 732,
+          "embedding_dim": 512,
+          "hidden_dim": 512,
+          "head": 16,
+          "linear_units": 2048,
+          "n_layer": 24,
+          "dropout": 0,
+          "EOS": 1024,
+          "random_bert": 0
+        },
+        "precision": [
+          "torch.float16"
+        ]
+      },
+      "sovits": {
+        "format": "v4_lora",
+        "lora_rank": 32,
+        "tensors": 258,
+        "base_required": true
+      },
+      "sample_rate": 48000,
+      "super_sampling": false
+    },
+    "weights": {
+      "gpt": {
+        "path": "E:\\DictionForge\\data\\models\\af2b799d7833c2aa8645b752\\8ae85643f5a059f380454c7a3e586687\\gpt.ckpt",
+        "bytes": 155306673,
+        "sha256": "55d6bd4605a0d72d0828fb7b7a49d3a82391850cbeca9ed7c441bf3023310d68",
+        "expected_sha256": "55d6bd4605a0d72d0828fb7b7a49d3a82391850cbeca9ed7c441bf3023310d68"
+      },
+      "sovits": {
+        "path": "E:\\DictionForge\\data\\models\\af2b799d7833c2aa8645b752\\8ae85643f5a059f380454c7a3e586687\\sovits.pth",
+        "bytes": 75551611,
+        "sha256": "f8d5ec7e651b7e248f293457f02062f12e09e43ab2b3cf36e0caf2c22c5b4f70",
+        "expected_sha256": "f8d5ec7e651b7e248f293457f02062f12e09e43ab2b3cf36e0caf2c22c5b4f70"
+      }
+    }
+  },
+  "validation": {
+    "targeted_pytest": {
+      "passed": 31,
+      "new_scheduler_cases": 6
+    },
+    "full_pytest": {
+      "passed": 270,
+      "skipped": 7,
+      "seconds": 130.48,
+      "log": "data/scheduler-tests.log",
+      "junit": "data/scheduler-tests.xml"
+    },
+    "frontend": {
+      "typecheck": "PASS",
+      "vite_build": "PASS",
+      "component_tests_passed": 5
+    },
+    "live_browser": {
+      "status": "PASS",
+      "export_job_id": "1ac6f3199d164dbe8798802d1bc82f77",
+      "diagnostic_job_id": "cf5be7b55b2b4670bb6c22dd58fe496f",
+      "first_observation": {
+        "at": "2026-11-18T11:07:41.978Z",
+        "states": [
+          {
+            "id": "1ac6f3199d164dbe8798802d1bc82f77",
+            "state": "QUEUED",
+            "pid": null,
+            "error": null
+          },
+          {
+            "id": "cf5be7b55b2b4670bb6c22dd58fe496f",
+            "state": "QUEUED",
+            "pid": null,
+            "error": null
+          }
+        ]
+      },
+      "final_observation": {
+        "at": "2026-11-18T11:07:44.23Z",
+        "states": [
+          {
+            "id": "1ac6f3199d164dbe8798802d1bc82f77",
+            "state": "COMPLETED",
+            "pid": 42800,
+            "error": null
+          },
+          {
+            "id": "cf5be7b55b2b4670bb6c22dd58fe496f",
+            "state": "COMPLETED",
+            "pid": 43408,
+            "error": null
+          }
+        ]
+      },
+      "checks": [
+        {
+          "name": "CPU导出与GPU诊断自动领取并完成，同一冻结导出保持模型ID及权重哈希",
+          "status": "PASS"
+        },
+        {
+          "name": "真实导出模型在管理页可见，健康调度不显示异常提示",
+          "status": "PASS"
+        },
+        {
+          "name": "模拟暂时异常时显示自动重试及任务保留提示",
+          "status": "PASS"
+        },
+        {
+          "name": "模拟调度停止时明确提示，390px页面不横向溢出",
+          "status": "PASS"
+        },
+        {
+          "name": "恢复真实健康状态后异常提示消失，浏览器无错误",
+          "status": "PASS"
+        }
+      ],
+      "errors": [],
+      "health": {
+        "service": "ready",
+        "name": "DictionForge",
+        "version": "0.1.0",
+        "workspace": "E:\\DictionForge",
+        "data_root": "E:\\DictionForge\\data",
+        "pid": 44512,
+        "scheduler": {
+          "alive": true,
+          "state": "ready",
+          "heartbeat_age_seconds": 0.3503134250640869,
+          "current_errors": {},
+          "last_error": null
+        }
+      },
+      "area": "E:\\DictionForge\\data\\scheduler-browser\\2026-11-18T11-07-40-530Z",
+      "report": "data/scheduler-browser/latest.json"
+    },
+    "limits": [
+      "Browser retrying/stopped messages use health response fixtures; CPU export and diagnostic completion are real.",
+      "Diagnostic validates GPU queue dispatch only, not model computation or sound quality. Export GPU validation remains NOT_RUN.",
+      "Retry uses the existing immutable snapshot and model ID; weight metadata unchanged and initial recovery weights independently SHA256 checked."
+    ]
+  },
+  "push_record": "data/EXPORT_QUEUE_PUSH_RESULT.json"
+}

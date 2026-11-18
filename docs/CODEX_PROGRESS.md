@@ -157,3 +157,13 @@ TypeScript/Vite构建与5项组件测试通过，8项专项浏览器验收通过
 两组共48档真实运行：37 PASS、11个预期CUDA OOM，无其他失败。10秒景元工况S2通过7/相邻8 OOM，GPT通过49/相邻50 OOM；6.86秒流萤工况S2通过13/相邻14 OOM，GPT通过77/相邻78 OOM。四个上限与四个建议档分别完成12次真实优化器更新并核对参数SHA改变；GPT初始GradScaler跳过单独记录、不计更新。按85%分配器预算及界面64上限取建议：流萤S2=8/GPT=64，10秒S2=6/GPT=32。默认配置与界面范围未修改；77仅为独立硬件压测档位。
 
 实际配置、形状、每档峰值/耗时、失败边界、参数SHA及命令见docs/evidence/BATCH_CAPACITY.md和JSON。本机完整日志/请求/特征副本在data/batch-benchmark/20261118-094659及20261118-095856。两轮结束原版本音频与官方权重SHA不变，未发布模型；无活动任务，服务健康，GPU显存回落至897 MiB。结果为当前片段长度/精度/rank及桌面占用条件下容量，未当作长训收敛或音质验证。只对本次脚本及实际结果做验证，未无关重跑API/UI全套。
+
+## 导出排队恢复与调度异常保护 — DONE（2026-11-18）
+
+用户反馈没有运行任务但模型导出一直排队。现场唯一活动任务为07a322f3df85440a9258b5bce1d257af（model_export/QUEUED，无PID），CPU/GPU工作锁均可取得，没有运行中的worker或压测。原流萤训练11e7b6344fcc41af930651d9c9736076已完成，服务仍响应但未领取队列。使用原Supervisor的正常CPU领取逻辑恢复，原导出COMPLETED、模型8ae85643f5a059f380454c7a3e586687为READY，GPT与SoVITS两文件SHA实读匹配；未修改数据库状态、重新训练或删除原数据。旧服务输出日志为空，无法确认当时具体触发异常，未把测试注入的数据库错误当作现场原因。
+
+修复已确认的调度缺陷：GPU、CPU检查分别捕获异常并在下轮继续，避免一次未捕获异常终止整条调度线程；锁竞争与进程启动/文件系统错误分开处理。独立JSONL文件持久记录异常栈并限制重复日志，日志写入失败不会停止调度。health增加线程、心跳和错误状态，页面增加任务调度状态、自动重试/未响应提示。正式服务已安全重启加载修复。
+
+验收：API全套270 passed/7 skipped（130.48秒，既有API环境无Torch跳过），专项31 passed（含6项新增调度韧性测试）；TypeScript/Vite构建及5项组件通过。真实7867服务自动领取同一冻结快照的重试导出1ac6f3199d164dbe8798802d1bc82f77与诊断cf5be7b55b2b4670bb6c22dd58fe496f，两者均完成，模型ID和权重哈希保持不变。5项浏览器验收通过、无控制台错误；异常提示使用health响应夹具，队列完成和模型可见性为真实结果。诊断仅验证GPU队列调度，本次没有新增GPU音质验收，模型GPU校验仍为NOT_RUN。
+
+证据docs/evidence/EXPORT_QUEUE_RECOVERY.json，原始恢复记录data/export-queue-recovery.json、实读哈希data/export-recovered-model.json、页面记录data/scheduler-browser/latest.json、全套日志data/scheduler-tests.log。以独立维护提交保存，不增加P00–P12阶段提交；推送及远端哈希核对结果另写data/EXPORT_QUEUE_PUSH_RESULT.json。

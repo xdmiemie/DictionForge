@@ -73,3 +73,11 @@ API241 passed/7 skipped；worker18 passed；Windows启停专项5 passed；前端
 用户要求的实机容量测试完成，脚本scripts/benchmark_physical_batch.py和报告docs/evidence/BATCH_CAPACITY.md、JSON可复查。48档真实GPU运行中37通过、11预期OOM；FP16/rank32/累积1/official/最长真实片段重复组成满批次，使用生产模型/loss/优化器，每个上限与建议档均复核12次实际更新。10秒片段S2边界7/8、GPT49/50，建议6/32；当前流萤最长6.86秒S2边界13/14、GPT77/78，建议8/64。前数通过，后数OOM。界面上限仍64，未改默认batch或累积。
 
 源版本：景元76b5a08af4ca471f9c6fa9c903347e69，流萤4a87c1b08a0c411aae29c63e317f3aed。完整本机记录位于data/batch-benchmark/20261118-094659和20261118-095856；脚本可等待应用GPU锁，按当时独立空闲显存减256 MiB限制分配器，最大探测档256。容量会随片段长度、桌面占用、精度和rank变化，不把短训容量当作音质结论。原有流萤特征任务正常完成，音频/底模SHA复核不变，未发布模型，结束后GPU已释放。推送结果另记data/BATCH_CAPACITY_PUSH_RESULT.json。
+
+## 导出队列修复（2026-11-18）
+
+流萤运行11e7b6344fcc41af930651d9c9736076已正常训练完成，原导出07a322f3df85440a9258b5bce1d257af曾在双锁空闲时无人领取。正常CPU调度恢复后已完成，模型8ae85643f5a059f380454c7a3e586687为READY、结构PASS、两权重实读SHA匹配；GPU试听仍NOT_RUN，未重新训练。另一个被用户取消的导出保持取消，不恢复或覆盖用户操作。旧日志缺失，具体触发异常未知；确认并修复的是调度循环缺少异常边界以及吞掉所有OSError的问题。
+
+新服务验收时PID44512、7867端口、data_root为本项目data；运行时以/api/health为准。新增scheduler线程/心跳/错误状态，异常持久化到data/logs/scheduler-errors.jsonl，页面显示自动恢复或未响应。逐队列异常恢复和日志失效等新增6测试通过；全套270 passed/7 skipped，前端build与5组件通过。真实自动重试同一冻结快照保持模型ID/哈希，CPU导出和GPU队列诊断均完成；5浏览器检查通过（健康异常展示为响应夹具，非现场新故障）。
+
+证据docs/evidence/EXPORT_QUEUE_RECOVERY.json和data/scheduler-browser/latest.json。复验脚本scripts/validate_scheduler_recovery.cjs需要显式传入已完成导出ID，且只允许正式7867本项目data：重用不可变快照，不新建模型版本。若用户已删除相关模型/数据，不可为旧脚本恢复；另选仍存在的完成导出。推送记录为data/EXPORT_QUEUE_PUSH_RESULT.json；保留此前网络失败记录及全部本地历史。

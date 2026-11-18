@@ -164,7 +164,10 @@ def _inventory(jobs, kind, key):
     return value, bases, files
 
 
-def delete_preview(jobs, kind, key):
+def delete_preview(jobs, kind, key, cascade=False):
+    if cascade:
+        from .cascade_deletion import preview
+        return preview(jobs, kind, key)
     value, bases, files = _inventory(jobs, kind, key)
     refs = references_for(jobs, kind, key)
     token = uuid.uuid4().hex
@@ -217,6 +220,9 @@ def delete(jobs, kind, key, token):
     preview = get(jobs, 'delete_preview', token)
     if preview['kind'] != kind or preview['id'] != key or preview['expires'] < time.time():
         raise Conflict('DELETE_CONFIRMATION_EXPIRED_OR_MISMATCH')
+    if preview.get('mode') == 'cascade':
+        from .cascade_deletion import delete as delete_cascade
+        return delete_cascade(jobs, preview)
     trash_root = jobs.root/'trash'/token
     trash_root.mkdir(parents=True, exist_ok=True)
     operation = dict(kind=kind, id=key, token=token, state='PREPARED', created=time.time(),

@@ -324,9 +324,9 @@ def register(app):
         return retry(request.app.state.jobs, key, str(body.request_id))
 
     @app.get("/api/models/{key}/delete-preview")
-    def model_delete_preview(key: str, request: Request):
+    def model_delete_preview(key: str, request: Request, cascade: bool = False):
         from .references import delete_preview
-        return delete_preview(request.app.state.jobs, "model", key)
+        return delete_preview(request.app.state.jobs, "model", key, cascade=cascade)
 
     @app.delete("/api/models/{key}")
     def model_delete(key: str, body: DeleteConfirmation, request: Request):
@@ -334,14 +334,14 @@ def register(app):
         return delete(request.app.state.jobs, "model", key, body.preview_id)
 
     @app.get("/api/dataset-versions/{key}/delete-preview")
-    def dataset_delete_preview(key: str, request: Request):
+    def dataset_delete_preview(key: str, request: Request, cascade: bool = False):
         from .references import delete_preview
-        return delete_preview(request.app.state.jobs, "version", key)
+        return delete_preview(request.app.state.jobs, "version", key, cascade=cascade)
 
     @app.get("/api/dataset-drafts/{key}/delete-preview")
-    def draft_delete_preview(key: str, request: Request):
+    def draft_delete_preview(key: str, request: Request, cascade: bool = False):
         from .references import delete_preview
-        return delete_preview(request.app.state.jobs, "draft", key)
+        return delete_preview(request.app.state.jobs, "draft", key, cascade=cascade)
 
     @app.delete("/api/dataset-drafts/{key}")
     def draft_delete(key: str, body: DeleteConfirmation, request: Request):

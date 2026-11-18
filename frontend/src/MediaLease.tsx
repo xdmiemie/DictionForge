@@ -16,14 +16,21 @@ export function useMediaLease(audioId?: string, enabled = true) {
     };
     const fail = (error: unknown) => {if (!disposed) {setState({ready: false, error: isGone(error) ? '这份临时音频已回收，无法播放或保存。冻结文本和任务记录仍保留。' : '音频引用获取失败：' + (error as Error).message, gone: isGone(error)}); release();}};
     const onHide = () => {release(); setState({ready: false, error: '播放器已释放，请重新打开。', gone: false});};
+    const onDeleted = (event: Event) => {
+      if ((event as CustomEvent<{deleted_media_ids?:string[]}>).detail.deleted_media_ids?.includes(audioId)) {
+        disposed = true; release(); if (timer) clearInterval(timer);
+        setState({ready:false, error:'音频已随关联对象删除。', gone:true});
+      }
+    };
     window.addEventListener('pagehide', onHide);
+    window.addEventListener('dictionforge:catalog-deleted', onDeleted);
     void api<Lease>('/media-leases', {audio_id: audioId}).then(lease => {
       token = lease.token;
       if (disposed) {release(); return;}
       setState({ready: true, error: '', gone: false});
       timer = setInterval(() => {if (token) void api('/media-leases/' + encodeURIComponent(token) + '/heartbeat', {}).catch(fail);}, 20000);
     }).catch(fail);
-    return () => {disposed = true; if (timer) clearInterval(timer); window.removeEventListener('pagehide', onHide); release();};
+    return () => {disposed = true; if (timer) clearInterval(timer); window.removeEventListener('pagehide', onHide); window.removeEventListener('dictionforge:catalog-deleted', onDeleted); release();};
   }, [audioId, enabled]);
   return state;
 }

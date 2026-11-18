@@ -52,6 +52,14 @@ function App() {
     if (jobsResult.status === 'fulfilled') setJobs(jobsResult.value);
     if (systemResult.status === 'fulfilled') setSystem(systemResult.value);
   }, []);
+  useEffect(() => {
+    const deleted = (event: Event) => {
+      const ids = (event as CustomEvent<{deleted_jobs?:string[]}>).detail.deleted_jobs ?? [];
+      setSelected(current => ids.includes(current) ? '' : current); setError(''); void refresh();
+    };
+    window.addEventListener('dictionforge:catalog-deleted', deleted);
+    return () => window.removeEventListener('dictionforge:catalog-deleted', deleted);
+  }, [refresh]);
   useEffect(() => {void refresh(); const timer = window.setInterval(() => void refresh(), 4000); return () => window.clearInterval(timer);}, [refresh]);
   useEffect(() => {try {localStorage.setItem('dictionforge.selectedJob', selected);} catch {/* The workbench also works when browser storage is unavailable. */}}, [selected]);
   useEffect(() => {

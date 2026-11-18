@@ -5,7 +5,7 @@ import type {DatasetVersion} from './Datasets';
 
 type Weight = {path?: string; sha256: string; bytes: number};
 export type ModelVersion = {id: string; model_id: string; version_id: string; role: string; status: string; weights: {gpt: Weight; sovits: Weight}; stage_progress?: Record<string, {state?: string; optimizer_updates?: number}>; validation?: {structure?: string; gpu?: string}; provenance?: {run_id?: string; version_id?: string; initial_model?: string; reason?: string; snapshot_id?: string}; dependencies?: unknown[]; default_reference?: unknown};
-type DeletePreview = {preview_id?: string; token?: string; id?: string; files: {path: string; bytes?: number; sha256?: string}[]; references: {kind: string; id: string; reason: string}[]; deletable?: boolean; total_bytes?: number};
+type DeletePreview = {mode?: 'cascade'; objects?: {kind:string;id:string;label:string;title?:string;reason:string}[]; browser_leases?:string[]; preview_id?: string; token?: string; id?: string; files: {path: string; bytes?: number; sha256?: string}[]; references: {kind: string; id: string; reason: string}[]; deletable?: boolean; total_bytes?: number};
 type Selection = {kind: 'model' | 'dataset' | 'draft'; id: string; title: string; preview: DeletePreview};
 type PreviewTarget = Omit<Selection, 'preview'>;
 type Submit = (path: string, payload: object) => Promise<Job>;
@@ -28,9 +28,9 @@ export function ModelCard({model, busy, onPreview}: {model: ModelVersion; busy: 
 
 export function DeleteConfirmation({selection, busy, onCancel, onConfirm}: {selection: Selection; busy: boolean; onCancel: () => void; onConfirm: () => void}) {
   const blocked = selection.preview.references.length > 0 || selection.preview.deletable === false;
-  return <div className="delete-preview" role="region" aria-label="删除确认"><div className="section-top"><h3>删除{kindName(selection.kind)}</h3><button className="quiet" data-delete-cancel disabled={busy} onClick={onCancel}>取消</button></div><p>{selection.title}</p>{selection.kind==='draft'&&<p className="small">删除此草稿记录和下面列出的整理副本。原始录音、已发布数据版本及其音频保留。</p>}<p className="muted small">以下是本次确认的文件范围：{selection.preview.files.length} 项 · {size(selection.preview.total_bytes)}</p><div className="delete-files"><PaginatedList items={selection.preview.files ?? []} label="删除文件" key={selection.id}>{(file, index) => <p key={file.path + index} className="path-text">{file.path} <span>{size(file.bytes)}</span></p>}</PaginatedList></div>
-    {blocked ? <><p className="inline-error">此版本受到引用保护，暂不能删除。</p><div><PaginatedList items={selection.preview.references ?? []} label="保护引用" key={selection.id}>{(reference, index) => <p className="small path-text" key={reference.id + index}>{reference.reason} · {reference.kind} / {reference.id}</p>}</PaginatedList></div></> : <p className="muted small">未发现阻止删除的引用。确认后删除以上指定版本文件。</p>}
-    <button className="danger" disabled={busy || blocked || !(selection.preview.preview_id ?? selection.preview.token)} onClick={onConfirm}>确认删除此{kindName(selection.kind)}</button>
+  return <div className="delete-preview" role="region" aria-label="删除确认"><div className="section-top"><h3>删除{kindName(selection.kind)}</h3><button className="quiet" data-delete-cancel disabled={busy} onClick={onCancel}>取消</button></div><p>{selection.title}</p>{selection.preview.mode==='cascade'&&<><p className="notice">将一并删除以下 {selection.preview.objects?.length ?? 0} 项对象及其文件。原始录音、共享底模和独立保存的语音作品保留。关联的播放器引用会关闭。</p><div className="cascade-objects"><PaginatedList items={selection.preview.objects ?? []} label="关联删除对象">{item=><article key={item.kind+item.id}><strong>{item.label}{item.title&&' · '+item.title}</strong><p className="small path-text">{item.id} · {item.reason}</p></article>}</PaginatedList></div></>}{selection.kind==='draft'&&<p className="small">{selection.preview.mode==='cascade'?'删除此草稿及下列关联对象；借用且未列入范围的音频保留。':'删除此草稿记录和下面列出的整理副本。原始录音、已发布数据版本及其音频保留。'}</p>}<p className="muted small">以下是本次确认的文件范围：{selection.preview.files.length} 项 · {size(selection.preview.total_bytes)}</p><div className="delete-files"><PaginatedList items={selection.preview.files ?? []} label="删除文件" key={selection.id}>{(file, index) => <p key={file.path + index} className="path-text">{file.path} <span>{size(file.bytes)}</span></p>}</PaginatedList></div>
+    {blocked ? <><p className="inline-error">{selection.preview.mode==='cascade'?'有关联任务或文件仍在读写，完成或安全暂停后请重新查看范围。':'此版本受到引用保护，暂不能删除。'}</p><div><PaginatedList items={selection.preview.references ?? []} label="保护引用" key={selection.id}>{(reference, index) => <p className="small path-text" key={reference.id + index}>{reference.reason} · {reference.kind} / {reference.id}</p>}</PaginatedList></div></> : <p className="muted small">未发现正在使用的任务或文件。确认后删除以上范围，无法撤销。</p>}
+    <button className="danger" disabled={busy || blocked || !(selection.preview.preview_id ?? selection.preview.token)} onClick={onConfirm}>确认删除此{kindName(selection.kind)}{selection.preview.mode==='cascade'?'及关联记录':''}</button>
   </div>;
 }
 
@@ -81,7 +81,7 @@ export function Models({jobs, submit, reportError, onCatalogChange, showDatasets
     const ticket = ++previewRequest.current;
     setPreviewTarget({kind, id, title}); setSelection(undefined); setPreviewLoading(true); setPreviewError(''); setNotice('');
     try {
-      const result = await api<DeletePreview>(endpointFor(kind) + encodeURIComponent(id) + '/delete-preview');
+      const result = await api<DeletePreview>(endpointFor(kind) + encodeURIComponent(id) + '/delete-preview?cascade=true');
       if (ticket === previewRequest.current) setSelection({kind, id, title, preview: result});
     } catch (e) {if (ticket === previewRequest.current) setPreviewError((e as Error).message);}
     finally {if (ticket === previewRequest.current) setPreviewLoading(false);}
@@ -91,8 +91,9 @@ export function Models({jobs, submit, reportError, onCatalogChange, showDatasets
     const token = selection.preview.preview_id ?? selection.preview.token;
     if (!token) throw new Error('删除预览已失效，请重新查看删除范围。');
     const endpoint = endpointFor(selection.kind);
-    await api(endpoint + encodeURIComponent(selection.id), {preview_id: token}, 'DELETE');
-    setNotice(`已删除 ${selection.title} 的指定版本。`); closePreview(); setRefreshKey(value => value + 1); onCatalogChange();
+    const result=await api<{deleted_jobs?:string[];deleted_media_ids?:string[]}>(endpoint + encodeURIComponent(selection.id), {preview_id: token}, 'DELETE');
+    window.dispatchEvent(new CustomEvent('dictionforge:catalog-deleted',{detail:result}));
+    setNotice(`已删除 ${selection.title} 及确认范围内的关联记录。`); closePreview(); setRefreshKey(value => value + 1); onCatalogChange();
   };
   const confirmDelete = async () => {
     setBusy(true); setPreviewError('');

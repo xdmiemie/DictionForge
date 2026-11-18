@@ -26,3 +26,5 @@
 .review-wizard{margin:18px 0}.review-wizard .review-clip{margin-top:16px}.review-summary{padding:15px 0;border-bottom:1px solid #e1e8da}.review-summary p{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;font-size:13px}.review-wizard textarea{min-height:120px}
 
 .deletion-dialog{width:min(880px,calc(100% - 32px));max-height:calc(100dvh - 32px);box-sizing:border-box;padding:0;border:1px solid #dfbeab;border-radius:12px;background:#fcf5ef;color:inherit;overflow:auto;box-shadow:0 16px 60px #24331d40}.deletion-dialog::backdrop{background:#20331d66}.deletion-dialog .delete-preview{margin:0;border:0}.delete-dialog-status,.delete-dialog-error{padding:20px}.delete-dialog-status p{font-size:13px;overflow-wrap:anywhere}.delete-dialog-error+.delete-preview{padding-top:0}body:has(.deletion-dialog[open]){overflow:hidden}
+
+.cascade-objects{border:1px solid #e4cdbd;padding:0 14px;margin:14px 0;border-radius:8px}.cascade-objects article{padding:12px 0;border-bottom:1px solid #ecdfd2}.cascade-objects strong{font-size:13px}

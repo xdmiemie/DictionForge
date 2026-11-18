@@ -1,0 +1,212 @@
+{
+  "date": "2026-11-18",
+  "status": "PASS",
+  "request": "模型或数据集可连同引用一起删除，先冻结并展示完整关联范围",
+  "behavior": [
+    "管理页默认cascade=true；对象及文件各每页5项；点击后立即弹出可取消/重试的对话框",
+    "递归纳入派生模型/数据、草稿、回流、训练与完整恢复点、导出、临时合成/试听及任务记录",
+    "清理已启用模型、当前合成和播放器引用；原始输入、共享资产、独立永久作品保留",
+    "暂停及历史记录可以删除；运行/排队任务、HTTP文件传输及复制临界区仍阻止删除",
+    "确认重算对象/记录/文件SHA范围；范围变化拒绝旧令牌；固定受管路径、搬移回滚、崩溃恢复、重复确认回执保护"
+  ],
+  "tests": {
+    "api_suite": {
+      "command": ".venv-api/Scripts/python.exe -m pytest -q -o faulthandler_timeout=45 --basetemp=data/pytest-cascade-final --junitxml=data/cascade-tests.xml",
+      "passed": 262,
+      "skipped": 7,
+      "seconds": 124.14,
+      "log": "data/cascade-tests.log",
+      "note": "7项为API环境未装Torch的既有跳过；1条httpx/Starlette弃用警告"
+    },
+    "final_cascade_contracts": {
+      "command": ".venv-api/Scripts/python.exe -m pytest tests/test_cascade_deletion.py -q --basetemp=data/pytest-cascade-request-guard",
+      "passed": 15,
+      "seconds": 5.56,
+      "note": "全套之后增加2项重复确认回执保护；最后修改后重跑全部15项关联删除专项"
+    },
+    "frontend": {
+      "typecheck": "PASS",
+      "vite_build": "PASS",
+      "node_component_tests": 5
+    },
+    "browser": {
+      "command": "node scripts/validate_cascade_dialog.cjs",
+      "engine": "Installed Microsoft Edge / Playwright / headless",
+      "port": 7869,
+      "fixture": {
+        "area": "E:\\DictionForge\\data\\cascade-ui-fixture\\20261118-084235-399375",
+        "data_root": "E:\\DictionForge\\data\\cascade-ui-fixture\\20261118-084235-399375\\managed",
+        "run_id": "1baa7c277feb4849b3669a927a4eccc7",
+        "source": "E:\\DictionForge\\data\\cascade-ui-fixture\\20261118-084235-399375\\original.wav",
+        "source_sha256": "0a8f76d89c709043814cb74f331a4578d17ff61256303bd0019a263d053f86e8",
+        "asset": "E:\\DictionForge\\data\\cascade-ui-fixture\\20261118-084235-399375\\managed\\assets\\retained.bin",
+        "asset_sha256": "67ed5af8cf05cd41fae722ce86da6d5583ac8c0990d1fc79c2061f2dd612a135",
+        "saved": "E:\\DictionForge\\data\\cascade-ui-fixture\\20261118-084235-399375\\managed\\saved_speech\\keep\\source.wav",
+        "saved_sha256": "0a8f76d89c709043814cb74f331a4578d17ff61256303bd0019a263d053f86e8"
+      },
+      "checks": [
+        {
+          "name": "模型预览递归列出关联对象，每页5项，已启用和暂停恢复点可一并删除",
+          "status": "PASS"
+        },
+        {
+          "name": "确认实际删除模型、派生模型、暂停运行、回流及草稿，并清除启用指向",
+          "status": "PASS"
+        },
+        {
+          "name": "数据版本实际连同派生版本、关联模型与借用音频草稿删除",
+          "status": "PASS"
+        },
+        {
+          "name": "原始输入、共享资产和独立作品的文件与哈希保留",
+          "status": "PASS"
+        }
+      ],
+      "errors": [],
+      "model_delete": {
+        "objects": [
+          {
+            "kind": "augmentation",
+            "id": "append",
+            "label": "回流记录",
+            "title": "",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "draft",
+            "id": "feedback-draft",
+            "label": "标注草稿",
+            "title": "级联回流草稿",
+            "reason": "回流审核草稿"
+          },
+          {
+            "kind": "job",
+            "id": "1baa7c277feb4849b3669a927a4eccc7",
+            "label": "后台任务及日志",
+            "title": "",
+            "reason": "对应的后台任务与日志"
+          },
+          {
+            "kind": "model",
+            "id": "child",
+            "label": "模型版本",
+            "title": "级联验收 child",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "model",
+            "id": "parent",
+            "label": "模型版本",
+            "title": "级联验收 parent",
+            "reason": "本次选择的删除对象"
+          },
+          {
+            "kind": "model_selection",
+            "id": "active",
+            "label": "模型启用状态",
+            "title": "",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "run",
+            "id": "1baa7c277feb4849b3669a927a4eccc7",
+            "label": "训练与恢复点",
+            "title": "",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "version",
+            "id": "feedback",
+            "label": "数据版本",
+            "title": "feedback",
+            "reason": "该回流发布的数据版本"
+          }
+        ],
+        "files": 7,
+        "state": "DELETED"
+      },
+      "dataset_delete": {
+        "objects": [
+          {
+            "kind": "draft",
+            "id": "revision",
+            "label": "标注草稿",
+            "title": "借用版本音频的草稿",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "model",
+            "id": "independent",
+            "label": "模型版本",
+            "title": "级联验收 independent",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "version",
+            "id": "derived",
+            "label": "数据版本",
+            "title": "derived",
+            "reason": "依赖本次删除范围中的对象或文件"
+          },
+          {
+            "kind": "version",
+            "id": "upstream",
+            "label": "数据版本",
+            "title": "upstream",
+            "reason": "本次选择的删除对象"
+          }
+        ],
+        "files": 4,
+        "state": "DELETED"
+      },
+      "report": "data/cascade-ui-fixture/result.json",
+      "screenshot": "E:\\DictionForge\\data\\cascade-ui-fixture\\20261118-084235-399375\\model-preview.png"
+    }
+  },
+  "live_read_only_preview": {
+    "deletable": true,
+    "models_before": [
+      "661bdeb20f295a1fa001465fc8447e20",
+      "21786e5fe9d652f591a44d3c368ae8fe",
+      "a974c5da69695d0aba3477bff5c7b768",
+      "official"
+    ],
+    "objects": 19,
+    "models_after": [
+      "661bdeb20f295a1fa001465fc8447e20",
+      "21786e5fe9d652f591a44d3c368ae8fe",
+      "a974c5da69695d0aba3477bff5c7b768",
+      "official"
+    ],
+    "target": "661bdeb20f295a1fa001465fc8447e20",
+    "mode": "cascade",
+    "bytes": 3256015538,
+    "files": 81,
+    "health": {
+      "service": "ready",
+      "name": "DictionForge",
+      "version": "0.1.0",
+      "workspace": "E:\\DictionForge",
+      "data_root": "E:\\DictionForge\\data",
+      "pid": 36312
+    },
+    "elapsed_ms": 3493,
+    "delete_requests": 0,
+    "blockers": []
+  },
+  "final_service": {
+    "service": "ready",
+    "name": "DictionForge",
+    "version": "0.1.0",
+    "workspace": "E:\\DictionForge",
+    "data_root": "E:\\DictionForge\\data",
+    "pid": 23332
+  },
+  "failure_and_correction": {
+    "first_report": "data/cascade-ui-fixture/20261118-083942-549294/report.json",
+    "cause": "作品夹具误写state而非status=READY，导致列表计数0；文件及SHA始终保留",
+    "fix": "夹具改为status=READY；在删除前检查作品可见；在全新独立目录重跑4项页面实测通过"
+  },
+  "scope": "真实DELETE仅对独立CPU夹具；权重与检查点为明确标记的不可训练占位文件，本轮不新增GPU/ASR/音质结论。正式7867仅GET预览，无DELETE；模型ID集合前后一致。隔离7869已安全停止。",
+  "history": "P00-P12各一提交保持不变；7ac47ce弹窗修复及本次UI维护的推送哈希另记data/UI_CASCADE_PUSH_RESULT.json"
+}

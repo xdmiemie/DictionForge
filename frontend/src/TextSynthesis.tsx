@@ -123,6 +123,15 @@ export function TextSynthesis({modelId, canGenerate, reference, jobs, submit, re
   const jobsKey = jobs.map(job => `${job.id}:${job.state}`).join('|');
   const refresh = useCallback(async (id?: string) => {const ticket = ++currentRequest.current; const value = await api<SpeechSnapshot | null>(id ? '/tts/' + encodeURIComponent(id) : '/tts/current'); if (ticket === currentRequest.current) {setCurrent(value); setLoadError('');}}, []);
   useEffect(() => {void refresh().catch(error => setLoadError(error.message));}, [refresh, jobsKey]);
+  useEffect(() => {
+    const deleted = (event: Event) => {
+      const ids = (event as CustomEvent<{deleted_jobs?:string[]}>).detail.deleted_jobs ?? [];
+      if (ids.includes(historyId)) {setHistoryId('');setHistory(undefined);setHistoryError('');}
+      void refresh().catch(error => setLoadError(error.message));
+    };
+    window.addEventListener('dictionforge:catalog-deleted', deleted);
+    return () => window.removeEventListener('dictionforge:catalog-deleted', deleted);
+  }, [historyId, refresh]);
   useEffect(() => {try {localStorage.setItem('dictionforge.textDraft', text);} catch {/* The input remains usable without storage. */}}, [text]);
   useEffect(() => {
     if (!historyId) return;

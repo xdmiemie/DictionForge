@@ -59,6 +59,17 @@ export function Synthesis({jobs, submit, reportError, refreshToken = 0, onCatalo
   }, []);
   useEffect(() => {void load().catch(error => setLoadingError(error.message));}, [load, jobsKey, refreshToken]);
   useEffect(() => {
+    const deleted = (event: Event) => {
+      const objects = (event as CustomEvent<{deleted_objects?:{kind:string;id:string}[]}>).detail.deleted_objects ?? [];
+      if (objects.some(item => item.kind === 'comparison' && item.id === comparisonId)) {
+        setComparisonId('');setComparison(undefined);try {localStorage.removeItem('dictionforge.comparison');} catch {/* Optional storage. */}
+      }
+      if (objects.some(item => item.kind === 'job' && item.id === probeId)) setProbeId('');
+    };
+    window.addEventListener('dictionforge:catalog-deleted', deleted);
+    return () => window.removeEventListener('dictionforge:catalog-deleted', deleted);
+  }, [comparisonId, probeId]);
+  useEffect(() => {
     if (!file) {setFileUrl(''); return;}
     const url = URL.createObjectURL(file); setFileUrl(url);
     return () => URL.revokeObjectURL(url);

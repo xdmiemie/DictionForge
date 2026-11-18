@@ -57,3 +57,13 @@ API241 passed/7 skipped；worker18 passed；Windows启停专项5 passed；前端
 ## 删除预览修复（2026-11-18）
 
 已修复「查看删除范围」内容落在页面底部、用户视野外的问题：现在立即弹出原生对话框，加载、错误、重试和确认都在当前视野；取消/Esc可关闭，旧请求不会重新打开或覆盖新对象。前端构建/5项组件/8项专项真实浏览器验证通过；未删除真实业务记录。详见docs/evidence/UI_DELETE_DIALOG.json，最新推送核对写data/UI_DELETE_DIALOG_PUSH_RESULT.json。刷新现有浏览器即可载入，后端无需重启。
+
+## 关联删除维护（2026-11-18）
+
+删除弹窗修复提交7ac47ce之后，用户要求可连同引用删除。管理页现在默认使用?cascade=true冻结关联范围，历史引用、已启用模型、暂停训练与恢复点可一并删除；正在执行的任务和文件传输仍保护。关联对象、文件各5项分页，确认后清理任务/播放器/当前合成等指向。保留用户原录音、共享底模和独立保存的作品；不自动删除模型的上游训练数据。行为以USER_GUIDE的关联范围规则为准，旧计划和历史验收中的保护式删除描述不再代表新版UI。
+
+后端全套262 passed/7 skipped；最后重复确认回执补强后15项专项全部通过；前端build/5组件通过。独立7869数据库中的4项页面实际关联删除通过，CPU夹具不是可推理权重，未进行新的GPU质量验收。正式7867只做预览，19项对象/81文件，未删除业务数据。证据docs/evidence/UI_CASCADE_DELETE.json。正式服务已安全重启加载新后端，刷新浏览器即可使用。最新远端提交以data/UI_CASCADE_PUSH_RESULT.json为准。
+
+复验关联删除：先在API环境运行scripts/prepare_cascade_ui_fixture.py，读取data/cascade-ui-fixture/latest.json的data_root，以scripts/start.ps1 -NoBrowser -Port 7869 -DataRoot该目录启动隔离服务，再运行node scripts/validate_cascade_dialog.cjs（需要含Playwright的测试Node）。脚本硬性核对端口与data_root后才真实DELETE；运行完成后使用相同端口/data_root安全停止。API专项为tests/test_cascade_deletion.py。
+
+维护期间用户在正式页面进行了数据整理与删除，因此上方P12产物ID属于历史验收记录，不保证仍存在。不可为满足旧validate_delivery或依赖固定列表规模的脚本而恢复已删除模型/数据；新的管理流程使用隔离夹具验收。原始录音和独立作品仍须保护。

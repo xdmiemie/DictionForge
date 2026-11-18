@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-18",
+  "status": "PASS",
+  "scope": [
+    "每页5项分页",
+    "逐条审核/跳过/中途结束",
+    "独立数据与模型管理及草稿删除"
+  ],
+  "tests": {
+    "api": "249 passed / 7 skipped, 101.19 seconds",
+    "frontend": "TypeScript + Vite build; 5 component tests passed",
+    "browser": [
+      {
+        "name": "后台任务刷新与翻页保留选中任务",
+        "status": "PASS"
+      },
+      {
+        "name": "模型版本每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 4
+      },
+      {
+        "name": "管理数据版本每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 5
+      },
+      {
+        "name": "管理标注草稿每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 5
+      },
+      {
+        "name": "数据版本每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 5
+      },
+      {
+        "name": "预训练资产每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 5
+      },
+      {
+        "name": "扫描文件跨页保留排除勾选",
+        "status": "PASS",
+        "scanId": "83a3e9b7dab449e08ed9cdf673210dd0",
+        "total": 6
+      },
+      {
+        "name": "标注总览每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 1
+      },
+      {
+        "name": "已保存语音每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 1
+      },
+      {
+        "name": "作品筛选回首页与跨页冻结删除预览",
+        "status": "PASS",
+        "total": 6,
+        "deleted": 0
+      },
+      {
+        "name": "390px窄屏分页无横向溢出",
+        "status": "PASS"
+      },
+      {
+        "name": "逐条审核修正文案、通过或去掉即保存跳转、中途结束保留排除并默认通过剩余",
+        "status": "PASS"
+      },
+      {
+        "name": "跳过整个审核将全部保留片段默认通过并保存",
+        "status": "PASS"
+      },
+      {
+        "name": "识别为空时定位该片段，不伪造可训练的空标注",
+        "status": "PASS"
+      },
+      {
+        "name": "审核测试未改动服务端原草稿",
+        "status": "PASS"
+      },
+      {
+        "name": "句子分页保留选择和真实播放器定位、拖动自动显示当前句",
+        "status": "PASS"
+      },
+      {
+        "name": "嵌套回流列表和片段每页5项、跨页编辑及保存单条不清空其他记录",
+        "status": "PASS"
+      },
+      {
+        "name": "训练恢复点每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 1
+      },
+      {
+        "name": "导出记录每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 1
+      },
+      {
+        "name": "导出登记每页5项且前后翻页",
+        "status": "PASS",
+        "secondPage": 1
+      }
+    ],
+    "browser_errors": [],
+    "browser_fixtures": [
+      "仅浏览器响应：12段可编辑草稿，PATCH只更新测试内存，服务端原草稿不变",
+      "仅浏览器响应：12句索引、6条回流记录各6片、6个未保留区间；媒体仍为既有4秒音频，未生成或回流新数据",
+      "仅浏览器响应：6个恢复点、6项导出和6项导出登记；未调用恢复、导出或训练"
+    ]
+  },
+  "real_flow": {
+    "checks": [
+      {
+        "name": "纯WAV无标注文件，真实STT生成可审核文字",
+        "status": "PASS"
+      },
+      {
+        "name": "跳过审核实际保存全部通过，保留STT标注来源",
+        "status": "PASS"
+      },
+      {
+        "name": "真实试听、修正文案通过并发布训练数据版本",
+        "status": "PASS"
+      },
+      {
+        "name": "管理页真实删除本次测试版本与草稿，原始音频及纯语音输入副本不变",
+        "status": "PASS"
+      },
+      {
+        "name": "管理页展示在用模型删除保护，未删除用户模型",
+        "status": "PASS"
+      }
+    ],
+    "input": "E:\\DictionForge\\data\\ui-review\\2026-11-18T07-47-27-250Z\\纯语音输入",
+    "input_files": [
+      "景元录音.wav"
+    ],
+    "source_sha256": "e3db07886320844abb3f4f7537ba21dc61d2ad43ee4c4504378383ace2a8f1ef",
+    "scan_id": "91145e4b5db141f882a48f595076e076",
+    "prepare_id": "6f1298dc7ed2471ea2e851c76c305b95",
+    "draft_id": "6f1298dc7ed2471ea2e851c76c305b95",
+    "version_id": "7bb2f91ac7a6463a989910db72466f7c",
+    "asr_result": {
+      "schema_version": 1,
+      "clips": [
+        {
+          "id": "04471f4478684565ab913f6217e5c1c9",
+          "text": "我是罗父云奇将军警员啊，不必拘谨将军只是一时的身份，你称呼我警员便可。",
+          "language": "zh",
+          "error": null,
+          "confidence": null,
+          "seconds": 17.312000000001717
+        }
+      ],
+      "asset_revision": {
+        "lock_sha256": "dd66b73f1cb31a65ccd5736b64fe715d662a7d62884663f1d4b5d90bbbd93c07",
+        "repositories": {
+          "funasr/paraformer-zh": "d7811ee3ac581fbcfdeb37c98c6ba674028433dc",
+          "funasr/fsmn-vad": "df20e6b30c653645fa4ff125cacfcabd1020a669",
+          "funasr/ct-punc": "d0e55e2b8722a78b63705ff443d09c4f86e5d750"
+        }
+      }
+    },
+    "prepared_seconds": 8.78,
+    "corrected_text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+    "playback": {
+      "seconds": 8.78,
+      "playedTo": 0.161036
+    },
+    "deleted_test_version": "DELETED",
+    "deleted_test_draft": "DELETED",
+    "saved_before": [
+      {
+        "id": "4841aea38d3f4637be47cd90dc9a165f",
+        "sha256": "f119a956cb5a94f5dfdcbcfbcba187af567de22239e904df6c289c41cd4c16e6"
+      },
+      {
+        "id": "7604a45d9eb44897bb1165436a021326",
+        "sha256": "7c5eefa05ea80fee4e6b859682a84028d872855da0877f9a9960ac970c55df33"
+      },
+      {
+        "id": "6d8a0b80a5384cb79f0133e0c47e3613",
+        "sha256": "9adb5c9d7745a6358be9a43765f3bc260b9b7be7455388875a2b4b7621549f13"
+      },
+      {
+        "id": "b2968e66c6294d3d9f654b2f0b2768b9",
+        "sha256": "9d7f6a06d7b54bb052438745ea54cc07e41b8d31831882a79e950b72e0aa7186"
+      },
+      {
+        "id": "7c4fff962a0a4f46b171b16f7c939e41",
+        "sha256": "596018eccd87f1f77f4c4cd7f15e2e6b8b74abb1986e87e17adc0840c869e0b9"
+      },
+      {
+        "id": "bfa6b69242ae406f9b04859837d763e3",
+        "sha256": "9d7f6a06d7b54bb052438745ea54cc07e41b8d31831882a79e950b72e0aa7186"
+      }
+    ],
+    "saved_after": [
+      {
+        "id": "4841aea38d3f4637be47cd90dc9a165f",
+        "sha256": "f119a956cb5a94f5dfdcbcfbcba187af567de22239e904df6c289c41cd4c16e6"
+      },
+      {
+        "id": "7604a45d9eb44897bb1165436a021326",
+        "sha256": "7c5eefa05ea80fee4e6b859682a84028d872855da0877f9a9960ac970c55df33"
+      },
+      {
+        "id": "6d8a0b80a5384cb79f0133e0c47e3613",
+        "sha256": "9adb5c9d7745a6358be9a43765f3bc260b9b7be7455388875a2b4b7621549f13"
+      },
+      {
+        "id": "b2968e66c6294d3d9f654b2f0b2768b9",
+        "sha256": "9d7f6a06d7b54bb052438745ea54cc07e41b8d31831882a79e950b72e0aa7186"
+      },
+      {
+        "id": "7c4fff962a0a4f46b171b16f7c939e41",
+        "sha256": "596018eccd87f1f77f4c4cd7f15e2e6b8b74abb1986e87e17adc0840c869e0b9"
+      },
+      {
+        "id": "bfa6b69242ae406f9b04859837d763e3",
+        "sha256": "9d7f6a06d7b54bb052438745ea54cc07e41b8d31831882a79e950b72e0aa7186"
+      }
+    ],
+    "errors": []
+  },
+  "local_reports": [
+    "data/ui-pagination.json",
+    "data/ui-review.json",
+    "data/ui-tests.xml",
+    "data/ui-tests.log"
+  ],
+  "notes": [
+    "浏览器长列表与多片审核夹具仅拦截页面响应；真实ASR与删除是另一次独立闭环。",
+    "原P00–P12证据保持原样；后续提交使用UI前缀。",
+    "首轮沙箱全套测试停滞，已仅结束核实的pytest进程；允许本机进程/套接字后全套通过。"
+  ]
+}

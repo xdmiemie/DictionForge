@@ -237,10 +237,11 @@ def update_draft(jobs, key, revision, clips):
         lookup = {c["id"]: c for c in draft["clips"]}
         for change in clips:
             clip = lookup[change["id"]]
+            text_changed = "text" in change and change["text"] != clip["text"]
             if change.get("language", clip["language"]) not in LANGUAGES:
                 raise ValueError("UNSUPPORTED_LANGUAGE")
             clip.update({k: v for k, v in change.items() if k in {"text", "language", "reviewed", "excluded"}})
-            if "text" in change:
+            if text_changed:
                 clip["label_source"] = "manual"
         draft["revision"] += 1
         return put(jobs, "draft", key, draft, db)

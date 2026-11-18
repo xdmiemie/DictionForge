@@ -17,7 +17,9 @@ def digest(path):
 def api(route):
     with urllib.request.urlopen('http://127.0.0.1:7867/api'+route,timeout=30) as r:return json.load(r)
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--phases',type=int,default=13);args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--phases',type=int,default=13)
+    p.add_argument('--allow-maintenance',action='store_true',help='Allow later non-phase maintenance commits')
+    p.add_argument('--output',default='data/p12-delivery.json');args=p.parse_args()
     result={'schema_version':1,'checks':{},'source_files':[]}
     assert digest(ROOT/'DictionForge_Codex_Project_Plan.md')==digest(ROOT/'docs/PROJECT_PLAN.md')
     result['checks']['plan_verbatim']='PASS'
@@ -27,8 +29,10 @@ def main():
         result['source_files'].append({'path':row['original'],'sha256':actual})
     result['checks']['source_recordings_unchanged']='PASS'
     history=subprocess.check_output(['git','-C',str(ROOT),'log','--reverse','--format=%H %s'],text=True).splitlines()
-    assert len(history)==args.phases,history
-    for index,line in enumerate(history):assert line.split(' ',1)[1].startswith(f'P{index:02d} '),line
+    assert len(history)>=args.phases if args.allow_maintenance else len(history)==args.phases,history
+    for index,line in enumerate(history[:args.phases]):assert line.split(' ',1)[1].startswith(f'P{index:02d} '),line
+    for line in history[args.phases:]:
+        assert not any(line.split(' ',1)[1].startswith(f'P{index:02d} ') for index in range(args.phases)),line
     result['commits']=history;result['checks']['one_commit_per_phase']='PASS'
     result['timbreforge']={key:subprocess.check_output(['git','-C','E:/TimbreForge',*command],text=True).strip()
         for key,command in [('head',['rev-parse','HEAD']),('status',['status','--porcelain'])]}
@@ -60,6 +64,6 @@ def main():
     result['checks']['final_checkpoints_and_native_48k_pair']='PASS'
     result['selection']=api('/synthesis/selection');assert result['selection']['active_model']==browser['deliveredModel']
     result['result']='PASS'
-    (ROOT/'data/p12-delivery.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+    (ROOT/args.output).write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps({'result':'PASS','checks':result['checks'],'commits':len(history)},ensure_ascii=False))
 if __name__=='__main__':main()

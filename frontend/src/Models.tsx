@@ -1,3 +1,4 @@
+import {PaginatedList} from './Pagination';
 import {useEffect, useState} from 'react';
 import {active, api, finiteNumber, Job, stateLabel} from './api';
 import type {DatasetVersion} from './Datasets';
@@ -5,8 +6,10 @@ import type {DatasetVersion} from './Datasets';
 type Weight = {path?: string; sha256: string; bytes: number};
 export type ModelVersion = {id: string; model_id: string; version_id: string; role: string; status: string; weights: {gpt: Weight; sovits: Weight}; stage_progress?: Record<string, {state?: string; optimizer_updates?: number}>; validation?: {structure?: string; gpu?: string}; provenance?: {run_id?: string; version_id?: string; initial_model?: string; reason?: string; snapshot_id?: string}; dependencies?: unknown[]; default_reference?: unknown};
 type DeletePreview = {preview_id?: string; token?: string; id?: string; files: {path: string; bytes?: number; sha256?: string}[]; references: {kind: string; id: string; reason: string}[]; deletable?: boolean; total_bytes?: number};
-type Selection = {kind: 'model' | 'dataset'; id: string; title: string; preview: DeletePreview};
+type Selection = {kind: 'model' | 'dataset' | 'draft'; id: string; title: string; preview: DeletePreview};
 type Submit = (path: string, payload: object) => Promise<Job>;
+const kindName = (kind: Selection['kind']) => ({model:'模型版本',dataset:'数据版本',draft:'标注草稿'}[kind]);
+const endpointFor = (kind: Selection['kind']) => ({model:'/models/',dataset:'/dataset-versions/',draft:'/dataset-drafts/'}[kind]);
 const verification = (value?: string) => ({PASS: '通过', PASSED: '通过', NOT_RUN: '尚未运行', FAILED: '失败', FAIL: '失败'}[value ?? ''] ?? value ?? '尚未记录');
 const size = (bytes?: number) => finiteNumber(bytes) ? `${(bytes / 2 ** 20).toFixed(1)} MiB` : '未记录大小';
 
@@ -24,15 +27,16 @@ export function ModelCard({model, busy, onPreview}: {model: ModelVersion; busy: 
 
 export function DeleteConfirmation({selection, busy, onCancel, onConfirm}: {selection: Selection; busy: boolean; onCancel: () => void; onConfirm: () => void}) {
   const blocked = selection.preview.references.length > 0 || selection.preview.deletable === false;
-  return <div className="delete-preview" role="region" aria-label="删除确认"><div className="section-top"><h3>删除{selection.kind === 'model' ? '模型' : '数据'}版本</h3><button className="quiet" disabled={busy} onClick={onCancel}>取消</button></div><p>{selection.title}</p><p className="muted small">以下是本次确认的文件范围：{selection.preview.files.length} 项 · {size(selection.preview.total_bytes)}</p><div className="delete-files">{selection.preview.files.map((file, index) => <p key={file.path + index} className="path-text">{file.path} <span>{size(file.bytes)}</span></p>)}</div>
-    {blocked ? <><p className="inline-error">此版本受到引用保护，暂不能删除。</p><ul>{selection.preview.references.map((reference, index) => <li key={reference.id + index}>{reference.reason} · {reference.kind} / {reference.id}</li>)}</ul></> : <p className="muted small">未发现阻止删除的引用。确认后删除以上指定版本文件。</p>}
-    <button className="danger" disabled={busy || blocked || !(selection.preview.preview_id ?? selection.preview.token)} onClick={onConfirm}>确认删除此{selection.kind === 'model' ? '模型' : '数据'}版本</button>
+  return <div className="delete-preview" role="region" aria-label="删除确认"><div className="section-top"><h3>删除{kindName(selection.kind)}</h3><button className="quiet" disabled={busy} onClick={onCancel}>取消</button></div><p>{selection.title}</p>{selection.kind==='draft'&&<p className="small">删除此草稿记录和下面列出的整理副本。原始录音、已发布数据版本及其音频保留。</p>}<p className="muted small">以下是本次确认的文件范围：{selection.preview.files.length} 项 · {size(selection.preview.total_bytes)}</p><div className="delete-files"><PaginatedList items={selection.preview.files ?? []} label="删除文件" key={selection.id}>{(file, index) => <p key={file.path + index} className="path-text">{file.path} <span>{size(file.bytes)}</span></p>}</PaginatedList></div>
+    {blocked ? <><p className="inline-error">此版本受到引用保护，暂不能删除。</p><div><PaginatedList items={selection.preview.references ?? []} label="保护引用" key={selection.id}>{(reference, index) => <p className="small path-text" key={reference.id + index}>{reference.reason} · {reference.kind} / {reference.id}</p>}</PaginatedList></div></> : <p className="muted small">未发现阻止删除的引用。确认后删除以上指定版本文件。</p>}
+    <button className="danger" disabled={busy || blocked || !(selection.preview.preview_id ?? selection.preview.token)} onClick={onConfirm}>确认删除此{kindName(selection.kind)}</button>
   </div>;
 }
 
 export function Models({jobs, submit, reportError, onCatalogChange, showDatasets, refreshToken = 0}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; onCatalogChange: () => void; showDatasets: boolean; refreshToken?: number}) {
   const [models, setModels] = useState<ModelVersion[]>([]);
   const [datasets, setDatasets] = useState<DatasetVersion[]>([]);
+  const [drafts,setDrafts]=useState<{id:string;role:string;clips:unknown[];published?:string}[]>([]);
   const [gpt, setGpt] = useState('');
   const [sovits, setSovits] = useState('');
   const [role, setRole] = useState('');
@@ -46,7 +50,7 @@ export function Models({jobs, submit, reportError, onCatalogChange, showDatasets
   const jobsKey = jobs.map(job => `${job.id}:${job.state}`).join('|');
   useEffect(() => {
     let disposed = false;
-    Promise.all([api<ModelVersion[]>('/models'), api<DatasetVersion[]>('/datasets')]).then(([nextModels, nextDatasets]) => {if (!disposed) {setModels(nextModels); setDatasets(nextDatasets); setLoadError('');}}).catch(e => {if (!disposed) setLoadError(e.message);});
+    Promise.all([api<ModelVersion[]>('/models'), api<DatasetVersion[]>('/datasets'),api<typeof drafts>('/dataset-drafts')]).then(([nextModels, nextDatasets, nextDrafts]) => {if (!disposed) {setModels(nextModels); setDatasets(nextDatasets); setDrafts(nextDrafts); setLoadError('');}}).catch(e => {if (!disposed) setLoadError(e.message);});
     return () => {disposed = true;};
   }, [jobsKey, refreshKey, showDatasets, refreshToken]);
   const importing = jobs.find(job => job.id === importId);
@@ -55,7 +59,7 @@ export function Models({jobs, submit, reportError, onCatalogChange, showDatasets
     try {await operation();} catch (e) {reportError((e as Error).message);} finally {setBusy(false);}
   };
   const preview = async (kind: Selection['kind'], id: string, title: string) => {
-    const endpoint = kind === 'model' ? '/models/' : '/dataset-versions/';
+    const endpoint = endpointFor(kind);
     const result = await api<DeletePreview>(endpoint + encodeURIComponent(id) + '/delete-preview');
     setSelection({kind, id, title, preview: result});
   };
@@ -63,7 +67,7 @@ export function Models({jobs, submit, reportError, onCatalogChange, showDatasets
     if (!selection || selection.preview.references.length || selection.preview.deletable === false) return;
     const token = selection.preview.preview_id ?? selection.preview.token;
     if (!token) throw new Error('删除预览已失效，请重新查看删除范围。');
-    const endpoint = selection.kind === 'model' ? '/models/' : '/dataset-versions/';
+    const endpoint = endpointFor(selection.kind);
     await api(endpoint + encodeURIComponent(selection.id), {preview_id: token}, 'DELETE');
     setNotice(`已删除 ${selection.title} 的指定版本。`); setSelection(undefined); setRefreshKey(value => value + 1); onCatalogChange();
   };
@@ -71,8 +75,9 @@ export function Models({jobs, submit, reportError, onCatalogChange, showDatasets
     {loadError && <p className="inline-error">版本列表读取失败：{loadError}</p>}
     {notice && <p className="success-note" role="status">{notice}</p>}
     <details><summary>导入本地 GPT 与 SoVITS v4 权重对</summary><div className="grid"><label>角色名称<input value={role} maxLength={80} onChange={e => setRole(e.target.value)}/></label><label>GPT 权重路径（.ckpt）<input value={gpt} placeholder="服务电脑上的 GPT 权重路径" onChange={e => setGpt(e.target.value)}/></label><label>SoVITS v4 权重路径（.pth）<input value={sovits} placeholder="服务电脑上的 SoVITS v4 权重路径" onChange={e => setSovits(e.target.value)}/></label></div><label className="check"><input type="checkbox" checked={trusted} onChange={e => setTrusted(e.target.checked)}/>这些本地权重来自我信任的来源</label><button disabled={busy || !trusted || !role.trim() || !gpt.trim() || !sovits.trim() || Boolean(importing && active(importing))} onClick={() => void perform(async () => {const job = await submit('/models/import', {gpt_path: gpt.trim(), sovits_path: sovits.trim(), role: role.trim(), trusted: true}); setImportId(job.id); setNotice('权重对导入已提交，将检查结构、版本和所需依赖。');})}>检查并导入权重对</button>{importing && <p className="muted small">导入任务 {importing.id.slice(0, 8)} · {stateLabel(importing.state)}</p>}</details>
-    {models.length ? <div className="model-grid">{models.map(model => <ModelCard key={model.id} model={model} busy={busy} onPreview={() => void perform(() => preview('model', model.id, `${model.role} · ${model.id.slice(0, 8)}`))}/>)}</div> : <div className="empty"><strong>还没有完整注册的模型包</strong><p>训练导出或导入兼容权重对后，版本会出现在这里。</p></div>}
-    {showDatasets && <details><summary>已发布数据版本 · {datasets.length} 个</summary>{datasets.map(version => <div className="version-row" key={version.id}><div><strong>{version.role}</strong><p className="muted small">{version.id.slice(0, 8)} · {Array.isArray(version.clips) ? version.clips.length : version.clips} 段</p></div><button className="quiet danger" disabled={busy} onClick={() => void perform(() => preview('dataset', version.id, `${version.role} · ${version.id.slice(0, 8)}`))}>查看删除范围</button></div>)}</details>}
+    {models.length ? <div className="model-grid"><PaginatedList items={models ?? []} label="模型版本">{model => <ModelCard key={model.id} model={model} busy={busy} onPreview={() => void perform(() => preview('model', model.id, `${model.role} · ${model.id.slice(0, 8)}`))}/>}</PaginatedList></div> : <div className="empty"><strong>还没有完整注册的模型包</strong><p>训练导出或导入兼容权重对后，版本会出现在这里。</p></div>}
+    {showDatasets && <details><summary>已发布数据版本 · {datasets.length} 个</summary><PaginatedList items={datasets ?? []} label="管理数据版本">{version => <div className="version-row" key={version.id}><div><strong>{version.role}</strong><p className="muted small">{version.id.slice(0, 8)} · {Array.isArray(version.clips) ? version.clips.length : version.clips} 段</p></div><button className="quiet danger" disabled={busy} onClick={() => void perform(() => preview('dataset', version.id, `${version.role} · ${version.id.slice(0, 8)}`))}>查看删除范围</button></div>}</PaginatedList></details>}
+    <details open className="draft-management"><summary>整理后的标注草稿 · {drafts.length} 个</summary><p className="muted small">包含等待审核和已发布草稿。草稿与已发布版本分别管理。</p><PaginatedList items={drafts} label="管理标注草稿">{draft=><article className="version-row" key={draft.id}><div><strong>{draft.role}</strong><p className="muted small">{draft.id.slice(0,8)} · {draft.clips.length} 段 · {draft.published?'已发布':'等待审核'}</p></div><button className="quiet danger" disabled={busy} onClick={()=>void perform(()=>preview('draft',draft.id,`${draft.role} · 草稿 ${draft.id.slice(0,8)}`))}>查看删除范围</button></article>}</PaginatedList></details>
     {selection && <DeleteConfirmation selection={selection} busy={busy} onCancel={() => setSelection(undefined)} onConfirm={() => void perform(remove)}/>}
   </section>;
 }

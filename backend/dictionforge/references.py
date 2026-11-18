@@ -30,7 +30,7 @@ def _safe(root, path):
 def acquire(jobs, kind, key, owner):
     token = uuid.uuid4().hex
     with jobs.connect(write=True) as db:
-        if kind in {'model', 'version'} and key != 'official':
+        if kind in {'model', 'version', 'draft'} and key != 'official':
             get(jobs, kind, key, db)
         put(jobs, 'reference', token, dict(kind=kind, id=key, owner=owner, created=time.time()), db)
     return token
@@ -64,11 +64,13 @@ def references_for(jobs, kind, key):
     states = {job['id']: job['state'] for job in jobs_rows}
     media_ids = {row_id for category, row_id, row in rows if category == 'media' and row.get('owner') == key}
     for job in jobs_rows:
-        if job['state'] in {'QUEUED', 'RUNNING'} and (_mentions(job['payload'], key) or
+        if job['state'] in {'QUEUED', 'RUNNING'} and ((kind == 'draft' and job['id'] == key) or _mentions(job['payload'], key) or
                 any(_mentions(job['payload'], media_id) for media_id in media_ids)):
             add('job', job['id'], '活跃任务冻结了该版本')
     for category, row_id, row in rows:
         if category == 'augmentation':
+            if kind == 'draft' and (row_id == key or row.get('draft_id') == key):
+                add('augmentation', row_id, '句子回流记录仍引用该审核草稿')
             if kind == 'model' and row.get('source_model_id') == key:
                 add('augmentation', row_id, '句子回流记录与新微调默认来源依赖该模型')
             if kind == 'version' and key in {row.get('target_version_id'),row.get('version_id'),row.get('source_version_id')}:
@@ -108,6 +110,9 @@ def references_for(jobs, kind, key):
             if uses_parent or uses_files:
                 add('draft', row_id, '校对草稿或只读草稿片段仍引用该数据版本')
         elif category == 'model' and row.get('status') == 'READY':
+            if kind == 'draft' and (row.get('default_reference') or {}).get('path'):
+                if Path(row['default_reference']['path']).resolve().is_relative_to((jobs.root/'drafts'/key).resolve()):
+                    add('model', row_id, '默认参考仍使用该草稿音频')
             provenance = row.get('provenance', {})
             if kind == 'model' and row_id != key and provenance.get('initial_model') == key:
                 add('model', row_id, '派生模型记录了该来源模型')
@@ -126,18 +131,23 @@ def references_for(jobs, kind, key):
 
 
 def _inventory(jobs, kind, key):
-    if kind not in {'model', 'version'} or not re.fullmatch('[A-Za-z0-9_-]{1,128}', key) or key == 'official':
+    if kind not in {'model', 'version', 'draft'} or not re.fullmatch('[A-Za-z0-9_-]{1,128}', key) or key == 'official':
         raise ValueError('该对象不可删除')
     value = get(jobs, kind, key)
     if kind == 'model':
         expected = jobs.root/'models'/value['model_id']/key
         bases = [expected]
-    else:
+    elif kind == 'version':
         expected = jobs.root/'datasets'/value['dataset_id']/key
         bases = [expected]
         if (jobs.root/'features'/key).exists():
             bases.append(jobs.root/'features'/key)
-    if Path(value['path']).resolve() != expected.resolve():
+    else:
+        # Revised drafts can reference immutable version files and own no folder.
+        # Never derive the deletion scope from a clip's source/audio path.
+        expected = _safe(jobs.root, jobs.root/'drafts'/key)
+        bases = [expected] if expected.exists() else []
+    if kind != 'draft' and Path(value['path']).resolve() != expected.resolve():
         raise ValueError('DELETE_MANAGED_IDENTITY_MISMATCH')
     files = []
     for base in bases:
@@ -161,6 +171,8 @@ def delete_preview(jobs, kind, key):
     preview = dict(kind=kind, id=key, token=token, preview_id=token, files=files, references=refs,
                    deletable=not refs, total_bytes=sum(item['bytes'] for item in files), expires=time.time()+600,
                    bases=[str(base) for base in bases], fingerprint=config_fingerprint(files), state='PREVIEW')
+    if kind == 'draft':
+        preview['record_fingerprint'] = config_fingerprint(value)
     put(jobs, 'delete_preview', token, preview)
     return preview
 
@@ -216,6 +228,8 @@ def delete(jobs, kind, key, token):
         with jobs.connect(write=True) as db:
             value, bases, files = _inventory(jobs, kind, key)
             if config_fingerprint(files) != preview['fingerprint']:
+                raise Conflict('DELETE_PREVIEW_CHANGED')
+            if kind == 'draft' and config_fingerprint(value) != preview.get('record_fingerprint'):
                 raise Conflict('DELETE_PREVIEW_CHANGED')
             refs = references_for(jobs, kind, key)
             if refs:

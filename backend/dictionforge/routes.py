@@ -338,6 +338,16 @@ def register(app):
         from .references import delete_preview
         return delete_preview(request.app.state.jobs, "version", key)
 
+    @app.get("/api/dataset-drafts/{key}/delete-preview")
+    def draft_delete_preview(key: str, request: Request):
+        from .references import delete_preview
+        return delete_preview(request.app.state.jobs, "draft", key)
+
+    @app.delete("/api/dataset-drafts/{key}")
+    def draft_delete(key: str, body: DeleteConfirmation, request: Request):
+        from .references import delete
+        return delete(request.app.state.jobs, "draft", key, body.preview_id)
+
     @app.delete("/api/dataset-versions/{key}")
     def dataset_delete(key: str, body: DeleteConfirmation, request: Request):
         from .references import delete

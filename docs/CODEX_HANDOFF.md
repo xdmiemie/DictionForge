@@ -1,11 +1,11 @@
 # DictionForge 交付与继续维护
 
-2026-11-18：用户已解除此前P09/P10停止要求，P00–P12已全部实施和验收。最后指令为「效果确认符合预期，可以继续推进」。不再有未实施阶段；后续应按新的维护需求工作，不重复创建阶段提交。
+2026-11-18：用户已解除此前P09/P10停止要求，P00–P12已全部实施和验收。之后用户要求统一分页、纯语音STT后的逐条/可跳过审核，以及独立数据与模型管理和删除。以上维护改动已实现并验收；不重复创建阶段提交。
 
 ## 工作区与历史
 
 - 本项目 E:\DictionForge，main，origin=https://github.com/xdmiemie/DictionForge.git。
-- P00–P12恰好各一次本地提交；P12是本文件所在提交。P12提交后才尝试推送。
+- P00–P12恰好各一次本地提交；P12为c991af6c3818668062ccadf830a3ca3e5f0be456，已推送并核对origin/main相同哈希。后续UI维护使用独立UI提交。
 - 提交后的13阶段审计与远端核对结果分别在 data/p12-delivery.json、data/P12_PUSH_RESULT.json；不为记录自身hash新增阶段提交。
 - 只读TimbreForge最后核对HEAD309adfefc97d41dd5e4e79a64adff79e124362e9，干净。原12份景元wav/lab哈希未变。其他项目及原始录音不得作为清理目标。
 
@@ -22,7 +22,7 @@ da71629 P08 verify reference-bound comparisons model activation and real GPU res
 98f47d3 P09 deliver native 48k sentence synthesis with verified UI playback and handoff
 116df75 P10 deliver leased media playback permanent speech library and verified lifecycle
 8301f03 P11 deliver sentence feedback and verified source model initialization
-P12 本文件所在提交：独立Windows交付、真实完整闭环及人工试听确认
+c991af6 P12 独立Windows交付、真实完整闭环及人工试听确认
 ```
 
 ## 启动与本机状态
@@ -45,3 +45,11 @@ P12 本文件所在提交：独立Windows交付、真实完整闭环及人工试
 API241 passed/7 skipped；worker18 passed；Windows启停专项5 passed；前端build/5组件通过。全部真实阶段数据、截图路径和配置见evidence/P12_DELIVERY.md及JSON。API环境跳过的Torch合同另由worker覆盖；自动静音浏览器播放只证明解码，人工效果结论来自用户确认。独立环境在本机重新创建，复用了已校验的模型和wheel缓存，没有重装操作系统。
 
 操作手册USER_GUIDE.md，排障TROUBLESHOOTING.md。恢复训练须保留原冻结配置/数据/完整检查点；换数据应新建微调运行。迁移时保留数据库与所有依赖的路径关系，不要只复制模型权重。
+
+## 后续 UI 维护（2026-11-18）
+
+三项新需求已完成：多记录列表每页5项；ReviewWizard提供逐条修正/去掉/通过后保存并自动下一条、跳过全部和中途结束默认通过；新增独立「数据与模型管理」主标签，模型、数据版本、标注草稿均有带引用保护的删除预览。无文字的ASR失败条目需补写、重识别或去掉。原计划保持逐字一致，当前行为以更新的USER_GUIDE为准。
+
+后端249 passed/7 skipped；前端build及5项组件通过；浏览器20项通过。真实纯WAV输入扫描91145e4b5db141f882a48f595076e076，STT/草稿6f1298dc7ed2471ea2e851c76c305b95，8.78秒片段，ASR17.312秒；跳过、修正、发布7bb2f91ac7a6463a989910db72466f7c，再从页面删除本次测试草稿和版本成功。原录音副本、6件作品和默认模型不变。证据docs/evidence/UI_WORKFLOW.json；完整本机报告data/ui-review.json及ui-pagination.json。
+
+维护后完整交付审计用：python scripts/validate_delivery.py --phases 13 --allow-maintenance --output data/ui-delivery.json。远端核对结果写data/UI_PUSH_RESULT.json。服务已重启加载草稿删除接口，默认仍为127.0.0.1:7867。

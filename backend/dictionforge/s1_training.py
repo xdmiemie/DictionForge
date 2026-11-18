@@ -19,6 +19,9 @@ def create(stage_config, initial, run_dir):
     effective['output_dir'] = str(run_dir)
     model = Text2SemanticLightningModule(effective, Path(run_dir), is_train=False)
     model.load_state_dict(package['weight'], strict=True)
+    from .initialization import loaded_weights_report
+    effective['initialization'] = dict(loaded_weights_report(model, package['weight']),
+                                       source_load_count=1, source=str(initial))
     del package
     model = model.cuda().train()
     optimizer = ScaledAdam(model.model.parameters(), lr=stage_config['learning_rate'], betas=(.9, .95),

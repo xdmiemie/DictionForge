@@ -288,9 +288,12 @@ def preflight(request):
     version, config = request["version"], request["config"]
     area = Path(request["data_root"]) / "features" / version["id"]
     result = dict(ready=False, blockers=[], stages={}, config=config, config_fingerprint=config_fingerprint(config))
-    if config["initial_model"] != "official":
-        result["blockers"].append("MODEL_INITIALIZATION_NOT_AVAILABLE：来源模型初始化将在模型注册后校验")
     try:
+        if request.get('initialization'):
+            from .initialization import verify
+            verify(request['initialization'], config)
+        elif config['initial_model'] != 'official':
+            raise ValueError('INITIALIZATION_REQUIRED：来源模型必须冻结后才能预检')
         manifest = json.loads((area / "manifest.json").read_text(encoding="utf-8"))
         if not manifest["ready"] or manifest["version_fingerprint"] != version["fingerprint"]:
             raise ValueError("特征未就绪或数据指纹变化")

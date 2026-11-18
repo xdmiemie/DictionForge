@@ -248,6 +248,8 @@ def update_draft(jobs, key, revision, clips):
 def publish(jobs, key, revision):
     with jobs.connect(write=True) as db:
         draft = get(jobs, "draft", key, db)
+        if draft.get('augmentation_id'):
+            raise Conflict('APPEND_PUBLISH_REQUIRED：回流草稿请从当前句追加面板发布，以验证特征和父版本')
         if draft.get("published"):
             return get(jobs, "version", draft["published"], db)
         if draft["revision"] != revision:

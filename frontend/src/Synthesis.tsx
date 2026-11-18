@@ -2,6 +2,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {active, api, errorText, finiteNumber, Job, JobError, kindLabel, requestId, stateLabel} from './api';
 import type {ModelVersion} from './Models';
 import {TextSynthesis} from './TextSynthesis';
+import type {TrainSelection} from './AppendSentence';
 import {SavedSpeech} from './SavedSpeech';
 
 export type ReferenceAudio = {id?: string; audio_id?: string; path?: string; sha256?: string; text: string; language: string; seconds: number; sample_rate?: number; channels?: number; fingerprint?: string; status?: string};
@@ -33,7 +34,7 @@ export function ComparisonAudioCard({job, label}: {job?: Job; label: string}) {
   </article>;
 }
 
-export function Synthesis({jobs, submit, reportError, refreshToken = 0, onCatalogChange, system}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; refreshToken?: number; onCatalogChange: () => void; system?: SynthesisSystem}) {
+export function Synthesis({jobs, submit, reportError, refreshToken = 0, onCatalogChange, system, onTrain}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; refreshToken?: number; onCatalogChange: () => void; system?: SynthesisSystem; onTrain?: TrainSelection}) {
   const [models, setModels] = useState<ModelVersion[]>([]);
   const [selection, setSelection] = useState<Selection>();
   const [references, setReferences] = useState<ReferenceAudio[]>([]);
@@ -117,7 +118,7 @@ export function Synthesis({jobs, submit, reportError, refreshToken = 0, onCatalo
     <details className="reference-editor"><summary>选择或替换默认参考</summary><label>已管理参考<select aria-label="已管理参考" value={referenceId} disabled={busy} onChange={event => setReferenceId(event.target.value)}><option value="">选择已有参考素材</option>{references.map(item => <option key={item.id} value={item.id}>{item.text.slice(0, 36)} · {item.seconds.toFixed(2)} 秒 · {item.id?.slice(0, 8)}</option>)}</select></label>{managedReference && <ReferencePreview reference={managedReference} title="待设为默认的参考"/>}<button disabled={busy || !model || !managedReference?.id} onClick={() => void perform(() => setDefault(managedReference!.id!))}>设为默认参考</button>
       <div className="reference-upload"><h3>从本机上传参考</h3><p className="muted small">上传 3–10 秒清晰语音（最大 25 MiB），并填写其中实际说出的内容。</p><label>参考音频文件<input aria-label="参考音频文件" type="file" accept="audio/*,.wav,.mp3,.flac,.m4a,.ogg,.aac,.wma,.aif,.aiff" disabled={busy} onChange={event => setFile(event.target.files?.[0])}/></label>{fileUrl && <audio controls preload="metadata" src={fileUrl}/>}<label>参考音频准确文本<textarea aria-label="参考音频准确文本" maxLength={1000} value={referenceText} disabled={busy} placeholder="与参考音频中实际朗读的文字一致" onChange={event => setReferenceText(event.target.value)}/></label><p className="muted small">参考语言：中文 · 普通话</p><button disabled={busy || !model || !file || !referenceText.trim()} onClick={() => void perform(upload)}>上传并设为默认参考</button></div>
     </details>
-    <TextSynthesis modelId={modelId} canGenerate={Boolean(ready && enabledHere && selection?.valid)} reference={defaultReference} jobs={jobs} submit={submit} reportError={reportError}/>
+    <TextSynthesis modelId={modelId} canGenerate={Boolean(ready && enabledHere && selection?.valid)} reference={defaultReference} jobs={jobs} submit={submit} reportError={reportError} onTrain={onTrain}/>
     <SavedSpeech jobs={jobs} models={models}/>
     <div className="fixed-probe"><div className="section-top"><h3>固定短句效果试听</h3><span className="pill">相同条件比较</span></div><blockquote>{fixedText}</blockquote><p className="muted small">同一参考与语言 · 种子 42 · 采样步数 32 · 语速 1.0。两次生成按 GPU 队列顺序执行。</p><div className="actions"><button className="primary-button" disabled={busy || !ready || !enabledHere || !selection?.valid || modelId === 'official' || comparing} onClick={() => void perform(async () => {const next = await api<Comparison>('/models/' + encodeURIComponent(modelId) + '/compare', requestId()); const id = next.comparison_id ?? next.id; if (!id) throw new Error('比较请求未返回比较编号。'); setComparison(next); setComparisonId(id); setNotice('对比试听已进入 GPU 队列，两份结果使用同一冻结条件。');})}>生成自训与官方对比试听</button><button disabled={busy || !ready || !enabledHere || !selection?.valid || Boolean(probe && active(probe))} onClick={() => void perform(async () => {const job = await submit('/models/' + encodeURIComponent(modelId) + '/probe', {}); setProbeId(job.id);})}>试听当前模型</button></div>
       {probe && <ComparisonAudioCard job={probe} label="当前模型固定短句"/>}

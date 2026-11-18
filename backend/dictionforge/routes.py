@@ -127,7 +127,41 @@ class SpeechDeletePreview(Strict):
 class MediaLease(Strict):
     audio_id: str
 
+class AppendSentence(Identified):
+    sentence_id: str
+    target_version_id: str
+    split_config: dict = Field(default_factory=dict)
+
+class AppendPublish(Identified):
+    revision: int
+
 def register(app):
+    @app.get('/api/tts/{key}/append-target')
+    def append_target(key: str, request: Request):
+        from .augmentation import target
+        return target(request.app.state.jobs, key)
+
+    @app.post('/api/tts/{key}/append', status_code=202)
+    def append_sentence(key: str, body: AppendSentence, request: Request):
+        from .augmentation import submit
+        return submit(request.app.state.jobs,key,body.sentence_id,body.target_version_id,str(body.request_id),body.split_config)
+
+    @app.get('/api/augmentations')
+    def augmentation_list(request: Request, tts_id: str):
+        from .augmentation import snapshot
+        jobs=request.app.state.jobs
+        return [snapshot(jobs,row['id']) for row in list_records(jobs,'augmentation') if row['tts_id']==tts_id]
+
+    @app.get('/api/augmentations/{key}')
+    def augmentation_snapshot(key: str, request: Request):
+        from .augmentation import snapshot
+        return snapshot(request.app.state.jobs,key)
+
+    @app.post('/api/augmentations/{key}/publish', status_code=202)
+    def augmentation_publish(key: str, body: AppendPublish, request: Request):
+        from .augmentation import publish_submit
+        return publish_submit(request.app.state.jobs,key,body.revision,str(body.request_id))
+
     @app.post('/api/media-leases')
     def media_lease(body: MediaLease, request: Request):
         from .media_lifecycle import acquire_browser

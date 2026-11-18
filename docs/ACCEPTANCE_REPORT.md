@@ -29,7 +29,7 @@
 | A23 | 轮内恢复和交接中断 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
 | A24 | 半写、磁盘满、损坏恢复点 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
 | A25 | 从较早恢复点派生 | PASS | docs/evidence/P06_RECOVERY.md、P06_HTTP.json、P06_CHECKPOINT_IO.md；真实暂停重启/受控中断/派生与文件故障验证 |
-| A26 | 更换数据和权重初始化 | NOT_RUN | 依赖P07模型注册，随P11新数据和来源模型实训补验 |
+| A26 | 更换数据和权重初始化 | PASS | P11_FEEDBACK.md、P11_HTTP.json：两种初始化实际张量与首步核对、新优化器计数为零 |
 | A27 | 训练中导出 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
 | A28 | 中止并导出 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
 | A29 | 自然完成自动发布 | PASS | docs/evidence/P07_EXPORT.md、P07_HTTP.json、P07_MANAGEMENT.json；三种真实GPU推理/同快照重试/导入与保护删除 |
@@ -48,12 +48,12 @@
 | A42 | 保存并发和 Windows 句柄 | PASS | P10_HTTP.json、P10_MEDIA_LIFECYCLE.md：真实排队保存、Windows句柄pending→release→deleted，13项专项通过 |
 | A43 | 作品筛选与分页 | PASS | P10_HTTP.json、P10_BROWSER.md：真实页面模型/标题筛选，14件作品10+4分页，翻页及筛选清除选择 |
 | A44 | 批量删除 | PASS | P10_HTTP.json、P10_BROWSER.md：精确单条/本页/跨页确认集合，播放保护；HTTP及浏览器预览后新增不误删，确认框保留冻结集合 |
-| A45 | 单句追加复用文本 | NOT_RUN | 尚未执行 |
-| A46 | 多句选择与追加再切分 | NOT_RUN | 尚未执行 |
-| A47 | 追加失败和回滚 | NOT_RUN | 尚未执行 |
-| A48 | 并发追加和去重 | NOT_RUN | 尚未执行 |
-| A49 | 数据谱系与留出集 | NOT_RUN | 尚未执行 |
-| A50 | 新版本二次微调 | NOT_RUN | 尚未执行 |
+| A45 | 单句追加复用文本 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
+| A46 | 多句选择与追加再切分 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
+| A47 | 追加失败和回滚 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
+| A48 | 并发追加和去重 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
+| A49 | 数据谱系与留出集 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
+| A50 | 新版本二次微调 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
 | A51 | 全新环境启动和停机 | NOT_RUN | 尚未执行 |
 | A52 | 目标硬件全流程 | NOT_RUN | 尚未执行 |
 | A53 | 角色音质 | NOT_RUN | 尚未执行 |

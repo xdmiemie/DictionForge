@@ -7,12 +7,12 @@ from .settings import Settings
 from .training_config import normalize_config, config_fingerprint
 
 
-def _run(jobs, job, action, version, config=None):
+def _run(jobs, job, action, version, config=None, initialization=None):
     settings = Settings.from_environment()
     area = jobs.root / "runs" / job["id"]
     area.mkdir(parents=True, exist_ok=True)
     request, result = area / "feature-request.json", area / "feature-result.json"
-    atomic_json(request, dict(action=action, version=version, config=config,
+    atomic_json(request, dict(action=action, version=version, config=config, initialization=initialization,
                 data_root=str(jobs.root), upstream=str(settings.upstream), job_id=job["id"]))
     return invoke(jobs, job, [settings.worker_python, "-m", "dictionforge.feature_worker", request, result], result=result)
 
@@ -36,7 +36,10 @@ def process(jobs, job):
 def preflight(jobs, job):
     config = normalize_config(job["payload"])
     version = get(jobs, "version", config["version_id"])
-    result = _run(jobs, job, "preflight", version, config)
+    from .initialization import freeze
+    initialization = freeze(jobs, config)
+    result = _run(jobs, job, "preflight", version, config, initialization)
+    result['initialization'] = initialization
     result.update(config=config, config_fingerprint=config_fingerprint(config),
                   version_fingerprint=version["fingerprint"], id=job["id"])
     put(jobs, "preflight", job["id"], result)

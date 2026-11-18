@@ -1,6 +1,7 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {active, api, errorText, finiteNumber, Job, JobError, stateLabel, requestId} from './api';
 import {isGone, useMediaLease} from './MediaLease';
+import {AppendSentence, type TrainSelection} from './AppendSentence';
 import type {ReferenceAudio} from './Synthesis';
 
 export type SpeechAudio = {audio_id?: string; sample_rate: number; samples?: number; seconds?: number; sha256?: string; state?: string; available?: boolean};
@@ -42,7 +43,7 @@ export function FrozenText({text, sentence}: {text: string; sentence?: SpeechSen
   return <div className="frozen-text" aria-label="冻结朗读文本">{validRange ? <>{codepointSlice(text, 0, sentence.source_start)}<mark>{codepointSlice(text, sentence.source_start, sentence.source_end)}</mark>{codepointSlice(text, sentence.source_end)}</> : text}</div>;
 }
 
-export function SpeechPlayback({snapshot, historical = false, submit}: {snapshot: SpeechSnapshot; historical?: boolean; submit?: Submit}) {
+export function SpeechPlayback({snapshot, historical = false, submit, onTrain}: {snapshot: SpeechSnapshot; historical?: boolean; submit?: Submit; onTrain?: TrainSelection}) {
   const result = snapshot.result ?? snapshot.job.result as SpeechResult | undefined;
   const audio = result?.audio;
   const sentences = result?.sentences ?? [];
@@ -100,11 +101,12 @@ export function SpeechPlayback({snapshot, historical = false, submit}: {snapshot
       </>}
       {submit && !gone && <div className="speech-save"><h3>保存独立作品</h3><div className="grid"><label>作品标题<input aria-label="作品标题" value={title} maxLength={200} placeholder="可选，留空使用朗读文本" onChange={event => setTitle(event.target.value)}/></label><label>保存格式<select aria-label="保存格式" value={format} onChange={event => setFormat(event.target.value as 'wav' | 'mp3')}><option value="wav">WAV · 原生 48 kHz 无损</option><option value="mp3">MP3 · 320 kbps</option></select></label></div><button className="primary-button" disabled={saving || !lease.ready} onClick={() => void save()}>{saving ? '正在受理保存…' : '保存到作品库'}</button>{!lease.ready && <p className="muted small">打开播放器并确认音频可用后保存。</p>}{saveNotice && <p role="status" className="success-note">{saveNotice}</p>}</div>}
     </> : <p className="muted small">{active(snapshot.job) ? '合成任务在后台排队或生成，完成后会显示完整音频和每句结果。' : '当前任务尚无成功的完整音频。'}</p>}
+    {submit && snapshot.job.state === 'COMPLETED' && <AppendSentence ttsId={snapshot.id} sentence={selected} available={lease.ready&&!gone} submit={submit} onTrain={onTrain}/>}
     <details><summary>冻结参考与生成条件</summary><pre>{JSON.stringify({model_id: snapshot.request.model_version_id ?? snapshot.request.model_id, language: snapshot.request.language, split_rule: snapshot.request.split_rule, reference: snapshot.request.reference, parameters: snapshot.request.parameters, metrics: result?.metrics}, null, 2)}</pre></details>
   </div>;
 }
 
-export function TextSynthesis({modelId, canGenerate, reference, jobs, submit, reportError}: {modelId: string; canGenerate: boolean; reference?: ReferenceAudio | null; jobs: Job[]; submit: Submit; reportError: (message: string) => void}) {
+export function TextSynthesis({modelId, canGenerate, reference, jobs, submit, reportError, onTrain}: {modelId: string; canGenerate: boolean; reference?: ReferenceAudio | null; jobs: Job[]; submit: Submit; reportError: (message: string) => void; onTrain?: TrainSelection}) {
   const [text, setText] = useState(() => {try {return localStorage.getItem('dictionforge.textDraft') ?? '';} catch {return '';}});
   const [splitRule, setSplitRule] = useState<'punctuation' | 'lines' | 'none'>('punctuation');
   const [parameters, setParameters] = useState<Parameters>(defaults);
@@ -155,6 +157,6 @@ export function TextSynthesis({modelId, canGenerate, reference, jobs, submit, re
     {current && active(current.job) && <button className="quiet danger" disabled={busy} onClick={() => void cancel()}>取消当前合成任务</button>}
     <label>查看合成任务<select aria-label="查看合成任务" value={historyId} onChange={event => setHistoryId(event.target.value)}><option value="">当前合成结果</option>{jobs.filter(job => job.kind === 'tts' && job.id !== current?.id).map(job => <option key={job.id} value={job.id}>{job.id.slice(0, 8)} · {stateLabel(job.state)}{job.created ? ` · ${new Date(job.created * 1000).toLocaleString('zh-CN')}` : ''}</option>)}</select></label>
     {historyError && <p className="inline-error">历史结果读取失败：{historyError}</p>}
-    {historyId ? history ? <SpeechPlayback key={history.id} snapshot={history} historical submit={submit}/> : <p className="muted small">正在读取历史合成任务…</p> : current ? <SpeechPlayback key={current.id} snapshot={current} submit={submit}/> : <p className="muted small">{current === null ? '还没有当前合成结果。生成后可播放完整语音或选择其中一句。' : '正在读取当前合成结果…'}</p>}
+    {historyId ? history ? <SpeechPlayback key={history.id} snapshot={history} historical submit={submit} onTrain={onTrain}/> : <p className="muted small">正在读取历史合成任务…</p> : current ? <SpeechPlayback key={current.id} snapshot={current} submit={submit} onTrain={onTrain}/> : <p className="muted small">{current === null ? '还没有当前合成结果。生成后可播放完整语音或选择其中一句。' : '正在读取当前合成结果…'}</p>}
   </section>;
 }

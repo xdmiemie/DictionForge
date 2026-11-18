@@ -1,0 +1,1557 @@
+{
+  "started": "2026-11-18T05:48:59.529Z",
+  "checks": [
+    {
+      "name": "单句当前结果从页面追加，复用原文本且零ASR",
+      "status": "PASS",
+      "detail": {
+        "tts": "5ce84aadf90742daa5b2842641167563",
+        "append": "1d533f827d6f4bdb993e1b7e26570907",
+        "version": "69a4dca81b56499dbcdfcd3e64982d81",
+        "source_model": "21786e5fe9d652f591a44d3c368ae8fe",
+        "text": "今天阳光很好，我们一起出发吧。"
+      }
+    },
+    {
+      "name": "更换来源模型后正确预选，重复跳转恢复来源初值",
+      "status": "PASS",
+      "detail": {
+        "version_id": "69a4dca81b56499dbcdfcd3e64982d81",
+        "initial_model": "21786e5fe9d652f591a44d3c368ae8fe"
+      }
+    },
+    {
+      "name": "390px回流界面与浏览器无异常",
+      "status": "PASS",
+      "detail": {}
+    }
+  ],
+  "errors": [],
+  "tts": {
+    "id": "5ce84aadf90742daa5b2842641167563",
+    "request": "48fd36ad-17c2-4801-9520-73b8fc06165d",
+    "kind": "tts",
+    "state": "QUEUED",
+    "payload": {
+      "language": "zh",
+      "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+      "parameters": {
+        "fragment_interval": 0.3,
+        "repetition_penalty": 1.35,
+        "sample_steps": 16,
+        "seed": 2027,
+        "speed_factor": 1,
+        "temperature": 1,
+        "top_k": 5,
+        "top_p": 1
+      },
+      "reference_id": "563ea3259eed48938003d5bb0566d68e",
+      "split_rule": "none",
+      "text": "今天阳光很好，我们一起出发吧。"
+    },
+    "result": null,
+    "error": null,
+    "created": 1794980943.2273476,
+    "updated": 1794980943.2273476,
+    "pid": null,
+    "process_start": null,
+    "instance": null
+  },
+  "speech": {
+    "id": "5ce84aadf90742daa5b2842641167563",
+    "job": {
+      "id": "5ce84aadf90742daa5b2842641167563",
+      "request": "48fd36ad-17c2-4801-9520-73b8fc06165d",
+      "kind": "tts",
+      "state": "COMPLETED",
+      "payload": {
+        "language": "zh",
+        "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+        "parameters": {
+          "fragment_interval": 0.3,
+          "repetition_penalty": 1.35,
+          "sample_steps": 16,
+          "seed": 2027,
+          "speed_factor": 1,
+          "temperature": 1,
+          "top_k": 5,
+          "top_p": 1
+        },
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "split_rule": "none",
+        "text": "今天阳光很好，我们一起出发吧。"
+      },
+      "result": {
+        "outcome": "COMPLETED",
+        "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+        "audio": {
+          "path": "E:\\DictionForge\\data\\runtime\\tts\\5ce84aadf90742daa5b2842641167563\\audio-b560f6674fad485999d76d2d44aaa2e9.wav",
+          "sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+          "bytes": 272684,
+          "sample_rate": 48000,
+          "channels": 1,
+          "samples": 136320,
+          "seconds": 2.84,
+          "decode_verified": true,
+          "peak": 0.90576171875,
+          "rms": 0.1117621051566624,
+          "audio_id": "806ed15e2746448182778d1ccba42d77"
+        },
+        "weights": {
+          "gpt": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\gpt.ckpt",
+          "sovits": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\sovits.pth"
+        },
+        "weight_hashes": {
+          "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+          "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+        },
+        "reference": {
+          "id": "563ea3259eed48938003d5bb0566d68e",
+          "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+          "language": "zh",
+          "seconds": 10,
+          "samples": 480000,
+          "sample_rate": 48000,
+          "channels": 1,
+          "subtype": "PCM_16",
+          "source": {
+            "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+            "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+            "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+          },
+          "status": "READY",
+          "created": 1794914086.7331984,
+          "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+          "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+        },
+        "text": "今天阳光很好，我们一起出发吧。",
+        "source_text": "今天阳光很好，我们一起出发吧。",
+        "language": "zh",
+        "sentences": [
+          {
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "index": 0,
+            "text": "今天阳光很好，我们一起出发吧。",
+            "source_start": 0,
+            "source_end": 15,
+            "seed": 2027,
+            "actual_seed": 2027,
+            "audio": {
+              "path": "E:\\DictionForge\\data\\runtime\\tts\\5ce84aadf90742daa5b2842641167563\\sentence-b560f6674fad485999d76d2d44aaa2e9-0000.wav",
+              "sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+              "bytes": 272684,
+              "sample_rate": 48000,
+              "channels": 1,
+              "samples": 136320,
+              "seconds": 2.84,
+              "decode_verified": true,
+              "peak": 0.90576171875,
+              "rms": 0.1117621051566624,
+              "audio_id": "7954f6b764494a5aa7bc14a180c32464"
+            },
+            "start_sample": 0,
+            "end_sample": 136320,
+            "leading_silence_samples": 0,
+            "trailing_silence_samples": 9900,
+            "silence_threshold": {
+              "amplitude": 32,
+              "unit": "pcm16"
+            },
+            "generation_seconds": 5.359831699999631,
+            "actual_text": "今天阳光很好,我们一起出发吧.",
+            "normalized_texts": [
+              "今天阳光很好,我们一起出发吧."
+            ]
+          }
+        ],
+        "coordinate_system": {
+          "text": "unicode_code_point_half_open",
+          "audio": "sample_half_open",
+          "sample_rate": 48000,
+          "concatenation": "exact_sequential_pcm_no_added_silence"
+        },
+        "parameters": {
+          "seed": 2027,
+          "sample_steps": 16,
+          "top_k": 5,
+          "top_p": 1,
+          "temperature": 1,
+          "speed_factor": 1,
+          "repetition_penalty": 1.35,
+          "fragment_interval": 0.3
+        },
+        "effective": {
+          "config": {
+            "version": "v4",
+            "device": "cuda",
+            "is_half": true,
+            "t2s_weights_path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\gpt.ckpt",
+            "vits_weights_path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\sovits.pth",
+            "cnhuhbert_base_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\chinese-hubert-base",
+            "bert_base_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\chinese-roberta-wwm-ext-large"
+          },
+          "inputs": {
+            "seed": 2027,
+            "sample_steps": 16,
+            "top_k": 5,
+            "top_p": 1,
+            "temperature": 1,
+            "speed_factor": 1,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3,
+            "text": "今天阳光很好，我们一起出发吧。",
+            "text_lang": "all_zh",
+            "ref_audio_path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+            "prompt_text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+            "prompt_lang": "all_zh",
+            "text_split_method": "cut0",
+            "batch_size": 1,
+            "parallel_infer": false,
+            "split_bucket": false,
+            "return_fragment": false
+          },
+          "upstream_lock": "c8332db8ddeb77bffb92ddb5d645b05237bbdd82fbd0775c05eadbba6e4a562e",
+          "asset_lock": "dd66b73f1cb31a65ccd5736b64fe715d662a7d62884663f1d4b5d90bbbd93c07",
+          "weight_hashes": {
+            "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+            "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+          },
+          "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "native_sample_rate_required": 48000,
+          "source_text": "今天阳光很好，我们一起出发吧。",
+          "sentences": [
+            {
+              "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+              "index": 0,
+              "text": "今天阳光很好，我们一起出发吧。",
+              "source_start": 0,
+              "source_end": 15,
+              "seed": 2027
+            }
+          ],
+          "sentence_inputs": [
+            {
+              "seed": 2027,
+              "sample_steps": 16,
+              "top_k": 5,
+              "top_p": 1,
+              "temperature": 1,
+              "speed_factor": 1,
+              "repetition_penalty": 1.35,
+              "fragment_interval": 0.3,
+              "text": "今天阳光很好，我们一起出发吧。",
+              "text_lang": "all_zh",
+              "ref_audio_path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+              "prompt_text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+              "prompt_lang": "all_zh",
+              "text_split_method": "cut0",
+              "batch_size": 1,
+              "parallel_infer": false,
+              "split_bucket": false,
+              "return_fragment": false
+            }
+          ],
+          "coordinate_system": {
+            "text": "unicode_code_point_half_open",
+            "audio": "sample_half_open",
+            "sample_rate": 48000,
+            "concatenation": "exact_sequential_pcm_no_added_silence"
+          },
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          }
+        },
+        "phase_events": [
+          {
+            "stage": "request_validation",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": false,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 0,
+            "elapsed_seconds": 0.026342999997723382
+          },
+          {
+            "stage": "dependency_validation",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": false,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 0.1927761000006285
+          },
+          {
+            "stage": "reference_validation",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": false,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 3.2414719999978843
+          },
+          {
+            "stage": "model_loading",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": false,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 3.3781104999980016,
+            "parameters": {
+              "seed": 2027,
+              "sample_steps": 16,
+              "top_k": 5,
+              "top_p": 1,
+              "temperature": 1,
+              "speed_factor": 1,
+              "repetition_penalty": 1.35,
+              "fragment_interval": 0.3
+            },
+            "precision": "fp16"
+          },
+          {
+            "stage": "model_ready",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 11.61457689999952,
+            "model_parameter_bytes": {
+              "t2s_model": 155212804,
+              "vits_model": 765642128,
+              "bert_model": 651091216,
+              "cnhuhbert_model": 188743424,
+              "vocoder": 28850818
+            },
+            "allocated_bytes": 1823197184,
+            "reserved_bytes": 2344615936
+          },
+          {
+            "stage": "sentence_started",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 11.631682199997158,
+            "actual_seed": 2027,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "reference_processing",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 11.651282299997547,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "text_frontend",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 13.751595199999429,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "synthesizing",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 15.16400749999957,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "sentence_audio_validation",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 17.00863919999756,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "sentence_audio_writing",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 0,
+            "total_sentences": 1,
+            "elapsed_seconds": 17.025881499997922,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "sentence_completed",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 1,
+            "total_sentences": 1,
+            "elapsed_seconds": 17.04862299999877,
+            "audio_sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+            "samples": 136320,
+            "start_sample": 0,
+            "end_sample": 136320,
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "sentence_index": 0
+          },
+          {
+            "stage": "audio_writing",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 1,
+            "total_sentences": 1,
+            "elapsed_seconds": 17.06798809999964
+          },
+          {
+            "stage": "audio_written",
+            "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "gpu_resident": true,
+            "worker_pid": 39700,
+            "worker_process_start": 1794980943.606332,
+            "completed_sentences": 1,
+            "total_sentences": 1,
+            "elapsed_seconds": 17.098336799997924,
+            "audio_sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+            "sample_rate": 48000,
+            "samples": 136320
+          }
+        ],
+        "metrics": {
+          "generation_seconds": 5.359831699999631,
+          "load_seconds": 11.60533360000045,
+          "total_seconds": 17.09704469999997,
+          "peak_cuda_bytes": 2318460416,
+          "peak_reserved_bytes": 2430599168,
+          "device": "NVIDIA GeForce RTX 5080"
+        },
+        "job_id": "5ce84aadf90742daa5b2842641167563",
+        "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+        "split_rule": "none",
+        "created": 1794980962.760711,
+        "conditions_fingerprint": "0c7b3de113e955a6eef7e273c58d5f0d8ddb62f8b679e066c321f54fe28eb3e3",
+        "reference_fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "provenance": {
+          "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "model_id": "09e42df26bf30b98cea3880e",
+          "role": "景元",
+          "source_data_version_id": "6db3636a61c744bb902e11173dc4c325",
+          "reference_id": "563ea3259eed48938003d5bb0566d68e",
+          "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "request_id": "48fd36ad-17c2-4801-9520-73b8fc06165d"
+        }
+      },
+      "error": null,
+      "created": 1794980943.2273476,
+      "updated": 1794980962.8015301,
+      "pid": 39820,
+      "process_start": 1794980943.3329885,
+      "instance": "6b531df7c0ea4503a3441c8f5a317312"
+    },
+    "request": {
+      "schema_version": 1,
+      "job_id": "5ce84aadf90742daa5b2842641167563",
+      "request_id": "48fd36ad-17c2-4801-9520-73b8fc06165d",
+      "data_root": "E:\\DictionForge\\data",
+      "output_dir": "E:\\DictionForge\\data\\runtime\\tts\\5ce84aadf90742daa5b2842641167563",
+      "upstream": "E:\\DictionForge\\vendor\\gpt-sovits",
+      "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+      "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+      "model": {
+        "schema_version": 1,
+        "id": "21786e5fe9d652f591a44d3c368ae8fe",
+        "version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "status": "READY",
+        "created": 1794979625.7618127,
+        "path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe",
+        "weights": {
+          "gpt": {
+            "path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\gpt.ckpt",
+            "sha256": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+            "bytes": 155306673,
+            "stage": "s1",
+            "source": "TRAINED",
+            "initial_model": null
+          },
+          "sovits": {
+            "path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\sovits.pth",
+            "sha256": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14",
+            "bytes": 75551803,
+            "stage": "s2",
+            "source": "TRAINED",
+            "initial_model": null
+          }
+        },
+        "dependencies": [
+          {
+            "id": "GPT-SoVITS/chinese-hubert-base/config.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\config.json",
+            "sha256": "c3e5060a1277e0f078cc6be9da4528a605dba6ece93018981fe2c820e5c7b103",
+            "bytes": 1449,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/config.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-hubert-base/preprocessor_config.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\preprocessor_config.json",
+            "sha256": "dcd684124d06722947939d41ea6ae58dbf10968c60a11a29f23ddc602c64a29b",
+            "bytes": 212,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/preprocessor_config.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-hubert-base/pytorch_model.bin",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-hubert-base\\pytorch_model.bin",
+            "sha256": "24164f129c66499d1346e2aa55f183250c223161ec2770c0da3d3b08cf432d3c",
+            "bytes": 188811417,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base/pytorch_model.bin",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/config.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\config.json",
+            "sha256": "3d57de2fd7e80d0e5c8ff194f0bbb6baa10df7e43fc262a0cc71298a78b0a3e5",
+            "bytes": 963,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/config.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\pytorch_model.bin",
+            "sha256": "e53a693acc59ace251d143d068096ae0d7b79e4b1b503fa84c9dcf576448c1d8",
+            "bytes": 651225145,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/tokenizer.json",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\chinese-roberta-wwm-ext-large\\tokenizer.json",
+            "sha256": "173796956820ea27bd14f76bf28162607ff4254807e2948253eb5b46f5bb643b",
+            "bytes": 268962,
+            "upstream_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large/tokenizer.json",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/gsv-v4-pretrained/s2Gv4.pth",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\gsv-v4-pretrained\\s2Gv4.pth",
+            "sha256": "906fe22f48c3e037a389df291d4d32a9414e15dbb8f9628643e83aaced109ea4",
+            "bytes": 769025545,
+            "upstream_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/s2Gv4.pth",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/gsv-v4-pretrained/vocoder.pth",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\gsv-v4-pretrained\\vocoder.pth",
+            "sha256": "4d611913df7b12d49e8976c944558d2d096816365edfc6c35a9e85b67dd14ed9",
+            "bytes": 57781109,
+            "upstream_path": "GPT_SoVITS/pretrained_models/gsv-v4-pretrained/vocoder.pth",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "GPT-SoVITS/s1v3.ckpt",
+            "path": "E:\\DictionForge\\data\\assets\\GPT-SoVITS\\s1v3.ckpt",
+            "sha256": "87133414860ea14ff6620c483a3db5ed07b44be42e2c3fcdad65523a729a745a",
+            "bytes": 155284856,
+            "upstream_path": "GPT_SoVITS/pretrained_models/s1v3.ckpt",
+            "revision": "8f8857563c040d542de108a2c18b0425abd6c9c5"
+          },
+          {
+            "id": "text/G2PWModel/char_bopomofo_dict.json",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\char_bopomofo_dict.json",
+            "sha256": "4832fb6a553a9c5ee0c18b5cb698ce0acc312f324ee77ee61c340266d228184d",
+            "bytes": 1851143,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/char_bopomofo_dict.json",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/POLYPHONIC_CHARS.txt",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\POLYPHONIC_CHARS.txt",
+            "sha256": "cc7e5a3eb377e3289af5e3a6be7505ac11a0d21422f80cfbf161059798f8671b",
+            "bytes": 102444,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/POLYPHONIC_CHARS.txt",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/MONOPHONIC_CHARS.txt",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\MONOPHONIC_CHARS.txt",
+            "sha256": "fe7ed53098648441a94f414ed5fd3395789d1dceb98dc1e584489c2d43036b69",
+            "bytes": 120744,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/MONOPHONIC_CHARS.txt",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/record.log",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\record.log",
+            "sha256": "d56fd692e4fd0090b3e11741f10238ea69bf4b380c0d65894646941e1231aed4",
+            "bytes": 81808,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/record.log",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/config.py",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\config.py",
+            "sha256": "b6154e494355d14a8d2c8a38d07720f77b34479e26aab21a5f63495ae904da76",
+            "bytes": 347,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/config.py",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/g2pW.onnx",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\g2pW.onnx",
+            "sha256": "2eb3c71fd95117b2e1abef8d2d0cd78aae894bbe7f0fac105ddc9c32ce63cbd0",
+            "bytes": 635212732,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/g2pW.onnx",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/bopomofo_to_pinyin_wo_tune_dict.json",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\bopomofo_to_pinyin_wo_tune_dict.json",
+            "sha256": "0fe90e26be7653023772b3ad2d08952961bbf295fb39ba685c7172d3d9769f52",
+            "bytes": 7739,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/bopomofo_to_pinyin_wo_tune_dict.json",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          },
+          {
+            "id": "text/G2PWModel/version",
+            "path": "E:\\DictionForge\\data\\assets\\text\\G2PWModel\\version",
+            "sha256": "cf063c2ce8ac1403d4dca358f0568dfd32684e7a4412e24bc6e7cd1a7cd0cefb",
+            "bytes": 5,
+            "upstream_path": "GPT_SoVITS/text/G2PWModel/version",
+            "revision": "827f4a519b083e3f37c790c938300241e75692d5"
+          }
+        ],
+        "stage_progress": {
+          "s2": {
+            "state": "COMPLETED",
+            "epoch": 0,
+            "completed_epochs": 0,
+            "batch_cursor": 2,
+            "processed_batches": 2,
+            "optimizer_updates": 2,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "cf786ce1c25cca6c3dd5cb440f6c1ffb64bcbe26e35ce5a0b5aad1af4a0dce7e",
+            "trainable_parameters": 36155748,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s2",
+            "target": 2,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "436e6be52847bc0078787e3eca80db372ad545c96dd3f9cc925a76efec2768eb",
+            "first_update_parameters_sha256": "4ee7f29698f67c17c3dbb4cf8306d35b51bdec3dabd1c74419cc15d10a715b09",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 0.5294263958930969,
+            "learning_rate": 0.0001,
+            "next_learning_rate": 0.0001,
+            "seconds": 4.791913799999747,
+            "updates_per_second": 0.41736977822933824,
+            "peak_allocated_bytes": 3821943296,
+            "peak_reserved_bytes": 3873439744,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 65536,
+            "update_applied": true,
+            "step": 2,
+            "peak_cuda_bytes": 3821943296,
+            "final_parameters_sha256": "6a980b652c78c16afca970e5d78a819ca63f25ada3cb409679f8b3109fe83548",
+            "checkpoint": {
+              "path": "E:\\DictionForge\\data\\runs\\d019d2b5d6ed465aae6cae3f31d2ac9d\\checkpoints\\s2-u2-0af8889afd38.pt",
+              "sha256": "4633627332bafaf3076bab02f249375aa97a2102120f1229cbde495618435ff6",
+              "bytes": 1845472765,
+              "stage": "s2",
+              "metrics": {
+                "state": "COMPLETED",
+                "epoch": 0,
+                "completed_epochs": 0,
+                "batch_cursor": 2,
+                "processed_batches": 2,
+                "optimizer_updates": 2,
+                "skipped_updates": 0,
+                "initial_parameters_sha256": "cf786ce1c25cca6c3dd5cb440f6c1ffb64bcbe26e35ce5a0b5aad1af4a0dce7e",
+                "trainable_parameters": 36155748,
+                "physical_batch_size": 1,
+                "precision": "fp16",
+                "accumulation": 1,
+                "stage": "s2",
+                "target": 2,
+                "unit": "optimizer_updates",
+                "batch_order_sha256": "436e6be52847bc0078787e3eca80db372ad545c96dd3f9cc925a76efec2768eb",
+                "first_update_parameters_sha256": "4ee7f29698f67c17c3dbb4cf8306d35b51bdec3dabd1c74419cc15d10a715b09",
+                "consecutive_skips": 0,
+                "scheduler_applied_at_epoch_end": false,
+                "loss": 0.5294263958930969,
+                "learning_rate": 0.0001,
+                "next_learning_rate": 0.0001,
+                "seconds": 4.791913799999747,
+                "updates_per_second": 0.41736977822933824,
+                "peak_allocated_bytes": 3821943296,
+                "peak_reserved_bytes": 3873439744,
+                "batch_cycle_size": 1,
+                "actual_batch_sizes": [
+                  1
+                ],
+                "scaler_scale": 65536,
+                "update_applied": true,
+                "step": 2,
+                "peak_cuda_bytes": 3821943296,
+                "final_parameters_sha256": "6a980b652c78c16afca970e5d78a819ca63f25ada3cb409679f8b3109fe83548",
+                "grads_clear": true,
+                "accumulation_pending": 0
+              },
+              "kind": "stage_final",
+              "id": "s2-u2-0af8889afd38",
+              "snapshot": {
+                "path": "E:\\DictionForge\\data\\runs\\d019d2b5d6ed465aae6cae3f31d2ac9d\\snapshots\\s2-u2-0af8889afd38\\sovits.pth",
+                "sha256": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14",
+                "bytes": 75551803
+              }
+            },
+            "snapshot": {
+              "path": "E:\\DictionForge\\data\\runs\\d019d2b5d6ed465aae6cae3f31d2ac9d\\snapshots\\s2-u2-0af8889afd38\\sovits.pth",
+              "sha256": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14",
+              "bytes": 75551803
+            },
+            "weight_source": "TRAINED",
+            "weight_sha256": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+          },
+          "s1": {
+            "state": "COMPLETED",
+            "epoch": 0,
+            "completed_epochs": 0,
+            "batch_cursor": 2,
+            "processed_batches": 2,
+            "optimizer_updates": 2,
+            "skipped_updates": 0,
+            "initial_parameters_sha256": "c5d0d9cf9ade9ebdf83d96a5ff82d41160d6e86c996789ae49507c5854b70887",
+            "trainable_parameters": 77606402,
+            "physical_batch_size": 1,
+            "precision": "fp16",
+            "accumulation": 1,
+            "stage": "s1",
+            "target": 2,
+            "unit": "optimizer_updates",
+            "batch_order_sha256": "f783010f27a5afd1ed9caebd459cfd44c86024a8ee9f1f916040bf7d836d7192",
+            "first_update_parameters_sha256": "4d56fd599426cb81bb6fbb627d46a41a7420f7adae99e8da065298cc959bfb61",
+            "consecutive_skips": 0,
+            "scheduler_applied_at_epoch_end": false,
+            "loss": 773.1611328125,
+            "learning_rate": 0.002,
+            "next_learning_rate": 0.002,
+            "seconds": 2.395396300002176,
+            "updates_per_second": 0.8349349124394085,
+            "peak_allocated_bytes": 2323559936,
+            "peak_reserved_bytes": 2766143488,
+            "batch_cycle_size": 1,
+            "actual_batch_sizes": [
+              1
+            ],
+            "scaler_scale": 128,
+            "update_applied": true,
+            "step": 2,
+            "peak_cuda_bytes": 2323559936,
+            "accuracy": 0.4233871102333069,
+            "final_parameters_sha256": "0873d25bde8fac532dee845a14a7f3537c2a36d98b1e68b217ec2da74a9e0f57",
+            "checkpoint": {
+              "path": "E:\\DictionForge\\data\\runs\\d019d2b5d6ed465aae6cae3f31d2ac9d\\checkpoints\\s1-u2-c5113369ec92.pt",
+              "sha256": "26181e2d99ddcb3a5ef71340e1ea852c5d2a97e10da619dc48ce8690cd7ae979",
+              "bytes": 931430269,
+              "stage": "s1",
+              "metrics": {
+                "state": "COMPLETED",
+                "epoch": 0,
+                "completed_epochs": 0,
+                "batch_cursor": 2,
+                "processed_batches": 2,
+                "optimizer_updates": 2,
+                "skipped_updates": 0,
+                "initial_parameters_sha256": "c5d0d9cf9ade9ebdf83d96a5ff82d41160d6e86c996789ae49507c5854b70887",
+                "trainable_parameters": 77606402,
+                "physical_batch_size": 1,
+                "precision": "fp16",
+                "accumulation": 1,
+                "stage": "s1",
+                "target": 2,
+                "unit": "optimizer_updates",
+                "batch_order_sha256": "f783010f27a5afd1ed9caebd459cfd44c86024a8ee9f1f916040bf7d836d7192",
+                "first_update_parameters_sha256": "4d56fd599426cb81bb6fbb627d46a41a7420f7adae99e8da065298cc959bfb61",
+                "consecutive_skips": 0,
+                "scheduler_applied_at_epoch_end": false,
+                "loss": 773.1611328125,
+                "learning_rate": 0.002,
+                "next_learning_rate": 0.002,
+                "seconds": 2.395396300002176,
+                "updates_per_second": 0.8349349124394085,
+                "peak_allocated_bytes": 2323559936,
+                "peak_reserved_bytes": 2766143488,
+                "batch_cycle_size": 1,
+                "actual_batch_sizes": [
+                  1
+                ],
+                "scaler_scale": 128,
+                "update_applied": true,
+                "step": 2,
+                "peak_cuda_bytes": 2323559936,
+                "accuracy": 0.4233871102333069,
+                "final_parameters_sha256": "0873d25bde8fac532dee845a14a7f3537c2a36d98b1e68b217ec2da74a9e0f57",
+                "grads_clear": true,
+                "accumulation_pending": 0
+              },
+              "kind": "stage_final",
+              "id": "s1-u2-c5113369ec92",
+              "snapshot": {
+                "path": "E:\\DictionForge\\data\\runs\\d019d2b5d6ed465aae6cae3f31d2ac9d\\snapshots\\s1-u2-c5113369ec92\\gpt.ckpt",
+                "sha256": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+                "bytes": 155306673
+              }
+            },
+            "snapshot": {
+              "path": "E:\\DictionForge\\data\\runs\\d019d2b5d6ed465aae6cae3f31d2ac9d\\snapshots\\s1-u2-c5113369ec92\\gpt.ckpt",
+              "sha256": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+              "bytes": 155306673
+            },
+            "weight_source": "TRAINED",
+            "weight_sha256": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65"
+          }
+        },
+        "default_reference": {
+          "text": "我是「罗浮」云骑将军景元。不必拘谨，「将军」只是一时的身份，你称呼我景元便可。",
+          "language": "zh",
+          "seconds": 8.78,
+          "sha256": "4aded8d5c1da9a0b3fc212de72a1c11f42be2907736cbd5e777671f1365b1cc6",
+          "path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\reference.wav",
+          "audio_id": "7354325573c54fa4bdad76f54c099c45"
+        },
+        "provenance": {
+          "run_id": "d019d2b5d6ed465aae6cae3f31d2ac9d",
+          "version_id": "6db3636a61c744bb902e11173dc4c325",
+          "initial_model": "a974c5da69695d0aba3477bff5c7b768",
+          "reason": "completed",
+          "snapshot_id": "2b8564c9b3cd56c2b04712dbe5df6cfb",
+          "checkpoint_id": "s1-u2-c5113369ec92"
+        },
+        "validation": {
+          "structure": "PASS",
+          "gpu": "NOT_RUN",
+          "device": "cpu",
+          "torch": "2.9.0+cu128",
+          "gpt": {
+            "tensors": 295,
+            "architecture": {
+              "vocab_size": 1025,
+              "phoneme_vocab_size": 732,
+              "embedding_dim": 512,
+              "hidden_dim": 512,
+              "head": 16,
+              "linear_units": 2048,
+              "n_layer": 24,
+              "dropout": 0,
+              "EOS": 1024,
+              "random_bert": 0
+            },
+            "precision": [
+              "torch.float16"
+            ]
+          },
+          "sovits": {
+            "format": "v4_lora",
+            "lora_rank": 32,
+            "tensors": 258,
+            "base_required": true
+          },
+          "sample_rate": 48000,
+          "super_sampling": false,
+          "reference_fingerprint": "591cebc9e916045ec1393a9685965ec085cc37e567774db41ed5fb92bdfa0eed"
+        },
+        "inference_defaults": {
+          "seed": 42,
+          "sample_rate": 48000,
+          "super_sampling": false
+        },
+        "reference_fingerprint": "591cebc9e916045ec1393a9685965ec085cc37e567774db41ed5fb92bdfa0eed",
+        "latest_gpu_test_id": "4ef34ceb273b4afda18a072fa8a9ff16"
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "reference_fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+      "source_text": "今天阳光很好，我们一起出发吧。",
+      "text": "今天阳光很好，我们一起出发吧。",
+      "language": "zh",
+      "split_rule": "none",
+      "parameters": {
+        "seed": 2027,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "precision": "fp16",
+      "sentences": [
+        {
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "index": 0,
+          "text": "今天阳光很好，我们一起出发吧。",
+          "source_start": 0,
+          "source_end": 15,
+          "seed": 2027
+        }
+      ],
+      "silence_threshold": {
+        "amplitude": 32,
+        "unit": "pcm16"
+      },
+      "weights": {
+        "gpt": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\gpt.ckpt",
+        "sovits": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\sovits.pth"
+      },
+      "weight_hashes": {
+        "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+        "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+      },
+      "created": 1794980943.2313573,
+      "conditions_fingerprint": "0c7b3de113e955a6eef7e273c58d5f0d8ddb62f8b679e066c321f54fe28eb3e3"
+    },
+    "result": {
+      "outcome": "COMPLETED",
+      "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\5ce84aadf90742daa5b2842641167563\\audio-b560f6674fad485999d76d2d44aaa2e9.wav",
+        "sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+        "bytes": 272684,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 136320,
+        "seconds": 2.84,
+        "decode_verified": true,
+        "peak": 0.90576171875,
+        "rms": 0.1117621051566624,
+        "audio_id": "806ed15e2746448182778d1ccba42d77",
+        "state": "AVAILABLE",
+        "available": true
+      },
+      "weights": {
+        "gpt": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\gpt.ckpt",
+        "sovits": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\sovits.pth"
+      },
+      "weight_hashes": {
+        "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+        "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "text": "今天阳光很好，我们一起出发吧。",
+      "source_text": "今天阳光很好，我们一起出发吧。",
+      "language": "zh",
+      "sentences": [
+        {
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "index": 0,
+          "text": "今天阳光很好，我们一起出发吧。",
+          "source_start": 0,
+          "source_end": 15,
+          "seed": 2027,
+          "actual_seed": 2027,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\5ce84aadf90742daa5b2842641167563\\sentence-b560f6674fad485999d76d2d44aaa2e9-0000.wav",
+            "sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+            "bytes": 272684,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 136320,
+            "seconds": 2.84,
+            "decode_verified": true,
+            "peak": 0.90576171875,
+            "rms": 0.1117621051566624,
+            "audio_id": "7954f6b764494a5aa7bc14a180c32464",
+            "state": "AVAILABLE",
+            "available": true
+          },
+          "start_sample": 0,
+          "end_sample": 136320,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9900,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.359831699999631,
+          "actual_text": "今天阳光很好,我们一起出发吧.",
+          "normalized_texts": [
+            "今天阳光很好,我们一起出发吧."
+          ]
+        }
+      ],
+      "coordinate_system": {
+        "text": "unicode_code_point_half_open",
+        "audio": "sample_half_open",
+        "sample_rate": 48000,
+        "concatenation": "exact_sequential_pcm_no_added_silence"
+      },
+      "parameters": {
+        "seed": 2027,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "effective": {
+        "config": {
+          "version": "v4",
+          "device": "cuda",
+          "is_half": true,
+          "t2s_weights_path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\gpt.ckpt",
+          "vits_weights_path": "E:\\DictionForge\\data\\models\\09e42df26bf30b98cea3880e\\21786e5fe9d652f591a44d3c368ae8fe\\sovits.pth",
+          "cnhuhbert_base_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\chinese-hubert-base",
+          "bert_base_path": "E:\\DictionForge\\vendor\\gpt-sovits\\GPT_SoVITS\\pretrained_models\\chinese-roberta-wwm-ext-large"
+        },
+        "inputs": {
+          "seed": 2027,
+          "sample_steps": 16,
+          "top_k": 5,
+          "top_p": 1,
+          "temperature": 1,
+          "speed_factor": 1,
+          "repetition_penalty": 1.35,
+          "fragment_interval": 0.3,
+          "text": "今天阳光很好，我们一起出发吧。",
+          "text_lang": "all_zh",
+          "ref_audio_path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+          "prompt_text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+          "prompt_lang": "all_zh",
+          "text_split_method": "cut0",
+          "batch_size": 1,
+          "parallel_infer": false,
+          "split_bucket": false,
+          "return_fragment": false
+        },
+        "upstream_lock": "c8332db8ddeb77bffb92ddb5d645b05237bbdd82fbd0775c05eadbba6e4a562e",
+        "asset_lock": "dd66b73f1cb31a65ccd5736b64fe715d662a7d62884663f1d4b5d90bbbd93c07",
+        "weight_hashes": {
+          "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+          "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+        },
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "native_sample_rate_required": 48000,
+        "source_text": "今天阳光很好，我们一起出发吧。",
+        "sentences": [
+          {
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "index": 0,
+            "text": "今天阳光很好，我们一起出发吧。",
+            "source_start": 0,
+            "source_end": 15,
+            "seed": 2027
+          }
+        ],
+        "sentence_inputs": [
+          {
+            "seed": 2027,
+            "sample_steps": 16,
+            "top_k": 5,
+            "top_p": 1,
+            "temperature": 1,
+            "speed_factor": 1,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3,
+            "text": "今天阳光很好，我们一起出发吧。",
+            "text_lang": "all_zh",
+            "ref_audio_path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+            "prompt_text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+            "prompt_lang": "all_zh",
+            "text_split_method": "cut0",
+            "batch_size": 1,
+            "parallel_infer": false,
+            "split_bucket": false,
+            "return_fragment": false
+          }
+        ],
+        "coordinate_system": {
+          "text": "unicode_code_point_half_open",
+          "audio": "sample_half_open",
+          "sample_rate": 48000,
+          "concatenation": "exact_sequential_pcm_no_added_silence"
+        },
+        "silence_threshold": {
+          "amplitude": 32,
+          "unit": "pcm16"
+        }
+      },
+      "phase_events": [
+        {
+          "stage": "request_validation",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": false,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 0,
+          "elapsed_seconds": 0.026342999997723382
+        },
+        {
+          "stage": "dependency_validation",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": false,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 0.1927761000006285
+        },
+        {
+          "stage": "reference_validation",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": false,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 3.2414719999978843
+        },
+        {
+          "stage": "model_loading",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": false,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 3.3781104999980016,
+          "parameters": {
+            "seed": 2027,
+            "sample_steps": 16,
+            "top_k": 5,
+            "top_p": 1,
+            "temperature": 1,
+            "speed_factor": 1,
+            "repetition_penalty": 1.35,
+            "fragment_interval": 0.3
+          },
+          "precision": "fp16"
+        },
+        {
+          "stage": "model_ready",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 11.61457689999952,
+          "model_parameter_bytes": {
+            "t2s_model": 155212804,
+            "vits_model": 765642128,
+            "bert_model": 651091216,
+            "cnhuhbert_model": 188743424,
+            "vocoder": 28850818
+          },
+          "allocated_bytes": 1823197184,
+          "reserved_bytes": 2344615936
+        },
+        {
+          "stage": "sentence_started",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 11.631682199997158,
+          "actual_seed": 2027,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "reference_processing",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 11.651282299997547,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "text_frontend",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 13.751595199999429,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "synthesizing",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 15.16400749999957,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "sentence_audio_validation",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 17.00863919999756,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "sentence_audio_writing",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 0,
+          "total_sentences": 1,
+          "elapsed_seconds": 17.025881499997922,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "sentence_completed",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 1,
+          "total_sentences": 1,
+          "elapsed_seconds": 17.04862299999877,
+          "audio_sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+          "samples": 136320,
+          "start_sample": 0,
+          "end_sample": 136320,
+          "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+          "sentence_index": 0
+        },
+        {
+          "stage": "audio_writing",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 1,
+          "total_sentences": 1,
+          "elapsed_seconds": 17.06798809999964
+        },
+        {
+          "stage": "audio_written",
+          "model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+          "gpu_resident": true,
+          "worker_pid": 39700,
+          "worker_process_start": 1794980943.606332,
+          "completed_sentences": 1,
+          "total_sentences": 1,
+          "elapsed_seconds": 17.098336799997924,
+          "audio_sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+          "sample_rate": 48000,
+          "samples": 136320
+        }
+      ],
+      "metrics": {
+        "generation_seconds": 5.359831699999631,
+        "load_seconds": 11.60533360000045,
+        "total_seconds": 17.09704469999997,
+        "peak_cuda_bytes": 2318460416,
+        "peak_reserved_bytes": 2430599168,
+        "device": "NVIDIA GeForce RTX 5080"
+      },
+      "job_id": "5ce84aadf90742daa5b2842641167563",
+      "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+      "split_rule": "none",
+      "created": 1794980962.760711,
+      "conditions_fingerprint": "0c7b3de113e955a6eef7e273c58d5f0d8ddb62f8b679e066c321f54fe28eb3e3",
+      "reference_fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+      "provenance": {
+        "model_version_id": "21786e5fe9d652f591a44d3c368ae8fe",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "6db3636a61c744bb902e11173dc4c325",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "48fd36ad-17c2-4801-9520-73b8fc06165d"
+      },
+      "media_state": "AVAILABLE"
+    }
+  },
+  "append": {
+    "id": "1d533f827d6f4bdb993e1b7e26570907",
+    "request": "1441988d-0a73-442b-ab64-262f77cdcbaa",
+    "kind": "augmentation_prepare",
+    "state": "QUEUED",
+    "payload": {
+      "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+      "split_config": {
+        "max_seconds": 12,
+        "min_seconds": 1
+      },
+      "target_version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+      "tts_id": "5ce84aadf90742daa5b2842641167563"
+    },
+    "result": null,
+    "error": null,
+    "created": 1794980963.74399,
+    "updated": 1794980963.74399,
+    "pid": null,
+    "process_start": null,
+    "instance": null
+  },
+  "result": {
+    "id": "1d533f827d6f4bdb993e1b7e26570907",
+    "state": "PUBLISHED",
+    "created": 1794980963.7449923,
+    "target_version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+    "source_version_id": "6db3636a61c744bb902e11173dc4c325",
+    "dataset_id": "09e42df26bf30b98cea3880e",
+    "role": "景元",
+    "source_model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+    "source_weight_hashes": {
+      "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+      "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+    },
+    "tts_id": "5ce84aadf90742daa5b2842641167563",
+    "sentence": {
+      "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+      "index": 0,
+      "text": "今天阳光很好，我们一起出发吧。",
+      "source_start": 0,
+      "source_end": 15,
+      "seed": 2027,
+      "actual_seed": 2027,
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\5ce84aadf90742daa5b2842641167563\\sentence-b560f6674fad485999d76d2d44aaa2e9-0000.wav",
+        "sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+        "bytes": 272684,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 136320,
+        "seconds": 2.84,
+        "decode_verified": true,
+        "peak": 0.90576171875,
+        "rms": 0.1117621051566624,
+        "audio_id": "7954f6b764494a5aa7bc14a180c32464"
+      },
+      "start_sample": 0,
+      "end_sample": 136320,
+      "leading_silence_samples": 0,
+      "trailing_silence_samples": 9900,
+      "silence_threshold": {
+        "amplitude": 32,
+        "unit": "pcm16"
+      },
+      "generation_seconds": 5.359831699999631,
+      "actual_text": "今天阳光很好,我们一起出发吧.",
+      "normalized_texts": [
+        "今天阳光很好,我们一起出发吧."
+      ]
+    },
+    "config": {
+      "min_seconds": 1,
+      "max_seconds": 12,
+      "silence_db": -40,
+      "silence_seconds": 3
+    },
+    "asr_calls": 0,
+    "source_key": "97753fbc7521161ff293b99cfc988284b7b435a4adc51247b9b77480ef0d48da",
+    "request_id": "1441988d-0a73-442b-ab64-262f77cdcbaa",
+    "jobs": [
+      "1d533f827d6f4bdb993e1b7e26570907"
+    ],
+    "draft_id": "1d533f827d6f4bdb993e1b7e26570907",
+    "whole": true,
+    "candidate_version_id": "69a4dca81b56499dbcdfcd3e64982d81",
+    "rebase_attempt": 0,
+    "version_id": "69a4dca81b56499dbcdfcd3e64982d81",
+    "parent_version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+    "added_count": 1,
+    "added_seconds": 2.84,
+    "error": null,
+    "job": {
+      "id": "1d533f827d6f4bdb993e1b7e26570907",
+      "request": "1441988d-0a73-442b-ab64-262f77cdcbaa",
+      "kind": "augmentation_prepare",
+      "state": "COMPLETED",
+      "payload": {
+        "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+        "split_config": {
+          "max_seconds": 12,
+          "min_seconds": 1
+        },
+        "target_version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+        "tts_id": "5ce84aadf90742daa5b2842641167563"
+      },
+      "result": {
+        "outcome": "COMPLETED",
+        "augmentation_id": "1d533f827d6f4bdb993e1b7e26570907",
+        "state": "PUBLISHED",
+        "version_id": "69a4dca81b56499dbcdfcd3e64982d81",
+        "added_count": 1,
+        "added_seconds": 2.84,
+        "asr_calls": 0
+      },
+      "error": null,
+      "created": 1794980963.74399,
+      "updated": 1794980986.600159,
+      "pid": 42752,
+      "process_start": 1794980963.9878242,
+      "instance": "a6cee6360e5c4c37ae748fb966cde411"
+    },
+    "draft": {
+      "id": "1d533f827d6f4bdb993e1b7e26570907",
+      "augmentation_id": "1d533f827d6f4bdb993e1b7e26570907",
+      "dataset_id": "09e42df26bf30b98cea3880e",
+      "role": "景元",
+      "parent_version": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+      "revision": 0,
+      "clips": [
+        {
+          "id": "99f86855485946c89642bfa38685e7f7",
+          "path": "E:\\DictionForge\\data\\drafts\\1d533f827d6f4bdb993e1b7e26570907\\99f86855485946c89642bfa38685e7f7.wav",
+          "audio_id": "8aaaf9fa433a4b468483d6a17c956c5f",
+          "sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+          "pcm_sha256": "da5d300e525ac8d51e4d1ede5d6cb1f395cb95fcea7abb9c96c67641b02d89d9",
+          "seconds": 2.84,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 136320,
+          "source": "synthesized",
+          "source_id": "5ce84aadf90742daa5b2842641167563",
+          "source_sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+          "group": "tts:97753fbc7521161ff293b99cfc988284b7b435a4adc51247b9b77480ef0d48da",
+          "language": "zh",
+          "text": "今天阳光很好，我们一起出发吧。",
+          "label_source": "tts_original",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "split": "train",
+          "provenance": {
+            "augmentation_id": "1d533f827d6f4bdb993e1b7e26570907",
+            "source_key": "97753fbc7521161ff293b99cfc988284b7b435a4adc51247b9b77480ef0d48da",
+            "tts_id": "5ce84aadf90742daa5b2842641167563",
+            "sentence_id": "f3bb88c6ed64573da7fc3ed81298d457",
+            "source_model_id": "21786e5fe9d652f591a44d3c368ae8fe",
+            "source_weight_hashes": {
+              "gpt": "47299b9a41afaa6f129dc1e9d4f36365ea26de5d53bf99d2d4aa2d73abf3de65",
+              "sovits": "0dc485108ee940256f1784ea850b728b207baa70c5d20d637887b07488aa5b14"
+            },
+            "source_audio_sha256": "c639dc75248ababa7c6d5e8d5cc34bf9ee48baaf9ce14966ee988ee876a2add8",
+            "text_sha256": "fae573b91c727cd43c1c4bd697f3b06694be8494d59c897761efe20392466176",
+            "segment_index": 0,
+            "start_sample": 0,
+            "end_sample": 136320,
+            "trim_applied": false
+          },
+          "clipping_ratio": 0
+        }
+      ],
+      "config": {
+        "min_seconds": 1,
+        "max_seconds": 12,
+        "silence_db": -40,
+        "silence_seconds": 3
+      },
+      "created": 1794980964.2398634,
+      "rejected": [],
+      "published": "69a4dca81b56499dbcdfcd3e64982d81"
+    },
+    "training_defaults": {
+      "version_id": "69a4dca81b56499dbcdfcd3e64982d81",
+      "initial_model": "21786e5fe9d652f591a44d3c368ae8fe"
+    }
+  },
+  "status": "PASS",
+  "finished": "2026-11-18T05:49:48.907Z",
+  "runDir": "E:\\DictionForge\\data\\p11-browser-whole\\2026-11-18T05-48-59-530Z"
+}

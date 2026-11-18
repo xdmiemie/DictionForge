@@ -68,6 +68,11 @@ def references_for(jobs, kind, key):
                 any(_mentions(job['payload'], media_id) for media_id in media_ids)):
             add('job', job['id'], '活跃任务冻结了该版本')
     for category, row_id, row in rows:
+        if category == 'augmentation':
+            if kind == 'model' and row.get('source_model_id') == key:
+                add('augmentation', row_id, '句子回流记录与新微调默认来源依赖该模型')
+            if kind == 'version' and key in {row.get('target_version_id'),row.get('version_id'),row.get('source_version_id')}:
+                add('augmentation', row_id, '句子回流的父版本、来源谱系或发布结果')
         if category == 'reference' and row.get('kind') == kind and row.get('id') == key:
             add('reference', row_id, f"正在使用：{row.get('owner')}")
         elif category == 'reference' and row.get('kind') == 'media' and row.get('id') in media_ids:

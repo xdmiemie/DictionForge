@@ -23,11 +23,15 @@ def create(stage_config, initial, run_dir):
         effective['train']['segment_size'] // effective['data']['hop_length'],
         n_speakers=effective['data']['n_speakers'], **effective['model'])
     model.load_state_dict(package['weight'], strict=True)
+    from .initialization import loaded_weights_report
+    from .audio import digest
+    initialization = dict(base_load_count=1, lora_wrap_count=1, source_load_count=0,
+                          base=str(base), source=str(initial), base_check=loaded_weights_report(model, package['weight']))
     del package
     rank = stage_config['rank']
     model.cfm = get_peft_model(model.cfm, LoraConfig(target_modules=['to_k', 'to_q', 'to_v', 'to_out.0'],
         r=rank, lora_alpha=rank, init_lora_weights=True))
-    if Path(initial).resolve() != base:
+    if digest(Path(initial)) != digest(base):
         _, version, is_lora = get_sovits_version_from_path_fast(str(initial))
         if version != 'v4' or not is_lora:
             raise ValueError('MODEL_INITIALIZATION_INVALID: source SoVITS must be compatible v4 LoRA')
@@ -42,7 +46,9 @@ def create(stage_config, initial, run_dir):
             if expected[key].shape != value.shape:
                 raise ValueError(f'MODEL_INITIALIZATION_INVALID: shape {key}')
         model.load_state_dict(source['weight'], strict=False)
+        initialization.update(loaded_weights_report(model, source['weight']), source_load_count=1)
         del source
+    effective['initialization'] = initialization
     model = model.cuda().train()
     optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad),
         lr=stage_config['learning_rate'], betas=tuple(effective['train']['betas']), eps=effective['train']['eps'])

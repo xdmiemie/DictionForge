@@ -1,0 +1,343 @@
+{
+  "started": "2026-11-18T05:47:00.647Z",
+  "runDir": "E:\\DictionForge\\data\\p11-browser\\2026-11-18T05-47-00-500Z",
+  "target": "02fe6b59b851460f80e6ff75b54cb606",
+  "checks": [
+    {
+      "name": "发布后跳转并预选新版本和来源模型",
+      "status": "PASS",
+      "detail": {
+        "version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+        "initial_model": "a974c5da69695d0aba3477bff5c7b768"
+      }
+    },
+    {
+      "name": "可切换官方底模，新训练入口独立于完整续训",
+      "status": "PASS",
+      "detail": {}
+    },
+    {
+      "name": "真实留出保持不变，新增两片来自当前句",
+      "status": "PASS",
+      "detail": {
+        "version": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+        "clips": 11,
+        "added": [
+          {
+            "text": "今天我们一起去公园散步。",
+            "provenance": {
+              "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+              "source_key": "3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+              "tts_id": "ac8f1b6cab6246378892c2b41aaf1778",
+              "sentence_id": "109177f2be9351e2a04b25703f660aae",
+              "source_model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "source_weight_hashes": {
+                "gpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+                "sovits": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+              },
+              "source_audio_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+              "text_sha256": "281766ef5cc7135dbb5b17790abf5b318fe79927f961051c8921ea77eb387bab",
+              "segment_index": 0,
+              "start_sample": 0,
+              "end_sample": 120960,
+              "trim_applied": false
+            }
+          },
+          {
+            "text": "湖边的风景很美。",
+            "provenance": {
+              "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+              "source_key": "3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+              "tts_id": "ac8f1b6cab6246378892c2b41aaf1778",
+              "sentence_id": "109177f2be9351e2a04b25703f660aae",
+              "source_model_id": "a974c5da69695d0aba3477bff5c7b768",
+              "source_weight_hashes": {
+                "gpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+                "sovits": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+              },
+              "source_audio_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+              "text_sha256": "281766ef5cc7135dbb5b17790abf5b318fe79927f961051c8921ea77eb387bab",
+              "segment_index": 1,
+              "start_sample": 120960,
+              "end_sample": 219840,
+              "trim_applied": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "E:\\DictionForge\\data\\p11-browser\\2026-11-18T05-47-00-500Z\\02-source-initialization.png",
+      "sha256": "5afce13c8d60eb9b73c709ca0a6191f420ecb69e73b15d2782b8cebd52b4c024"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p11-browser\\2026-11-18T05-47-00-500Z\\03-narrow-training.png",
+      "sha256": "9530f46c926d5321bb68a4f058ae47672e49d8e0dd9325ba77c6d9abcae6c677"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "httpErrors": [],
+  "resumedFromPublished": true,
+  "published": {
+    "id": "02fe6b59b851460f80e6ff75b54cb606",
+    "state": "PUBLISHED",
+    "created": 1794979525.7672508,
+    "target_version_id": "6db3636a61c744bb902e11173dc4c325",
+    "source_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+    "dataset_id": "09e42df26bf30b98cea3880e",
+    "role": "景元",
+    "source_model_id": "a974c5da69695d0aba3477bff5c7b768",
+    "source_weight_hashes": {
+      "gpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+      "sovits": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+    },
+    "tts_id": "ac8f1b6cab6246378892c2b41aaf1778",
+    "sentence": {
+      "sentence_id": "109177f2be9351e2a04b25703f660aae",
+      "index": 0,
+      "text": "今天我们一起去公园散步，湖边的风景很美，微风吹过树梢，明天还可以再来。",
+      "source_start": 0,
+      "source_end": 35,
+      "seed": 73,
+      "actual_seed": 73,
+      "audio": {
+        "path": "E:\\DictionForge\\data\\runtime\\tts\\ac8f1b6cab6246378892c2b41aaf1778\\sentence-91e28c1d75b8465a984fa7d1a1aa5487-0000.wav",
+        "sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+        "bytes": 783404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 391680,
+        "seconds": 8.16,
+        "decode_verified": true,
+        "peak": 0.955078125,
+        "rms": 0.10683098259869275,
+        "audio_id": "b68a1ec476d346c2adabd645f6bf4143"
+      },
+      "start_sample": 0,
+      "end_sample": 391680,
+      "leading_silence_samples": 0,
+      "trailing_silence_samples": 11526,
+      "silence_threshold": {
+        "amplitude": 32,
+        "unit": "pcm16"
+      },
+      "generation_seconds": 9.77161839999826,
+      "actual_text": "今天我们一起去公园散步,湖边的风景很美,微风吹过树梢,明天还可以再来.",
+      "normalized_texts": [
+        "今天我们一起去公园散步,湖边的风景很美,微风吹过树梢,明天还可以再来."
+      ]
+    },
+    "config": {
+      "min_seconds": 1,
+      "max_seconds": 3,
+      "silence_db": -40,
+      "silence_seconds": 3
+    },
+    "asr_calls": 3,
+    "source_key": "3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+    "request_id": "08a5c18f-67f7-4a76-bccd-80375bc116b4",
+    "jobs": [
+      "02fe6b59b851460f80e6ff75b54cb606",
+      "7fa1702138b04ca0a4b8d059417e1d22"
+    ],
+    "draft_id": "02fe6b59b851460f80e6ff75b54cb606",
+    "whole": false,
+    "error": null,
+    "candidate_version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+    "rebase_attempt": 0,
+    "version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+    "parent_version_id": "a66e0a2aaad14047a6318dae17270dfc",
+    "added_count": 2,
+    "added_seconds": 4.58,
+    "job": {
+      "id": "7fa1702138b04ca0a4b8d059417e1d22",
+      "request": "95e7fcb3-0039-4a5f-9667-6e2dbbc972b8",
+      "kind": "augmentation_publish",
+      "state": "COMPLETED",
+      "payload": {
+        "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+        "revision": 2
+      },
+      "result": {
+        "outcome": "COMPLETED",
+        "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+        "state": "PUBLISHED",
+        "version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+        "added_count": 2,
+        "added_seconds": 4.58,
+        "asr_calls": 3
+      },
+      "error": null,
+      "created": 1794979894.0964687,
+      "updated": 1794979913.499471,
+      "pid": 20828,
+      "process_start": 1794979894.9119368,
+      "instance": "c5fcc9d9285d43b7872f02bea6d8f029"
+    },
+    "draft": {
+      "id": "02fe6b59b851460f80e6ff75b54cb606",
+      "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+      "dataset_id": "09e42df26bf30b98cea3880e",
+      "role": "景元",
+      "parent_version": "6db3636a61c744bb902e11173dc4c325",
+      "revision": 2,
+      "clips": [
+        {
+          "id": "19b4e0a1238044ffad1ed5ac37d7eab8",
+          "path": "E:\\DictionForge\\data\\drafts\\02fe6b59b851460f80e6ff75b54cb606\\19b4e0a1238044ffad1ed5ac37d7eab8.wav",
+          "audio_id": "57ccfc2b3d2f403aae89edfb75865091",
+          "sha256": "4155288d9a905b25433262171d69f04f782394da932cefea91165ac4abf94a77",
+          "pcm_sha256": "240b6d054ae8ef0bbd581507ad54af4cb0c803945f9786f222c487b322e813be",
+          "seconds": 2.52,
+          "sample_rate": 48000,
+          "start_sample": 0,
+          "end_sample": 120960,
+          "source": "synthesized",
+          "source_id": "ac8f1b6cab6246378892c2b41aaf1778",
+          "source_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+          "group": "tts:3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+          "language": "zh",
+          "text": "今天我们一起去公园散步。",
+          "label_source": "asr",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "split": "train",
+          "provenance": {
+            "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+            "source_key": "3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+            "tts_id": "ac8f1b6cab6246378892c2b41aaf1778",
+            "sentence_id": "109177f2be9351e2a04b25703f660aae",
+            "source_model_id": "a974c5da69695d0aba3477bff5c7b768",
+            "source_weight_hashes": {
+              "gpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+              "sovits": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+            },
+            "source_audio_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+            "text_sha256": "281766ef5cc7135dbb5b17790abf5b318fe79927f961051c8921ea77eb387bab",
+            "segment_index": 0,
+            "start_sample": 0,
+            "end_sample": 120960,
+            "trim_applied": false
+          },
+          "clipping_ratio": 0,
+          "asr_candidate": "今天我们一起去公园散步。",
+          "confidence": null,
+          "asr_seconds": 17.54699999999866
+        },
+        {
+          "id": "f4272c6260034ca687744075a07d6d65",
+          "path": "E:\\DictionForge\\data\\drafts\\02fe6b59b851460f80e6ff75b54cb606\\f4272c6260034ca687744075a07d6d65.wav",
+          "audio_id": "3df989fb33e14c37b8be3e5c602c16e7",
+          "sha256": "5d87c9887460bb4355c3d6dd2598a82ffe123d9f7d3b58d7ff9b18efe48ac67c",
+          "pcm_sha256": "4d4059f31d8d25ad43b59c1a6fe7e7585e80cd723a7e311efa4ddf93931e6e8c",
+          "seconds": 2.06,
+          "sample_rate": 48000,
+          "start_sample": 120960,
+          "end_sample": 219840,
+          "source": "synthesized",
+          "source_id": "ac8f1b6cab6246378892c2b41aaf1778",
+          "source_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+          "group": "tts:3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+          "language": "zh",
+          "text": "湖边的风景很美。",
+          "label_source": "asr",
+          "reviewed": true,
+          "excluded": false,
+          "asr_error": null,
+          "split": "train",
+          "provenance": {
+            "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+            "source_key": "3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+            "tts_id": "ac8f1b6cab6246378892c2b41aaf1778",
+            "sentence_id": "109177f2be9351e2a04b25703f660aae",
+            "source_model_id": "a974c5da69695d0aba3477bff5c7b768",
+            "source_weight_hashes": {
+              "gpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+              "sovits": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+            },
+            "source_audio_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+            "text_sha256": "281766ef5cc7135dbb5b17790abf5b318fe79927f961051c8921ea77eb387bab",
+            "segment_index": 1,
+            "start_sample": 120960,
+            "end_sample": 219840,
+            "trim_applied": false
+          },
+          "clipping_ratio": 0,
+          "asr_candidate": "湖边的风景很美。",
+          "confidence": null,
+          "asr_seconds": 0.15599999999903957
+        },
+        {
+          "id": "eff9ac4bb8c94b63b92f43a760bbba94",
+          "path": "E:\\DictionForge\\data\\drafts\\02fe6b59b851460f80e6ff75b54cb606\\eff9ac4bb8c94b63b92f43a760bbba94.wav",
+          "audio_id": "32012dfadc4d4dc884a02dcd7e06af01",
+          "sha256": "ecf3095e82ae9c029e094634de3bd3cf18e4c23129524eb7d2783dbed01d4e78",
+          "pcm_sha256": "e77725003fdfc5da90f735f73fdf9a01ed0f31a2345c1e7a5198c06dede8984a",
+          "seconds": 2.58,
+          "sample_rate": 48000,
+          "start_sample": 219840,
+          "end_sample": 343680,
+          "source": "synthesized",
+          "source_id": "ac8f1b6cab6246378892c2b41aaf1778",
+          "source_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+          "group": "tts:3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+          "language": "zh",
+          "text": "微风吹过树梢，明天还。",
+          "label_source": "asr",
+          "reviewed": false,
+          "excluded": true,
+          "asr_error": null,
+          "split": "train",
+          "provenance": {
+            "augmentation_id": "02fe6b59b851460f80e6ff75b54cb606",
+            "source_key": "3655854b0268cadac54873c670704dbfdfa1c7019bbaaf8e04f846d5a10af872",
+            "tts_id": "ac8f1b6cab6246378892c2b41aaf1778",
+            "sentence_id": "109177f2be9351e2a04b25703f660aae",
+            "source_model_id": "a974c5da69695d0aba3477bff5c7b768",
+            "source_weight_hashes": {
+              "gpt": "76b45dcad7ec930cfbdfa5d56eb60e2b1b1dcd2d70612fcbc862d445523bff03",
+              "sovits": "a6dc7b4f7c067b456ac5db87fe8e3e9e6e390310f55e0892311e7fd702518e2b"
+            },
+            "source_audio_sha256": "8b854d97a4ede79a35ded549a17f4aff0f48d1bea50bc0be76d794365026c360",
+            "text_sha256": "281766ef5cc7135dbb5b17790abf5b318fe79927f961051c8921ea77eb387bab",
+            "segment_index": 2,
+            "start_sample": 219840,
+            "end_sample": 343680,
+            "trim_applied": false
+          },
+          "clipping_ratio": 0,
+          "asr_candidate": "微风吹过树梢，明天还。",
+          "confidence": null,
+          "asr_seconds": 0.15599999999903957
+        }
+      ],
+      "config": {
+        "min_seconds": 1,
+        "max_seconds": 3,
+        "silence_db": -40,
+        "silence_seconds": 3
+      },
+      "created": 1794979526.2696493,
+      "rejected": [],
+      "asr_assets": {
+        "lock_sha256": "dd66b73f1cb31a65ccd5736b64fe715d662a7d62884663f1d4b5d90bbbd93c07",
+        "repositories": {
+          "funasr/paraformer-zh": "d7811ee3ac581fbcfdeb37c98c6ba674028433dc",
+          "funasr/fsmn-vad": "df20e6b30c653645fa4ff125cacfcabd1020a669",
+          "funasr/ct-punc": "d0e55e2b8722a78b63705ff443d09c4f86e5d750"
+        }
+      },
+      "published": "a3f5512f88e241e08bc1dfa6ed9b0dd1"
+    },
+    "training_defaults": {
+      "version_id": "a3f5512f88e241e08bc1dfa6ed9b0dd1",
+      "initial_model": "a974c5da69695d0aba3477bff5c7b768"
+    }
+  },
+  "status": "PASS",
+  "finished": "2026-11-18T05:47:02.951Z"
+}

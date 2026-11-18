@@ -413,6 +413,12 @@ def train_stage(request, stage, loader, report, emit, stage_state, resume=None):
         trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
         physical_batch_size=config['batch_size'], precision=config['precision'], accumulation=config.get('accumulate', 1),
         stage=stage, target=config['target'], unit='optimizer_updates' if config['stop_mode'] == 'steps' else 'epochs')
+    if resume is None:
+        atomic_json(Path(request['run_dir']) / f'{stage}.initialization.json', dict(
+            model_version_id=request['config'].get('initial_model', 'official'),
+            frozen=request.get('initialization'), loaded=effective.get('initialization'),
+            parameters_sha256=metrics['initial_parameters_sha256'], optimizer_updates=0,
+            optimizer_state_entries=len(optimizer.state), dataset_id=request['version']['id']))
     order = []
     pending_rng = None
     if resume is not None:
@@ -520,6 +526,8 @@ def train_stage(request, stage, loader, report, emit, stage_state, resume=None):
                 scaler.update()
                 optimizer.zero_grad(set_to_none=True)
                 updated = metrics['optimizer_updates'] != before
+                if updated and metrics['optimizer_updates'] == 1 and resume is None:
+                    metrics['first_update_parameters_sha256'] = parameter_hash(model)
                 if not updated:
                     metrics['skipped_updates'] += 1
                     consecutive_skips += 1
@@ -604,6 +612,9 @@ def run(request):
     jobs = Jobs(root)
     jobs.get(request['run_id'])  # Never silently discard real progress for an unknown task.
     config, preflight = request['config'], request['preflight']
+    if request.get('initialization'):
+        from .initialization import verify
+        verify(request['initialization'], config)
     if config['stages'] != [stage for stage in ('s2', 's1') if stage in config['stages']]:
         raise ValueError('STAGE_ORDER_INVALID: expected S2 then S1')
     verify_source(ROOT, Path(request['upstream']))

@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import {active, api, errorText, finiteNumber, Job, JobError, optimizerUpdates, peakBytes, Progress, requestId, stateLabel} from './api';
 import type {DatasetVersion} from './Datasets';
+import type {ModelVersion} from './Models';
 
 type StageConfig = {batch_size: number; precision: string; stop_mode: 'steps' | 'epochs'; target: number; learning_rate: number; rank?: number; accumulate?: number};
 type StageResult = {samples?: number; unique_samples?: number; batches?: number; batch_size?: number; precision?: string; [key: string]: unknown};
@@ -140,8 +141,9 @@ export function TrainingRun({job, submit, jobs = []}: {job: Job; submit: Submit;
   </div>;
 }
 
-export function Training({jobs, submit, reportError, requestedVersion = '', refreshToken = 0}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; requestedVersion?: string; refreshToken?: number}) {
+export function Training({jobs, submit, reportError, requestedVersion = '', requestedModel = 'official', selectionToken = 0, refreshToken = 0}: {jobs: Job[]; submit: Submit; reportError: (message: string) => void; requestedVersion?: string; requestedModel?: string; selectionToken?: number; refreshToken?: number}) {
   const [versions, setVersions] = useState<DatasetVersion[]>([]);
+  const [models,setModels] = useState<ModelVersion[]>([]);
   const [versionId, setVersionId] = useState('');
   const [initialModel, setInitialModel] = useState('official');
   const [s2, setS2] = useState(initialS2);
@@ -158,7 +160,10 @@ export function Training({jobs, submit, reportError, requestedVersion = '', refr
   const config = useMemo(() => ({version_id: versionId, initial_model: initialModel, stages, seed, s2, s1}), [versionId, initialModel, stages, seed, s2, s1]);
   const configKey = JSON.stringify(config);
   useEffect(() => {api<DatasetVersion[]>('/datasets').then(rows => {setVersions(rows); setVersionError('');}).catch(e => setVersionError(e.message));}, [jobsKey, requestedVersion, refreshToken]);
-  useEffect(() => {if (requestedVersion) setVersionId(requestedVersion);}, [requestedVersion]);
+  useEffect(() => {if (requestedVersion) setVersionId(requestedVersion);}, [requestedVersion,selectionToken]);
+  useEffect(()=>{setInitialModel(requestedModel);},[requestedModel,requestedVersion,selectionToken]);
+  useEffect(()=>{void api<ModelVersion[]>('/models').then(setModels).catch(e=>setVersionError(e.message));},[jobsKey,refreshToken]);
+  useEffect(()=>{const rank=(models.find(m=>m.id===initialModel)?.validation as {sovits?:{lora_rank?:number}}|undefined)?.sovits?.lora_rank;if(rank)setS2(value=>({...value,rank}));},[initialModel,models]);
   useEffect(() => {setPreflightId(''); setSubmittedConfig('');}, [configKey]);
   const version = versions.find(row => row.id === versionId);
   const preflightJob = jobs.find(job => job.id === preflightId);
@@ -184,10 +189,10 @@ export function Training({jobs, submit, reportError, requestedVersion = '', refr
   };
   return <section className="panel training-panel" id="training-config"><div className="section-top"><div><p className="eyebrow">04 / TRAINING PREPARATION</p><h2>训练配置与预检</h2></div><span className="pill">SoVITS → GPT</span></div><p className="muted small">选择冻结的数据版本，准备上游特征，再由两个阶段的真实加载器检查可训练性。</p>
     {versionError && <p className="inline-error">数据版本读取失败：{versionError}</p>}
-    <label>训练数据版本<select value={versionId} disabled={busy} onChange={e => setVersionId(e.target.value)}><option value="">选择已发布数据版本</option>{versions.map(row => <option key={row.id} value={row.id}>{row.role} · {row.id.slice(0, 8)} · {Array.isArray(row.clips) ? row.clips.length : row.clips} 段</option>)}</select></label>
+    <label>训练数据版本<select aria-label="训练数据版本" value={versionId} disabled={busy} onChange={e => setVersionId(e.target.value)}><option value="">选择已发布数据版本</option>{versions.map(row => <option key={row.id} value={row.id}>{row.role} · {row.id.slice(0, 8)} · {Array.isArray(row.clips) ? row.clips.length : row.clips} 段</option>)}</select></label>
     {version && <div className="feature-card"><div><strong>{version.feature_status?.toUpperCase() === 'READY' ? '训练特征已就绪' : '准备训练特征'}</strong><p>文本音素与 BERT → HuBERT 与训练音频 → 语义 token</p></div><button disabled={busy || running} onClick={() => void perform(async () => {setPreflightId(''); setSubmittedConfig(''); const job = await submit('/dataset-versions/' + encodeURIComponent(versionId) + '/features', {}); setFeatureId(job.id);})}>{version.feature_status?.toUpperCase() === 'READY' ? '校验并补齐特征' : '准备训练特征'}</button></div>}
     {featureJob && <p className="muted small">特征任务 {featureJob.id.slice(0, 8)} · {active(featureJob) ? '正在处理，可在后台任务查看进度' : featureJob.state === 'COMPLETED' ? '已完成' : errorText(featureJob.error) ?? featureJob.state}</p>}
-    <div className="grid"><label>初始化权重<select value={initialModel} onChange={e => setInitialModel(e.target.value)}><option value="official">官方 GPT-SoVITS v4 底模</option></select></label><label>随机种子<input type="number" min="0" max="2147483647" step="1" value={seed} onChange={e => setSeed(e.target.valueAsNumber)}/></label></div>
+    <div className="grid"><label>初始化权重<select aria-label="初始化权重" value={initialModel} onChange={e => setInitialModel(e.target.value)}><option value="official">官方 GPT-SoVITS v4 底模</option>{models.filter(m=>m.id!=='official').map(m=><option value={m.id} key={m.id}>{m.role} · 来源模型 {m.id.slice(0,8)}</option>)}</select></label><label>随机种子<input type="number" min="0" max="2147483647" step="1" value={seed} onChange={e => setSeed(e.target.valueAsNumber)}/></label></div><p className="muted small">新微调从所选权重初始化，优化器与训练计数从零开始。完整续训请使用运行面板的继续训练。</p>
     <StageFields name="s2" value={s2} enabled={stages.includes('s2')} onEnabled={enabled => setStage('s2', enabled)} onChange={setS2}/>
     <StageFields name="s1" value={s1} enabled={stages.includes('s1')} onEnabled={enabled => setStage('s1', enabled)} onChange={setS1}/>
     <div className="actions"><button disabled={busy || running || !version || !stages.length} onClick={() => void perform(check)}>检查训练配置与显存</button><button className="primary-button" disabled={busy || running || !version || !report?.ready || submittedConfig !== configKey} onClick={() => void perform(async () => {if (!version || !report?.ready || submittedConfig !== configKey) throw new Error('当前配置需要重新预检。'); const job = await submit('/training', {preflight_id: preflightId}); setTrainingId(job.id);})}>开始训练</button><p className="muted small">修改配置后需要重新预检。</p></div>

@@ -15,6 +15,9 @@ def validate_preflight(jobs, preflight, *, upstream=None):
     if not preflight.get("ready"):
         raise ValueError("训练预检未通过")
     config = preflight["config"]
+    if preflight.get('initialization'):
+        from .initialization import verify
+        verify(preflight['initialization'], config)
     if config_fingerprint(config) != preflight["config_fingerprint"]:
         raise Conflict("PREFLIGHT_STALE：配置指纹变化")
     version = get(jobs, "version", config["version_id"])
@@ -73,13 +76,22 @@ def submit(jobs, preflight_id, request_id):
     preflight = get(jobs, "preflight", preflight_id)
     version = validate_preflight(jobs, preflight)
     settings = Settings.from_environment()
-    weights, hashes = initial_weights(settings, preflight["config"])
+    initialization = preflight.get('initialization')
+    if initialization:
+        weights = {key: item['path'] for key, item in initialization['weights'].items()}
+        hashes = {key: item['sha256'] for key, item in initialization['weights'].items()}
+    else:
+        weights, hashes = initial_weights(settings, preflight["config"])
     def accepted(db, job_id):
+        get(jobs, 'version', version['id'], db)
+        initial_model = preflight['config']['initial_model']
+        if initial_model != 'official' and get(jobs, 'model', initial_model, db).get('status') != 'READY':
+            raise Conflict('MODEL_NOT_READY：来源模型已不可用')
         run = {"id": job_id, "created": time.time(), "config": preflight["config"], "preflight_id": preflight_id,
                "preflight": preflight, "version": version, "role": version["role"], "dataset_id": version["dataset_id"],
                "initial_weights": weights, "initial_hashes": hashes, "upstream": str(settings.upstream),
                "run_dir": str(jobs.root / "runs" / job_id), "data_root": str(jobs.root), "run_id": job_id,
-               "resume_checkpoint": None}
+               "resume_checkpoint": None, 'initialization': initialization}
         area = Path(run["run_dir"])
         area.mkdir(parents=True, exist_ok=True)
         atomic_json(area / "run_meta.json", run)

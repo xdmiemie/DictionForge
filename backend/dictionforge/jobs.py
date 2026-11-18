@@ -8,7 +8,7 @@ import uuid
 
 ACTIVE = ("QUEUED", "RUNNING")
 TERMINAL = ("COMPLETED", "FAILED", "INTERRUPTED", "CANCELLED", "PAUSED", "EARLY_COMPLETED")
-CPU_KINDS = ("model_export",)
+CPU_KINDS = ("model_export", "speech_save")
 
 
 def lane_for(kind):

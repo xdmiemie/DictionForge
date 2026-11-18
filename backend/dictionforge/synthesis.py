@@ -71,6 +71,8 @@ def submit(jobs, request_id, model_version_id, text, language='zh', split_rule='
         atomic_json(area/'inference-request.json', request)
         put(jobs, 'tts', job_id, request, db)
         put(jobs, 'tts_current', 'current', {'job_id': job_id, 'accepted': request['created']}, db)
+        from .media_lifecycle import retire_previous
+        retire_previous(jobs, job_id, db=db)
     return jobs.submit('tts', payload, request_id, on_accept=accepted)
 
 
@@ -83,6 +85,14 @@ def snapshot(jobs, key):
         result = get(jobs, 'tts_result', key)
     except KeyError:
         result = None
+    if result and result.get('audio'):
+        from .media_lifecycle import state_for_owner
+        result['media_state'] = state_for_owner(jobs, key)
+        for audio in [result.get('audio'), *(row.get('audio') for row in result.get('sentences', []))]:
+            if audio and audio.get('audio_id'):
+                record = get(jobs, 'media', audio['audio_id'])
+                audio['state'] = record.get('state', 'AVAILABLE')
+                audio['available'] = audio['state'] == 'AVAILABLE'
     return dict(id=key, job=job, request=request, result=result)
 
 

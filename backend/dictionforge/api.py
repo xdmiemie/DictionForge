@@ -35,6 +35,10 @@ def create_app(settings=None):
         with exclusive(jobs.state / "app.lock"):
             from .references import reconcile_deletions
             reconcile_deletions(jobs)
+            from .saved_speech import reconcile_deletions as reconcile_saved
+            from .media_lifecycle import reconcile as reconcile_media
+            reconcile_saved(jobs)
+            reconcile_media(jobs)
             with jobs.connect(write=True) as db:
                 db.execute("DELETE FROM records WHERE kind='service' AND id='draining'")
             supervisor = Supervisor(jobs)
@@ -65,6 +69,11 @@ def create_app(settings=None):
     @app.exception_handler(Conflict)
     async def conflict(request, exc):
         return JSONResponse({"detail": str(exc), "code": type(exc).__name__, "stage": "request", "retryable": False}, status_code=409)
+
+    from .media_lifecycle import MediaGone
+    @app.exception_handler(MediaGone)
+    async def media_gone(request, exc):
+        return JSONResponse({'detail': str(exc), 'code': 'AUDIO_EXPIRED', 'stage': 'media', 'retryable': False}, status_code=410)
 
     @app.exception_handler(JobError)
     @app.exception_handler(ValueError)

@@ -3,6 +3,8 @@ import os
 import subprocess
 import sys
 import json
+import logging
+import time
 from threading import Event, Thread
 import psutil
 
@@ -56,11 +58,21 @@ class Supervisor:
         self.jobs = jobs
         self.stop = Event()
         self.thread = Thread(target=self.run, daemon=True)
+        self.last_media_reconcile = 0.
 
     def run(self):
         while not self.stop.is_set():
             for lane in ("gpu", "cpu"):
                 self.tick(lane)
+            if time.monotonic() - self.last_media_reconcile >= 2:
+                self.last_media_reconcile = time.monotonic()
+                try:
+                    from .media_lifecycle import reconcile
+                    from .saved_speech import reconcile_deletions
+                    reconcile(self.jobs)
+                    reconcile_deletions(self.jobs)
+                except Exception:
+                    logging.exception('媒体清理待重试；保留产物和恢复记录')
             self.stop.wait(0.2)
 
     def tick(self, lane):

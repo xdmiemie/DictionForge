@@ -2,6 +2,9 @@ def execute(jobs, job):
     from .settings import Settings, ROOT
     from .engine import invoke
     settings = Settings.from_environment()
+    if job["kind"] == "speech_save":
+        from .saved_speech import process
+        return process(jobs, job)
     if job["kind"] == "tts":
         from .synthesis import process
         return process(jobs, job)

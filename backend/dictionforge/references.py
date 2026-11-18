@@ -55,6 +55,9 @@ def references_for(jobs, kind, key):
         row = dict(kind=source_kind, id=source_id, reason=reason)
         if row not in result:
             result.append(row)
+    from .media_lifecycle import active_leases
+    for lease in active_leases(jobs, owner=key):
+        add('media_lease', lease['token'], '该版本的音频正在播放、下载或被任务使用')
     with jobs.connect() as db:
         jobs_rows = [jobs.decode(row) for row in db.execute('SELECT * FROM jobs')]
         rows = [(row['kind'], row['id'], json.loads(row['metadata'])) for row in db.execute('SELECT * FROM records')]
@@ -79,7 +82,7 @@ def references_for(jobs, kind, key):
                 base = Path(get(jobs, 'version', key)['path']).resolve()
                 if reference.get('audio_id') in media_ids or (reference.get('path') and Path(reference['path']).resolve().is_relative_to(base)):
                     add('tts', row_id, '合成任务冻结的参考仍使用该数据版本')
-        elif category == 'tts_result' and kind == 'model' and row.get('outcome') == 'COMPLETED':
+        elif category == 'tts_result' and kind == 'model' and row.get('outcome') == 'COMPLETED' and row.get('media_state') != 'DELETED':
             if row.get('provenance', {}).get('model_version_id') == key:
                 add('tts_result', row_id, '保留的合成结果记录了该来源模型；结果回收前保留依赖')
         elif category == 'run':

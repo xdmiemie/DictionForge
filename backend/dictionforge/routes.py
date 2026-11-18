@@ -114,7 +114,58 @@ class TextSynthesis(Identified):
     parameters: dict = Field(default_factory=dict)
     reference_id: str | None = None
 
+class SpeechSave(Identified):
+    format: Literal['wav', 'mp3'] = 'wav'
+    title: str = Field(default='', max_length=160)
+
+class SpeechDeletePreview(Strict):
+    ids: list[str] | None = None
+    all_filtered: bool = False
+    model_id: str | None = None
+    query: str = Field(default='', max_length=500)
+
+class MediaLease(Strict):
+    audio_id: str
+
 def register(app):
+    @app.post('/api/media-leases')
+    def media_lease(body: MediaLease, request: Request):
+        from .media_lifecycle import acquire_browser
+        return acquire_browser(request.app.state.jobs, body.audio_id)
+
+    @app.post('/api/media-leases/{token}/heartbeat')
+    def media_heartbeat(token: str, request: Request):
+        from .media_lifecycle import heartbeat
+        return heartbeat(request.app.state.jobs, token)
+
+    @app.post('/api/media-leases/{token}/release')
+    @app.delete('/api/media-leases/{token}')
+    def media_release(token: str, request: Request):
+        from .media_lifecycle import release
+        release(request.app.state.jobs, token)
+        return {'released': True}
+
+    @app.post('/api/tts/{key}/save', status_code=202)
+    def speech_save(key: str, body: SpeechSave, request: Request):
+        from .saved_speech import submit
+        return submit(request.app.state.jobs, key, format=body.format, title=body.title, request_id=str(body.request_id))
+
+    @app.get('/api/saved-speech')
+    def saved_speech(request: Request, model_id: str | None = None, query: str = '',
+                     page: int = Query(default=1, ge=1), page_size: int = Query(default=10, ge=1, le=10)):
+        from .saved_speech import list_saved
+        return list_saved(request.app.state.jobs, model_id=model_id, query=query, page=page, page_size=page_size)
+
+    @app.post('/api/saved-speech/delete-preview')
+    def speech_delete_preview(body: SpeechDeletePreview, request: Request):
+        from .saved_speech import delete_preview
+        return delete_preview(request.app.state.jobs, **body.model_dump())
+
+    @app.post('/api/saved-speech/delete')
+    def speech_delete(body: DeleteConfirmation, request: Request):
+        from .saved_speech import delete
+        return delete(request.app.state.jobs, body.preview_id)
+
     @app.post('/api/tts', status_code=202)
     def text_synthesis(body: TextSynthesis, request: Request):
         from .synthesis import submit
@@ -351,9 +402,7 @@ def register(app):
         return jobs.submit("dataset_asr", {"draft_id": key, "clip_ids": body.clip_ids}, str(body.request_id))
 
     @app.get("/api/audio/{key}")
+    @app.head("/api/audio/{key}")
     def audio(key: str, request: Request, download: bool = False):
-        record = get(request.app.state.jobs, "media", key)
-        path = Path(record["path"])
-        if record.get("state") == "DELETED" or not path.is_file():
-            raise HTTPException(410, "AUDIO_EXPIRED：音频已失效")
-        return FileResponse(path, filename=path.name if download else None)
+        from .media_response import leased_audio
+        return leased_audio(request.app.state.jobs, key, download=download)

@@ -6,4 +6,4 @@
 
 实施规格见 [项目计划](docs/PROJECT_PLAN.md)，实际完成情况见 [阶段进度](docs/CODEX_PROGRESS.md)。未通过真实验收的能力不得视为已交付。
 
-当前使用见 [P09 使用手册](docs/USER_MANUAL.md)，继续开发见 [交接记录](docs/CODEX_HANDOFF.md)。按用户要求完成 P09 后停止，P10–P12 尚未实施，尚未推送远端。
+当前使用见 [使用手册](docs/USER_MANUAL.md)，历史停止点见 [交接记录](docs/CODEX_HANDOFF.md)。2026-11-18 已恢复后续阶段，最新范围和验收见阶段进度；全部阶段完成后才推送远端。

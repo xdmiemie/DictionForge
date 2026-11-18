@@ -1,6 +1,6 @@
 # 真实验收报告
 
-日期：2026-11-17（Asia/Hong_Kong）。PASS 仅用于已执行且满足通过条件的场景。夹具测试不替代真实 GPU、ASR 或浏览器证据。
+日期：2026-11-18（Asia/Hong_Kong）。PASS 仅用于已执行且满足通过条件的场景。夹具测试不替代真实 GPU、ASR 或浏览器证据。
 
 | 编号 | 场景 | 状态 | 证据/阻塞 |
 | --- | --- | --- | --- |
@@ -42,12 +42,12 @@
 | A36 | 单句合成 | PASS | P09_SYNTHESIS.md、P09_HTTP.json、P09_BROWSER.md：真实v4原生48k、浏览器解码播放 |
 | A37 | 多句、重复句和断句 | PASS | P09_WORKER.md/.json、P09_ASR.json、P09_BROWSER.md：4组7句PCM逐样本与原文范围一致、真实ASR与播放同步 |
 | A38 | 无效文本和语言 | PASS | P09_HTTP.json、P09_BROWSER.md：7种HTTP422均保留current，页面真实非法标点请求后仍可播放 |
-| A39 | 合成与旧结果 | NOT_RUN | 尚未执行 |
-| A40 | WAV、MP3 与 Range | NOT_RUN | 尚未执行 |
-| A41 | 永久作品 | NOT_RUN | 尚未执行 |
-| A42 | 保存并发和 Windows 句柄 | NOT_RUN | 尚未执行 |
-| A43 | 作品筛选与分页 | NOT_RUN | 尚未执行 |
-| A44 | 批量删除 | NOT_RUN | 尚未执行 |
+| A39 | 合成与旧结果 | PASS | P10_HTTP.json、P10_LIFECYCLE.md：有效新请求退休旧结果；取消/失效410/原文保留，非法请求保留current |
+| A40 | WAV、MP3 与 Range | PASS | P10_HTTP.json、P10_SAVED_SPEECH.md：真实48k WAV/320kbps MP3完整解码；206字节/416/HEAD/download，HTTPfinally释放引用 |
+| A41 | 永久作品 | PASS | P10_HTTP.json restart_validation：独立作品跨新任务和完整服务重启，哈希/解码/Range一致 |
+| A42 | 保存并发和 Windows 句柄 | PASS | P10_HTTP.json、P10_MEDIA_LIFECYCLE.md：真实排队保存、Windows句柄pending→release→deleted，13项专项通过 |
+| A43 | 作品筛选与分页 | PASS | P10_HTTP.json、P10_BROWSER.md：真实页面模型/标题筛选，14件作品10+4分页，翻页及筛选清除选择 |
+| A44 | 批量删除 | PASS | P10_HTTP.json、P10_BROWSER.md：精确单条/本页/跨页确认集合，播放保护；HTTP及浏览器预览后新增不误删，确认框保留冻结集合 |
 | A45 | 单句追加复用文本 | NOT_RUN | 尚未执行 |
 | A46 | 多句选择与追加再切分 | NOT_RUN | 尚未执行 |
 | A47 | 追加失败和回滚 | NOT_RUN | 尚未执行 |

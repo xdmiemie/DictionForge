@@ -1,0 +1,3651 @@
+{
+  "started": "2026-11-18T04:44:57.739Z",
+  "runDir": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z",
+  "prefix": "P10_UI_1794977097739",
+  "checks": [
+    {
+      "name": "临时播放器取得引用后播放，关闭释放并撤销src，重开可用",
+      "status": "PASS",
+      "detail": {
+        "current": "1ba9920f732a4eef902f6917b6c6a7b9"
+      }
+    },
+    {
+      "name": "真实页面保存14件独立作品含WAV和320kbps MP3",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "cf04aa9c8b7a4505a8c02dac24c619ce",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\cf04aa9c8b7a4505a8c02dac24c619ce\\source.wav"
+        },
+        {
+          "id": "9ecc038f65eb41d0b61122d334c164dd",
+          "format": "mp3",
+          "sha256": "cee48d8802a460344cd600f341bf7c1db7b498eeee491fc533bb3b78d14deb8d",
+          "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\audio.mp3"
+        },
+        {
+          "id": "4224e3c346234f4597e37305a99cdd8d",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\4224e3c346234f4597e37305a99cdd8d\\source.wav"
+        },
+        {
+          "id": "57b475ec1df84c1c9c467851c2b48811",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\57b475ec1df84c1c9c467851c2b48811\\source.wav"
+        },
+        {
+          "id": "480a589bdfb14750a9876b95800ae376",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\480a589bdfb14750a9876b95800ae376\\source.wav"
+        },
+        {
+          "id": "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\9fffe1de1abf4d44b7d62c3ed9cb9a0f\\source.wav"
+        },
+        {
+          "id": "f86022a5d1134885bcb05a11afc68a2c",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\f86022a5d1134885bcb05a11afc68a2c\\source.wav"
+        },
+        {
+          "id": "c85a20647b944b4388bcaadf93341ec4",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\c85a20647b944b4388bcaadf93341ec4\\source.wav"
+        },
+        {
+          "id": "0038071294f545f1909dc784804c9288",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\0038071294f545f1909dc784804c9288\\source.wav"
+        },
+        {
+          "id": "599ba401fe8c433fab4a4e732c74807b",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\599ba401fe8c433fab4a4e732c74807b\\source.wav"
+        },
+        {
+          "id": "9d1b335b56d14a0c894b9de3bcb90d6a",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\9d1b335b56d14a0c894b9de3bcb90d6a\\source.wav"
+        },
+        {
+          "id": "15768da94fca464a8e4ba1a94b53df98",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\15768da94fca464a8e4ba1a94b53df98\\source.wav"
+        },
+        {
+          "id": "cea9e4244f87480099280a3c482f05e4",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\cea9e4244f87480099280a3c482f05e4\\source.wav"
+        },
+        {
+          "id": "97221a155798436b8b3d1e7193f6253e",
+          "format": "wav",
+          "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+          "path": "E:\\DictionForge\\data\\saved_speech\\97221a155798436b8b3d1e7193f6253e\\source.wav"
+        }
+      ]
+    },
+    {
+      "name": "模型及标题筛选、10条分页、翻页及筛选清空按钮选择",
+      "status": "PASS",
+      "detail": {
+        "total": 14,
+        "firstPage": 10,
+        "secondPage": 4
+      }
+    },
+    {
+      "name": "永久MP3真实解码播放、浏览器下载及Range",
+      "status": "PASS",
+      "detail": {
+        "played": {
+          "events": [
+            "playing"
+          ],
+          "duration": 5.16,
+          "currentTime": 0.260039,
+          "subjectiveListening": "NOT_PERFORMED"
+        },
+        "downloadPath": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z\\download.mp3",
+        "contentType": "audio/mpeg",
+        "contentRange": "bytes 0-99/208365"
+      }
+    },
+    {
+      "name": "正在打开的作品受保护，释放后单件精确删除",
+      "status": "PASS",
+      "detail": {
+        "id": "9ecc038f65eb41d0b61122d334c164dd",
+        "protectedResult": {
+          "token": "fcdb4c1c50a741889c3c3872f7784f85",
+          "results": [
+            {
+              "id": "9ecc038f65eb41d0b61122d334c164dd",
+              "status": "protected",
+              "reason": "SAVED_REFERENCED：作品正在播放、下载或处理中"
+            }
+          ],
+          "counts": {
+            "deleted": 0,
+            "already_deleted": 0,
+            "protected": 1
+          }
+        },
+        "single": {
+          "token": "29e75b21ea0d4035a9ba0c737a37c710",
+          "results": [
+            {
+              "id": "9ecc038f65eb41d0b61122d334c164dd",
+              "status": "deleted"
+            }
+          ],
+          "counts": {
+            "deleted": 1,
+            "already_deleted": 0,
+            "protected": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "本页所选和跨页全部只删除确认的自建集合",
+      "status": "PASS",
+      "detail": {
+        "pageSelected": [
+          "97221a155798436b8b3d1e7193f6253e",
+          "cea9e4244f87480099280a3c482f05e4"
+        ],
+        "acrossPages": [
+          "cf04aa9c8b7a4505a8c02dac24c619ce",
+          "4224e3c346234f4597e37305a99cdd8d",
+          "57b475ec1df84c1c9c467851c2b48811",
+          "480a589bdfb14750a9876b95800ae376",
+          "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+          "f86022a5d1134885bcb05a11afc68a2c",
+          "c85a20647b944b4388bcaadf93341ec4",
+          "0038071294f545f1909dc784804c9288",
+          "599ba401fe8c433fab4a4e732c74807b",
+          "9d1b335b56d14a0c894b9de3bcb90d6a",
+          "15768da94fca464a8e4ba1a94b53df98"
+        ],
+        "all": {
+          "token": "ff46e7a4da544aa0835782d7d74f0d92",
+          "results": [
+            {
+              "id": "15768da94fca464a8e4ba1a94b53df98",
+              "status": "deleted"
+            },
+            {
+              "id": "9d1b335b56d14a0c894b9de3bcb90d6a",
+              "status": "deleted"
+            },
+            {
+              "id": "599ba401fe8c433fab4a4e732c74807b",
+              "status": "deleted"
+            },
+            {
+              "id": "0038071294f545f1909dc784804c9288",
+              "status": "deleted"
+            },
+            {
+              "id": "c85a20647b944b4388bcaadf93341ec4",
+              "status": "deleted"
+            },
+            {
+              "id": "f86022a5d1134885bcb05a11afc68a2c",
+              "status": "deleted"
+            },
+            {
+              "id": "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+              "status": "deleted"
+            },
+            {
+              "id": "480a589bdfb14750a9876b95800ae376",
+              "status": "deleted"
+            },
+            {
+              "id": "57b475ec1df84c1c9c467851c2b48811",
+              "status": "deleted"
+            },
+            {
+              "id": "4224e3c346234f4597e37305a99cdd8d",
+              "status": "deleted"
+            },
+            {
+              "id": "cf04aa9c8b7a4505a8c02dac24c619ce",
+              "status": "deleted"
+            }
+          ],
+          "counts": {
+            "deleted": 11,
+            "already_deleted": 0,
+            "protected": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "预览后新保存作品不清空或扩张确认集合，确认后新作品仍在",
+      "status": "PASS",
+      "detail": {
+        "newId": "e73f8682bda84b47bc0e78bedb68bb08",
+        "frozenIds": [
+          "cf04aa9c8b7a4505a8c02dac24c619ce",
+          "4224e3c346234f4597e37305a99cdd8d",
+          "57b475ec1df84c1c9c467851c2b48811",
+          "480a589bdfb14750a9876b95800ae376",
+          "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+          "f86022a5d1134885bcb05a11afc68a2c",
+          "c85a20647b944b4388bcaadf93341ec4",
+          "0038071294f545f1909dc784804c9288",
+          "599ba401fe8c433fab4a4e732c74807b",
+          "9d1b335b56d14a0c894b9de3bcb90d6a",
+          "15768da94fca464a8e4ba1a94b53df98"
+        ]
+      }
+    },
+    {
+      "name": "已回收历史保留文本并明确禁播放及保存",
+      "status": "PASS",
+      "detail": {
+        "id": "70f2d6554c8548afa3d8bab86a1effba"
+      }
+    },
+    {
+      "name": "真实20秒引用心跳成功",
+      "status": "PASS",
+      "detail": [
+        {
+          "url": "http://127.0.0.1:7867/api/media-leases/23ef7200c5f24dbeb8f96d3721a6288a/heartbeat",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "3件原作品/current保持不变、窄屏无溢出、浏览器无错误",
+      "status": "PASS",
+      "detail": {
+        "width": 390,
+        "scroll": 390
+      }
+    }
+  ],
+  "created": [
+    {
+      "id": "cf04aa9c8b7a4505a8c02dac24c619ce",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_00_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977100.4452174,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\cf04aa9c8b7a4505a8c02dac24c619ce",
+      "save_job_id": "ee89e8980f284f88adc615bd65b89752",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\cf04aa9c8b7a4505a8c02dac24c619ce\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "97af72ab1d2e410c97362233c1b9561d"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\cf04aa9c8b7a4505a8c02dac24c619ce\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "97af72ab1d2e410c97362233c1b9561d"
+      }
+    },
+    {
+      "id": "9ecc038f65eb41d0b61122d334c164dd",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_01_mp3",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "mp3",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977101.14252,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd",
+      "save_job_id": "a6a215b079774f19a131fb5b3be15e74",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "30e88d1d98774b3ea237105014b4623b"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\audio.mp3",
+        "sha256": "cee48d8802a460344cd600f341bf7c1db7b498eeee491fc533bb3b78d14deb8d",
+        "bytes": 208365,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "mp3",
+        "bitrate": 320000,
+        "decode_verified": true,
+        "audio_id": "39f40052c31146859601c9a0a09ce3cf"
+      }
+    },
+    {
+      "id": "4224e3c346234f4597e37305a99cdd8d",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_02_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977102.313914,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\4224e3c346234f4597e37305a99cdd8d",
+      "save_job_id": "55d5916982474a13871c4d5557400c98",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\4224e3c346234f4597e37305a99cdd8d\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "f04605c6d2ab49f8b93ec5aa6e93fb55"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\4224e3c346234f4597e37305a99cdd8d\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "f04605c6d2ab49f8b93ec5aa6e93fb55"
+      }
+    },
+    {
+      "id": "57b475ec1df84c1c9c467851c2b48811",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_03_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977103.8496363,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\57b475ec1df84c1c9c467851c2b48811",
+      "save_job_id": "495024522a4b4fa488baa7f06946540c",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\57b475ec1df84c1c9c467851c2b48811\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "54d0ab0f7fea4c7cac698d4575254243"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\57b475ec1df84c1c9c467851c2b48811\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "54d0ab0f7fea4c7cac698d4575254243"
+      }
+    },
+    {
+      "id": "480a589bdfb14750a9876b95800ae376",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_04_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977104.4822419,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\480a589bdfb14750a9876b95800ae376",
+      "save_job_id": "50c45b5cb239407a94a54d7075545e9f",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\480a589bdfb14750a9876b95800ae376\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "a009d17dda854e5ab42f0c59da2e26b6"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\480a589bdfb14750a9876b95800ae376\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "a009d17dda854e5ab42f0c59da2e26b6"
+      }
+    },
+    {
+      "id": "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_05_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977105.6010208,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+      "save_job_id": "c235932dbab2417db334219103cca887",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\9fffe1de1abf4d44b7d62c3ed9cb9a0f\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "590123cfe9d143aea52a2cb6860ccd2b"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\9fffe1de1abf4d44b7d62c3ed9cb9a0f\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "590123cfe9d143aea52a2cb6860ccd2b"
+      }
+    },
+    {
+      "id": "f86022a5d1134885bcb05a11afc68a2c",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_06_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977106.2998407,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\f86022a5d1134885bcb05a11afc68a2c",
+      "save_job_id": "8d2a64c59b2a4936891cafcaf2e9d15c",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\f86022a5d1134885bcb05a11afc68a2c\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "118b270b29324a8c866bccadfcdcd7ca"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\f86022a5d1134885bcb05a11afc68a2c\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "118b270b29324a8c866bccadfcdcd7ca"
+      }
+    },
+    {
+      "id": "c85a20647b944b4388bcaadf93341ec4",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_07_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977106.9563463,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\c85a20647b944b4388bcaadf93341ec4",
+      "save_job_id": "cebabb17776f4e50931ef0b54ef2e790",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\c85a20647b944b4388bcaadf93341ec4\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "4b18fbaf8a4e48a8a451f3c7a9714c5c"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\c85a20647b944b4388bcaadf93341ec4\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "4b18fbaf8a4e48a8a451f3c7a9714c5c"
+      }
+    },
+    {
+      "id": "0038071294f545f1909dc784804c9288",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_08_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977107.5929463,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\0038071294f545f1909dc784804c9288",
+      "save_job_id": "ece994ab7dcf4ba2a8755ea21e9694e4",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\0038071294f545f1909dc784804c9288\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "421711de80474644a6895e41fcbd0712"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\0038071294f545f1909dc784804c9288\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "421711de80474644a6895e41fcbd0712"
+      }
+    },
+    {
+      "id": "599ba401fe8c433fab4a4e732c74807b",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_09_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977108.223878,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\599ba401fe8c433fab4a4e732c74807b",
+      "save_job_id": "a7b3fa69db3a4e4e9dd522a735d6636a",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\599ba401fe8c433fab4a4e732c74807b\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "d2efbd0d4ab04d93b4ad4997be6b6663"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\599ba401fe8c433fab4a4e732c74807b\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "d2efbd0d4ab04d93b4ad4997be6b6663"
+      }
+    },
+    {
+      "id": "9d1b335b56d14a0c894b9de3bcb90d6a",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_10_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977109.8518136,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\9d1b335b56d14a0c894b9de3bcb90d6a",
+      "save_job_id": "0e27d71ec108405f9c5f2de0ec9bb610",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\9d1b335b56d14a0c894b9de3bcb90d6a\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "96b4b21f0540426c8e96a5b42205fd5e"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\9d1b335b56d14a0c894b9de3bcb90d6a\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "96b4b21f0540426c8e96a5b42205fd5e"
+      }
+    },
+    {
+      "id": "15768da94fca464a8e4ba1a94b53df98",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_11_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977110.5068188,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\15768da94fca464a8e4ba1a94b53df98",
+      "save_job_id": "aa2bf9deb67f4be4a520698f6d87eb94",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\15768da94fca464a8e4ba1a94b53df98\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "73a759832c28448ab397299bd906caca"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\15768da94fca464a8e4ba1a94b53df98\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "73a759832c28448ab397299bd906caca"
+      }
+    },
+    {
+      "id": "cea9e4244f87480099280a3c482f05e4",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_12_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977111.129492,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\cea9e4244f87480099280a3c482f05e4",
+      "save_job_id": "c5810429a2b54ff29bc9aef4e8986503",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\cea9e4244f87480099280a3c482f05e4\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "2d61560521e6423eb99d5af3642c3058"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\cea9e4244f87480099280a3c482f05e4\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "2d61560521e6423eb99d5af3642c3058"
+      }
+    },
+    {
+      "id": "97221a155798436b8b3d1e7193f6253e",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_13_wav",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977111.754983,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\97221a155798436b8b3d1e7193f6253e",
+      "save_job_id": "9a1e8bad20fc4aca86f6a807c977b09f",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\97221a155798436b8b3d1e7193f6253e\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "b0d9aeb412fb4254884d782013538e8c"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\97221a155798436b8b3d1e7193f6253e\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "b0d9aeb412fb4254884d782013538e8c"
+      }
+    },
+    {
+      "id": "e73f8682bda84b47bc0e78bedb68bb08",
+      "tts_id": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "title": "P10_UI_1794977097739_after_preview",
+      "text": "今天我们一起去公园散步。湖边的风景很美。明天还可以再来。",
+      "format": "wav",
+      "model_id": "a974c5da69695d0aba3477bff5c7b768",
+      "model_name": "景元",
+      "created": 1794977115.5087242,
+      "provenance": {
+        "model_version_id": "a974c5da69695d0aba3477bff5c7b768",
+        "model_id": "09e42df26bf30b98cea3880e",
+        "role": "景元",
+        "source_data_version_id": "76b5a08af4ca471f9c6fa9c903347e69",
+        "reference_id": "563ea3259eed48938003d5bb0566d68e",
+        "reference_sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "request_id": "6cb33cca-0dcf-4eb3-a634-cfcca5e66f97"
+      },
+      "parameters": {
+        "seed": 42,
+        "sample_steps": 16,
+        "top_k": 5,
+        "top_p": 1,
+        "temperature": 1,
+        "speed_factor": 1,
+        "repetition_penalty": 1.35,
+        "fragment_interval": 0.3
+      },
+      "reference": {
+        "id": "563ea3259eed48938003d5bb0566d68e",
+        "path": "E:\\DictionForge\\data\\references\\563ea3259eed48938003d5bb0566d68e\\reference.wav",
+        "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+        "text": "你若当他是个孩子，他便会端起大人的架子来。你若当他是个大人，他又会露出小孩子的脾性来。",
+        "language": "zh",
+        "seconds": 10,
+        "samples": 480000,
+        "sample_rate": 48000,
+        "channels": 1,
+        "subtype": "PCM_16",
+        "source": {
+          "path": "E:\\DictionForge\\data\\datasets\\09e42df26bf30b98cea3880e\\76b5a08af4ca471f9c6fa9c903347e69\\35994dd5e702407f8455be9d41a0d67a.wav",
+          "sha256": "6d8a0d9e80e67a8aa2c6048f34ac528ff529b6b54a89858f315fa07d2f2558b7",
+          "audio_id": "478fd36e3df74843aeff2bed9b8f0118"
+        },
+        "status": "READY",
+        "created": 1794914086.7331984,
+        "fingerprint": "c2d11d71752b22529cd9156703a308ba3c3fdc441919a1a26a0927ebb192bfce",
+        "audio_id": "fa1d0b1ebb74474b894550a54b6835ee"
+      },
+      "sentences": [
+        {
+          "sentence_id": "665f0f516ea357e399baca07c2e5dc64",
+          "index": 0,
+          "text": "今天我们一起去公园散步。",
+          "source_start": 0,
+          "source_end": 12,
+          "seed": 42,
+          "actual_seed": 42,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0000.wav",
+            "sha256": "20d2015eaac5ecd7e258d008ff06fc17adf09bcc07612fee77d78e6ad0debc29",
+            "bytes": 192044,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 96000,
+            "seconds": 2,
+            "decode_verified": true,
+            "peak": 0.9140625,
+            "rms": 0.10578016097008297,
+            "audio_id": "9289891b93f042678e36d18bf08a9ee3"
+          },
+          "start_sample": 0,
+          "end_sample": 96000,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9643,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 5.171794199999567,
+          "actual_text": "今天我们一起去公园散步.",
+          "normalized_texts": [
+            "今天我们一起去公园散步."
+          ]
+        },
+        {
+          "sentence_id": "b917fce58c795f5d91a75fd4e11dc0c9",
+          "index": 1,
+          "text": "湖边的风景很美。",
+          "source_start": 12,
+          "source_end": 20,
+          "seed": 43,
+          "actual_seed": 43,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0001.wav",
+            "sha256": "214b0749198a9d7408076e022447755edde6db632a742c33ae8e534531c41c92",
+            "bytes": 165164,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 82560,
+            "seconds": 1.72,
+            "decode_verified": true,
+            "peak": 0.921875,
+            "rms": 0.11510782031934882,
+            "audio_id": "9691f801c6044d31be3f87f73185dd43"
+          },
+          "start_sample": 96000,
+          "end_sample": 178560,
+          "leading_silence_samples": 0,
+          "trailing_silence_samples": 9707,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.2714620000006107,
+          "actual_text": "湖边的风景很美.",
+          "normalized_texts": [
+            "湖边的风景很美."
+          ]
+        },
+        {
+          "sentence_id": "4aa244deeb82575db2ba465df51a4c44",
+          "index": 2,
+          "text": "明天还可以再来。",
+          "source_start": 20,
+          "source_end": 28,
+          "seed": 44,
+          "actual_seed": 44,
+          "audio": {
+            "path": "E:\\DictionForge\\data\\runtime\\tts\\1ba9920f732a4eef902f6917b6c6a7b9\\sentence-d33b666b4ec04f6aa4ffd92387baefa9-0002.wav",
+            "sha256": "f2cd6cd0b8736ba5f1782aa2b87974ead16368381d4849a8f6ddec9367b04432",
+            "bytes": 138284,
+            "sample_rate": 48000,
+            "channels": 1,
+            "samples": 69120,
+            "seconds": 1.44,
+            "decode_verified": true,
+            "peak": 0.86572265625,
+            "rms": 0.11282790355896208,
+            "audio_id": "e4597fc09ca2444a82802425e8d56445"
+          },
+          "start_sample": 178560,
+          "end_sample": 247680,
+          "leading_silence_samples": 4763,
+          "trailing_silence_samples": 9600,
+          "silence_threshold": {
+            "amplitude": 32,
+            "unit": "pcm16"
+          },
+          "generation_seconds": 1.0725149999998393,
+          "actual_text": "明天还可以再来.",
+          "normalized_texts": [
+            "明天还可以再来."
+          ]
+        }
+      ],
+      "schema_version": 1,
+      "status": "READY",
+      "path": "E:\\DictionForge\\data\\saved_speech\\e73f8682bda84b47bc0e78bedb68bb08",
+      "save_job_id": "d4e492d234674cba9b61479a138f306c",
+      "source_audio_sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+      "wav": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\e73f8682bda84b47bc0e78bedb68bb08\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "b98c848504b341ffa5515bb0ce68a10c"
+      },
+      "audio": {
+        "path": "E:\\DictionForge\\data\\saved_speech\\e73f8682bda84b47bc0e78bedb68bb08\\source.wav",
+        "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+        "bytes": 495404,
+        "sample_rate": 48000,
+        "channels": 1,
+        "samples": 247680,
+        "seconds": 5.16,
+        "codec": "pcm_s16le",
+        "decode_verified": true,
+        "audio_id": "b98c848504b341ffa5515bb0ce68a10c"
+      }
+    }
+  ],
+  "previews": [
+    {
+      "token": "fcdb4c1c50a741889c3c3872f7784f85",
+      "preview_id": "fcdb4c1c50a741889c3c3872f7784f85",
+      "ids": [
+        "9ecc038f65eb41d0b61122d334c164dd"
+      ],
+      "count": 1,
+      "items": [
+        {
+          "id": "9ecc038f65eb41d0b61122d334c164dd",
+          "title": "P10_UI_1794977097739_01_mp3",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\audio.mp3",
+              "sha256": "cee48d8802a460344cd600f341bf7c1db7b498eeee491fc533bb3b78d14deb8d",
+              "bytes": 208365
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\manifest.json",
+              "sha256": "95aa3ae9b2cd03cf9ff5dca92279a2632103772b0dab25fd7377a47c86031075",
+              "bytes": 6696
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "bef6ec4bdcb161e3017f5342d3e2f201289d95a5d89456802d291dbd08f408df"
+        }
+      ],
+      "filter": null,
+      "expires": 1794977714.2285697
+    },
+    {
+      "token": "29e75b21ea0d4035a9ba0c737a37c710",
+      "preview_id": "29e75b21ea0d4035a9ba0c737a37c710",
+      "ids": [
+        "9ecc038f65eb41d0b61122d334c164dd"
+      ],
+      "count": 1,
+      "items": [
+        {
+          "id": "9ecc038f65eb41d0b61122d334c164dd",
+          "title": "P10_UI_1794977097739_01_mp3",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\audio.mp3",
+              "sha256": "cee48d8802a460344cd600f341bf7c1db7b498eeee491fc533bb3b78d14deb8d",
+              "bytes": 208365
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\manifest.json",
+              "sha256": "95aa3ae9b2cd03cf9ff5dca92279a2632103772b0dab25fd7377a47c86031075",
+              "bytes": 6696
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9ecc038f65eb41d0b61122d334c164dd\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "bef6ec4bdcb161e3017f5342d3e2f201289d95a5d89456802d291dbd08f408df"
+        }
+      ],
+      "filter": null,
+      "expires": 1794977714.4443295
+    },
+    {
+      "token": "eeb0f63a6d16452880d9d48937656709",
+      "preview_id": "eeb0f63a6d16452880d9d48937656709",
+      "ids": [
+        "97221a155798436b8b3d1e7193f6253e",
+        "cea9e4244f87480099280a3c482f05e4"
+      ],
+      "count": 2,
+      "items": [
+        {
+          "id": "97221a155798436b8b3d1e7193f6253e",
+          "title": "P10_UI_1794977097739_13_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\97221a155798436b8b3d1e7193f6253e\\manifest.json",
+              "sha256": "d5cfe790675516021362cc9307862bfa7800716451a7f8c5fb49dc806a86bb87",
+              "bytes": 6680
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\97221a155798436b8b3d1e7193f6253e\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "79f90d9e75be7e6166ea5285f33bd393732fca51a3a634264dbd0bc335b6bb98"
+        },
+        {
+          "id": "cea9e4244f87480099280a3c482f05e4",
+          "title": "P10_UI_1794977097739_12_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\cea9e4244f87480099280a3c482f05e4\\manifest.json",
+              "sha256": "30dc35baa4f2ad2e2894268d9b7ab724176164e5fa2afc2bccb8b32a4ea601be",
+              "bytes": 6680
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\cea9e4244f87480099280a3c482f05e4\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "3e1b71406f2c5d7b55ad5538e0988b19d39481d2428a8a7b9b819aae1e982eef"
+        }
+      ],
+      "filter": null,
+      "expires": 1794977714.8617857
+    },
+    {
+      "token": "ff46e7a4da544aa0835782d7d74f0d92",
+      "preview_id": "ff46e7a4da544aa0835782d7d74f0d92",
+      "ids": [
+        "15768da94fca464a8e4ba1a94b53df98",
+        "9d1b335b56d14a0c894b9de3bcb90d6a",
+        "599ba401fe8c433fab4a4e732c74807b",
+        "0038071294f545f1909dc784804c9288",
+        "c85a20647b944b4388bcaadf93341ec4",
+        "f86022a5d1134885bcb05a11afc68a2c",
+        "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+        "480a589bdfb14750a9876b95800ae376",
+        "57b475ec1df84c1c9c467851c2b48811",
+        "4224e3c346234f4597e37305a99cdd8d",
+        "cf04aa9c8b7a4505a8c02dac24c619ce"
+      ],
+      "count": 11,
+      "items": [
+        {
+          "id": "15768da94fca464a8e4ba1a94b53df98",
+          "title": "P10_UI_1794977097739_11_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\15768da94fca464a8e4ba1a94b53df98\\manifest.json",
+              "sha256": "28f5fd60911ce9153f3033f179fe177eb5a3bd9cd000407c34fbdbd2922ea288",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\15768da94fca464a8e4ba1a94b53df98\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "189088788575ca36396f2690c663d0316962e469448cd4f0587fdc7e4ab87495"
+        },
+        {
+          "id": "9d1b335b56d14a0c894b9de3bcb90d6a",
+          "title": "P10_UI_1794977097739_10_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9d1b335b56d14a0c894b9de3bcb90d6a\\manifest.json",
+              "sha256": "31440f9dbe51c35f49b994992bedf0d760f1895242d9c3284e9493116be8504e",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9d1b335b56d14a0c894b9de3bcb90d6a\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "7b512a5d49a8a03cdf1176d32694d1958e89e82ecdcc6a8390ab94e8fcd8884e"
+        },
+        {
+          "id": "599ba401fe8c433fab4a4e732c74807b",
+          "title": "P10_UI_1794977097739_09_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\599ba401fe8c433fab4a4e732c74807b\\manifest.json",
+              "sha256": "11275990f91da0177658c41a678a7b2c2acb1c55c10171734de5963a116141b2",
+              "bytes": 6680
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\599ba401fe8c433fab4a4e732c74807b\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "e5cffd32762ddc06acdb38a4a5f0427b04f606e942229b78c91aa046ccab2c8f"
+        },
+        {
+          "id": "0038071294f545f1909dc784804c9288",
+          "title": "P10_UI_1794977097739_08_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\0038071294f545f1909dc784804c9288\\manifest.json",
+              "sha256": "88e6f53967ebe0bfdc6dddb6714d1bb7b14a4e333e255258ef51ea09f7d3fdcd",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\0038071294f545f1909dc784804c9288\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "b713ae1b12bc86d41cc4d09afe9ac18de06f3ebdcc79e8d831af86a3b6b66121"
+        },
+        {
+          "id": "c85a20647b944b4388bcaadf93341ec4",
+          "title": "P10_UI_1794977097739_07_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\c85a20647b944b4388bcaadf93341ec4\\manifest.json",
+              "sha256": "77fcac22beb2dc626f6a89727038a24ee1c44d018abd96c2e64480866a13ebe2",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\c85a20647b944b4388bcaadf93341ec4\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "1855843daf49a387050ceb676c09af491e3ed7d414dba0a3d876155b4ce5cde7"
+        },
+        {
+          "id": "f86022a5d1134885bcb05a11afc68a2c",
+          "title": "P10_UI_1794977097739_06_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\f86022a5d1134885bcb05a11afc68a2c\\manifest.json",
+              "sha256": "e1d940ec91aa24eb0b498d95525ce3d00fe36731d5b4c7f06c983c04e5cae834",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\f86022a5d1134885bcb05a11afc68a2c\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "edb5802ba4ca6626d3c8793f5e0a510082593aaa1572adf216e582bed75fdb14"
+        },
+        {
+          "id": "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+          "title": "P10_UI_1794977097739_05_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9fffe1de1abf4d44b7d62c3ed9cb9a0f\\manifest.json",
+              "sha256": "525c5e69cd90b7d13f797c6f138bbc8feca0d82da10327c5ef29f842d99663cf",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\9fffe1de1abf4d44b7d62c3ed9cb9a0f\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "bc6fab6964f57365d15cb66acb4d405575678ad2fb6734f0a801bc4288f85b1c"
+        },
+        {
+          "id": "480a589bdfb14750a9876b95800ae376",
+          "title": "P10_UI_1794977097739_04_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\480a589bdfb14750a9876b95800ae376\\manifest.json",
+              "sha256": "14735a0784da23c72268800d1f524e4143e3d560920f6a29fb07718ca086407a",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\480a589bdfb14750a9876b95800ae376\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "87f5f7e2417f870b37cc988efd8d2ac91fa4bc92c994327c10a72096a4e0706a"
+        },
+        {
+          "id": "57b475ec1df84c1c9c467851c2b48811",
+          "title": "P10_UI_1794977097739_03_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\57b475ec1df84c1c9c467851c2b48811\\manifest.json",
+              "sha256": "9a264befce93668481463982b2dd00d0f304bb762a86f88993462adebd39ba4a",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\57b475ec1df84c1c9c467851c2b48811\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "1c28865e75c94806dc26e6ffa1b41580b9be103c382ec87b9e4367a88a4afcbe"
+        },
+        {
+          "id": "4224e3c346234f4597e37305a99cdd8d",
+          "title": "P10_UI_1794977097739_02_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\4224e3c346234f4597e37305a99cdd8d\\manifest.json",
+              "sha256": "41f583691796e0161dd945c00333abf54aa8c836ae08defd5214157a20fd4c50",
+              "bytes": 6680
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\4224e3c346234f4597e37305a99cdd8d\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "7a027cc2b3862448edc39537dc870659b85089a40d5a5657052f7c9abc1f0459"
+        },
+        {
+          "id": "cf04aa9c8b7a4505a8c02dac24c619ce",
+          "title": "P10_UI_1794977097739_00_wav",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\cf04aa9c8b7a4505a8c02dac24c619ce\\manifest.json",
+              "sha256": "64ab58e67cd0daa8bb89b335516c87c6a3d9ce484a811440aa10b3aa26fe525c",
+              "bytes": 6681
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\cf04aa9c8b7a4505a8c02dac24c619ce\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "04e4af75177f9e9189ce3134c81dd86e5f71d22ceeedfbeeac46a42e865b101a"
+        }
+      ],
+      "filter": {
+        "model_id": "a974c5da69695d0aba3477bff5c7b768",
+        "query": "P10_UI_1794977097739"
+      },
+      "expires": 1794977715.2310927
+    },
+    {
+      "token": "0184814a26d44e03af8c5cdf8c2aa2db",
+      "preview_id": "0184814a26d44e03af8c5cdf8c2aa2db",
+      "ids": [
+        "e73f8682bda84b47bc0e78bedb68bb08"
+      ],
+      "count": 1,
+      "items": [
+        {
+          "id": "e73f8682bda84b47bc0e78bedb68bb08",
+          "title": "P10_UI_1794977097739_after_preview",
+          "files": [
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\e73f8682bda84b47bc0e78bedb68bb08\\manifest.json",
+              "sha256": "4d120ecb127fda85543d41069599bd4cb48e1dcd1e7645d21c767e8d05f0c345",
+              "bytes": 6688
+            },
+            {
+              "path": "E:\\DictionForge\\data\\saved_speech\\e73f8682bda84b47bc0e78bedb68bb08\\source.wav",
+              "sha256": "9359955a0dac855f253a90d9a6f3c4231093c8b9f7abf68911bd37fff2e8f8cf",
+              "bytes": 495404
+            }
+          ],
+          "fingerprint": "977a039d575e584d0ee1e2aaa6a11c195fec13efd5e970777e87f364cf83745e"
+        }
+      ],
+      "filter": null,
+      "expires": 1794977717.2925665
+    }
+  ],
+  "confirmed": [
+    {
+      "token": "fcdb4c1c50a741889c3c3872f7784f85",
+      "results": [
+        {
+          "id": "9ecc038f65eb41d0b61122d334c164dd",
+          "status": "protected",
+          "reason": "SAVED_REFERENCED：作品正在播放、下载或处理中"
+        }
+      ],
+      "counts": {
+        "deleted": 0,
+        "already_deleted": 0,
+        "protected": 1
+      }
+    },
+    {
+      "token": "29e75b21ea0d4035a9ba0c737a37c710",
+      "results": [
+        {
+          "id": "9ecc038f65eb41d0b61122d334c164dd",
+          "status": "deleted"
+        }
+      ],
+      "counts": {
+        "deleted": 1,
+        "already_deleted": 0,
+        "protected": 0
+      }
+    },
+    {
+      "token": "eeb0f63a6d16452880d9d48937656709",
+      "results": [
+        {
+          "id": "97221a155798436b8b3d1e7193f6253e",
+          "status": "deleted"
+        },
+        {
+          "id": "cea9e4244f87480099280a3c482f05e4",
+          "status": "deleted"
+        }
+      ],
+      "counts": {
+        "deleted": 2,
+        "already_deleted": 0,
+        "protected": 0
+      }
+    },
+    {
+      "token": "ff46e7a4da544aa0835782d7d74f0d92",
+      "results": [
+        {
+          "id": "15768da94fca464a8e4ba1a94b53df98",
+          "status": "deleted"
+        },
+        {
+          "id": "9d1b335b56d14a0c894b9de3bcb90d6a",
+          "status": "deleted"
+        },
+        {
+          "id": "599ba401fe8c433fab4a4e732c74807b",
+          "status": "deleted"
+        },
+        {
+          "id": "0038071294f545f1909dc784804c9288",
+          "status": "deleted"
+        },
+        {
+          "id": "c85a20647b944b4388bcaadf93341ec4",
+          "status": "deleted"
+        },
+        {
+          "id": "f86022a5d1134885bcb05a11afc68a2c",
+          "status": "deleted"
+        },
+        {
+          "id": "9fffe1de1abf4d44b7d62c3ed9cb9a0f",
+          "status": "deleted"
+        },
+        {
+          "id": "480a589bdfb14750a9876b95800ae376",
+          "status": "deleted"
+        },
+        {
+          "id": "57b475ec1df84c1c9c467851c2b48811",
+          "status": "deleted"
+        },
+        {
+          "id": "4224e3c346234f4597e37305a99cdd8d",
+          "status": "deleted"
+        },
+        {
+          "id": "cf04aa9c8b7a4505a8c02dac24c619ce",
+          "status": "deleted"
+        }
+      ],
+      "counts": {
+        "deleted": 11,
+        "already_deleted": 0,
+        "protected": 0
+      }
+    },
+    {
+      "token": "0184814a26d44e03af8c5cdf8c2aa2db",
+      "results": [
+        {
+          "id": "e73f8682bda84b47bc0e78bedb68bb08",
+          "status": "deleted"
+        }
+      ],
+      "counts": {
+        "deleted": 1,
+        "already_deleted": 0,
+        "protected": 0
+      }
+    }
+  ],
+  "leases": [
+    {
+      "token": "325c277ef9a2462f997a9afe83897c19",
+      "media_id": "8f9770862b2e49e3adc46406254464b6",
+      "owner": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "kind": "browser",
+      "scope": "owner",
+      "created": 1794977099.6561763,
+      "heartbeat": 1794977099.6561763,
+      "expires_at": 1794977189.6561763
+    },
+    {
+      "token": "c42f3bb4dde048d49bd9d8536c043b6c",
+      "media_id": "8f9770862b2e49e3adc46406254464b6",
+      "owner": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "kind": "browser",
+      "scope": "owner",
+      "created": 1794977100.2865946,
+      "heartbeat": 1794977100.2865946,
+      "expires_at": 1794977190.2865946
+    },
+    {
+      "token": "f18664b7b307495a83a3189a66757092",
+      "media_id": "39f40052c31146859601c9a0a09ce3cf",
+      "owner": "9ecc038f65eb41d0b61122d334c164dd",
+      "kind": "browser",
+      "scope": "owner",
+      "created": 1794977113.0357993,
+      "heartbeat": 1794977113.0357993,
+      "expires_at": 1794977203.0357993
+    },
+    {
+      "token": "23ef7200c5f24dbeb8f96d3721a6288a",
+      "media_id": "8f9770862b2e49e3adc46406254464b6",
+      "owner": "1ba9920f732a4eef902f6917b6c6a7b9",
+      "kind": "browser",
+      "scope": "owner",
+      "created": 1794977117.7871852,
+      "heartbeat": 1794977117.7871852,
+      "expires_at": 1794977207.7871852
+    }
+  ],
+  "heartbeat": [
+    {
+      "url": "http://127.0.0.1:7867/api/media-leases/23ef7200c5f24dbeb8f96d3721a6288a/heartbeat",
+      "status": 200
+    }
+  ],
+  "releases": [
+    {
+      "url": "http://127.0.0.1:7867/api/media-leases/325c277ef9a2462f997a9afe83897c19/release",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/media-leases/f18664b7b307495a83a3189a66757092/release",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:7867/api/media-leases/c42f3bb4dde048d49bd9d8536c043b6c/release",
+      "status": 200
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "httpErrors": [],
+  "blocked": [],
+  "screenshots": [
+    {
+      "path": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z\\01-library-pagination.png",
+      "sha256": "eb1787fe1e19ec5219d1b65b40c9a5baf6190821502e26216d0ad8644a62a2ed"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z\\02-cross-page-confirmation.png",
+      "sha256": "495f463d11bb0bf985c19782eb9c98e7233e9f0b0efb9ce914beb4a80325615b"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z\\02b-frozen-confirmation-after-save.png",
+      "sha256": "17953a4989d290c85210a0d375ff7384f1055c206f3a5d13d53f61be26e724eb"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z\\03-expired-history.png",
+      "sha256": "f275c07f792d44581cff197be2e55d2a12be81cfd24c853f570ac8d27bc9b513"
+    },
+    {
+      "path": "E:\\DictionForge\\data\\p10-browser\\2026-11-18T04-44-57-592Z\\04-narrow-library.png",
+      "sha256": "5f2d79de895b136c2e5e00d6ea3e8516d8742cb05abef9074d8f9c63dc725e45"
+    }
+  ],
+  "browser": "157.0.4341.60",
+  "before": {
+    "current": "1ba9920f732a4eef902f6917b6c6a7b9",
+    "total": 3
+  },
+  "status": "PASS",
+  "finished": "2026-11-18T04:45:39.640Z"
+}

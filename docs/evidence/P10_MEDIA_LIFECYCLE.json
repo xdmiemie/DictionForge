@@ -1,0 +1,107 @@
+{
+  "outcome": "PASS",
+  "method": "Independent read-only inspection of final JUnit and real HTTP acceptance artifacts",
+  "junit_path": "E:\\DictionForge\\data\\p10-final-tests.xml",
+  "junit_sha256": "fa53b883cffe41c599cb5ddab998d8e577e0f4e38c4f961bc8d7dbf6b4b66204",
+  "tests": [
+    {
+      "name": "test_startup_preserves_history_until_new_accept_and_current_is_never_collected",
+      "seconds": 2.851,
+      "passed": true
+    },
+    {
+      "name": "test_browser_owner_lease_protects_all_sentences_and_heartbeat_release",
+      "seconds": 0.325,
+      "passed": true
+    },
+    {
+      "name": "test_job_lease_has_no_ttl_and_survives_restart_until_terminal",
+      "seconds": 0.338,
+      "passed": true
+    },
+    {
+      "name": "test_http_lease_lives_with_process_identity_not_clock",
+      "seconds": 1.202,
+      "passed": true
+    },
+    {
+      "name": "test_same_transaction_job_admission_wins_against_collector",
+      "seconds": 0.347,
+      "passed": true
+    },
+    {
+      "name": "test_committed_purge_intent_wins_against_new_reader_or_save",
+      "seconds": 0.403,
+      "passed": true
+    },
+    {
+      "name": "test_move_then_metadata_failure_recovers_from_committed_intent",
+      "seconds": 0.407,
+      "passed": true
+    },
+    {
+      "name": "test_failed_current_collects_unregistered_worker_audio_but_preserves_json_and_other_files",
+      "seconds": 1.9,
+      "passed": true
+    },
+    {
+      "name": "test_external_and_saved_paths_never_enter_tts_collection",
+      "seconds": 0.327,
+      "passed": true
+    },
+    {
+      "name": "test_managed_record_outside_owner_directory_is_rejected",
+      "seconds": 0.213,
+      "passed": true
+    },
+    {
+      "name": "test_real_windows_handle_becomes_pending_then_retries_after_restart[0]",
+      "seconds": 0.302,
+      "passed": true
+    },
+    {
+      "name": "test_real_windows_handle_becomes_pending_then_retries_after_restart[1]",
+      "seconds": 0.343,
+      "passed": true
+    },
+    {
+      "name": "test_real_reparse_directory_is_rejected_without_touching_target",
+      "seconds": 0.375,
+      "passed": true
+    }
+  ],
+  "passed": 13,
+  "skipped": 0,
+  "http_report_sha256": "7e1d3b8c8c28615c6a8f5ac8e4b732cc5f25ae26519111e0845fe5ac62a5b4f9",
+  "http_outcome": "PASS",
+  "restart_validation": [
+    {
+      "probe": {
+        "seconds": 2.44,
+        "sample_rate": 48000,
+        "channels": 1
+      },
+      "range206": true,
+      "range416": true,
+      "download_head": true,
+      "sha256": "9d7f6a06d7b54bb052438745ea54cc07e41b8d31831882a79e950b72e0aa7186"
+    },
+    {
+      "probe": {
+        "seconds": 2.44,
+        "sample_rate": 48000,
+        "channels": 1
+      },
+      "range206": true,
+      "range416": true,
+      "download_head": true,
+      "sha256": "596018eccd87f1f77f4c4cd7f15e2e6b8b74abb1986e87e17adc0840c869e0b9"
+    }
+  ],
+  "earlier_sandbox_result": {
+    "passed": 12,
+    "skipped": 1,
+    "reason": "junction creation unavailable; later authorized full suite executed it successfully"
+  },
+  "gpu_used_by_this_audit": false
+}

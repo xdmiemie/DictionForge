@@ -28,10 +28,11 @@ test('逐句播放使用 codepoint 范围及完整 PCM 半开区间，重复句�
     const snapshot = {id: 'frozen-job', job: {id: 'frozen-job', state: 'COMPLETED', kind: 'tts'}, request: {text, language: 'zh', model_id: 'frozen-model'}, result: {audio: {audio_id: 'whole', sample_rate: 48000, seconds: 3}, sentences}};
     const html = renderToStaticMarkup(createElement(SpeechPlayback, {snapshot}));
     assert.match(html, /frozen-model/);
-    assert.match(html, /data-sentence-id="second"/);
-    assert.match(html, /src="\/api\/audio\/whole"/);
-    assert.match(html, /src="\/api\/audio\/second-audio"/);
-    assert.match(html, /实际种子 43/);
+    assert.match(html, /正在获取音频引用/);
+    assert.doesNotMatch(html, /<audio/, '媒体租约取得之前不得加载音频');
+    const gone = renderToStaticMarkup(createElement(SpeechPlayback, {snapshot: {...snapshot, result: {...snapshot.result, media_state: 'DELETED'}}}));
+    assert.match(gone, /临时音频已回收/);
+    assert.doesNotMatch(gone, /<audio|保存到作品库/);
     assert.doesNotMatch(renderToStaticMarkup(createElement(SpeechPlayback, {snapshot: {...snapshot, job: {...snapshot.job, state: 'FAILED'}}})), /<audio/);
     const failure = renderToStaticMarkup(createElement(SpeechFailurePanel, {result: {error: 'CUDA out of memory', phase: 'text_frontend', sentence_index: 1, sentence_text: '你好。', actual_seed: 43}}));
     assert.match(failure, /文本前处理 · 第 2 句/);

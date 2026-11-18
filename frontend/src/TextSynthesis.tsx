@@ -1,8 +1,9 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
-import {active, api, errorText, finiteNumber, Job, JobError, stateLabel} from './api';
+import {active, api, errorText, finiteNumber, Job, JobError, stateLabel, requestId} from './api';
+import {isGone, useMediaLease} from './MediaLease';
 import type {ReferenceAudio} from './Synthesis';
 
-export type SpeechAudio = {audio_id?: string; sample_rate: number; samples?: number; seconds?: number; sha256?: string};
+export type SpeechAudio = {audio_id?: string; sample_rate: number; samples?: number; seconds?: number; sha256?: string; state?: string; available?: boolean};
 export type SpeechSentence = {sentence_id: string; index: number; text: string; source_start: number; source_end: number; seed?: number; actual_seed?: number; start_sample: number; end_sample: number; audio: SpeechAudio; leading_silence_samples?: number; trailing_silence_samples?: number};
 type Parameters = {seed: number; sample_steps: number; top_k: number; top_p: number; temperature: number; speed_factor: number; repetition_penalty: number; fragment_interval: number};
 type FrozenRequest = {text: string; language: string; model_id?: string; model_version_id?: string; split_rule?: string; reference?: ReferenceAudio; parameters?: Parameters; sentences?: {sentence_id: string; index: number; text: string; source_start: number; source_end: number}[]};
@@ -41,12 +42,23 @@ export function FrozenText({text, sentence}: {text: string; sentence?: SpeechSen
   return <div className="frozen-text" aria-label="冻结朗读文本">{validRange ? <>{codepointSlice(text, 0, sentence.source_start)}<mark>{codepointSlice(text, sentence.source_start, sentence.source_end)}</mark>{codepointSlice(text, sentence.source_end)}</> : text}</div>;
 }
 
-export function SpeechPlayback({snapshot, historical = false}: {snapshot: SpeechSnapshot; historical?: boolean}) {
+export function SpeechPlayback({snapshot, historical = false, submit}: {snapshot: SpeechSnapshot; historical?: boolean; submit?: Submit}) {
   const result = snapshot.result ?? snapshot.job.result as SpeechResult | undefined;
   const audio = result?.audio;
   const sentences = result?.sentences ?? [];
   const [selectedId, setSelectedId] = useState('');
   const [playError, setPlayError] = useState('');
+  const [playerOpen, setPlayerOpen] = useState(true);
+  const [title, setTitle] = useState(''), [format, setFormat] = useState<'wav' | 'mp3'>('wav');
+  const [saving, setSaving] = useState(false), [saveNotice, setSaveNotice] = useState(''), [saveGone, setSaveGone] = useState(false);
+  const unavailable = result && ['DELETED', 'PURGE_PENDING'].includes(String((result as SpeechResult & {media_state?: string}).media_state)) || audio?.available === false || ['DELETED', 'PURGE_PENDING'].includes(audio?.state ?? '');
+  const lease = useMediaLease(audio?.audio_id, playerOpen && snapshot.job.state === 'COMPLETED' && !unavailable && !saveGone);
+  const gone = unavailable || lease.gone || saveGone;
+  const save = async () => {
+    if (!submit || !lease.ready || gone) return;
+    setSaving(true); setPlayError(''); setSaveNotice('');
+    try {const job = await submit('/tts/' + encodeURIComponent(snapshot.id) + '/save', {title, format}); setSaveNotice(`保存任务已受理（${job.id.slice(0, 8)}），完成后可在下方作品库播放与下载。`);} catch (error) {if (isGone(error)) setSaveGone(true); setPlayError((error as Error).message);} finally {setSaving(false);}
+  };
   const mainAudio = useRef<HTMLAudioElement>(null);
   const sentenceAudios = useRef<Record<string, HTMLAudioElement | null>>({});
   const playbackMode = useRef<'main' | 'sentence' | 'manual'>('manual');
@@ -70,6 +82,9 @@ export function SpeechPlayback({snapshot, historical = false}: {snapshot: Speech
     <FrozenText text={snapshot.request.text} sentence={selected}/>
     {(snapshot.job.error || result?.error) && <SpeechFailurePanel result={result} error={snapshot.job.error}/>}
     {snapshot.job.state === 'COMPLETED' && audio?.audio_id ? <>
+      {gone ? <p className="notice" role="status">这份临时音频已回收，无法播放或保存。冻结文本与任务记录仍可查看；已保存的作品请在作品库读取。</p> : <div className="actions"><button className="quiet" onClick={() => setPlayerOpen(value => !value)}>{playerOpen ? '关闭当前播放器' : '打开当前播放器'}</button>{lease.ready && <a className="download-link" href={audioUrl(audio.audio_id) + '?download=true'} download>下载当前 WAV</a>}</div>}
+      {!gone && playerOpen && !lease.ready && <p className={lease.error ? 'inline-error' : 'muted small'}>{lease.error || '正在获取音频引用…'}</p>}
+      {!gone && lease.ready && <>
       <audio ref={mainAudio} key={snapshot.id} className="complete-speech-audio" aria-label="完整合成音频" controls preload="metadata" src={audioUrl(audio.audio_id)}
         onPlay={() => {playbackMode.current = 'main'; pauseSentences();}} onError={() => setPlayError('音频加载失败，请刷新结果并检查后台日志。')}
         onTimeUpdate={event => {if (playbackMode.current !== 'main' || pendingSeek.current) return; const sentence = sentenceAtTime(sentences, event.currentTarget.currentTime, audio.sample_rate); if (sentence) setSelectedId(sentence.sentence_id);}}
@@ -82,6 +97,8 @@ export function SpeechPlayback({snapshot, historical = false}: {snapshot: Speech
         <p className="muted small">{finiteNumber(audio.sample_rate) && audio.sample_rate > 0 ? `${(sentence.start_sample / audio.sample_rate).toFixed(2)}–${(sentence.end_sample / audio.sample_rate).toFixed(2)} 秒` : '时间区间未报告'} · 实际种子 {sentence.actual_seed ?? '未报告'}</p>
         <details><summary>句子定位与实际记录</summary><pre>{JSON.stringify({sentence_id: sentence.sentence_id, source_start: sentence.source_start, source_end: sentence.source_end, seed: sentence.seed, actual_seed: sentence.actual_seed, start_sample: sentence.start_sample, end_sample: sentence.end_sample, audio: sentence.audio}, null, 2)}</pre></details>
       </article>)}</div>
+      </>}
+      {submit && !gone && <div className="speech-save"><h3>保存独立作品</h3><div className="grid"><label>作品标题<input aria-label="作品标题" value={title} maxLength={200} placeholder="可选，留空使用朗读文本" onChange={event => setTitle(event.target.value)}/></label><label>保存格式<select aria-label="保存格式" value={format} onChange={event => setFormat(event.target.value as 'wav' | 'mp3')}><option value="wav">WAV · 原生 48 kHz 无损</option><option value="mp3">MP3 · 320 kbps</option></select></label></div><button className="primary-button" disabled={saving || !lease.ready} onClick={() => void save()}>{saving ? '正在受理保存…' : '保存到作品库'}</button>{!lease.ready && <p className="muted small">打开播放器并确认音频可用后保存。</p>}{saveNotice && <p role="status" className="success-note">{saveNotice}</p>}</div>}
     </> : <p className="muted small">{active(snapshot.job) ? '合成任务在后台排队或生成，完成后会显示完整音频和每句结果。' : '当前任务尚无成功的完整音频。'}</p>}
     <details><summary>冻结参考与生成条件</summary><pre>{JSON.stringify({model_id: snapshot.request.model_version_id ?? snapshot.request.model_id, language: snapshot.request.language, split_rule: snapshot.request.split_rule, reference: snapshot.request.reference, parameters: snapshot.request.parameters, metrics: result?.metrics}, null, 2)}</pre></details>
   </div>;
@@ -127,6 +144,7 @@ export function TextSynthesis({modelId, canGenerate, reference, jobs, submit, re
       setHistoryId(''); await refresh(job.id);
     } catch (error) {setFormError((error as Error).message); reportError((error as Error).message);} finally {setBusy(false);}
   };
+  const cancel = async () => {if (!current || !active(current.job)) return; setBusy(true); try {await api('/jobs/' + encodeURIComponent(current.id) + '/control', {...requestId(), action: 'cancel'}); setNotice('取消请求已受理，等待后台任务退出。'); await refresh();} catch (error) {setFormError((error as Error).message);} finally {setBusy(false);}};
   return <section className="text-synthesis" aria-label="中文文本合成"><div className="section-top"><div><p className="eyebrow">TEXT TO SPEECH</p><h3>用文字生成语音</h3></div><span className="pill">当前支持中文</span></div>
     <label>待朗读文本<textarea aria-label="待朗读文本" className="speech-input" value={text} placeholder="输入要朗读的中文，可以包含多句或分行。" onChange={event => setText(event.target.value)}/></label>
     <div className="grid"><label>目标语言<select aria-label="目标语言" value="zh" disabled><option value="zh">中文 · 普通话（已实测）</option></select></label><label>语速倍率<input aria-label="语速倍率" type="number" min="0.5" max="2" step="0.05" value={parameters.speed_factor} onChange={event => change('speed_factor', event.target.valueAsNumber)}/></label></div>
@@ -134,8 +152,9 @@ export function TextSynthesis({modelId, canGenerate, reference, jobs, submit, re
     <p className="muted small">{reference ? `当前参考：${reference.text}` : '请先设置默认参考并启用模型。'}</p>
     <div className="actions"><button className="primary-button" disabled={busy || !canGenerate || Boolean(current?.job && active(current.job))} onClick={() => void generate()}>{busy ? '正在提交…' : '生成语音'}</button><button className="quiet" disabled={busy} onClick={() => {setHistoryId(''); void refresh().catch(error => setLoadError(error.message));}}>{historyId ? '返回当前合成结果' : '刷新当前合成结果'}</button></div>
     {notice && <p className="success-note" role="status">{notice}</p>}{formError && <p className="inline-error" role="alert">{formError}</p>}{loadError && <p className="inline-error">当前结果读取失败：{loadError}</p>}
+    {current && active(current.job) && <button className="quiet danger" disabled={busy} onClick={() => void cancel()}>取消当前合成任务</button>}
     <label>查看合成任务<select aria-label="查看合成任务" value={historyId} onChange={event => setHistoryId(event.target.value)}><option value="">当前合成结果</option>{jobs.filter(job => job.kind === 'tts' && job.id !== current?.id).map(job => <option key={job.id} value={job.id}>{job.id.slice(0, 8)} · {stateLabel(job.state)}{job.created ? ` · ${new Date(job.created * 1000).toLocaleString('zh-CN')}` : ''}</option>)}</select></label>
     {historyError && <p className="inline-error">历史结果读取失败：{historyError}</p>}
-    {historyId ? history ? <SpeechPlayback key={history.id} snapshot={history} historical/> : <p className="muted small">正在读取历史合成任务…</p> : current ? <SpeechPlayback key={current.id} snapshot={current}/> : <p className="muted small">{current === null ? '还没有当前合成结果。生成后可播放完整语音或选择其中一句。' : '正在读取当前合成结果…'}</p>}
+    {historyId ? history ? <SpeechPlayback key={history.id} snapshot={history} historical submit={submit}/> : <p className="muted small">正在读取历史合成任务…</p> : current ? <SpeechPlayback key={current.id} snapshot={current} submit={submit}/> : <p className="muted small">{current === null ? '还没有当前合成结果。生成后可播放完整语音或选择其中一句。' : '正在读取当前合成结果…'}</p>}
   </section>;
 }

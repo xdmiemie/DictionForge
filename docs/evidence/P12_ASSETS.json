@@ -1,0 +1,173 @@
+{
+  "action": "download",
+  "results": [
+    {
+      "id": "GPT-SoVITS/chinese-hubert-base/config.json",
+      "path": "GPT-SoVITS/chinese-hubert-base/config.json",
+      "sha256": "c3e5060a1277e0f078cc6be9da4528a605dba6ece93018981fe2c820e5c7b103",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/chinese-hubert-base/preprocessor_config.json",
+      "path": "GPT-SoVITS/chinese-hubert-base/preprocessor_config.json",
+      "sha256": "dcd684124d06722947939d41ea6ae58dbf10968c60a11a29f23ddc602c64a29b",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/chinese-hubert-base/pytorch_model.bin",
+      "path": "GPT-SoVITS/chinese-hubert-base/pytorch_model.bin",
+      "sha256": "24164f129c66499d1346e2aa55f183250c223161ec2770c0da3d3b08cf432d3c",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/config.json",
+      "path": "GPT-SoVITS/chinese-roberta-wwm-ext-large/config.json",
+      "sha256": "3d57de2fd7e80d0e5c8ff194f0bbb6baa10df7e43fc262a0cc71298a78b0a3e5",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+      "path": "GPT-SoVITS/chinese-roberta-wwm-ext-large/pytorch_model.bin",
+      "sha256": "e53a693acc59ace251d143d068096ae0d7b79e4b1b503fa84c9dcf576448c1d8",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/chinese-roberta-wwm-ext-large/tokenizer.json",
+      "path": "GPT-SoVITS/chinese-roberta-wwm-ext-large/tokenizer.json",
+      "sha256": "173796956820ea27bd14f76bf28162607ff4254807e2948253eb5b46f5bb643b",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/gsv-v4-pretrained/s2Gv4.pth",
+      "path": "GPT-SoVITS/gsv-v4-pretrained/s2Gv4.pth",
+      "sha256": "906fe22f48c3e037a389df291d4d32a9414e15dbb8f9628643e83aaced109ea4",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/gsv-v4-pretrained/vocoder.pth",
+      "path": "GPT-SoVITS/gsv-v4-pretrained/vocoder.pth",
+      "sha256": "4d611913df7b12d49e8976c944558d2d096816365edfc6c35a9e85b67dd14ed9",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "GPT-SoVITS/s1v3.ckpt",
+      "path": "GPT-SoVITS/s1v3.ckpt",
+      "sha256": "87133414860ea14ff6620c483a3db5ed07b44be42e2c3fcdad65523a729a745a",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/paraformer-zh/am.mvn",
+      "path": "asr/paraformer-zh/am.mvn",
+      "sha256": "29b3c740a2c0cfc6b308126d31d7f265fa2be74f3bb095cd2f143ea970896ae5",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/paraformer-zh/config.yaml",
+      "path": "asr/paraformer-zh/config.yaml",
+      "sha256": "bfd424b9f61846aac63591e96fe24d66b35f4643bddcb4b9bb759db8f987ab79",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/paraformer-zh/configuration.json",
+      "path": "asr/paraformer-zh/configuration.json",
+      "sha256": "b7d2917954fc547e43ad61486a5248596738cf5909907eade11e71c56f446f34",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/paraformer-zh/model.pt",
+      "path": "asr/paraformer-zh/model.pt",
+      "sha256": "5bba782a5e9196166233b9ab12ba04cadff9ef9212b4ff6153ed9290ff679025",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/paraformer-zh/seg_dict",
+      "path": "asr/paraformer-zh/seg_dict",
+      "sha256": "59a2ef803a3f1648ad03a2e1480db1c1ee0c0d7dc4ef4dbd16cea33944329022",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/paraformer-zh/tokens.json",
+      "path": "asr/paraformer-zh/tokens.json",
+      "sha256": "2b20c2b12572d682afff84ce1c8d560f67b8b32a4c1f21567411d141ed352127",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/fsmn-vad/am.mvn",
+      "path": "asr/fsmn-vad/am.mvn",
+      "sha256": "df189fd5f4352df84a0fd464eeab4e450a5e645665d6b38f13c832492261a739",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/fsmn-vad/config.yaml",
+      "path": "asr/fsmn-vad/config.yaml",
+      "sha256": "486861ca26ddb79081663b6179cb204c6bfae71c52f04aafc48a9e9d8dde1e93",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/fsmn-vad/configuration.json",
+      "path": "asr/fsmn-vad/configuration.json",
+      "sha256": "7bce8867e37d55c3dd8f672695ced18077a2be199ea529a5d432d5350fc0acba",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/fsmn-vad/model.pt",
+      "path": "asr/fsmn-vad/model.pt",
+      "sha256": "b3be75be477f0780277f3bae0fe489f48718f585f3a6e45d7dd1fbb1a4255fc5",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/ct-punc/config.yaml",
+      "path": "asr/ct-punc/config.yaml",
+      "sha256": "c5ffb25cd063ed366cb26283908dca05a08ecfef8e90bef1d498ef9ffacd7552",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/ct-punc/configuration.json",
+      "path": "asr/ct-punc/configuration.json",
+      "sha256": "7043245e6264cea789404e498a6f55a330a18585a4690d35dfe71741e6982237",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/ct-punc/model.pt",
+      "path": "asr/ct-punc/model.pt",
+      "sha256": "7176cae922a872e130e6b88aef9a1153581711baf79c9124c7c95be383cd6f81",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "asr/ct-punc/tokens.json",
+      "path": "asr/ct-punc/tokens.json",
+      "sha256": "89951fe0669380ed33298ee048c4a2b0ebcaaf6ee8f332d85c281c41d0f38392",
+      "mapping": "already_valid",
+      "status": "PASS"
+    },
+    {
+      "id": "text/G2PWModel_1.1.zip",
+      "path": "text/G2PWModel_1.1.zip",
+      "sha256": "b116f6930a7ee55eef6576a8d8e14bf40c1106583439e8ae924b901512379c64",
+      "mapping": "verified_archive_members",
+      "status": "PASS"
+    }
+  ]
+}

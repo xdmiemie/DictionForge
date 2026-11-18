@@ -6,6 +6,8 @@ param(
     [string]$Report
 )
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'common.ps1')
+Set-DictionForgeEnvironment
 $root = Split-Path -Parent $PSScriptRoot
 $python = Join-Path $root '.venv-api\Scripts\python.exe'
 if (-not (Test-Path -LiteralPath $python)) { $python = 'python' }

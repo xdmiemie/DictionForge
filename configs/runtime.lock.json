@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-17",
+  "date": "2026-11-18",
   "python": "3.12.10",
   "ffmpeg": {
     "version": "8.1.2-full_build-www.gyan.dev",
@@ -10,5 +10,10 @@
     "sha256": "9df3b0b5275e830961df6d94e1f7a71121a7abd5ff708e9fec8a0b6084a55015"
   },
   "gpu_driver": "621.01",
-  "torch": "2.9.0+cu128"
+  "torch": "2.9.0+cu128",
+  "python_distribution": "official NuGet python 3.12.10",
+  "python_home": "vendor/tools/python",
+  "api_environment": ".venv-api",
+  "worker_environment": ".venv-worker",
+  "tools_lock": "configs/tools.lock.json"
 }

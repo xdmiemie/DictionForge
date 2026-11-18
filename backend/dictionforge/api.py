@@ -82,7 +82,8 @@ def create_app(settings=None):
 
     @app.get("/api/health")
     def health():
-        return {"service": "ready", "name": app.title, "version": "0.1.0"}
+        return {"service": "ready", "name": app.title, "version": "0.1.0",
+                "workspace": str(ROOT.resolve()), "data_root": str(settings.root.resolve()), "pid": os.getpid()}
 
     @app.post("/api/system/stop")
     def stop(request: Request):

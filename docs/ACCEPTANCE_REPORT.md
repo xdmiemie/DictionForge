@@ -11,12 +11,12 @@
 | A05 | CUDA 与中文路径 | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
 | A06 | 缺失或损坏的资产 | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
 | A07 | 官方底模与 ASR | PASS | docs/evidence/P02_ENVIRONMENT.md、P02_ASSETS.md、P02_CUDA.json、P02_ASR.json、P02_TTS.json；16项回归通过 |
-| A08 | 扫描混合格式 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
-| A09 | 源录音保护 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
-| A10 | 无效素材与统计 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
-| A11 | 切分正确性 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
-| A12 | ASR 重试和校对 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
-| A13 | 训练清单和分组 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；UI浏览器补验另列BLOCKED |
+| A08 | 扫描混合格式 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；完整页面已由P12_BROWSER.json补验 |
+| A09 | 源录音保护 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；完整页面已由P12_BROWSER.json补验 |
+| A10 | 无效素材与统计 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；完整页面已由P12_BROWSER.json补验 |
+| A11 | 切分正确性 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；完整页面已由P12_BROWSER.json补验 |
+| A12 | ASR 重试和校对 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；完整页面已由P12_BROWSER.json补验 |
+| A13 | 训练清单和分组 | PASS | tests/test_datasets.py、test_asr_contract.py；docs/evidence/P03_DATASET.json、P03_DATASET_INITIAL.json、P03_ASR.md；完整页面已由P12_BROWSER.json补验 |
 | A14 | 上游特征 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
 | A15 | 特征修复 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
 | A16 | 修改输入使特征失效 | PASS | docs/evidence/P04_FEATURES.md、P04_HTTP.json、P04_ZERO_BATCH_RESULT.json；40项回归。显存仅加载器，完整训练待P05 |
@@ -54,7 +54,9 @@
 | A48 | 并发追加和去重 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
 | A49 | 数据谱系与留出集 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
 | A50 | 新版本二次微调 | PASS | P11_FEEDBACK.md、P11_HTTP.json、P11_BROWSER*.json；实际 GPU/ASR/页面，故障注入合同单独标明 |
-| A51 | 全新环境启动和停机 | NOT_RUN | 尚未执行 |
-| A52 | 目标硬件全流程 | NOT_RUN | 尚未执行 |
-| A53 | 角色音质 | NOT_RUN | 尚未执行 |
-| A54 | 交付与提交 | NOT_RUN | 尚未执行 |
+| A51 | 全新环境启动和停机 | PASS | P12_DELIVERY.md、P12_BROWSER.json、P12_LISTENING.json、P12_*；提交后审计/推送结果在data记录 |
+| A52 | 目标硬件全流程 | PASS | P12_DELIVERY.md、P12_BROWSER.json、P12_LISTENING.json、P12_*；提交后审计/推送结果在data记录 |
+| A53 | 角色音质 | PASS | P12_DELIVERY.md、P12_BROWSER.json、P12_LISTENING.json、P12_*；提交后审计/推送结果在data记录 |
+| A54 | 交付与提交 | PASS | P12_DELIVERY.md、P12_BROWSER.json、P12_LISTENING.json、P12_*；提交后审计/推送结果在data记录 |
+
+全部54项均有相应执行证据。A53采用用户实际试听后的明确确认；自动播放仅作解码验证。P12新环境使用已有已校验模型/依赖缓存，不等于重装Windows；实际边界和下载失败修复见 evidence/P12_DELIVERY.md。

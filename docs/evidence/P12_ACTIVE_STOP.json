@@ -1,0 +1,15 @@
+{
+  "before": "RUNNING",
+  "job_id": "58a515fdf3554d808d25ac053a9ab581",
+  "returncode": 1,
+  "stderr": "Invoke-RestMethod : {\"detail\":\"存在排队或运行中的任务，请先暂停训练或等待任务结束\",\"code\":\"Conflict\",\"stage\":\"request\",\"retryable\":false}\nAt E:\\DictionForge\\scripts\\stop.ps1:11 char:8\n+ $reply=Invoke-RestMethod -Method Post ($url+'/api/system/stop') -Time ...\n+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebExc \n   eption\n    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand\n",
+  "health": {
+    "service": "ready",
+    "name": "DictionForge",
+    "version": "0.1.0",
+    "workspace": "E:\\DictionForge",
+    "data_root": "E:\\DictionForge\\data",
+    "pid": 42512
+  },
+  "result": "PASS"
+}

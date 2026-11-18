@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-18",
+  "issue": "点击查看删除范围似乎无响应",
+  "reproduction": {
+    "status": 200,
+    "elapsed_ms": 318,
+    "viewport": {
+      "width": 1440,
+      "height": 1050
+    },
+    "preview_rect": {
+      "x": 165,
+      "y": 2762.515625,
+      "width": 802,
+      "height": 496.78125
+    },
+    "visible_in_viewport": false
+  },
+  "fix": "立即打开原生模态对话框，集中显示读取状态、确认范围、保护理由与错误；取消使旧请求结果失效。",
+  "validation": {
+    "status": "PASS",
+    "checks": [
+      {
+        "name": "模型删除范围在当前视野内弹出",
+        "status": "PASS",
+        "bounds": {
+          "x": 280,
+          "y": 276.609375,
+          "width": 880,
+          "height": 496.78125
+        }
+      },
+      {
+        "name": "键盘焦点进入对话框，Esc关闭后返回原按钮",
+        "status": "PASS"
+      },
+      {
+        "name": "数据版本预览在当前视野内显示",
+        "status": "PASS",
+        "bounds": {
+          "x": 280,
+          "y": 176.515625,
+          "width": 880,
+          "height": 696.96875
+        }
+      },
+      {
+        "name": "草稿预览在390px窄屏完整容纳",
+        "status": "PASS",
+        "bounds": {
+          "x": 17,
+          "y": 93.21875,
+          "width": 356,
+          "height": 657.5625
+        }
+      },
+      {
+        "name": "慢请求即时提示且可取消，迟到结果不覆盖新对象",
+        "status": "PASS"
+      },
+      {
+        "name": "请求失败在对话框提示并可重试",
+        "status": "PASS"
+      },
+      {
+        "name": "确认失败仍在框内可见，冻结确认令牌未变（DELETE已拦截）",
+        "status": "PASS"
+      },
+      {
+        "name": "在用模型的引用保护仍阻止确认删除",
+        "status": "PASS"
+      }
+    ],
+    "errors": [],
+    "delete_requests_intercepted": [
+      {
+        "method": "DELETE",
+        "url": "http://127.0.0.1:7867/api/models/64d73b8c3dc35410ac0cb9b60a1cb135",
+        "body": {
+          "preview_id": "fixture-token"
+        },
+        "intercepted": true
+      }
+    ],
+    "frontend": "TypeScript/Vite build PASS; 5 component tests PASS"
+  },
+  "local_report": "data/delete-preview-bug/latest.json",
+  "data_changes": "未删除任何现有模型、数据版本或草稿；前后目录ID集合一致"
+}

@@ -53,3 +53,7 @@ API241 passed/7 skipped；worker18 passed；Windows启停专项5 passed；前端
 后端249 passed/7 skipped；前端build及5项组件通过；浏览器20项通过。真实纯WAV输入扫描91145e4b5db141f882a48f595076e076，STT/草稿6f1298dc7ed2471ea2e851c76c305b95，8.78秒片段，ASR17.312秒；跳过、修正、发布7bb2f91ac7a6463a989910db72466f7c，再从页面删除本次测试草稿和版本成功。原录音副本、6件作品和默认模型不变。证据docs/evidence/UI_WORKFLOW.json；完整本机报告data/ui-review.json及ui-pagination.json。
 
 维护后完整交付审计用：python scripts/validate_delivery.py --phases 13 --allow-maintenance --output data/ui-delivery.json。远端核对结果写data/UI_PUSH_RESULT.json。服务已重启加载草稿删除接口，默认仍为127.0.0.1:7867。
+
+## 删除预览修复（2026-11-18）
+
+已修复「查看删除范围」内容落在页面底部、用户视野外的问题：现在立即弹出原生对话框，加载、错误、重试和确认都在当前视野；取消/Esc可关闭，旧请求不会重新打开或覆盖新对象。前端构建/5项组件/8项专项真实浏览器验证通过；未删除真实业务记录。详见docs/evidence/UI_DELETE_DIALOG.json，最新推送核对写data/UI_DELETE_DIALOG_PUSH_RESULT.json。刷新现有浏览器即可载入，后端无需重启。

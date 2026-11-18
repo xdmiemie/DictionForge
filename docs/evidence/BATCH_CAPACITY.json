@@ -1,0 +1,1321 @@
+{
+  "date": "2026-11-18",
+  "timezone": "Asia/Hong_Kong",
+  "status": "PASS",
+  "gpu": "RTX 5080 16GB",
+  "driver": "621.01",
+  "torch": "2.9.0+cu128",
+  "method": {
+    "precision": "fp16",
+    "s2_lora_rank": 32,
+    "gradient_checkpointing": false,
+    "accumulation": 1,
+    "initial_model": "official",
+    "seed": 42,
+    "probe_updates": 3,
+    "confirm_updates": 12,
+    "physical_batch": "repeat longest eligible real items with upstream collate; assert actual tensor batch every attempt",
+    "allocator_budget": "nvidia-smi free dedicated VRAM at each trial minus 256 MiB; no CPU/shared-memory success credit",
+    "recommendation": "largest tested batch <=64 with peak_reserved <=85% of allocator budget, then 12-update confirmation",
+    "caveat": "capacity benchmark with disposable model weights, not a convergence or audio quality evaluation; longer sequences or FP32/different rank require new measurements"
+  },
+  "trials_count": 48,
+  "counts": {
+    "PASS": 37,
+    "OOM": 11
+  },
+  "profiles": [
+    {
+      "role": "景元",
+      "version": "76b5a08af4ca471f9c6fa9c903347e69",
+      "train_clips": 5,
+      "max_seconds": 10.0,
+      "area": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659",
+      "source_snapshot_sha256": "9eab22a07ade03e94e25c8f10bee7c2fffb90b53e16c68956069762d7759d987",
+      "report_sha256": "aa1e49d944468d32fcfe8e2419e40516d4b92fe743950d9da47bf048942c2271",
+      "initial_hashes": {
+        "gpt": "87133414860ea14ff6620c483a3db5ed07b44be42e2c3fcdad65523a729a745a",
+        "sovits": "906fe22f48c3e037a389df291d4d32a9414e15dbb8f9628643e83aaced109ea4"
+      },
+      "stages": {
+        "s2": {
+          "max_passed": 7,
+          "first_oom": 8,
+          "recommended": 6,
+          "confirmations": [
+            {
+              "batch": 7,
+              "status": "PASS"
+            },
+            {
+              "batch": 6,
+              "status": "PASS"
+            }
+          ],
+          "capped": false
+        },
+        "s1": {
+          "max_passed": 49,
+          "first_oom": 50,
+          "recommended": 32,
+          "confirmations": [
+            {
+              "batch": 49,
+              "status": "PASS"
+            },
+            {
+              "batch": 32,
+              "status": "PASS"
+            }
+          ],
+          "capped": false
+        }
+      },
+      "started": "2026-11-18T09:47:05.784174+00:00",
+      "finished": "2026-11-18T09:58:29.044632+00:00",
+      "confirmations": [
+        {
+          "role": "景元",
+          "stage": "s2",
+          "batch": 7,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 0,
+          "peak_allocated_bytes": 13750110208,
+          "peak_reserved_bytes": 14053015552,
+          "sampled_gpu_peak_mib": 14792,
+          "allocator_budget_bytes": 15364784128,
+          "median_step_seconds": 0.2919177000003401,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b7-confirm\\result.json",
+          "tensor_shapes": [
+            [
+              7,
+              768,
+              502
+            ],
+            [
+              7,
+              1025,
+              502
+            ],
+            [
+              7,
+              100,
+              1004
+            ],
+            [
+              7
+            ],
+            [
+              7
+            ],
+            [
+              7,
+              82
+            ],
+            [
+              7
+            ],
+            [
+              7
+            ]
+          ],
+          "eligible_unique": 5,
+          "distinct_batch_items": 1,
+          "batch_item_names": [
+            "35994dd5e702407f8455be9d41a0d67a.wav"
+          ],
+          "update_sequence": "UUUUUUUUUUUU"
+        },
+        {
+          "role": "景元",
+          "stage": "s2",
+          "batch": 6,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 0,
+          "peak_allocated_bytes": 12143628288,
+          "peak_reserved_bytes": 12392071168,
+          "sampled_gpu_peak_mib": 13208,
+          "allocator_budget_bytes": 15362686976,
+          "median_step_seconds": 0.256465800004662,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b6-confirm\\result.json",
+          "tensor_shapes": [
+            [
+              6,
+              768,
+              502
+            ],
+            [
+              6,
+              1025,
+              502
+            ],
+            [
+              6,
+              100,
+              1004
+            ],
+            [
+              6
+            ],
+            [
+              6
+            ],
+            [
+              6,
+              82
+            ],
+            [
+              6
+            ],
+            [
+              6
+            ]
+          ],
+          "eligible_unique": 5,
+          "distinct_batch_items": 1,
+          "batch_item_names": [
+            "35994dd5e702407f8455be9d41a0d67a.wav"
+          ],
+          "update_sequence": "UUUUUUUUUUUU"
+        },
+        {
+          "role": "景元",
+          "stage": "s1",
+          "batch": 49,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 5,
+          "peak_allocated_bytes": 15074931200,
+          "peak_reserved_bytes": 15309209600,
+          "sampled_gpu_peak_mib": 15814,
+          "allocator_budget_bytes": 15509487616,
+          "median_step_seconds": 0.2861545000014303,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b49-confirm\\result.json",
+          "tensor_shapes": {
+            "phoneme_ids": [
+              49,
+              82
+            ],
+            "phoneme_ids_len": [
+              49
+            ],
+            "semantic_ids": [
+              49,
+              249
+            ],
+            "semantic_ids_len": [
+              49
+            ],
+            "bert_feature": [
+              49,
+              1024,
+              82
+            ]
+          },
+          "eligible_unique": 5,
+          "distinct_batch_items": 1,
+          "batch_item_names": [
+            "35994dd5e702407f8455be9d41a0d67a.wav"
+          ],
+          "update_sequence": "-----UUUUUUUUUUUU"
+        },
+        {
+          "role": "景元",
+          "stage": "s1",
+          "batch": 32,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 5,
+          "peak_allocated_bytes": 10263663616,
+          "peak_reserved_bytes": 10496245760,
+          "sampled_gpu_peak_mib": 11227,
+          "allocator_budget_bytes": 15545139200,
+          "median_step_seconds": 0.18488889999571256,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b32-confirm\\result.json",
+          "tensor_shapes": {
+            "phoneme_ids": [
+              32,
+              82
+            ],
+            "phoneme_ids_len": [
+              32
+            ],
+            "semantic_ids": [
+              32,
+              249
+            ],
+            "semantic_ids_len": [
+              32
+            ],
+            "bert_feature": [
+              32,
+              1024,
+              82
+            ]
+          },
+          "eligible_unique": 5,
+          "distinct_batch_items": 1,
+          "batch_item_names": [
+            "35994dd5e702407f8455be9d41a0d67a.wav"
+          ],
+          "update_sequence": "-----UUUUUUUUUUUU"
+        }
+      ]
+    },
+    {
+      "role": "流萤",
+      "version": "4a87c1b08a0c411aae29c63e317f3aed",
+      "train_clips": 2471,
+      "max_seconds": 6.86,
+      "area": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856",
+      "source_snapshot_sha256": "fee18210cf8e2d74c8d43c4945de201a44263400c715adeae605ddefba50cc8d",
+      "report_sha256": "8ca15a385dc2c2958e76acf52864de8e15cdd313e1ddd650e8450221c977e0e6",
+      "initial_hashes": {
+        "gpt": "87133414860ea14ff6620c483a3db5ed07b44be42e2c3fcdad65523a729a745a",
+        "sovits": "906fe22f48c3e037a389df291d4d32a9414e15dbb8f9628643e83aaced109ea4"
+      },
+      "stages": {
+        "s2": {
+          "max_passed": 13,
+          "first_oom": 14,
+          "recommended": 8,
+          "confirmations": [
+            {
+              "batch": 13,
+              "status": "PASS"
+            },
+            {
+              "batch": 8,
+              "status": "PASS"
+            }
+          ],
+          "capped": false
+        },
+        "s1": {
+          "max_passed": 77,
+          "first_oom": 78,
+          "recommended": 64,
+          "confirmations": [
+            {
+              "batch": 77,
+              "status": "PASS"
+            },
+            {
+              "batch": 64,
+              "status": "PASS"
+            }
+          ],
+          "capped": false
+        }
+      },
+      "started": "2026-11-18T09:59:33.876357+00:00",
+      "finished": "2026-11-18T10:06:40.069021+00:00",
+      "confirmations": [
+        {
+          "role": "流萤",
+          "stage": "s2",
+          "batch": 13,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 0,
+          "peak_allocated_bytes": 14755345920,
+          "peak_reserved_bytes": 15023996928,
+          "sampled_gpu_peak_mib": 15585,
+          "allocator_budget_bytes": 15514730496,
+          "median_step_seconds": 0.5263713999956963,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b13-confirm\\result.json",
+          "tensor_shapes": [
+            [
+              13,
+              768,
+              344
+            ],
+            [
+              13,
+              1025,
+              344
+            ],
+            [
+              13,
+              100,
+              688
+            ],
+            [
+              13
+            ],
+            [
+              13
+            ],
+            [
+              13,
+              62
+            ],
+            [
+              13
+            ],
+            [
+              13
+            ]
+          ],
+          "eligible_unique": 2471,
+          "distinct_batch_items": 2,
+          "batch_item_names": [
+            "5f4180b3d8134a07b59ffedadf910e5f.wav",
+            "7aa6bf7bca67467da59f82957887b70e.wav"
+          ],
+          "update_sequence": "UUUUUUUUUUUU"
+        },
+        {
+          "role": "流萤",
+          "stage": "s2",
+          "batch": 8,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 0,
+          "peak_allocated_bytes": 10077655552,
+          "peak_reserved_bytes": 10313793536,
+          "sampled_gpu_peak_mib": 11090,
+          "allocator_budget_bytes": 15505293312,
+          "median_step_seconds": 0.3383144999970682,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b8-confirm\\result.json",
+          "tensor_shapes": [
+            [
+              8,
+              768,
+              344
+            ],
+            [
+              8,
+              1025,
+              344
+            ],
+            [
+              8,
+              100,
+              688
+            ],
+            [
+              8
+            ],
+            [
+              8
+            ],
+            [
+              8,
+              62
+            ],
+            [
+              8
+            ],
+            [
+              8
+            ]
+          ],
+          "eligible_unique": 2471,
+          "distinct_batch_items": 2,
+          "batch_item_names": [
+            "5f4180b3d8134a07b59ffedadf910e5f.wav",
+            "7aa6bf7bca67467da59f82957887b70e.wav"
+          ],
+          "update_sequence": "UUUUUUUUUUUU"
+        },
+        {
+          "role": "流萤",
+          "stage": "s1",
+          "batch": 77,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 4,
+          "peak_allocated_bytes": 15095829504,
+          "peak_reserved_bytes": 15462301696,
+          "sampled_gpu_peak_mib": 15795,
+          "allocator_budget_bytes": 15559819264,
+          "median_step_seconds": 0.3979510500030301,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b77-confirm\\result.json",
+          "tensor_shapes": {
+            "phoneme_ids": [
+              77,
+              62
+            ],
+            "phoneme_ids_len": [
+              77
+            ],
+            "semantic_ids": [
+              77,
+              171
+            ],
+            "semantic_ids_len": [
+              77
+            ],
+            "bert_feature": [
+              77,
+              1024,
+              62
+            ]
+          },
+          "eligible_unique": 2452,
+          "distinct_batch_items": 2,
+          "batch_item_names": [
+            "5f4180b3d8134a07b59ffedadf910e5f.wav",
+            "7aa6bf7bca67467da59f82957887b70e.wav"
+          ],
+          "update_sequence": "----UUUUUUUUUUUU"
+        },
+        {
+          "role": "流萤",
+          "stage": "s1",
+          "batch": 64,
+          "suffix": "confirm",
+          "status": "PASS",
+          "updates": 12,
+          "skipped": 4,
+          "peak_allocated_bytes": 12773396480,
+          "peak_reserved_bytes": 13061062656,
+          "sampled_gpu_peak_mib": 13635,
+          "allocator_budget_bytes": 15579742208,
+          "median_step_seconds": 0.23445550000178628,
+          "error": null,
+          "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b64-confirm\\result.json",
+          "tensor_shapes": {
+            "phoneme_ids": [
+              64,
+              62
+            ],
+            "phoneme_ids_len": [
+              64
+            ],
+            "semantic_ids": [
+              64,
+              171
+            ],
+            "semantic_ids_len": [
+              64
+            ],
+            "bert_feature": [
+              64,
+              1024,
+              62
+            ]
+          },
+          "eligible_unique": 2452,
+          "distinct_batch_items": 2,
+          "batch_item_names": [
+            "5f4180b3d8134a07b59ffedadf910e5f.wav",
+            "7aa6bf7bca67467da59f82957887b70e.wav"
+          ],
+          "update_sequence": "----UUUUUUUUUUUU"
+        }
+      ]
+    }
+  ],
+  "trials": [
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 1,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 4088913920,
+      "peak_reserved_bytes": 4177526784,
+      "sampled_gpu_peak_mib": 5407,
+      "allocator_budget_bytes": 15314452480,
+      "median_step_seconds": 0.1403966500038223,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b1-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 2,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 5690779648,
+      "peak_reserved_bytes": 5861539840,
+      "sampled_gpu_peak_mib": 7009,
+      "allocator_budget_bytes": 15327035392,
+      "median_step_seconds": 0.14235650000046007,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b2-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 4,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 8936926208,
+      "peak_reserved_bytes": 9053405184,
+      "sampled_gpu_peak_mib": 10052,
+      "allocator_budget_bytes": 15333326848,
+      "median_step_seconds": 0.18361095000364003,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b4-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 8,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 1,
+      "skipped": 0,
+      "peak_allocated_bytes": 15122446848,
+      "peak_reserved_bytes": 15206449152,
+      "sampled_gpu_peak_mib": 15823,
+      "allocator_budget_bytes": 15343812608,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 248.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 187.87 MiB is free. 14.29 GiB allowed; Of the allocated memory 14.08 GiB is allocated by PyTorch, and 80.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b8-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 6,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 12139779584,
+      "peak_reserved_bytes": 12385779712,
+      "sampled_gpu_peak_mib": 13194,
+      "allocator_budget_bytes": 15371075584,
+      "median_step_seconds": 0.2552816999996139,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b6-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 7,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 13745468928,
+      "peak_reserved_bytes": 14046724096,
+      "sampled_gpu_peak_mib": 14784,
+      "allocator_budget_bytes": 15365832704,
+      "median_step_seconds": 0.2910615000000689,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b7-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 7,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 0,
+      "peak_allocated_bytes": 13750110208,
+      "peak_reserved_bytes": 14053015552,
+      "sampled_gpu_peak_mib": 14792,
+      "allocator_budget_bytes": 15364784128,
+      "median_step_seconds": 0.2919177000003401,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b7-confirm\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s2",
+      "batch": 6,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 0,
+      "peak_allocated_bytes": 12143628288,
+      "peak_reserved_bytes": 12392071168,
+      "sampled_gpu_peak_mib": 13208,
+      "allocator_budget_bytes": 15362686976,
+      "median_step_seconds": 0.256465800004662,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s2-b6-confirm\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 1,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 2326006272,
+      "peak_reserved_bytes": 2768240640,
+      "sampled_gpu_peak_mib": 4024,
+      "allocator_budget_bytes": 15367929856,
+      "median_step_seconds": 0.062079250001261244,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b1-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 2,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 1,
+      "peak_allocated_bytes": 2322509824,
+      "peak_reserved_bytes": 3030384640,
+      "sampled_gpu_peak_mib": 4275,
+      "allocator_budget_bytes": 15373172736,
+      "median_step_seconds": 0.07968040000559995,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b2-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 4,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 2,
+      "peak_allocated_bytes": 2326376960,
+      "peak_reserved_bytes": 3611295744,
+      "sampled_gpu_peak_mib": 4828,
+      "allocator_budget_bytes": 15361638400,
+      "median_step_seconds": 0.0681583999976283,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b4-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 8,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 3,
+      "peak_allocated_bytes": 3456216576,
+      "peak_reserved_bytes": 4603248640,
+      "sampled_gpu_peak_mib": 5774,
+      "allocator_budget_bytes": 15362686976,
+      "median_step_seconds": 0.06728429999930086,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b8-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 16,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 4,
+      "peak_allocated_bytes": 5690322432,
+      "peak_reserved_bytes": 6859784192,
+      "sampled_gpu_peak_mib": 7878,
+      "allocator_budget_bytes": 15355346944,
+      "median_step_seconds": 0.10235149999789428,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b16-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 32,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 5,
+      "peak_allocated_bytes": 10262803456,
+      "peak_reserved_bytes": 10496245760,
+      "sampled_gpu_peak_mib": 11465,
+      "allocator_budget_bytes": 15413018624,
+      "median_step_seconds": 0.1857735000012326,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b32-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 64,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 14912791552,
+      "peak_reserved_bytes": 15223226368,
+      "sampled_gpu_peak_mib": 15712,
+      "allocator_budget_bytes": 15300820992,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 218.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 243.22 MiB is free. 14.25 GiB allowed; Of the allocated memory 13.89 GiB is allocated by PyTorch, and 190.05 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b64-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 48,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 5,
+      "peak_allocated_bytes": 14766314496,
+      "peak_reserved_bytes": 15130951680,
+      "sampled_gpu_peak_mib": 15800,
+      "allocator_budget_bytes": 15377367040,
+      "median_step_seconds": 0.27707620000001043,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b48-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 56,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 14963571200,
+      "peak_reserved_bytes": 15334375424,
+      "sampled_gpu_peak_mib": 15695,
+      "allocator_budget_bytes": 15377367040,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 192.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 132.39 MiB is free. 14.32 GiB allowed; Of the allocated memory 13.94 GiB is allocated by PyTorch, and 259.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b56-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 52,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 15175208960,
+      "peak_reserved_bytes": 15325986816,
+      "sampled_gpu_peak_mib": 15816,
+      "allocator_budget_bytes": 15376318464,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 102.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 52.93 MiB is free. 14.32 GiB allowed; Of the allocated memory 14.11 GiB is allocated by PyTorch, and 169.10 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b52-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 50,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 1,
+      "skipped": 6,
+      "peak_allocated_bytes": 15026422784,
+      "peak_reserved_bytes": 15349055488,
+      "sampled_gpu_peak_mib": 15793,
+      "allocator_budget_bytes": 15381561344,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 50.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 83.50 MiB is free. 14.33 GiB allowed; Of the allocated memory 13.99 GiB is allocated by PyTorch, and 295.69 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b50-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 49,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 5,
+      "peak_allocated_bytes": 15073518592,
+      "peak_reserved_bytes": 15309209600,
+      "sampled_gpu_peak_mib": 15842,
+      "allocator_budget_bytes": 15424552960,
+      "median_step_seconds": 0.2949148999978206,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b49-probe\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 49,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 5,
+      "peak_allocated_bytes": 15074931200,
+      "peak_reserved_bytes": 15309209600,
+      "sampled_gpu_peak_mib": 15814,
+      "allocator_budget_bytes": 15509487616,
+      "median_step_seconds": 0.2861545000014303,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b49-confirm\\result.json"
+    },
+    {
+      "role": "景元",
+      "stage": "s1",
+      "batch": 32,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 5,
+      "peak_allocated_bytes": 10263663616,
+      "peak_reserved_bytes": 10496245760,
+      "sampled_gpu_peak_mib": 11227,
+      "allocator_budget_bytes": 15545139200,
+      "median_step_seconds": 0.18488889999571256,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-094659\\s1-b32-confirm\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 1,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 3464975360,
+      "peak_reserved_bytes": 3504340992,
+      "sampled_gpu_peak_mib": 4569,
+      "allocator_budget_bytes": 15534653440,
+      "median_step_seconds": 0.20150899999862304,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b1-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 2,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 4396900864,
+      "peak_reserved_bytes": 4525654016,
+      "sampled_gpu_peak_mib": 5543,
+      "allocator_budget_bytes": 15534653440,
+      "median_step_seconds": 0.15530629999921075,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b2-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 4,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 6237094400,
+      "peak_reserved_bytes": 6536822784,
+      "sampled_gpu_peak_mib": 7461,
+      "allocator_budget_bytes": 15539896320,
+      "median_step_seconds": 0.186319350003032,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b4-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 8,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 10071685632,
+      "peak_reserved_bytes": 10313793536,
+      "sampled_gpu_peak_mib": 11057,
+      "allocator_budget_bytes": 15533604864,
+      "median_step_seconds": 0.2761954000015976,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b8-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 16,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 15405682688,
+      "peak_reserved_bytes": 15510536192,
+      "sampled_gpu_peak_mib": 13945,
+      "allocator_budget_bytes": 15535702016,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 44.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 0 bytes is free. 14.47 GiB allowed; Of the allocated memory 14.35 GiB is allocated by PyTorch, and 100.00 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b16-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 12,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 13752153088,
+      "peak_reserved_bytes": 14375976960,
+      "sampled_gpu_peak_mib": 14987,
+      "allocator_budget_bytes": 15603859456,
+      "median_step_seconds": 0.4012767000021995,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b12-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 14,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 15153705984,
+      "peak_reserved_bytes": 15422455808,
+      "sampled_gpu_peak_mib": 15795,
+      "allocator_budget_bytes": 15431892992,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 38.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 38.33 MiB is free. 14.37 GiB allowed; Of the allocated memory 14.10 GiB is allocated by PyTorch, and 245.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b14-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 13,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 14755345920,
+      "peak_reserved_bytes": 15023996928,
+      "sampled_gpu_peak_mib": 15574,
+      "allocator_budget_bytes": 15512633344,
+      "median_step_seconds": 0.42641394999736804,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b13-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 13,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 0,
+      "peak_allocated_bytes": 14755345920,
+      "peak_reserved_bytes": 15023996928,
+      "sampled_gpu_peak_mib": 15585,
+      "allocator_budget_bytes": 15514730496,
+      "median_step_seconds": 0.5263713999956963,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b13-confirm\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s2",
+      "batch": 8,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 0,
+      "peak_allocated_bytes": 10077655552,
+      "peak_reserved_bytes": 10313793536,
+      "sampled_gpu_peak_mib": 11090,
+      "allocator_budget_bytes": 15505293312,
+      "median_step_seconds": 0.3383144999970682,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s2-b8-confirm\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 1,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 2320153088,
+      "peak_reserved_bytes": 2759852032,
+      "sampled_gpu_peak_mib": 3880,
+      "allocator_budget_bytes": 15505293312,
+      "median_step_seconds": 0.057595450001826975,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b1-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 2,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 2322628096,
+      "peak_reserved_bytes": 2837446656,
+      "sampled_gpu_peak_mib": 4007,
+      "allocator_budget_bytes": 15505293312,
+      "median_step_seconds": 0.06160710000040126,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b2-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 4,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 0,
+      "peak_allocated_bytes": 2324069376,
+      "peak_reserved_bytes": 3214934016,
+      "sampled_gpu_peak_mib": 4339,
+      "allocator_budget_bytes": 15503196160,
+      "median_step_seconds": 0.05811865000214311,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b4-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 8,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 1,
+      "peak_allocated_bytes": 2591497728,
+      "peak_reserved_bytes": 3940548608,
+      "sampled_gpu_peak_mib": 5014,
+      "allocator_budget_bytes": 15486418944,
+      "median_step_seconds": 0.05759089999628486,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b8-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 16,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 2,
+      "peak_allocated_bytes": 4054157312,
+      "peak_reserved_bytes": 5387583488,
+      "sampled_gpu_peak_mib": 6397,
+      "allocator_budget_bytes": 15501099008,
+      "median_step_seconds": 0.07320120000076713,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b16-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 32,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 3,
+      "peak_allocated_bytes": 6952375808,
+      "peak_reserved_bytes": 8118075392,
+      "sampled_gpu_peak_mib": 9001,
+      "allocator_budget_bytes": 15495856128,
+      "median_step_seconds": 0.1221464999980526,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b32-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 64,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 4,
+      "peak_allocated_bytes": 12773210624,
+      "peak_reserved_bytes": 13061062656,
+      "sampled_gpu_peak_mib": 13690,
+      "allocator_budget_bytes": 15504244736,
+      "median_step_seconds": 0.23155319999932544,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b64-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 128,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 15112082432,
+      "peak_reserved_bytes": 15344861184,
+      "sampled_gpu_peak_mib": 15764,
+      "allocator_budget_bytes": 15521021952,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 220.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 112.61 MiB is free. 14.46 GiB allowed; Of the allocated memory 14.07 GiB is allocated by PyTorch, and 198.00 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b128-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 96,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 0,
+      "skipped": 0,
+      "peak_allocated_bytes": 15439253504,
+      "peak_reserved_bytes": 15548284928,
+      "sampled_gpu_peak_mib": 15843,
+      "allocator_budget_bytes": 15570305024,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 66.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 0 bytes is free. 14.50 GiB allowed; Of the allocated memory 14.36 GiB is allocated by PyTorch, and 126.14 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b96-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 80,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 1,
+      "skipped": 4,
+      "peak_allocated_bytes": 15213171712,
+      "peak_reserved_bytes": 15558770688,
+      "sampled_gpu_peak_mib": 15842,
+      "allocator_budget_bytes": 15569256448,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 38.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 0 bytes is free. 14.50 GiB allowed; Of the allocated memory 14.15 GiB is allocated by PyTorch, and 335.79 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b80-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 72,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 4,
+      "peak_allocated_bytes": 14188265472,
+      "peak_reserved_bytes": 14537457664,
+      "sampled_gpu_peak_mib": 15034,
+      "allocator_budget_bytes": 15586033664,
+      "median_step_seconds": 0.2681217999997898,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b72-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 76,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 4,
+      "peak_allocated_bytes": 14915698688,
+      "peak_reserved_bytes": 15198060544,
+      "sampled_gpu_peak_mib": 15659,
+      "allocator_budget_bytes": 15591276544,
+      "median_step_seconds": 0.2794399999984307,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b76-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 78,
+      "suffix": "probe",
+      "status": "OOM",
+      "updates": 2,
+      "skipped": 4,
+      "peak_allocated_bytes": 15303277568,
+      "peak_reserved_bytes": 15510536192,
+      "sampled_gpu_peak_mib": 15831,
+      "allocator_budget_bytes": 15587082240,
+      "median_step_seconds": null,
+      "error": "OutOfMemoryError: CUDA out of memory. Tried to allocate 106.00 MiB. GPU 0 has a total capacity of 15.89 GiB of which 0 bytes is free. 14.52 GiB allowed; Of the allocated memory 14.15 GiB is allocated by PyTorch, and 291.32 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b78-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 77,
+      "suffix": "probe",
+      "status": "PASS",
+      "updates": 3,
+      "skipped": 4,
+      "peak_allocated_bytes": 15095829504,
+      "peak_reserved_bytes": 15462301696,
+      "sampled_gpu_peak_mib": 15820,
+      "allocator_budget_bytes": 15590227968,
+      "median_step_seconds": 0.4104005000044708,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b77-probe\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 77,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 4,
+      "peak_allocated_bytes": 15095829504,
+      "peak_reserved_bytes": 15462301696,
+      "sampled_gpu_peak_mib": 15795,
+      "allocator_budget_bytes": 15559819264,
+      "median_step_seconds": 0.3979510500030301,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b77-confirm\\result.json"
+    },
+    {
+      "role": "流萤",
+      "stage": "s1",
+      "batch": 64,
+      "suffix": "confirm",
+      "status": "PASS",
+      "updates": 12,
+      "skipped": 4,
+      "peak_allocated_bytes": 12773396480,
+      "peak_reserved_bytes": 13061062656,
+      "sampled_gpu_peak_mib": 13635,
+      "allocator_budget_bytes": 15579742208,
+      "median_step_seconds": 0.23445550000178628,
+      "error": null,
+      "path": "E:\\DictionForge\\data\\batch-benchmark\\20261118-095856\\s1-b64-confirm\\result.json"
+    }
+  ],
+  "final_service": {
+    "health": {
+      "service": "ready",
+      "name": "DictionForge",
+      "version": "0.1.0",
+      "workspace": "E:\\DictionForge",
+      "data_root": "E:\\DictionForge\\data",
+      "pid": 26704
+    },
+    "active": [],
+    "feature_job": {
+      "id": "b0f2876074a146e899427c8a67b159d1",
+      "state": "COMPLETED"
+    }
+  },
+  "protection": {
+    "original_feature_job": "COMPLETED before GPU lease acquisition",
+    "copied_features": true,
+    "source_audio_hashes_unchanged": true,
+    "base_weight_hashes_unchanged": true,
+    "models_published": 0,
+    "application_defaults_changed": false
+  },
+  "benchmark_script_sha256": "ab31a5198ae9355483d8b0485c7fe5f249d8e64059f152c03165db45d4bb2b8f"
+}

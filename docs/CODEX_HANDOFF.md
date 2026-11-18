@@ -67,3 +67,9 @@ API241 passed/7 skipped；worker18 passed；Windows启停专项5 passed；前端
 复验关联删除：先在API环境运行scripts/prepare_cascade_ui_fixture.py，读取data/cascade-ui-fixture/latest.json的data_root，以scripts/start.ps1 -NoBrowser -Port 7869 -DataRoot该目录启动隔离服务，再运行node scripts/validate_cascade_dialog.cjs（需要含Playwright的测试Node）。脚本硬性核对端口与data_root后才真实DELETE；运行完成后使用相同端口/data_root安全停止。API专项为tests/test_cascade_deletion.py。
 
 维护期间用户在正式页面进行了数据整理与删除，因此上方P12产物ID属于历史验收记录，不保证仍存在。不可为满足旧validate_delivery或依赖固定列表规模的脚本而恢复已删除模型/数据；新的管理流程使用隔离夹具验收。原始录音和独立作品仍须保护。
+
+## 物理 batch 容量（2026-11-18）
+
+用户要求的实机容量测试完成，脚本scripts/benchmark_physical_batch.py和报告docs/evidence/BATCH_CAPACITY.md、JSON可复查。48档真实GPU运行中37通过、11预期OOM；FP16/rank32/累积1/official/最长真实片段重复组成满批次，使用生产模型/loss/优化器，每个上限与建议档均复核12次实际更新。10秒片段S2边界7/8、GPT49/50，建议6/32；当前流萤最长6.86秒S2边界13/14、GPT77/78，建议8/64。前数通过，后数OOM。界面上限仍64，未改默认batch或累积。
+
+源版本：景元76b5a08af4ca471f9c6fa9c903347e69，流萤4a87c1b08a0c411aae29c63e317f3aed。完整本机记录位于data/batch-benchmark/20261118-094659和20261118-095856；脚本可等待应用GPU锁，按当时独立空闲显存减256 MiB限制分配器，最大探测档256。容量会随片段长度、桌面占用、精度和rank变化，不把短训容量当作音质结论。原有流萤特征任务正常完成，音频/底模SHA复核不变，未发布模型，结束后GPU已释放。推送结果另记data/BATCH_CAPACITY_PUSH_RESULT.json。
